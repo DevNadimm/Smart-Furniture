@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_furniture/core/utils/themes/theme.dart';
+import 'package:smart_furniture/features/shop_selection/presentation/pages/shop_selection_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,8 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Smart Furniture',
+      debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const Placeholder(),
+      home: const ShopSelectionPage(),
     );
   }
 }

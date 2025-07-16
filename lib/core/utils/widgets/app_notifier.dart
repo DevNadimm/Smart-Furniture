@@ -18,6 +18,19 @@ class AppNotifier {
     }
   }
 
+  static IconData _getIconData(MessageType type) {
+    switch (type) {
+      case MessageType.success:
+        return Icons.check_circle;
+      case MessageType.error:
+        return Icons.error;
+      case MessageType.info:
+        return Icons.info;
+      case MessageType.warning:
+        return Icons.warning;
+    }
+  }
+
   static void showToast(String message, {MessageType type = MessageType.info}) {
     Fluttertoast.showToast(
       msg: message,
@@ -36,8 +49,16 @@ class AppNotifier {
     final bgColor = _getBackgroundColor(type);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Row(
+          children: [
+            Icon(_getIconData(type), color: AppColors.white),
+            const SizedBox(width: 8),
+            Text(message, style: const TextStyle(color: AppColors.white)),
+          ],
+        ),
         backgroundColor: bgColor,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         duration: const Duration(seconds: 4),
       ),
     );

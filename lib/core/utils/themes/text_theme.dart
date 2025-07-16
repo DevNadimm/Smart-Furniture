@@ -1,82 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-const TextTheme textTheme = TextTheme(
-  displayLarge: TextStyle(
+final TextTheme textTheme = TextTheme(
+  displayLarge: GoogleFonts.poppins(
     fontSize: 34,
     fontWeight: FontWeight.bold,
     color: AppColors.primaryFontColor,
     height: 1.3,
     letterSpacing: 0.25,
   ),
-  displayMedium: TextStyle(
+  displayMedium: GoogleFonts.poppins(
     fontSize: 28,
     fontWeight: FontWeight.w600,
     color: AppColors.primaryFontColor,
     height: 1.3,
   ),
-  displaySmall: TextStyle(
+  displaySmall: GoogleFonts.poppins(
     fontSize: 22,
     fontWeight: FontWeight.w600,
     color: AppColors.primaryFontColor,
     height: 1.3,
   ),
-  headlineLarge: TextStyle(
+  headlineLarge: GoogleFonts.poppins(
     fontSize: 20,
     fontWeight: FontWeight.w500,
     color: AppColors.primaryFontColor,
     height: 1.3,
   ),
-  headlineMedium: TextStyle(
+  headlineMedium: GoogleFonts.poppins(
     fontSize: 18,
     fontWeight: FontWeight.w500,
     color: AppColors.primaryFontColor,
     height: 1.3,
   ),
-  headlineSmall: TextStyle(
+  headlineSmall: GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: AppColors.primaryFontColor,
     height: 1.4,
   ),
-  titleLarge: TextStyle(
+  titleLarge: GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: AppColors.secondaryFontColor,
     height: 1.4,
   ),
-  titleMedium: TextStyle(
+  titleMedium: GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: AppColors.secondaryFontColor,
     height: 1.4,
   ),
-  bodyLarge: TextStyle(
+  bodyLarge: GoogleFonts.poppins(
     fontSize: 16,
     fontWeight: FontWeight.normal,
     color: AppColors.primaryFontColor,
     height: 1.5,
   ),
-  bodyMedium: TextStyle(
+  bodyMedium: GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.normal,
     color: AppColors.primaryFontColor,
     height: 1.5,
   ),
-  bodySmall: TextStyle(
+  bodySmall: GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.normal,
     color: AppColors.lightFontColor,
     height: 1.3,
   ),
-  labelLarge: TextStyle(
+  labelLarge: GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w600,
     color: AppColors.buttonFontColor,
     letterSpacing: 1.25,
     height: 1.3,
   ),
-  labelSmall: TextStyle(
+  labelSmall: GoogleFonts.poppins(
     fontSize: 10,
     fontWeight: FontWeight.w500,
     color: AppColors.lightFontColor,
