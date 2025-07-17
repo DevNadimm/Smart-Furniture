@@ -9,7 +9,7 @@ List<Shop> shops = [
     location: '123 Main Street, Dhaka',
     color: Colors.blue,
     icon: Icons.shopify_rounded,
-    status: 'Active',
+    isActive: true,
   ),
   Shop(
     id: 'shop_2',
@@ -18,7 +18,7 @@ List<Shop> shops = [
     location: '45 Central Ave, Chittagong',
     color: Colors.red,
     icon: Icons.shopify_rounded,
-    status: 'Active',
+    isActive: true,
   ),
   Shop(
     id: 'shop_3',
@@ -27,7 +27,7 @@ List<Shop> shops = [
     location: '67 Plaza Rd, Sylhet',
     color: Colors.orange,
     icon: Icons.shopify_rounded,
-    status: 'Active',
+    isActive: true,
   ),
   Shop(
     id: 'shop_4',
@@ -36,6 +36,6 @@ List<Shop> shops = [
     location: 'Nationwide',
     color: Colors.purple,
     icon: Icons.shopify_rounded,
-    status: 'Active',
+    isActive: false,
   ),
 ];
