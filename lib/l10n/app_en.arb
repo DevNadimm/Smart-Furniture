@@ -1,9 +1,9 @@
 {
   "@@locale": "en",
-  "appBarTxt": "Choose your language",
+  "appBarTxt": "Choose Your Language",
   "nextScreenBtn": "Continue",
-  "languageScreenSubtitle": "Select your preferred language to personalize your app experience.",
-  "selectShopTitle": "Select Shop",
-  "selectShopSubtitle": "Choose a shop to manage and view analytics",
-  "changeShopBtn": "Change Shop"
+  "languageScreenSubtitle": "Select the language you’re most comfortable with to personalize your app experience.",
+  "selectShopTitle": "Select a Shop",
+  "selectShopSubtitle": "Pick a shop to manage operations and view insights.",
+  "changeShopBtn": "Switch Shop"
 }
