@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/themes/theme.dart';
+import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
 import 'package:smart_furniture/features/language_selector/presentation/pages/language_selection_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -7,11 +11,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Smart Furniture',
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      home: const LanguageSelectionPage(),
+    return BlocBuilder<LanguageCubit, Locale>(
+      builder: (context, locale) {
+        return MaterialApp(
+          locale: locale,
+          supportedLocales: const [
+            Locale('en'),
+            Locale('bn'),
+          ],
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          debugShowCheckedModeBanner: false,
+          title: 'Smart Furniture',
+          theme: theme,
+          home: const LanguageSelectionPage(),
+        );
+      },
     );
   }
 }
