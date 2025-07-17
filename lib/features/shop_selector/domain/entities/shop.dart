@@ -7,7 +7,7 @@ class Shop {
   final String location;
   final Color color;
   final IconData icon;
-  final String status;
+  final bool isActive;
 
   Shop({
     required this.id,
@@ -16,6 +16,6 @@ class Shop {
     required this.location,
     required this.color,
     required this.icon,
-    required this.status,
+    required this.isActive,
   });
 }
