@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
+import 'package:smart_furniture/features/shop_selection/presentation/pages/shop_selection_page.dart';
 
 class LanguageSelectionPage extends StatelessWidget {
   const LanguageSelectionPage({super.key});
@@ -58,6 +60,16 @@ class LanguageSelectionPage extends StatelessWidget {
                 );
               },
             ),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () => Navigator.pushReplacement(context, ShopSelectionPage.route()),
+                icon: const Icon(HugeIcons.strokeRoundedArrowRight02),
+                label: const Text("Continue"),
+                iconAlignment: IconAlignment.end,
+              ),
+            )
           ],
         ),
       ),
