@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
-import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/features/shop_selection/data/datasources/shop_local_data_source.dart';
+import 'package:smart_furniture/features/shop_selection/domain/entities/shop.dart';
+import 'package:smart_furniture/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class ShopSelectionPage extends StatelessWidget {
   const ShopSelectionPage({super.key});
@@ -56,7 +58,7 @@ class ShopSelectionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildShopCard(BuildContext context, Map<String, dynamic> shop) {
+  Widget _buildShopCard(BuildContext context, Shop shop) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.cardColor,
@@ -65,7 +67,7 @@ class ShopSelectionPage extends StatelessWidget {
           BoxShadow(
             color: AppColors.white,
             blurRadius: 20,
-            offset: Offset(0, 0),
+            offset: Offset(2, 2),
           ),
         ],
       ),
@@ -85,12 +87,12 @@ class ShopSelectionPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: shop['color'].withOpacity(0.2),
+                        color: shop.color.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
-                        shop['icon'],
-                        color: shop['color'],
+                        shop.icon,
+                        color: shop.color,
                         size: 24,
                       ),
                     ),
@@ -104,7 +106,7 @@ class ShopSelectionPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        shop['status'],
+                        shop.status,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.green),
                       ),
                     ),
@@ -112,14 +114,14 @@ class ShopSelectionPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  shop['name'],
+                  shop.name,
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const Spacer(),
                 Text(
-                  shop['description'],
+                  shop.description,
                   style: Theme.of(context).textTheme.titleMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -131,7 +133,7 @@ class ShopSelectionPage extends StatelessWidget {
                     const SizedBox(width: 4),
                     Expanded(
                       child: Text(
-                        shop['location'],
+                        shop.location,
                         style: Theme.of(context).textTheme.bodySmall,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -147,46 +149,7 @@ class ShopSelectionPage extends StatelessWidget {
     );
   }
 
-  void _selectShop(BuildContext context, Map<String, dynamic> shop) {
-    AppNotifier.showSnackBar(context, '${shop['name']} selected');
+  void _selectShop(BuildContext context, Shop shop) {
+    Navigator.pushReplacement(context, DashboardPage.route(shop: shop));
   }
 }
-
-const List<Map<String, dynamic>> shops = [
-  {
-    'name': 'Main Street Furniture',
-    'id': 'shop_1',
-    'description': 'Primary retail location',
-    'color': Colors.blue,
-    'icon': Icons.store,
-    'location': '123 Main Street, Dhaka',
-    'status': 'Active'
-  },
-  {
-    'name': 'Downtown Furnishings',
-    'id': 'shop_2',
-    'description': 'City center location',
-    'color': Colors.red,
-    'icon': Icons.store,
-    'location': '45 Central Ave, Chittagong',
-    'status': 'Active'
-  },
-  {
-    'name': 'Mall Furniture Outlet',
-    'id': 'shop_3',
-    'description': 'Shopping mall store',
-    'color': Colors.orange,
-    'icon': Icons.store,
-    'location': '67 Plaza Rd, Sylhet',
-    'status': 'Active'
-  },
-  {
-    'name': 'Online Furniture Hub',
-    'id': 'shop_4',
-    'description': 'E-commerce platform',
-    'color': Colors.purple,
-    'icon': Icons.store,
-    'location': 'Nationwide',
-    'status': 'Active'
-  },
-];
