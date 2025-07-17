@@ -5,6 +5,8 @@ import 'package:smart_furniture/features/shop_selection/domain/entities/shop.dar
 import 'package:smart_furniture/features/dashboard/presentation/pages/dashboard_page.dart';
 
 class ShopSelectionPage extends StatelessWidget {
+  static route() => MaterialPageRoute(builder: (context) => const ShopSelectionPage());
+
   const ShopSelectionPage({super.key});
 
   @override

@@ -13,6 +13,7 @@ dependencies:
   hugeicons: ^0.0.11
   fluttertoast: ^8.2.12
   cached_network_image: ^3.4.1
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +22,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/flags/
