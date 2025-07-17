@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
-import 'package:smart_furniture/features/shop_selection/domain/entities/shop.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/features/dashboard/data/datasources/module_local_data_source.dart';
+import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
+import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
 
 class DashboardPage extends StatelessWidget {
   final Shop shop;
@@ -10,6 +15,8 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -20,6 +27,16 @@ class DashboardPage extends StatelessWidget {
               _buildHeader(context),
               const SizedBox(height: 32),
               _buildGridView(context),
+              const Spacer(),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => Navigator.pushAndRemoveUntil(context, ShopSelectionPage.route(), (route) => false,),
+                  icon: const Icon(HugeIcons.strokeRoundedExchange01),
+                  label: Text(strings.changeShopBtn),
+                  iconAlignment: IconAlignment.end,
+                ),
+              )
             ],
           ),
         ),
@@ -55,7 +72,6 @@ class DashboardPage extends StatelessWidget {
 
   Widget _buildGridView(BuildContext context) {
     return GridView.builder(
-      itemCount: dashboardModules.length,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
@@ -63,11 +79,10 @@ class DashboardPage extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
-        childAspectRatio: 0.9,
+        childAspectRatio: 1.05,
       ),
-      itemBuilder: (context, index) {
-        return _buildCard(context, dashboardModules[index]);
-      },
+      itemCount: modules.length,
+      itemBuilder: (context, index) => _buildCard(context, modules[index]),
     );
   }
 
@@ -75,10 +90,11 @@ class DashboardPage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.cardColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(width: 1.4, color: AppColors.borderColor),
         boxShadow: const [
           BoxShadow(
-            color: AppColors.white,
+            color: AppColors.cardColor,
             blurRadius: 20,
             offset: Offset(2, 2),
           ),
@@ -106,22 +122,23 @@ class DashboardPage extends StatelessWidget {
                 Text(
                   module.title,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const Spacer(),
                 Text(
                   module.primaryInfo,
                   style: Theme.of(context).textTheme.titleMedium,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   module.secondaryInfo,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const Spacer(),
-                const Text(
-                  'View Details →',
-                  style: TextStyle(color: AppColors.primaryColor, fontWeight: FontWeight.w500),
-                )
               ],
             ),
           ),
@@ -130,76 +147,3 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
-
-class Module {
-  final String title;
-  final IconData icon;
-  final String primaryInfo;
-  final String secondaryInfo;
-  final VoidCallback onTap;
-
-  Module({
-    required this.title,
-    required this.icon,
-    required this.primaryInfo,
-    required this.secondaryInfo,
-    required this.onTap,
-  });
-}
-
-final List<Module> dashboardModules = [
-  Module(
-    title: 'Sales',
-    icon: Icons.shopping_cart,
-    primaryInfo: '৳ 24,300',
-    secondaryInfo: '12 invoices today',
-    onTap: () {
-      // Navigate to Sales Page
-    },
-  ),
-  Module(
-    title: 'Purchase',
-    icon: Icons.shopping_basket,
-    primaryInfo: '৳ 12,500',
-    secondaryInfo: '4 new vendors',
-    onTap: () {
-      // Navigate to Purchase Page
-    },
-  ),
-  Module(
-    title: 'Accounts',
-    icon: Icons.account_balance_wallet,
-    primaryInfo: '৳ 58,000',
-    secondaryInfo: '৳ 6,000 due',
-    onTap: () {
-      // Navigate to Accounts Page
-    },
-  ),
-  Module(
-    title: 'HR',
-    icon: Icons.group,
-    primaryInfo: '14 Staff',
-    secondaryInfo: '12 Present today',
-    onTap: () {
-      // Navigate to HR Page
-    },
-  ),
-  Module(
-    title: 'Daily Reports',
-    icon: Icons.today,
-    primaryInfo: '৳ 6,200',
-    secondaryInfo: 'Today\'s income',
-    onTap: () {
-      // Navigate to Daily Report Page
-    },
-  ),
-  Module(
-    title: 'Reports',
-    icon: Icons.insert_chart_outlined,
-    primaryInfo: '15 Reports',
-    secondaryInfo: 'This Month',
-    onTap: () {
-      // Navigate to Full Reports Page
-    },
-  ),
-];
