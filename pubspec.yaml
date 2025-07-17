@@ -1,6 +1,6 @@
 name: smart_furniture
 description: A smart enterprise app for managing multiple furniture shops.
-publish_to: 'none' # For private use only
+publish_to: 'none'
 version: 1.0.0+1
 environment:
   sdk: ^3.5.3
@@ -8,12 +8,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1
   hugeicons: ^0.0.11
   fluttertoast: ^8.2.12
   cached_network_image: ^3.4.1
   flutter_bloc: ^9.1.1
+  intl: ^0.19.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -21,6 +25,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/images/flags/

@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Base Colors
   static const Color backgroundColor = Color(0xFFF9F9F9);
-  // static const Color cardColor = Color(0xFFFFFFFF); // Pure white cards
-  static const Color cardColor = Color(0xFFEEEEEE);
-  static const Color cardColorBold = Color(0xFFE0E0E0);
+  static const Color cardColor = Color(0xFFFFFFFF);
+  static const Color borderColor = Color(0xFFE0E0E0);
 
   // Primary Theme Colors
   static const Color primaryColor = Color(0xFF0D47A1);
@@ -30,6 +29,6 @@ class AppColors {
   static const Color cardOverlay = Color(0x11CCCCCC);
 
   // Input Border Color
-  static const Color inputBorderColor = Color(0xFFCCCCCC);
+  static const Color inputBorderColor = Color(0xFFE0E0E0);
   static const Color inputBorderFocusedColor = primaryColor;
 }
