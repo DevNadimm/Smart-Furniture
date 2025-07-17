@@ -38,7 +38,7 @@ class ModuleCard extends StatelessWidget {
                     color: AppColors.primaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(module.icon, color: AppColors.primaryColor),
+                  child: Image.asset(module.iconPath, color: AppColors.primaryColor, scale: 6),
                 ),
                 const SizedBox(height: 12),
                 Text(

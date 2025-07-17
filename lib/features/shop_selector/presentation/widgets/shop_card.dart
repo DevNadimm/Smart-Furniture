@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
@@ -50,11 +51,7 @@ class ShopCard extends StatelessWidget {
                             color: shop.color.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Icon(
-                            shop.icon,
-                            color: shop.color,
-                            size: 24,
-                          ),
+                          child: Image.asset(AppImages.store, color: shop.color, scale: 6),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
