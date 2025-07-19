@@ -9,21 +9,21 @@ class ModuleLocalDataSource {
 
     return [
       Module(
-        title: strings.sales,
-        iconPath: AppImages.sales,
-        primaryInfo: '৳ 24,300',
-        secondaryInfo: '12 invoices today',
-        onTap: () {
-          // Navigate to Sales Page
-        },
-      ),
-      Module(
         title: strings.purchase,
         iconPath: AppImages.purchase,
         primaryInfo: '৳ 12,500',
         secondaryInfo: '4 new vendors',
         onTap: () {
           // Navigate to Purchase Page
+        },
+      ),
+      Module(
+        title: strings.sales,
+        iconPath: AppImages.sales,
+        primaryInfo: '৳ 24,300',
+        secondaryInfo: '12 invoices today',
+        onTap: () {
+          // Navigate to Sales Page
         },
       ),
       Module(
