@@ -7,9 +7,9 @@
   "selectShopSubtitle": "পরিচালনা এবং বিশ্লেষণ দেখতে একটি দোকান বেছে নিন।",
   "changeShopBtn": "দোকান পরিবর্তন করুন",
 
-  // ===== Module Titles =====
+  "@@moduleTitles": "===== Module Titles =====",
   "sales": "বিক্রয়",
-  "purchase": "কেনাকাটা",
+  "purchase": "ক্রয়",
   "accounts": "হিসাব-নিকাশ",
   "hr": "কর্মকর্তা বিভাগ",
   "dailyReports": "প্রতিদিনের রিপোর্ট",

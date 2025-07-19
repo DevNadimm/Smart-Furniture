@@ -7,7 +7,7 @@
   "selectShopSubtitle": "Pick a shop to manage operations and view insights.",
   "changeShopBtn": "Switch Shop",
 
-   // ===== Module Titles =====
+  "@@moduleTitles": "===== Module Titles =====",
   "sales": "Sales",
   "purchase": "Purchase",
   "accounts": "Accounts",
