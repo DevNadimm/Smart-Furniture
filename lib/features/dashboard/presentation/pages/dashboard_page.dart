@@ -71,6 +71,8 @@ class DashboardPage extends StatelessWidget {
   }
 
   Widget _buildGridView(BuildContext context) {
+    final modules = ModuleLocalDataSource.getModules(context);
+
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

@@ -5,5 +5,13 @@
   "languageScreenSubtitle": "Select the language you’re most comfortable with to personalize your app experience.",
   "selectShopTitle": "Select a Shop",
   "selectShopSubtitle": "Pick a shop to manage operations and view insights.",
-  "changeShopBtn": "Switch Shop"
+  "changeShopBtn": "Switch Shop",
+
+   // ===== Module Titles =====
+  "sales": "Sales",
+  "purchase": "Purchase",
+  "accounts": "Accounts",
+  "hr": "HR",
+  "dailyReports": "Daily Reports",
+  "reports": "Reports"
 }

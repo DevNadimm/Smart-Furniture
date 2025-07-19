@@ -5,5 +5,13 @@
   "languageScreenSubtitle": "অ্যাপটি আপনার মতো করে ব্যবহার করতে আপনার পছন্দের ভাষাটি বেছে নিন।",
   "selectShopTitle": "দোকান নির্বাচন করুন",
   "selectShopSubtitle": "পরিচালনা এবং বিশ্লেষণ দেখতে একটি দোকান বেছে নিন।",
-  "changeShopBtn": "দোকান পরিবর্তন করুন"
+  "changeShopBtn": "দোকান পরিবর্তন করুন",
+
+  // ===== Module Titles =====
+  "sales": "বিক্রয়",
+  "purchase": "কেনাকাটা",
+  "accounts": "হিসাব-নিকাশ",
+  "hr": "কর্মকর্তা বিভাগ",
+  "dailyReports": "প্রতিদিনের রিপোর্ট",
+  "reports": "সব রিপোর্ট"
 }
