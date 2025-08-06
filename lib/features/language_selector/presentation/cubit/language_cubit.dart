@@ -1,9 +1,10 @@
 import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_furniture/core/constants/preference_keys.dart';
 
 class LanguageCubit extends Cubit<Locale> {
-  static const _key = 'selectedLanguage';
+  static const _key = PreferenceKeys.selectedLanguage;
 
   LanguageCubit() : super(const Locale('en')) {
     _loadLanguage();

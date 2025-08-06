@@ -75,7 +75,7 @@ class LanguageSelectionPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () async {
-                    await AppPreferences.setFirstTimeUser();
+                    await AppPreferences.markFirstTimeCompleted();
                     Navigator.pushReplacement(context, ShopSelectionPage.route());
                   },
                   icon: const Icon(HugeIcons.strokeRoundedArrowRight02),
