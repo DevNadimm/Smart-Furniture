@@ -14,8 +14,18 @@ class AppPreferences {
     prefs.setBool(PreferenceKeys.isFirstTimeUser, false);
   }
 
-  static Future<void> deleteFirstTimeUser() async {
+  static Future<String> getSelectedLanguage() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove(PreferenceKeys.isFirstTimeUser);
+    return prefs.getString(PreferenceKeys.selectedLanguage) ?? 'en';
+  }
+
+  static Future<void> setSelectedLanguage(String code) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(PreferenceKeys.selectedLanguage, code);
+  }
+
+  static Future<void> clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }
