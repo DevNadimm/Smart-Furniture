@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/themes/theme.dart';
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
-import 'package:smart_furniture/features/language_selector/presentation/pages/language_selection_page.dart';
+import 'package:smart_furniture/features/splash/splash_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Smart Furniture',
           theme: theme,
-          home: const LanguageSelectionPage(),
+          home: const SplashPage(),
         );
       },
     );
