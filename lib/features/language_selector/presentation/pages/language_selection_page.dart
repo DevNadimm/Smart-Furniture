@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
+import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/language_selector/presentation/widgets/language_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
 
 class LanguageSelectionPage extends StatelessWidget {
+  static route() => MaterialPageRoute(builder: (context) => const LanguageSelectionPage());
   const LanguageSelectionPage({super.key});
 
   @override
@@ -72,12 +74,15 @@ class LanguageSelectionPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: () => Navigator.pushReplacement(context, ShopSelectionPage.route()),
+                  onPressed: () async {
+                    await AppPreferences.setFirstTimeUser();
+                    Navigator.pushReplacement(context, ShopSelectionPage.route());
+                  },
                   icon: const Icon(HugeIcons.strokeRoundedArrowRight02),
                   iconAlignment: IconAlignment.end,
                   label: Text(strings.nextScreenBtn),
                 ),
-              )
+              ),
             ],
           ),
         ),
