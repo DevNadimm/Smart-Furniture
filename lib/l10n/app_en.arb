@@ -13,5 +13,19 @@
   "accounts": "Accounts",
   "hr": "HR",
   "dailyReports": "Daily Reports",
-  "reports": "Reports"
+  "reports": "Reports",
+
+  "@@salesModule": "===== Sales Module =====",
+  "salesRecordTitle": "Sales Record",
+  "salesRecordSubtitle": "View and manage sales entries",
+  "salesReturnTitle": "Sales Return",
+  "salesReturnSubtitle": "Process and track returns",
+  "stockTitle": "Stock",
+  "stockSubtitle": "Check current inventory",
+
+  "@@purchaseModule": "===== Purchase Module =====",
+  "purchaseRecordTitle": "Purchase Record",
+  "purchaseRecordSubtitle": "View and manage purchase entries",
+  "purchaseReturnTitle": "Purchase Return",
+  "purchaseReturnSubtitle": "Process and track returned purchases"
 }

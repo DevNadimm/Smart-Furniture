@@ -36,7 +36,9 @@ class DashboardPage extends StatelessWidget {
                   label: Text(strings.changeShopBtn),
                   iconAlignment: IconAlignment.end,
                 ),
-              )
+              ),
+              // const Spacer(),
+              // ElevatedButton(onPressed: () => Navigator.push(context, LanguageSelectionPage.route()), child: const Text("Change Localization"))
             ],
           ),
         ),

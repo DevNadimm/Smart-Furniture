@@ -13,5 +13,19 @@
   "accounts": "হিসাব-নিকাশ",
   "hr": "কর্মকর্তা বিভাগ",
   "dailyReports": "প্রতিদিনের রিপোর্ট",
-  "reports": "সব রিপোর্ট"
+  "reports": "সব রিপোর্ট",
+
+  "@@salesModule": "===== Sales Module =====",
+  "salesRecordTitle": "বিক্রয় রেকর্ড",
+  "salesRecordSubtitle": "বিক্রয় এন্ট্রি দেখুন এবং পরিচালনা করুন",
+  "salesReturnTitle": "বিক্রয় ফেরত",
+  "salesReturnSubtitle": "রিটার্ন প্রক্রিয়া এবং ট্র্যাক করুন",
+  "stockTitle": "স্টক",
+  "stockSubtitle": "বর্তমান ইনভেন্টরি দেখুন",
+
+  "@@purchaseModule": "===== Purchase Module =====",
+  "purchaseRecordTitle": "ক্রয় রেকর্ড",
+  "purchaseRecordSubtitle": "ক্রয় এন্ট্রি দেখুন এবং পরিচালনা করুন",
+  "purchaseReturnTitle": "ক্রয় রিটার্ন",
+  "purchaseReturnSubtitle": "ফেরতকৃত ক্রয় প্রক্রিয়া এবং ট্র্যাক করুন"
 }
