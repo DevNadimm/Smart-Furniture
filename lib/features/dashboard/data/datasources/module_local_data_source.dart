@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/features/dashboard/presentation/pages/purchase_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/sales_module_page.dart';
 
 class ModuleLocalDataSource {
@@ -15,7 +16,7 @@ class ModuleLocalDataSource {
         primaryInfo: '৳ 12,500',
         secondaryInfo: '4 new vendors',
         onTap: () {
-          // Navigate to Purchase Page
+          Navigator.push(context, PurchaseModulePage.route());
         },
       ),
       Module(
