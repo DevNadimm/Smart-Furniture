@@ -10,7 +10,7 @@ class PurchaseModulePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final purchaseModules = PurchaseModuleLocalDataSource.getPurchaseModule(context);
+    final purchaseModules = PurchaseModuleLocalDataSource.getPurchaseModules(context);
     final strings = AppLocalizations.of(context)!;
 
     return Scaffold(

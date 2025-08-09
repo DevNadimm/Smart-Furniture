@@ -5,7 +5,7 @@ import 'package:smart_furniture/features/sales/presentation/pages/sales_record_p
 import 'package:smart_furniture/features/sales/presentation/pages/stock_page.dart';
 
 class SalesModuleLocalDataSource {
-  static List<SubModule> getSalesModule(BuildContext context) {
+  static List<SubModule> getSalesModules(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
 
     return [

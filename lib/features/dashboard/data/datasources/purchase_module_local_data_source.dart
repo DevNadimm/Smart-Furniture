@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
 
 class PurchaseModuleLocalDataSource {
-  static List<SubModule> getPurchaseModule(BuildContext context) {
+  static List<SubModule> getPurchaseModules(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
 
     return [
