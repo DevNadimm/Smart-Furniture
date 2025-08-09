@@ -4,6 +4,7 @@ import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/purchase_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/sales_module_page.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
 
 class ModuleLocalDataSource {
   static List<Module> getModules(BuildContext context) {
@@ -12,56 +13,66 @@ class ModuleLocalDataSource {
     return [
       Module(
         title: strings.purchase,
+        subTitle: strings.purchaseSubTitle,
         iconPath: AppImages.purchase,
-        primaryInfo: '৳ 12,500',
-        secondaryInfo: '4 new vendors',
         onTap: () {
           Navigator.push(context, PurchaseModulePage.route());
         },
       ),
       Module(
         title: strings.sales,
+        subTitle: strings.salesSubTitle,
         iconPath: AppImages.sales,
-        primaryInfo: '৳ 24,300',
-        secondaryInfo: '12 invoices today',
         onTap: () {
           Navigator.push(context, SalesModulePage.route());
         },
       ),
       Module(
         title: strings.accounts,
+        subTitle: strings.accountsSubTitle,
         iconPath: AppImages.accounts,
-        primaryInfo: '৳ 58,000',
-        secondaryInfo: '৳ 6,000 due',
         onTap: () {
           // Navigate to Accounts Page
         },
       ),
       Module(
+        title: strings.administration,
+        subTitle: strings.administrationSubTitle,
+        iconPath: AppImages.administration,
+        onTap: () {
+          // Navigate to Administration Page
+        },
+      ),
+      Module(
         title: strings.hr,
+        subTitle: strings.hrSubTitle,
         iconPath: AppImages.hr,
-        primaryInfo: '14 Staff',
-        secondaryInfo: '12 Present today',
         onTap: () {
           // Navigate to HR Page
         },
       ),
       Module(
         title: strings.dailyReports,
+        subTitle: strings.dailyReportsSubTitle,
         iconPath: AppImages.dailyReports,
-        primaryInfo: '৳ 6,200',
-        secondaryInfo: 'Today\'s income',
         onTap: () {
           // Navigate to Daily Report Page
         },
       ),
       Module(
         title: strings.reports,
+        subTitle: strings.reportsSubTitle,
         iconPath: AppImages.reports,
-        primaryInfo: '15 Reports',
-        secondaryInfo: 'This Month',
         onTap: () {
           // Navigate to Full Reports Page
+        },
+      ),
+      Module(
+        title: strings.switchShop,
+        subTitle: strings.switchShopSubTitle,
+        iconPath: AppImages.switchIcon,
+        onTap: () {
+          Navigator.pushAndRemoveUntil(context, ShopSelectionPage.route(), (route) => false);
         },
       ),
     ];

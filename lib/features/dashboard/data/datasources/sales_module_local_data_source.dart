@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
+import 'package:smart_furniture/features/sales/presentation/pages/sales_record_page.dart';
 
 class SalesModuleLocalDataSource {
   static List<SubModule> getSalesModule(BuildContext context) {
@@ -12,7 +13,7 @@ class SalesModuleLocalDataSource {
         subTitle: strings.salesRecordSubtitle,
         iconPath: 'assets/images/modules/sales.png',
         onTap: () {
-          print('Sales Record tapped');
+          Navigator.push(context, SalesRecordPage.route());
         },
       ),
       SubModule(

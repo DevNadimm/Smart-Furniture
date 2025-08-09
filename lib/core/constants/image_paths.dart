@@ -10,6 +10,8 @@ class AppImages {
   static const String sales = 'assets/images/modules/sales.png';
   static const String purchase = 'assets/images/modules/purchase.png';
   static const String accounts = 'assets/images/modules/accounts.png';
+  static const String administration = 'assets/images/modules/administration.png';
+  static const String switchIcon = 'assets/images/modules/switch.png';
   static const String hr = 'assets/images/modules/hr.png';
   static const String dailyReports = 'assets/images/modules/daily_reports.png';
   static const String reports = 'assets/images/modules/reports.png';
