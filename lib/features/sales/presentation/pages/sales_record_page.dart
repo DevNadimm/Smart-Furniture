@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
-import 'package:smart_furniture/features/sales/presentation/bloc/sales_record_bloc.dart';
+import 'package:smart_furniture/features/sales/presentation/blocs/sales_record/sales_record_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/widgets/sales_record_card.dart';
 
 class SalesRecordPage extends StatefulWidget {
