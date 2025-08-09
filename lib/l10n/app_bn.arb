@@ -37,5 +37,11 @@
   "purchaseRecordTitle": "ক্রয় রেকর্ড",
   "purchaseRecordSubtitle": "ক্রয় এন্ট্রি দেখুন এবং পরিচালনা করুন",
   "purchaseReturnTitle": "ক্রয় রিটার্ন",
-  "purchaseReturnSubtitle": "ফেরতকৃত ক্রয় প্রক্রিয়া এবং ট্র্যাক করুন"
+  "purchaseReturnSubtitle": "ফেরতকৃত ক্রয় প্রক্রিয়া এবং ট্র্যাক করুন",
+
+  "@@hrModule": "===== Hr Module =====",
+  "salaryPaymentTitle": "বেতন প্রদান",
+  "salaryPaymentSubtitle": "কর্মচারীদের বেতন পরিচালনা ও প্রদান করুন",
+  "employeeListTitle": "কর্মচারীর তালিকা",
+  "employeeListSubtitle": "সমস্ত কর্মচারী দেখুন ও পরিচালনা করুন"
 }

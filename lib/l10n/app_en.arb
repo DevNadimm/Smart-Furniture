@@ -16,7 +16,7 @@
   "accountsSubTitle": "Track account balances and dues",
   "administration": "Administration",
   "administrationSubTitle": "Manage products and inventory",
-  "hr": "HR",
+  "hr": "HR & Payroll",
   "hrSubTitle": "Manage staff and attendance",
   "dailyReports": "Daily Reports",
   "dailyReportsSubTitle": "View daily income and expenses",
@@ -37,5 +37,11 @@
   "purchaseRecordTitle": "Purchase Record",
   "purchaseRecordSubtitle": "View and manage purchase entries",
   "purchaseReturnTitle": "Purchase Return",
-  "purchaseReturnSubtitle": "Process and track returned purchases"
+  "purchaseReturnSubtitle": "Process and track returned purchases",
+
+  "@@hrModule": "===== Hr Module =====",
+  "salaryPaymentTitle": "Salary Payment",
+  "salaryPaymentSubtitle": "Manage and process employee salaries",
+  "employeeListTitle": "Employee List",
+  "employeeListSubtitle": "View and manage all employees"
 }

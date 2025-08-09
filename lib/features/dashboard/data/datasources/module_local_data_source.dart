@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/features/dashboard/presentation/pages/hr_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/purchase_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/sales_module_page.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
@@ -48,7 +49,7 @@ class ModuleLocalDataSource {
         subTitle: strings.hrSubTitle,
         iconPath: AppImages.hr,
         onTap: () {
-          // Navigate to HR Page
+          Navigator.push(context, HrModulePage.route());
         },
       ),
       Module(

@@ -24,7 +24,7 @@ class SalesModulePage extends StatelessWidget {
           separatorBuilder: (_, __) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
             final module = salesModules[index];
-            return SalesModuleTile(module: module);
+            return SubModuleTile(module: module);
           },
         ),
       ),

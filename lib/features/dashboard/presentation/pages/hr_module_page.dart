@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smart_furniture/features/dashboard/data/datasources/purchase_module_local_data_source.dart';
+import 'package:smart_furniture/features/dashboard/data/datasources/hr_module_local_data_source.dart';
 import 'package:smart_furniture/features/dashboard/presentation/widgets/sub_module_tile.dart';
 
-class PurchaseModulePage extends StatelessWidget {
-  static Route route() => MaterialPageRoute(builder: (context) => const PurchaseModulePage());
+class HrModulePage extends StatelessWidget {
+  static Route route() => MaterialPageRoute(builder: (context) => const HrModulePage());
 
-  const PurchaseModulePage({super.key});
+  const HrModulePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final purchaseModules = PurchaseModuleLocalDataSource.getPurchaseModule(context);
+    final hrModules = HrModuleLocalDataSource.getHrModules(context);
     final strings = AppLocalizations.of(context)!;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.purchase),
+        title: Text(strings.hr),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: ListView.separated(
-          itemCount: purchaseModules.length,
+          itemCount: hrModules.length,
           separatorBuilder: (_, __) => const SizedBox(height: 16),
           itemBuilder: (context, index) {
-            final module = purchaseModules[index];
+            final module = hrModules[index];
             return SubModuleTile(module: module);
           },
         ),

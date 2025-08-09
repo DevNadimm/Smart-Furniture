@@ -16,4 +16,6 @@ class AppImages {
   static const String dailyReports = 'assets/images/modules/daily_reports.png';
   static const String reports = 'assets/images/modules/reports.png';
   static const String store = 'assets/images/modules/store.png';
+  static const String salary = 'assets/images/modules/salary.png';
+  static const String employee = 'assets/images/modules/employee.png';
 }

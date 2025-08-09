@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
 
-class SalesModuleTile extends StatelessWidget {
+class SubModuleTile extends StatelessWidget {
   final SubModule module;
 
-  const SalesModuleTile({super.key, required this.module});
+  const SubModuleTile({super.key, required this.module});
 
   @override
   Widget build(BuildContext context) {
