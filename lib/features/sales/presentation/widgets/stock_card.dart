@@ -89,8 +89,10 @@ class StockCard extends StatelessWidget {
                   Text(
                     "Current Stocks: ${stockData?.remainingStock ?? '0'} pcs",
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
+                          color: stockData?.remainingStock == '0'
+                              ? AppColors.error
+                              : AppColors.success,
+                        ),
                   ),
                 ],
               ),
