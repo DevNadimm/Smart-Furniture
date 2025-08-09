@@ -8,7 +8,7 @@ InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   fillColor: AppColors.cardColor,
   filled: true,
   contentPadding: const EdgeInsets.all(16),
-  labelStyle: const TextStyle().copyWith(fontSize: 16, color: AppColors.secondaryFontColor),
+  labelStyle: const TextStyle().copyWith(fontSize: 16, color: AppColors.secondaryFontColor, fontWeight: FontWeight.w500),
   hintStyle: const TextStyle().copyWith(fontSize: 16, color: AppColors.secondaryFontColor, fontWeight: FontWeight.w500),
   errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
   floatingLabelStyle: const TextStyle().copyWith(
