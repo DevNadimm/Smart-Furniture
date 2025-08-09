@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/date_filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_record/sales_record_bloc.dart';
@@ -65,10 +66,12 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
       ),
       body: Column(
         children: [
-          // Date Filter Row
-          _dateFilterWidget(),
-
-          // Data List
+          DateFilterBar(
+            fromDateController: _fromDateController,
+            toDateController: _toDateController,
+            onFilterPressed: _fetchData,
+            onSelectDate: _selectDate,
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -106,42 +109,6 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _dateFilterWidget() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: _fromDateController,
-              readOnly: true,
-              decoration: const InputDecoration(
-                labelText: 'From Date',
-              ),
-              onTap: () => _selectDate(context, _fromDateController),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: TextField(
-              controller: _toDateController,
-              readOnly: true,
-              decoration: const InputDecoration(
-                labelText: 'To Date',
-              ),
-              onTap: () => _selectDate(context, _toDateController),
-            ),
-          ),
-          const SizedBox(width: 8),
-          ElevatedButton(
-            onPressed: _fetchData,
-            child: const Text('Filter'),
           ),
         ],
       ),
