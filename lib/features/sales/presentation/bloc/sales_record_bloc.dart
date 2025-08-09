@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
+import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
+import 'package:smart_furniture/features/sales/data/repositories/sales_record_repository.dart';
 
 part 'sales_record_event.dart';
 part 'sales_record_state.dart';
@@ -8,11 +9,11 @@ class SalesRecordBloc extends Bloc<SalesRecordEvent, SalesRecordState> {
   SalesRecordBloc() : super(SalesRecordInitial()) {
     on<LoadSalesRecordEvent>((event, emit) async {
       emit(SalesRecordLoading());
-
       try {
-
+        final data = await SalesRecordRepository.fetchData(event.fromDate, event.toDate);
+        emit(SalesRecordLoaded(data));
       } catch (e) {
-
+        emit(SalesRecordError(e.toString()));
       }
     });
   }

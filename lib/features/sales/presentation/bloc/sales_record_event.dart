@@ -3,11 +3,11 @@ part of 'sales_record_bloc.dart';
 abstract class SalesRecordEvent {}
 
 class LoadSalesRecordEvent extends SalesRecordEvent {
-  final DateTime startDate;
-  final DateTime endDate;
+  final String? fromDate;
+  final String? toDate;
 
   LoadSalesRecordEvent({
-    required this.startDate,
-    required this.endDate,
+    required this.fromDate,
+    required this.toDate,
   });
 }
