@@ -41,7 +41,7 @@ class SalesRecordCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(salesRecord!.saleDate!).toString(),
+                    DateFormatters.readableDate(salesRecord?.saleDate.toString()).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),
