@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
 import 'package:smart_furniture/features/sales/presentation/pages/sales_record_page.dart';
+import 'package:smart_furniture/features/sales/presentation/pages/stock_page.dart';
 
 class SalesModuleLocalDataSource {
   static List<SubModule> getSalesModule(BuildContext context) {
@@ -29,7 +30,7 @@ class SalesModuleLocalDataSource {
         subTitle: strings.stockSubtitle,
         iconPath: 'assets/images/modules/stock.png',
         onTap: () {
-          print('Stock tapped');
+          Navigator.push(context, StockPage.route());
         },
       ),
     ];
