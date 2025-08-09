@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
 
 class SalesRecordCard extends StatelessWidget {
@@ -40,7 +41,7 @@ class SalesRecordCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${salesRecord?.saleDate}",
+                    DateFormatters.readableDate(salesRecord!.saleDate!).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),
