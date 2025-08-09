@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+import 'package:smart_furniture/core/utils/widgets/loader.dart';
+import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/salary_payment/salary_payment_bloc.dart';
+import 'package:smart_furniture/features/hr_and_payroll/presentation/widgets/salary_payment_card.dart';
+
+class SalaryPaymentPage extends StatefulWidget {
+  static Route route() => MaterialPageRoute(builder: (context) => const SalaryPaymentPage());
+
+  const SalaryPaymentPage({super.key});
+
+  @override
+  State<SalaryPaymentPage> createState() => _SalaryPaymentPageState();
+}
+
+class _SalaryPaymentPageState extends State<SalaryPaymentPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  void _fetchData() {
+    context.read<SalaryPaymentBloc>().add(
+      LoadSalaryPaymentEvent(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(strings!.salaryPaymentTitle),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: BlocConsumer<SalaryPaymentBloc, SalaryPaymentState>(
+                  listener: (context, state) {
+                    if (state is SalaryPaymentError) {
+                      AppNotifier.showToast(state.message);
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is SalaryPaymentLoading) {
+                      return const Loader();
+                    }
+                    if (state is SalaryPaymentLoaded) {
+                      if (state.salaryPaymentModelList.isEmpty) {
+                        return const EmptyStateWidget(
+                          title: 'No Salary Payment Records Found',
+                          message: 'We couldn’t find any salary payment records for the selected date range. Try adjusting your filters or selecting a different time period.',
+                        );
+                      } else {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.salaryPaymentModelList.length,
+                          itemBuilder: (context, index) {
+                            final salaryPayment = state.salaryPaymentModelList[index];
+                            return SalaryPaymentCard(salaryPayment: salaryPayment);
+                          },
+                        );
+                      }
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
