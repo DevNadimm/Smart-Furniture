@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
 import 'package:smart_furniture/features/sales/presentation/pages/sales_record_page.dart';
+import 'package:smart_furniture/features/sales/presentation/pages/sales_return_page.dart';
 import 'package:smart_furniture/features/sales/presentation/pages/stock_page.dart';
 
 class SalesModuleLocalDataSource {
@@ -22,7 +23,7 @@ class SalesModuleLocalDataSource {
         subTitle: strings.salesReturnSubtitle,
         iconPath: 'assets/images/modules/sales_return.png',
         onTap: () {
-          print('Sales Return tapped');
+          Navigator.push(context, SalesReturnPage.route());
         },
       ),
       SubModule(
