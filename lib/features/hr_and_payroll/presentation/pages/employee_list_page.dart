@@ -36,7 +36,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings!.salaryPaymentTitle),
+        title: Text(strings!.employeeListTitle),
       ),
       body: Column(
         children: [

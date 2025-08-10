@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
+import 'package:smart_furniture/features/purchase/presentation/pages/purchase_record_page.dart';
 
 class PurchaseModuleLocalDataSource {
   static List<SubModule> getPurchaseModules(BuildContext context) {
@@ -11,7 +12,9 @@ class PurchaseModuleLocalDataSource {
         title: strings.purchaseRecordTitle,
         subTitle: strings.purchaseRecordSubtitle,
         iconPath: 'assets/images/modules/purchase.png',
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, PurchaseRecordPage.route());
+        },
       ),
       SubModule(
         title: strings.purchaseReturnTitle,
