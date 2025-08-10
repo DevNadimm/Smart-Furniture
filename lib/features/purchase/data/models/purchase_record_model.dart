@@ -42,6 +42,8 @@ class PurchaseRecordData {
   final String? branchId;
   final String? createdAt;
   final String? updatedAt;
+  final Supplier? supplier;
+  final Category? category;
 
   PurchaseRecordData({
     this.id,
@@ -68,6 +70,8 @@ class PurchaseRecordData {
     this.branchId,
     this.createdAt,
     this.updatedAt,
+    this.supplier,
+    this.category,
   });
 
   factory PurchaseRecordData.fromJson(Map<String, dynamic> json) {
@@ -96,6 +100,46 @@ class PurchaseRecordData {
       branchId: json['branch_id'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
+      supplier: json['supplier'] != null
+          ? Supplier.fromJson(json['supplier'] as Map<String, dynamic>)
+          : null,
+      category: json['category'] != null
+          ? Category.fromJson(json['category'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+}
+
+class Supplier {
+  final int? id;
+  final String? supplierName;
+
+  Supplier({
+    this.id,
+    this.supplierName,
+  });
+
+  factory Supplier.fromJson(Map<String, dynamic> json) {
+    return Supplier(
+      id: json['id'] as int?,
+      supplierName: json['supplier_name'] as String?,
+    );
+  }
+}
+
+class Category {
+  final int? id;
+  final String? name;
+
+  Category({
+    this.id,
+    this.name,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
     );
   }
 }

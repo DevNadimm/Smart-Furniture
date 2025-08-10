@@ -61,10 +61,12 @@ class PurchaseRecordCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    purchaseRecord?.supplierId != null
-                        ? "Supplier ID: ${purchaseRecord!.supplierId}"
+                    purchaseRecord?.supplier?.supplierName != null
+                        ? "Supplier: ${purchaseRecord?.supplier?.supplierName}"
                         : 'Unknown Supplier',
                     style: Theme.of(context).textTheme.headlineSmall,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
@@ -74,25 +76,26 @@ class PurchaseRecordCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Product name & category
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            purchaseRecord?.productName ?? 'N/A',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            "Category ID: ${purchaseRecord?.categoryId ?? 'N/A'}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(color: AppColors.lightFontColor),
-                          ),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              purchaseRecord?.productName ?? 'N/A',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              "Category: ${purchaseRecord?.category?.name ?? 'N/A'}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: AppColors.lightFontColor),
+                            ),
+                          ],
+                        ),
                       ),
 
                       // Price info
