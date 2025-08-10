@@ -94,14 +94,18 @@ class _SearchableBottomSheetState extends State<SearchableBottomSheet> {
                       return SelectableListItem(
                         title: item,
                         isSelected: isSelected,
-                        onTap: () => widget.onItemSelected(item),
+                        onTap: () {
+                          widget.onItemSelected(item);
+                          Navigator.pop(context);
+                        },
                       );
                     },
                     separatorBuilder: (_, __) => const SizedBox(height: 16),
                   )
-                : const Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 32),
+                : const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 32),
+                    child: Align(
+                      alignment: Alignment.topCenter,
                       child: Text(
                         "No results found.",
                         style: TextStyle(fontSize: 16),
