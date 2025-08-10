@@ -14,7 +14,6 @@ class SupplierListRepository {
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonMap = jsonDecode(res.body);
-        print(jsonMap);
 
         return SupplierListModel.fromJson(jsonMap);
       } else {
