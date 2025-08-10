@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class DateFilterBar extends StatelessWidget {
+class FilterBar extends StatelessWidget {
   final TextEditingController fromDateController;
   final TextEditingController toDateController;
   final VoidCallback onFilterPressed;
   final Future<void> Function(BuildContext context, TextEditingController controller) onSelectDate;
 
-  const DateFilterBar({
+  const FilterBar({
     super.key,
     required this.fromDateController,
     required this.toDateController,

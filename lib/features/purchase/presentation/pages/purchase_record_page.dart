@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
-import 'package:smart_furniture/core/utils/widgets/date_filter_bar.dart';
+import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_record/purchase_record_bloc.dart';
@@ -66,7 +66,7 @@ class _PurchaseRecordPageState extends State<PurchaseRecordPage> {
       ),
       body: Column(
         children: [
-          DateFilterBar(
+          FilterBar(
             fromDateController: _fromDateController,
             toDateController: _toDateController,
             onFilterPressed: _fetchData,
