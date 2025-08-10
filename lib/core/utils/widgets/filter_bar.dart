@@ -50,6 +50,7 @@ class FilterBar extends StatelessWidget {
                         .inputDecorationTheme
                         .labelStyle
                         ?.copyWith(fontSize: 14),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                   ),
                   onTap: onFilterPickerTap,
                 ),
@@ -90,6 +91,7 @@ class FilterBar extends StatelessWidget {
                 .inputDecorationTheme
                 .labelStyle
                 ?.copyWith(fontSize: 14),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
           ),
           onTap: () => onSelectDate(context, controller),
         ),
