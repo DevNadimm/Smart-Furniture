@@ -110,9 +110,9 @@ class _StockPageState extends State<StockPage> {
       body: Column(
         children: [
           FilterBar(
-            fromDateController: _fromDateController,
-            toDateController: _toDateController,
-            onFilterPressed: _fetchData,
+            startDateController: _fromDateController,
+            endDateController: _toDateController,
+            onApplyFilter: _fetchData,
             onSelectDate: _selectDate,
           ),
           Expanded(

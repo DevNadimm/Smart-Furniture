@@ -67,9 +67,9 @@ class _PurchaseRecordPageState extends State<PurchaseRecordPage> {
       body: Column(
         children: [
           FilterBar(
-            fromDateController: _fromDateController,
-            toDateController: _toDateController,
-            onFilterPressed: _fetchData,
+            startDateController: _fromDateController,
+            endDateController: _toDateController,
+            onApplyFilter: _fetchData,
             onSelectDate: _selectDate,
           ),
           Expanded(
