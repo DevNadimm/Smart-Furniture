@@ -6,7 +6,7 @@ import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/date_filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
-import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_record_bloc.dart';
+import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_record/purchase_record_bloc.dart';
 import 'package:smart_furniture/features/purchase/presentation/widgets/purchase_record_card.dart';
 
 class PurchaseRecordPage extends StatefulWidget {
