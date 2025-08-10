@@ -104,7 +104,6 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
         children: [
           BlocBuilder<SupplierListBloc, SupplierListState>(
             builder: (context, state) {
-
                if (state is SupplierListLoaded) {
                 _supplierNameToId = {
                   for (var s in state.supplierListModel.data!)

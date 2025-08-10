@@ -1,0 +1,26 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:smart_furniture/features/sales/data/models/customer_list_model.dart';
+
+class CustomerListRepository {
+  static Future<CustomerListModel?> fetchData() async {
+    const baseUrl = "https://sfapi.qualityf.xyz/api";
+
+    final uri = Uri.parse("$baseUrl/customers");
+    print("URL: $uri");
+
+    try {
+      final res = await http.get(uri);
+
+      if (res.statusCode == 200) {
+        final Map<String, dynamic> jsonMap = jsonDecode(res.body);
+
+        return CustomerListModel.fromJson(jsonMap);
+      } else {
+        throw Exception('Failed to fetch customers');
+      }
+    } catch (e) {
+      throw Exception('Failed to fetch customers: $e');
+    }
+  }
+}
