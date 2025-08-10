@@ -72,7 +72,7 @@ class DashboardPage extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
-        childAspectRatio: 1.07,
+        childAspectRatio: 1.06,
       ),
       itemCount: modules.length,
       itemBuilder: (context, index) => ModuleCard(module: modules[index]),
