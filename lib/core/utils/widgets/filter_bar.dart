@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
 
 class FilterBar extends StatelessWidget {
-  final TextEditingController fromDateController;
-  final TextEditingController toDateController;
-  final VoidCallback onFilterPressed;
+  final TextEditingController startDateController;
+  final TextEditingController endDateController;
+
+  /// Optional picker for filtering (e.g., supplier, customer)
+  final bool showFilterPicker;
+  final TextEditingController? filterPickerController;
+  final VoidCallback? onFilterPickerTap;
+  final String? filterPickerLabel;
+
+  final VoidCallback onApplyFilter;
   final Future<void> Function(BuildContext context, TextEditingController controller) onSelectDate;
 
   const FilterBar({
     super.key,
-    required this.fromDateController,
-    required this.toDateController,
-    required this.onFilterPressed,
+    required this.startDateController,
+    required this.endDateController,
+    this.showFilterPicker = false,
+    this.filterPickerController,
+    this.onFilterPickerTap,
+    this.filterPickerLabel,
+    required this.onApplyFilter,
     required this.onSelectDate,
   });
 
@@ -20,48 +31,37 @@ class FilterBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          Expanded(
-            child: SizedBox(
-              height: 40,
-              child: TextField(
-                controller: fromDateController,
-                readOnly: true,
-                style: const TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                  labelText: 'From Date',
-                  labelStyle: Theme.of(context)
-                      .inputDecorationTheme
-                      .labelStyle
-                      ?.copyWith(fontSize: 14),
+          _buildDateField(context, 'Start Date', startDateController),
+          const SizedBox(width: 8),
+          _buildDateField(context, 'End Date', endDateController),
+          const SizedBox(width: 8),
+
+          if (showFilterPicker) ...[
+            Expanded(
+              child: SizedBox(
+                height: 40,
+                child: TextField(
+                  controller: filterPickerController,
+                  readOnly: true,
+                  style: const TextStyle(fontSize: 14),
+                  decoration: InputDecoration(
+                    labelText: filterPickerLabel ?? 'Select',
+                    labelStyle: Theme.of(context)
+                        .inputDecorationTheme
+                        .labelStyle
+                        ?.copyWith(fontSize: 14),
+                  ),
+                  onTap: onFilterPickerTap,
                 ),
-                onTap: () => onSelectDate(context, fromDateController),
               ),
             ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: SizedBox(
-              height: 40,
-              child: TextField(
-                controller: toDateController,
-                readOnly: true,
-                style: const TextStyle(fontSize: 14),
-                decoration: InputDecoration(
-                  labelText: 'To Date',
-                  labelStyle: Theme.of(context)
-                      .inputDecorationTheme
-                      .labelStyle
-                      ?.copyWith(fontSize: 14),
-                ),
-                onTap: () => onSelectDate(context, toDateController),
-              ),
-            ),
-          ),
-          const SizedBox(width: 8),
+            const SizedBox(width: 8),
+          ],
+
           SizedBox(
             height: 40,
             child: ElevatedButton(
-              onPressed: onFilterPressed,
+              onPressed: onApplyFilter,
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
@@ -72,6 +72,27 @@ class FilterBar extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Expanded _buildDateField(BuildContext context, String label, TextEditingController controller) {
+    return Expanded(
+      child: SizedBox(
+        height: 40,
+        child: TextField(
+          controller: controller,
+          readOnly: true,
+          style: const TextStyle(fontSize: 14),
+          decoration: InputDecoration(
+            labelText: label,
+            labelStyle: Theme.of(context)
+                .inputDecorationTheme
+                .labelStyle
+                ?.copyWith(fontSize: 14),
+          ),
+          onTap: () => onSelectDate(context, controller),
+        ),
       ),
     );
   }
