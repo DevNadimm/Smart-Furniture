@@ -4,10 +4,14 @@ import 'package:http/http.dart' as http;
 
 class DamageListRepository {
   static Future<DamageListModel?> fetchData(String? productId) async {
+    if (productId == null || productId.isEmpty) {
+      throw Exception('Please select product before fetching data.');
+    }
+
     const baseUrl = "https://sfapi.qualityf.xyz/api";
 
     final queryParams = {
-      if (productId != null && productId.isNotEmpty) 'product_id': productId,
+      if (productId.isNotEmpty) 'product_id': productId,
     };
 
     final uri = Uri.parse("$baseUrl/administration/damage-list").replace(queryParameters: queryParams);

@@ -14,6 +14,7 @@ class DamageListBloc extends Bloc<DamageListEvent, DamageListState> {
         emit(DamageListLoaded(data!));
       } catch (e) {
         emit(DamageListError(e.toString()));
+        emit(DamageListInitial());
       }
     });
 
