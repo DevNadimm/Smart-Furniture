@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
 import 'package:smart_furniture/features/sales/data/repositories/stock_repository.dart';
 
@@ -18,7 +19,7 @@ class StockBloc extends Bloc<StockEvent, StockState> {
 
         emit(StockLoaded(data!));
       } catch (e) {
-        emit(StockError(e.toString()));
+        emit(StockError(HelperFunctions.cleanErrorMessage(e.toString())));
       }
     });
   }

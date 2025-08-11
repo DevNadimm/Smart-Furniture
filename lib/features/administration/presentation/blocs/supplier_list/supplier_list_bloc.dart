@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/administration/data/models/supplier_list_model.dart';
 import 'package:smart_furniture/features/administration/data/repositories/supplier_list_repository.dart';
 
@@ -13,7 +14,7 @@ class SupplierListBloc extends Bloc<SupplierListEvent, SupplierListState> {
         final data = await SupplierListRepository.fetchData();
         emit(SupplierListLoaded(data!));
       } catch (e) {
-        emit(SupplierListError(e.toString()));
+        emit(SupplierListError(HelperFunctions.cleanErrorMessage(e.toString())));
       }
     });
   }

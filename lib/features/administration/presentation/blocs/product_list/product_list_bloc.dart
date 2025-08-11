@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/administration/data/models/product_list_model.dart';
 import 'package:smart_furniture/features/administration/data/repositories/product_list_repository.dart';
 
@@ -13,7 +14,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
         final data = await ProductListRepository.fetchData(event.search);
         emit(ProductListLoaded(data!));
       } catch (e) {
-        emit(ProductListError(e.toString()));
+        emit(ProductListError(HelperFunctions.cleanErrorMessage(e.toString())));
       }
     });
   }

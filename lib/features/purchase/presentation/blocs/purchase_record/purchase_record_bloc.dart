@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_record_model.dart';
 import 'package:smart_furniture/features/purchase/data/repositories/purchase_record_repository.dart';
 
@@ -14,7 +15,7 @@ class PurchaseRecordBloc extends Bloc<PurchaseRecordEvent, PurchaseRecordState> 
             event.fromDate, event.toDate);
         emit(PurchaseRecordLoaded(data!));
       } catch (e) {
-        emit(PurchaseRecordError(e.toString()));
+        emit(PurchaseRecordError(HelperFunctions.cleanErrorMessage(e.toString())));
       }
     });
   }

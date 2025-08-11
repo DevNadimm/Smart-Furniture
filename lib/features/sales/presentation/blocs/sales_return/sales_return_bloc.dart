@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_return_model.dart';
 import 'package:smart_furniture/features/sales/data/repositories/sales_return_repository.dart';
 
@@ -17,7 +18,7 @@ class SalesReturnBloc extends Bloc<SalesReturnEvent, SalesReturnState> {
         );
         emit(SalesReturnLoaded(data!));
       } catch (e) {
-        emit(SalesReturnError(e.toString()));
+        emit(SalesReturnError(HelperFunctions.cleanErrorMessage(e.toString())));
       }
     });
   }

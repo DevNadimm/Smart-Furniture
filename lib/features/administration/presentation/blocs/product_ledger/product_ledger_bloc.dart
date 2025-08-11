@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/administration/data/models/product_ledger_model.dart';
 import 'package:smart_furniture/features/administration/data/repositories/product_ledger_repository.dart';
 
@@ -17,7 +18,7 @@ class ProductLedgerBloc extends Bloc<ProductLedgerEvent, ProductLedgerState> {
         );
         emit(ProductLedgerLoaded(data!));
       } catch (e) {
-        emit(ProductLedgerError(e.toString()));
+        emit(ProductLedgerError(HelperFunctions.cleanErrorMessage(e.toString())));
         emit(ProductLedgerInitial());
       }
     });
