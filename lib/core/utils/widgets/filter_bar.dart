@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FilterBar extends StatelessWidget {
-  final TextEditingController startDateController;
-  final TextEditingController endDateController;
+  final TextEditingController? startDateController;
+  final TextEditingController? endDateController;
 
   /// Optional picker for filtering (e.g., supplier, customer)
   final bool showFilterPicker;
@@ -11,18 +11,18 @@ class FilterBar extends StatelessWidget {
   final String? filterPickerLabel;
 
   final VoidCallback onApplyFilter;
-  final Future<void> Function(BuildContext context, TextEditingController controller) onSelectDate;
+  final Future<void> Function(BuildContext context, TextEditingController controller)? onSelectDate;
 
   const FilterBar({
     super.key,
-    required this.startDateController,
-    required this.endDateController,
+    this.startDateController,
+    this.endDateController,
     this.showFilterPicker = false,
     this.filterPickerController,
     this.onFilterPickerTap,
     this.filterPickerLabel,
     required this.onApplyFilter,
-    required this.onSelectDate,
+    this.onSelectDate,
   });
 
   @override
@@ -31,10 +31,11 @@ class FilterBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          _buildDateField(context, 'Start Date', startDateController),
-          const SizedBox(width: 8),
-          _buildDateField(context, 'End Date', endDateController),
-          const SizedBox(width: 8),
+          if (startDateController != null) _buildDateField(context, 'Start Date', startDateController!),
+          if (startDateController != null) const SizedBox(width: 8),
+
+          if (endDateController != null) _buildDateField(context, 'End Date', endDateController!),
+          if (endDateController != null) const SizedBox(width: 8),
 
           if (showFilterPicker) ...[
             Expanded(
@@ -93,7 +94,9 @@ class FilterBar extends StatelessWidget {
                 ?.copyWith(fontSize: 14),
             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
           ),
-          onTap: () => onSelectDate(context, controller),
+          onTap: onSelectDate != null
+              ? () => onSelectDate!(context, controller)
+              : null,
         ),
       ),
     );

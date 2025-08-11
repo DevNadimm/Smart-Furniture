@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
@@ -54,18 +54,6 @@ class _DamageListPageState extends State<DamageListPage> {
     context.read<DamageListBloc>().add(ResetDamageListEvent());
   }
 
-  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2025),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null) {
-      controller.text = DateFormat('yyyy-MM-dd').format(picked);
-    }
-  }
-
   void _selectProductPicker(List<String> items) {
     showBarModalBottomSheet(
       context: context,
@@ -112,7 +100,6 @@ class _DamageListPageState extends State<DamageListPage> {
                 };
                 return FilterBar(
                   onApplyFilter: _fetchData,
-                  onSelectDate: _selectDate,
                   showFilterPicker: true,
                   filterPickerController: _productNameController,
                   onFilterPickerTap: () {
@@ -123,7 +110,6 @@ class _DamageListPageState extends State<DamageListPage> {
               } else if (state is ProductListLoading) {
                 return FilterBar(
                   onApplyFilter: _fetchData,
-                  onSelectDate: _selectDate,
                   showFilterPicker: true,
                   filterPickerLabel: 'Select Product',
                 );
@@ -145,6 +131,13 @@ class _DamageListPageState extends State<DamageListPage> {
                   builder: (context, state) {
                     if (state is DamageListLoading) {
                       return const Loader();
+                    }
+                    if (state is DamageListInitial) {
+                      return const EmptyStateWidget(
+                        icon: HugeIcons.strokeRoundedDeliveryBox01,
+                        title: 'Select a Product',
+                        message: 'Choose a product from the filter above to see its damage history.',
+                      );
                     }
                     if (state is DamageListLoaded) {
                       if (state.damageListModel.data?.isEmpty ?? false) {

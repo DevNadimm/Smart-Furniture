@@ -7,3 +7,5 @@ class LoadDamageListEvent extends DamageListEvent {
 
   LoadDamageListEvent(this.productId);
 }
+
+class ResetDamageListEvent extends DamageListEvent {}
