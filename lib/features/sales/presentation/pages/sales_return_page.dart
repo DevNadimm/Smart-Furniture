@@ -8,7 +8,7 @@ import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
-import 'package:smart_furniture/features/sales/presentation/blocs/customer_list/customer_list_bloc.dart';
+import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/sales_return_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/widgets/sales_return_card.dart';
 

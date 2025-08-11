@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:smart_furniture/features/sales/data/models/customer_list_model.dart';
+import 'package:smart_furniture/features/administration/data/models/customer_list_model.dart';
 
 class CustomerListRepository {
   static Future<CustomerListModel?> fetchData() async {
