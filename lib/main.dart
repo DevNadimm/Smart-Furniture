@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/app.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
+import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/employee_list/employee_list_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/salary_payment/salary_payment_bloc.dart';
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
@@ -28,6 +29,7 @@ void main() {
         BlocProvider(create: (_) => PurchaseRecordBloc()),
         BlocProvider(create: (_) => PurchaseReturnBloc()),
         BlocProvider(create: (_) => SupplierListBloc()),
+        BlocProvider(create: (_) => ProductListBloc()),
       ],
       child: const MyApp(),
     ),
