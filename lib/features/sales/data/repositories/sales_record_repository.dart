@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
 
 class SalesRecordRepository {
@@ -25,10 +26,10 @@ class SalesRecordRepository {
           return dataList.map((item) => SalesRecordModel.fromJson(item)).toList();
         }
       } else {
-        throw Exception('Failed to fetch sales records.');
+        throw Exception(ErrorMessages.fetchSalesRecordFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch sales records: $e');
+      throw Exception(ErrorMessages.fetchSalesRecordFailed);
     }
 
     return null;

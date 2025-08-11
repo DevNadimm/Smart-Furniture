@@ -13,6 +13,8 @@ class ErrorMessages {
   static const String fetchProductLedgerFailed = 'Failed to fetch product ledger data. Please try again later.';
   static const String fetchSalaryPaymentListFailed = 'Failed to fetch salary payment list. Please try again later.';
   static const String fetchEmployeeListFailed = 'Failed to fetch employee list. Please try again later.';
+  static const String selectProductBeforeFetch = 'Please select a product before fetching data.';
+  static const String selectAllFiltersBeforeFetch = 'Please select all filters before fetching data.';
   static const String networkError = 'Network error occurred. Please check your connection and try again later.';
   static const String unknownError = 'An unknown error occurred. Please try again later.';
 }

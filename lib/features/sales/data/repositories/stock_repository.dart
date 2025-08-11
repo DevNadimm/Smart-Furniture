@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,10 +25,10 @@ class StockRepository {
 
         return StockModel.fromJson(jsonMap);
       } else {
-        throw Exception('Failed to fetch stocks.');
+        throw Exception(ErrorMessages.fetchStockFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch stocks: $e');
+      throw Exception(ErrorMessages.fetchStockFailed);
     }
   }
 }

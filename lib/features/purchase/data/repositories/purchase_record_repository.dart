@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_record_model.dart';
 
 class PurchaseRecordRepository {
@@ -22,10 +23,10 @@ class PurchaseRecordRepository {
 
         return PurchaseRecordModel.fromJson(jsonMap);
       } else {
-        throw Exception('Failed to fetch purchase record');
+        throw Exception(ErrorMessages.fetchPurchaseRecordFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch purchase record: $e');
+      throw Exception(ErrorMessages.fetchPurchaseRecordFailed);
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_return_model.dart';
 
 class SalesReturnRepository {
@@ -24,20 +25,13 @@ class SalesReturnRepository {
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonMap = jsonDecode(res.body);
-        print(jsonMap);
 
-        final model = SalesReturnModel.fromJson(jsonMap);
-
-        if (model.success == true) {
-          return model;
-        } else {
-          throw Exception('API returned success: false');
-        }
+        return SalesReturnModel.fromJson(jsonMap);
       } else {
-        throw Exception('Failed to fetch sales return records.');
+        throw Exception(ErrorMessages.fetchSalesReturnFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch sales return records: $e');
+      throw Exception(ErrorMessages.fetchSalesReturnFailed);
     }
   }
 }

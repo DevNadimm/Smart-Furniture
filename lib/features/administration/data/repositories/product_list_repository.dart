@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/administration/data/models/product_list_model.dart';
 
 class ProductListRepository {
@@ -21,10 +22,10 @@ class ProductListRepository {
 
         return ProductListModel.fromJson(jsonMap);
       } else {
-        throw Exception('Failed to fetch products');
+        throw Exception(ErrorMessages.fetchProductListFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch products: $e');
+      throw Exception(ErrorMessages.fetchProductListFailed);
     }
   }
 }

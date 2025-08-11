@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_return_model.dart';
 
 class PurchaseReturnRepository {
@@ -23,10 +24,10 @@ class PurchaseReturnRepository {
 
         return PurchaseReturnModel.fromJson(jsonMap);
       } else {
-        throw Exception('Failed to fetch purchase return');
+        throw Exception(ErrorMessages.fetchPurchaseReturnFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch purchase return: $e');
+      throw Exception(ErrorMessages.fetchPurchaseReturnFailed);
     }
   }
 }

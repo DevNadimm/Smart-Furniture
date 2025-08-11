@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/hr_and_payroll/data/models/salary_payment_model.dart';
 
 class SalaryPaymentRepository {
@@ -20,10 +21,10 @@ class SalaryPaymentRepository {
           return dataList.map((item) => SalaryPaymentModel.fromJson(item)).toList();
         }
       } else {
-        throw Exception('Failed to fetch salary payment');
+        throw Exception(ErrorMessages.fetchSalaryPaymentListFailed);
       }
     } catch (e) {
-      throw Exception('Failed to fetch salary payment: $e');
+      throw Exception(ErrorMessages.fetchSalaryPaymentListFailed);
     }
 
     return null;
