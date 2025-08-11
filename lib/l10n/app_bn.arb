@@ -43,5 +43,17 @@
   "salaryPaymentTitle": "বেতন প্রদান",
   "salaryPaymentSubtitle": "কর্মচারীদের বেতনের তথ্য দেখুন",
   "employeeListTitle": "কর্মচারীর তালিকা",
-  "employeeListSubtitle": "সমস্ত কর্মচারী দেখুন"
+  "employeeListSubtitle": "সমস্ত কর্মচারী দেখুন",
+
+  "@@administrationModule": "===== Administration Module =====",
+  "productListTitle": "পণ্যের তালিকা",
+  "productListSubtitle": "সমস্ত পণ্য দেখুন",
+  "damageListTitle": "ক্ষতির তালিকা",
+  "damageListSubtitle": "ক্ষতিগ্রস্ত পণ্য দেখুন",
+  "customerListTitle": "ক্রেতার তালিকা",
+  "customerListSubtitle": "সমস্ত ক্রেতা দেখুন",
+  "supplierListTitle": "সরবরাহকারীর তালিকা",
+  "supplierListSubtitle": "সমস্ত সরবরাহকারী দেখুন",
+  "productLedgerTitle": "পণ্যের খতিয়ান",
+  "productLedgerSubtitle": "পণ্যের লেনদেনের ইতিহাস দেখুন"
 }

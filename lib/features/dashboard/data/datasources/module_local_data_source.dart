@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/features/dashboard/presentation/pages/administration_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/hr_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/purchase_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/sales_module_page.dart';
@@ -41,7 +42,7 @@ class ModuleLocalDataSource {
         subTitle: strings.administrationSubTitle,
         iconPath: AppImages.administration,
         onTap: () {
-          // Navigate to Administration Page
+          Navigator.push(context, AdministrationModulePage.route());
         },
       ),
       Module(

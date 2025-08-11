@@ -18,4 +18,9 @@ class AppImages {
   static const String store = 'assets/images/modules/store.png';
   static const String salary = 'assets/images/modules/salary.png';
   static const String employee = 'assets/images/modules/employee.png';
+  static const String product = 'assets/images/modules/product.png';
+  static const String damage = 'assets/images/modules/damage.png';
+  static const String customers = 'assets/images/modules/employee.png';
+  static const String suppliers = 'assets/images/modules/employee.png';
+  static const String productLedger = 'assets/images/modules/product_ledger.png';
 }

@@ -43,5 +43,17 @@
   "salaryPaymentTitle": "Salary Payment",
   "salaryPaymentSubtitle": "View employee salary details",
   "employeeListTitle": "Employee List",
-  "employeeListSubtitle": "View all employees"
+  "employeeListSubtitle": "View all employees",
+
+  "@@administrationModule": "===== Administration Module =====",
+  "productListTitle": "Product List",
+  "productListSubtitle": "View all available products",
+  "damageListTitle": "Damage List",
+  "damageListSubtitle": "View damaged products",
+  "customerListTitle": "Customer List",
+  "customerListSubtitle": "View all customers",
+  "supplierListTitle": "Supplier List",
+  "supplierListSubtitle": "View all suppliers",
+  "productLedgerTitle": "Product Ledger",
+  "productLedgerSubtitle": "View product transaction history"
 }
