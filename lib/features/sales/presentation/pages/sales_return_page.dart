@@ -139,12 +139,11 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: BlocConsumer<SalesReturnBloc, SalesReturnState>(
                   listener: (context, state) {
                     if (state is SalesReturnError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

@@ -47,7 +47,7 @@ class _SalaryPaymentPageState extends State<SalaryPaymentPage> {
                 child: BlocConsumer<SalaryPaymentBloc, SalaryPaymentState>(
                   listener: (context, state) {
                     if (state is SalaryPaymentError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

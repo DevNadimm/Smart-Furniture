@@ -47,7 +47,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                 child: BlocConsumer<EmployeeListBloc, EmployeeListState>(
                   listener: (context, state) {
                     if (state is EmployeeListError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

@@ -122,7 +122,7 @@ class _StockPageState extends State<StockPage> {
                 child: BlocConsumer<StockBloc, StockState>(
                   listener: (context, state) {
                     if (state is StockError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

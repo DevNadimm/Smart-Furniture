@@ -79,7 +79,7 @@ class _PurchaseRecordPageState extends State<PurchaseRecordPage> {
                 child: BlocConsumer<PurchaseRecordBloc, PurchaseRecordState>(
                   listener: (context, state) {
                     if (state is PurchaseRecordError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

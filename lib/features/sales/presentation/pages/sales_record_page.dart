@@ -79,7 +79,7 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
                 child: BlocConsumer<SalesRecordBloc, SalesRecordState>(
                   listener: (context, state) {
                     if (state is SalesRecordError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

@@ -154,7 +154,7 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                 child: BlocConsumer<ProductLedgerBloc, ProductLedgerState>(
                   listener: (context, state) {
                     if (state is ProductLedgerError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

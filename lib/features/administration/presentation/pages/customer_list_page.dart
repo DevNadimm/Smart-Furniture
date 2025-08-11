@@ -47,7 +47,7 @@ class _CustomerListPageState extends State<CustomerListPage> {
                 child: BlocConsumer<CustomerListBloc, CustomerListState>(
                   listener: (context, state) {
                     if (state is CustomerListError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

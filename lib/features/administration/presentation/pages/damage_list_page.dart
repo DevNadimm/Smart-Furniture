@@ -126,7 +126,7 @@ class _DamageListPageState extends State<DamageListPage> {
                 child: BlocConsumer<DamageListBloc, DamageListState>(
                   listener: (context, state) {
                     if (state is DamageListError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

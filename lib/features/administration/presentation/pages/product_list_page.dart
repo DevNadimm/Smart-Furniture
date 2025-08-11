@@ -90,7 +90,7 @@ class _ProductListPageState extends State<ProductListPage> {
                 child: BlocConsumer<ProductListBloc, ProductListState>(
                   listener: (context, state) {
                     if (state is ProductListError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

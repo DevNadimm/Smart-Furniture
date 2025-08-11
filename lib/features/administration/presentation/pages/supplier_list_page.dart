@@ -47,7 +47,7 @@ class _SupplierListPageState extends State<SupplierListPage> {
                 child: BlocConsumer<SupplierListBloc, SupplierListState>(
                   listener: (context, state) {
                     if (state is SupplierListError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {

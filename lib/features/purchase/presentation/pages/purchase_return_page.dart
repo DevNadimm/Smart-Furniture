@@ -142,7 +142,7 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
                 child: BlocConsumer<PurchaseReturnBloc, PurchaseReturnState>(
                   listener: (context, state) {
                     if (state is PurchaseReturnError) {
-                      AppNotifier.showToast(state.message);
+                      AppNotifier.showToast(state.message, type: MessageType.error);
                     }
                   },
                   builder: (context, state) {
