@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
+import 'package:smart_furniture/features/administration/presentation/pages/customer_list_page.dart';
+import 'package:smart_furniture/features/administration/presentation/pages/supplier_list_page.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/pages/salary_payment_page.dart';
 
@@ -30,7 +32,7 @@ class AdministrationModuleLocalDataSource {
         subTitle: strings.customerListSubtitle,
         iconPath: AppImages.customers,
         onTap: () {
-          Navigator.push(context, SalaryPaymentPage.route());
+          Navigator.push(context, CustomerListPage.route());
         },
       ),
       SubModule(
@@ -38,7 +40,7 @@ class AdministrationModuleLocalDataSource {
         subTitle: strings.supplierListSubtitle,
         iconPath: AppImages.suppliers,
         onTap: () {
-          Navigator.push(context, SalaryPaymentPage.route());
+          Navigator.push(context, SupplierListPage.route());
         },
       ),
       SubModule(
