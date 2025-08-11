@@ -10,6 +10,7 @@ import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/damage_list/damage_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:smart_furniture/features/administration/presentation/widgets/damage_card.dart';
 
 class DamageListPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const DamageListPage());
@@ -152,7 +153,7 @@ class _DamageListPageState extends State<DamageListPage> {
                           itemCount: state.damageListModel.data?.length ?? 0,
                           itemBuilder: (context, index) {
                             final data = state.damageListModel.data?[index];
-                            return Text(data!.product?.productName ?? 'N/A');
+                            return DamageCard(damageData: data);
                           },
                         );
                       }
