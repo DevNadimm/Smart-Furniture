@@ -9,7 +9,7 @@ import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_return/purchase_return_bloc.dart';
-import 'package:smart_furniture/features/purchase/presentation/blocs/supplier_list/supplier_list_bloc.dart';
+import 'package:smart_furniture/features/administration/presentation/blocs/supplier_list/supplier_list_bloc.dart';
 import 'package:smart_furniture/features/purchase/presentation/widgets/purchase_return_card.dart';
 
 class PurchaseReturnPage extends StatefulWidget {

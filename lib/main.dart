@@ -6,7 +6,7 @@ import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/salar
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_record/purchase_record_bloc.dart';
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_return/purchase_return_bloc.dart';
-import 'package:smart_furniture/features/purchase/presentation/blocs/supplier_list/supplier_list_bloc.dart';
+import 'package:smart_furniture/features/administration/presentation/blocs/supplier_list/supplier_list_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_record/sales_record_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/sales_return_bloc.dart';
