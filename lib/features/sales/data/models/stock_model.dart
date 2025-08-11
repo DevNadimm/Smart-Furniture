@@ -31,7 +31,10 @@ class StockData {
   final String? purchaseRate;
   final String? salesRate;
   final String? totalPurchased;
-  final String? totalSoldQuantity;
+  final String? totalPurchaseReturn;
+  final String? totalSold;
+  final String? totalSaleReturn;
+  final String? totalDamages;
   final String? remainingStock;
 
   StockData({
@@ -46,7 +49,10 @@ class StockData {
     this.purchaseRate,
     this.salesRate,
     this.totalPurchased,
-    this.totalSoldQuantity,
+    this.totalPurchaseReturn,
+    this.totalSold,
+    this.totalSaleReturn,
+    this.totalDamages,
     this.remainingStock,
   });
 
@@ -63,15 +69,18 @@ class StockData {
       purchaseRate: json['purchase_rate'] as String?,
       salesRate: json['sales_rate'] as String?,
       totalPurchased: json['total_purchased'] as String?,
-      totalSoldQuantity: json['total_sold_quantity'] as String?,
+      totalPurchaseReturn: json['total_purchase_return'] as String?,
+      totalSold: json['total_sold'] as String?,
+      totalSaleReturn: json['total_sale_return'] as String?,
+      totalDamages: json['total_demages'] as String?, // note spelling "demages"
       remainingStock: json['remaining_stock'] as String?,
     );
   }
 }
 
 class CalculateData {
-  final String? totalRemainingStock;
-  final String? totalPurchasePrice;
+  final int? totalRemainingStock;
+  final int? totalPurchasePrice;
 
   CalculateData({
     this.totalRemainingStock,
@@ -80,9 +89,8 @@ class CalculateData {
 
   factory CalculateData.fromJson(Map<String, dynamic> json) {
     return CalculateData(
-      totalRemainingStock: json['total_remaining_stock'] as String?,
-      totalPurchasePrice: json['total_purchase_price'] as String?,
+      totalRemainingStock: json['total_remaining_stock'] as int?,
+      totalPurchasePrice: json['total_purchase_price'] as int?,
     );
   }
 }
-

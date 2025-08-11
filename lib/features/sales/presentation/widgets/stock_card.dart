@@ -79,7 +79,7 @@ class StockCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag("Total Purchased", stockData?.totalPurchased, AppColors.success),
-                          _priceTag("Total Sold", stockData?.totalSoldQuantity, AppColors.info),
+                          _priceTag("Total Sold", stockData?.totalSold, AppColors.info),
                         ],
                       ),
                     ],
