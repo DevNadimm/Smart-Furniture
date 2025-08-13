@@ -12,6 +12,7 @@ class ProductLedgerBloc extends Bloc<ProductLedgerEvent, ProductLedgerState> {
       emit(ProductLedgerLoading());
       try {
         final data = await ProductLedgerRepository.fetchData(
+          shop: event.shop,
           productId: event.productId,
           fromDate: event.fromDate,
           toDate: event.toDate,

@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:smart_furniture/core/constants/api_endpoints.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/administration/data/models/product_ledger_model.dart';
 import 'package:http/http.dart' as http;
 
 class ProductLedgerRepository {
   static Future<ProductLedgerModel?> fetchData({
+    required String shop,
     String? productId,
     String? fromDate,
     String? toDate,
@@ -13,7 +15,8 @@ class ProductLedgerRepository {
       throw Exception(ErrorMessages.selectAllFiltersBeforeFetch);
     }
 
-    const baseUrl = "https://sfapi.qualityf.xyz/api";
+    ApiEndpoints api = ApiEndpoints(shop: shop);
+    final endpoint = api.productLedger;
 
     final queryParams = {
       if (productId.isNotEmpty) 'product_id': productId,
@@ -21,7 +24,7 @@ class ProductLedgerRepository {
       if (toDate.isNotEmpty) 'to': toDate,
     };
 
-    final uri = Uri.parse("$baseUrl/administration/product-ledger").replace(queryParameters: queryParams);
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print("URL: $uri");
 
     try {

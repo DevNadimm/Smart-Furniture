@@ -49,13 +49,19 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
   }
 
   void _fetchData() {
-    context.read<ProductLedgerBloc>().add(
-      LoadProductLedgerEvent(
-        fromDate: _fromDateController.text,
-        toDate: _toDateController.text,
-        productId: _productIdController.text,
-      ),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<ProductLedgerBloc>().add(
+        LoadProductLedgerEvent(
+          shop: selectedShop.name,
+          fromDate: _fromDateController.text,
+          toDate: _toDateController.text,
+          productId: _productIdController.text,
+        ),
+      );
+    } else {
+      AppNotifier.showToast(ErrorMessages.networkError, type: MessageType.error);
+    }
   }
 
   void _fetchProducts() {
