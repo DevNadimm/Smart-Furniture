@@ -44,9 +44,12 @@ class _DamageListPageState extends State<DamageListPage> {
   }
 
   void _fetchData() {
-    context.read<DamageListBloc>().add(
-      LoadDamageListEvent(_productIdController.text),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<DamageListBloc>().add(LoadDamageListEvent(selectedShop.name, _productIdController.text));
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   void _fetchProducts() {

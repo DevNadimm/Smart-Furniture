@@ -11,7 +11,7 @@ class DamageListBloc extends Bloc<DamageListEvent, DamageListState> {
     on<LoadDamageListEvent>((event, emit) async {
       emit(DamageListLoading());
       try {
-        final data = await DamageListRepository.fetchData(event.productId);
+        final data = await DamageListRepository.fetchData(event.shop, event.productId);
         emit(DamageListLoaded(data!));
       } catch (e) {
         emit(DamageListError(HelperFunctions.cleanErrorMessage(e.toString())));
