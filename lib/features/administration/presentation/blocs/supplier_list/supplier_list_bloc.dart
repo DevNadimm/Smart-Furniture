@@ -11,7 +11,7 @@ class SupplierListBloc extends Bloc<SupplierListEvent, SupplierListState> {
     on<LoadSupplierListEvent>((event, emit) async {
       emit(SupplierListLoading());
       try {
-        final data = await SupplierListRepository.fetchData();
+        final data = await SupplierListRepository.fetchData(event.shop);
         emit(SupplierListLoaded(data!));
       } catch (e) {
         emit(SupplierListError(HelperFunctions.cleanErrorMessage(e.toString())));
