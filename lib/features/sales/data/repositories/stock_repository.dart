@@ -21,7 +21,6 @@ class StockRepository {
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonMap = jsonDecode(res.body);
-        print(jsonMap);
 
         return StockModel.fromJson(jsonMap);
       } else {

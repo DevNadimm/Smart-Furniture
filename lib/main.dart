@@ -16,7 +16,8 @@ import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/s
 import 'package:smart_furniture/features/sales/presentation/blocs/stock/stock_bloc.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiBlocProvider(
       providers: [
