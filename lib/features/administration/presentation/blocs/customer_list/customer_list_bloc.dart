@@ -11,7 +11,7 @@ class CustomerListBloc extends Bloc<CustomerListEvent, CustomerListState> {
     on<LoadCustomerListEvent>((event, emit) async {
       emit(CustomerListLoading());
       try {
-        final data = await CustomerListRepository.fetchData();
+        final data = await CustomerListRepository.fetchData(event.shop);
         emit(CustomerListLoaded(data!));
       } catch (e) {
         emit(CustomerListError(HelperFunctions.cleanErrorMessage(e.toString())));

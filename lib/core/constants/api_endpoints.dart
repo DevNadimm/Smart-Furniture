@@ -1,11 +1,11 @@
 import 'package:smart_furniture/core/constants/base_url.dart';
 
 class ApiEndpoints {
-  final String shopId;
+  final String shop;
 
-  ApiEndpoints({required this.shopId});
+  ApiEndpoints({required this.shop});
 
-  String get baseUrl => BaseUrl.getBaseUrl(shopId);
+  String get baseUrl => BaseUrl.getBaseUrl(shop);
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

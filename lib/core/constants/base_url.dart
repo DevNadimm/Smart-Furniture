@@ -1,11 +1,13 @@
+import 'package:smart_furniture/features/shop_selector/domain/entities/shop_type.dart';
+
 class BaseUrl {
   BaseUrl._();
 
   static final Map<String, String> _baseUrls = {
-    "shop_1": "https://sfapi.qualityf.xyz/api",
-    "shop_2": "https://sfapi.qualityf.xyz/api",
-    "shop_3": "https://sfapi.qualityf.xyz/api",
-    "shop_4": "https://sfapi.qualityf.xyz/api",
+    ShopType.shop1.name: "https://sfapi.qualityf.xyz/api",
+    ShopType.shop2.name: "https://sfapi.qualityf.xyz/api",
+    ShopType.shop3.name: "https://sfapi.qualityf.xyz/api",
+    ShopType.shop4.name: "https://sfapi.qualityf.xyz/api",
   };
 
   static String getBaseUrl(String shopId) {
