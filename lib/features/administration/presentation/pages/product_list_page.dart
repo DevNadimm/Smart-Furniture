@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_bar_search_field.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/widgets/product_card.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class ProductListPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const ProductListPage());
@@ -36,9 +38,12 @@ class _ProductListPageState extends State<ProductListPage> {
   }
 
   void _fetchData() {
-    context.read<ProductListBloc>().add(
-      LoadProductListEvent(_searchController.text),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<ProductListBloc>().add(LoadProductListEvent(selectedShop.name, ''));
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   void _startSearch() => setState(() => _isSearching = true);

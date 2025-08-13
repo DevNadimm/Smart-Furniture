@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
@@ -12,6 +13,7 @@ import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart'
 import 'package:smart_furniture/features/administration/presentation/blocs/product_ledger/product_ledger_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/widgets/product_ledger_card.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class ProductLedgerPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const ProductLedgerPage());
@@ -57,7 +59,12 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
   }
 
   void _fetchProducts() {
-    context.read<ProductListBloc>().add(LoadProductListEvent(''));
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<ProductListBloc>().add(LoadProductListEvent(selectedShop.name, ''));
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   void _resetProductLedger() {
