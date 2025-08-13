@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
-
+import 'package:smart_furniture/features/shop_selector/domain/entities/shop_type.dart';
 List<Shop> shops = [
   Shop(
-    id: 'shop_1',
+    shopType: ShopType.shop1,
     name: 'Main Street Furniture',
     description: 'Primary retail location',
     location: '123 Main Street, Dhaka',
@@ -12,7 +12,7 @@ List<Shop> shops = [
     isActive: true,
   ),
   Shop(
-    id: 'shop_2',
+    shopType: ShopType.shop2,
     name: 'Downtown Furnishings',
     description: 'City center location',
     location: '45 Central Ave, Chittagong',
@@ -21,7 +21,7 @@ List<Shop> shops = [
     isActive: true,
   ),
   Shop(
-    id: 'shop_3',
+    shopType: ShopType.shop3,
     name: 'Mall Furniture Outlet',
     description: 'Shopping mall store',
     location: '67 Plaza Rd, Sylhet',
@@ -30,7 +30,7 @@ List<Shop> shops = [
     isActive: true,
   ),
   Shop(
-    id: 'shop_4',
+    shopType: ShopType.shop4,
     name: 'Online Furniture Hub',
     description: 'E-commerce platform',
     location: 'Nationwide',

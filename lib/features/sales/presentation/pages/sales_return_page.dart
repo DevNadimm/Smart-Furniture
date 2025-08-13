@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
@@ -11,6 +12,7 @@ import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart'
 import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/sales_return_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/widgets/sales_return_card.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class SalesReturnPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const SalesReturnPage());
@@ -57,7 +59,12 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
   }
 
   void _fetchCustomers() {
-    context.read<CustomerListBloc>().add(LoadCustomerListEvent());
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if(selectedShop != null) {
+      context.read<CustomerListBloc>().add(LoadCustomerListEvent(selectedShop.name));
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   Future<void> _selectDate(BuildContext context,

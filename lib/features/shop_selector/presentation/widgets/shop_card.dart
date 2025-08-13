@@ -5,6 +5,8 @@ import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
+import '../../domain/entities/shop_type.dart';
+
 class ShopCard extends StatelessWidget {
   final Shop shop;
 
@@ -12,9 +14,9 @@ class ShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShopSelectionCubit, String>(
-      builder: (context, shopId) {
-        final bool isSelected = shop.id == shopId;
+    return BlocBuilder<ShopSelectionCubit, ShopType?>(
+      builder: (context, shopType) {
+        final bool isSelected = shop.shopType == shopType;
 
         return Container(
           decoration: BoxDecoration(
@@ -36,7 +38,7 @@ class ShopCard extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               borderRadius: BorderRadius.circular(20),
-              onTap: () => context.read<ShopSelectionCubit>().selectShop(shop.id),
+              onTap: () => context.read<ShopSelectionCubit>().selectShop(shop.shopType),
               child: Padding(
                 padding: const EdgeInsets.all(18),
                 child: Column(

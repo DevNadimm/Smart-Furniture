@@ -5,8 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:smart_furniture/features/shop_selector/data/datasources/shop_local_data_source.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
-import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 import 'package:collection/collection.dart';
+import 'package:smart_furniture/features/shop_selector/domain/entities/shop_type.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/widgets/shop_card.dart';
 
 class ShopSelectionPage extends StatelessWidget {
@@ -74,9 +75,9 @@ class ShopSelectionPage extends StatelessWidget {
   Widget _buildBtn(AppLocalizations strings) {
     return SizedBox(
       width: double.infinity,
-      child: BlocBuilder<ShopSelectionCubit, String>(
-        builder: (context, shopId) {
-          Shop? shop = shops.firstWhereOrNull((shop) => shop.id == shopId);
+      child: BlocBuilder<ShopSelectionCubit, ShopType?>(
+        builder: (context, shopType) {
+          Shop? shop = shops.firstWhereOrNull((shop) => shop.shopType == shopType);
 
           return ElevatedButton.icon(
             icon: const Icon(HugeIcons.strokeRoundedArrowRight02),

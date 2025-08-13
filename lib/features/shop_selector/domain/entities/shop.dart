@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_furniture/features/shop_selector/domain/entities/shop_type.dart';
 
 class Shop {
-  final String id;
+  final ShopType shopType;
   final String name;
   final String description;
   final String location;
@@ -10,7 +11,7 @@ class Shop {
   final bool isActive;
 
   Shop({
-    required this.id,
+    required this.shopType,
     required this.name,
     required this.description,
     required this.location,
