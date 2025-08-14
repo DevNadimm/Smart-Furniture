@@ -27,5 +27,13 @@ class ApiEndpoints {
   String get employeeList => '$baseUrl/employees';
   String get salaryPayments => '$baseUrl/report-module/salary-payment-report';
 
+  // 📦 Accounts
+  String get bankTransaction => '$baseUrl/report-module/bank-transaction-report';
+  String get cashTransaction => '$baseUrl/report-module/cash-statment';
+  String get cashStatement => '$baseUrl/report-module/cash-statment';
+  String get pendingChequeList => '$baseUrl/accounts/pendingChequeList';
+  String get reminderChequeList => '$baseUrl/accounts/reminderChequeList';
+  String get balanceSheet => '$baseUrl/report-module/balance-sheet';
+
   // 📦 Misc
 }
