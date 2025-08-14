@@ -12,6 +12,7 @@ class SalesReturnBloc extends Bloc<SalesReturnEvent, SalesReturnState> {
       emit(SalesReturnLoading());
       try {
         final data = await SalesReturnRepository.fetchData(
+          event.shop,
           event.fromDate,
           event.toDate,
           event.customerId,

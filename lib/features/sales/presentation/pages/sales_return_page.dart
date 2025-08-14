@@ -49,13 +49,19 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
   }
 
   void _fetchData() {
-    context.read<SalesReturnBloc>().add(
-      LoadSalesReturnEvent(
-        fromDate: _fromDateController.text,
-        toDate: _toDateController.text,
-        customerId: _customerIdController.text,
-      ),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<SalesReturnBloc>().add(
+        LoadSalesReturnEvent(
+          shop: selectedShop.name,
+          fromDate: _fromDateController.text,
+          toDate: _toDateController.text,
+          customerId: _customerIdController.text,
+        ),
+      );
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   void _fetchCustomers() {
