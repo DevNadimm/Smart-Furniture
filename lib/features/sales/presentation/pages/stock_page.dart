@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_bar_search_field.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -136,6 +137,12 @@ class _StockPageState extends State<StockPage> {
                   builder: (context, state) {
                     if (state is StockLoading) {
                       return const Loader();
+                    }
+                    if (state is StockError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Stock Records',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is StockLoaded) {
                       if (state.stock.data?.isEmpty ?? false) {

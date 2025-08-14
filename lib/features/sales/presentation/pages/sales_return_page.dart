@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -170,6 +171,12 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
                   builder: (context, state) {
                     if (state is SalesReturnLoading) {
                       return const Loader();
+                    }
+                    if (state is SalesReturnError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Sales Return Records',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is SalesReturnLoaded) {
                       if (state.salesReturnModel.data?.isEmpty ?? false) {

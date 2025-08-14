@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -93,6 +94,12 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
                   builder: (context, state) {
                     if (state is SalesRecordLoading) {
                       return const Loader();
+                    }
+                    if (state is SalesRecordError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Sales Records',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is SalesRecordLoaded) {
                       if (state.salesRecord!.isEmpty) {

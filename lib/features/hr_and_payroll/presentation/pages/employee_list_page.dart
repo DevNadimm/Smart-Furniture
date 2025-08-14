@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/employee_list/employee_list_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/widgets/employee_card.dart';
@@ -60,6 +61,12 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                   builder: (context, state) {
                     if (state is EmployeeListLoading) {
                       return const Loader();
+                    }
+                    if (state is EmployeeListError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Employees',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is EmployeeListLoaded) {
                       if (state.employeeListModel.data!.isEmpty) {

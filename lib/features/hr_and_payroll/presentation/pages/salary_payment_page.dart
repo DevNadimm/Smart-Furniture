@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/salary_payment/salary_payment_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/widgets/salary_payment_card.dart';
@@ -60,6 +61,12 @@ class _SalaryPaymentPageState extends State<SalaryPaymentPage> {
                   builder: (context, state) {
                     if (state is SalaryPaymentLoading) {
                       return const Loader();
+                    }
+                    if (state is SalaryPaymentError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Salary Payment Records',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is SalaryPaymentLoaded) {
                       if (state.salaryPaymentModelList.isEmpty) {

@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -93,6 +94,12 @@ class _PurchaseRecordPageState extends State<PurchaseRecordPage> {
                   builder: (context, state) {
                     if (state is PurchaseRecordLoading) {
                       return const Loader();
+                    }
+                    if (state is PurchaseRecordError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Purchase Records',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is PurchaseRecordLoaded) {
                       if (state.purchaseRecord.data!.isEmpty) {
