@@ -55,5 +55,19 @@
   "supplierListTitle": "সরবরাহকারীর তালিকা",
   "supplierListSubtitle": "সমস্ত সরবরাহকারী দেখুন",
   "productLedgerTitle": "পণ্যের খতিয়ান",
-  "productLedgerSubtitle": "পণ্যের লেনদেনের ইতিহাস দেখুন"
+  "productLedgerSubtitle": "পণ্যের লেনদেনের ইতিহাস দেখুন",
+
+  "@@accountsModuleBn": "===== Accounts Module =====",
+  "bankTransactionTitle": "ব্যাংক লেনদেন",
+  "bankTransactionSubtitle": "সকল ব্যাংক লেনদেন দেখুন",
+  "cashTransactionTitle": "নগদ লেনদেন",
+  "cashTransactionSubtitle": "সকল নগদ লেনদেন দেখুন",
+  "cashStatementTitle": "নগদ বিবৃতি",
+  "cashStatementSubtitle": "সকল নগদ বিবৃতি দেখুন",
+  "pendingChequeListTitle": "অপেক্ষমান চেক তালিকা",
+  "pendingChequeListSubtitle": "সকল অপেক্ষমান চেক দেখুন",
+  "reminderChequeListTitle": "স্মারক চেক তালিকা",
+  "reminderChequeListSubtitle": "সকল স্মারক চেক দেখুন",
+  "balanceSheetTitle": "ব্যালেন্স শিট",
+  "balanceSheetSubtitle": "সামগ্রিক ব্যালেন্স বিবরণ দেখুন"
 }
