@@ -73,8 +73,7 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
     }
   }
 
-  Future<void> _selectDate(BuildContext context,
-      TextEditingController controller) async {
+  Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -139,7 +138,16 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
                 return FilterBar(
                   startDateController: _fromDateController,
                   endDateController: _toDateController,
-                  onApplyFilter: _fetchData,
+                  onApplyFilter: () {},
+                  onSelectDate: _selectDate,
+                  showFilterPicker: true,
+                  filterPickerLabel: 'Customer',
+                );
+              } else if (state is CustomerListError) {
+                return FilterBar(
+                  startDateController: _fromDateController,
+                  endDateController: _toDateController,
+                  onApplyFilter: () {},
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
                   filterPickerLabel: 'Customer',

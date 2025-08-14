@@ -140,7 +140,16 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
                  return FilterBar(
                    startDateController: _startDateController,
                    endDateController: _endDateController,
-                   onApplyFilter: _fetchData,
+                   onApplyFilter: () {},
+                   onSelectDate: _selectDate,
+                   showFilterPicker: true,
+                   filterPickerLabel: 'Supplier',
+                 );
+               } else if (state is SupplierListError) {
+                 return FilterBar(
+                   startDateController: _startDateController,
+                   endDateController: _endDateController,
+                   onApplyFilter: () {},
                    onSelectDate: _selectDate,
                    showFilterPicker: true,
                    filterPickerLabel: 'Supplier',

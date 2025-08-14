@@ -120,7 +120,13 @@ class _DamageListPageState extends State<DamageListPage> {
                 );
               } else if (state is ProductListLoading) {
                 return FilterBar(
-                  onApplyFilter: _fetchData,
+                  onApplyFilter: () {},
+                  showFilterPicker: true,
+                  filterPickerLabel: 'Select Product',
+                );
+              } else if (state is ProductListError) {
+                return FilterBar(
+                  onApplyFilter: () {},
                   showFilterPicker: true,
                   filterPickerLabel: 'Select Product',
                 );

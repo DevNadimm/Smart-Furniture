@@ -149,7 +149,16 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                 return FilterBar(
                   startDateController: _fromDateController,
                   endDateController: _toDateController,
-                  onApplyFilter: _fetchData,
+                  onApplyFilter: () {},
+                  onSelectDate: _selectDate,
+                  showFilterPicker: true,
+                  filterPickerLabel: 'Product',
+                );
+              } else if (state is ProductListError) {
+                return FilterBar(
+                  startDateController: _fromDateController,
+                  endDateController: _toDateController,
+                  onApplyFilter: () {},
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
                   filterPickerLabel: 'Product',
