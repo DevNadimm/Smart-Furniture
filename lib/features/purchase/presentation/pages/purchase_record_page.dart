@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_record/purchase_record_bloc.dart';
 import 'package:smart_furniture/features/purchase/presentation/widgets/purchase_record_card.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class PurchaseRecordPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const PurchaseRecordPage());
@@ -36,12 +38,18 @@ class _PurchaseRecordPageState extends State<PurchaseRecordPage> {
   }
 
   void _fetchData() {
-    context.read<PurchaseRecordBloc>().add(
-      LoadPurchaseRecordEvent(
-        fromDate: _fromDateController.text,
-        toDate: _toDateController.text,
-      ),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<PurchaseRecordBloc>().add(
+        LoadPurchaseRecordEvent(
+          shop: selectedShop.name,
+          fromDate: _fromDateController.text,
+          toDate: _toDateController.text,
+        ),
+      );
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {
