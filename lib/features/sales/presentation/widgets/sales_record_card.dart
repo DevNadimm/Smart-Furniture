@@ -32,7 +32,6 @@ class SalesRecordCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Column(
           children: [
-            // Header
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
@@ -55,8 +54,6 @@ class SalesRecordCard extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Body
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -69,8 +66,6 @@ class SalesRecordCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
-
-                  // Product Info
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

@@ -4,7 +4,7 @@ class DateFormatters {
   DateFormatters._();
 
   static String readableDate(String? date) {
-    if (date == null || date.isEmpty) return "-";
+    if (date == null || date.isEmpty) return "N/A";
     try {
       final parsedDate = DateTime.parse(date);
       return DateFormat('MMMM d, yyyy').format(parsedDate);

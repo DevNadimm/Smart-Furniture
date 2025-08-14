@@ -7,6 +7,7 @@ import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/pending_cheque_list/pending_cheque_list_bloc.dart';
+import 'package:smart_furniture/features/accounts/presentation/widgets/pending_cheque_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class PendingChequeListPage extends StatefulWidget {
@@ -80,7 +81,7 @@ class _PendingChequeListPageState extends State<PendingChequeListPage> {
                           itemCount: state.pendingChequeListModel.data?.length ?? 0,
                           itemBuilder: (context, index) {
                             final pendingCheck = state.pendingChequeListModel.data![index];
-                            return Text(pendingCheck.bankName ?? 'N/A');
+                            return PendingChequeCard(chequeData: pendingCheck);
                           },
                         );
                       }
