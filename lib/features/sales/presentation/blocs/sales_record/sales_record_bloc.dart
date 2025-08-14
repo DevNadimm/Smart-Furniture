@@ -11,7 +11,7 @@ class SalesRecordBloc extends Bloc<SalesRecordEvent, SalesRecordState> {
     on<LoadSalesRecordEvent>((event, emit) async {
       emit(SalesRecordLoading());
       try {
-        final data = await SalesRecordRepository.fetchData(event.fromDate, event.toDate);
+        final data = await SalesRecordRepository.fetchData(event.shop, event.fromDate, event.toDate);
         emit(SalesRecordLoaded(data));
       } catch (e) {
         emit(SalesRecordError(HelperFunctions.cleanErrorMessage(e.toString())));

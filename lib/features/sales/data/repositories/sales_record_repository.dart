@@ -1,18 +1,20 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/api_endpoints.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
 
 class SalesRecordRepository {
-  static Future<List<SalesRecordModel>?> fetchData(String? fromDate, String? toDate) async {
-    const baseUrl = "https://sfapi.qualityf.xyz/api";
+  static Future<List<SalesRecordModel>?> fetchData(String shop, String? fromDate, String? toDate) async {
+    ApiEndpoints api = ApiEndpoints(shop: shop);
+    final endpoint = api.salesRecord;
 
     final queryParams = {
       if (fromDate != null && fromDate.isNotEmpty) 'from': fromDate,
       if (toDate != null && toDate.isNotEmpty) 'to': toDate,
     };
 
-    final uri = Uri.parse("$baseUrl/sale-records").replace(queryParameters: queryParams);
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print("URL: $uri");
 
     try {
