@@ -11,7 +11,7 @@ class SalaryPaymentBloc extends Bloc<SalaryPaymentEvent, SalaryPaymentState> {
     on<LoadSalaryPaymentEvent>((event, emit) async {
       emit(SalaryPaymentLoading());
       try {
-        final data = await SalaryPaymentRepository.fetchData();
+        final data = await SalaryPaymentRepository.fetchData(event.shop);
         emit(SalaryPaymentLoaded(data!));
       } catch (e) {
         SalaryPaymentError(HelperFunctions.cleanErrorMessage(e.toString()));
