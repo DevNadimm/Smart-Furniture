@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_bar_search_field.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
@@ -10,6 +11,7 @@ import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/stock/stock_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/widgets/stock_card.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class StockPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const StockPage());
@@ -42,13 +44,19 @@ class _StockPageState extends State<StockPage> {
   }
 
   void _fetchData() {
-    context.read<StockBloc>().add(
-      LoadStockEvent(
-        fromDate: _fromDateController.text,
-        toDate: _toDateController.text,
-        search: _searchController.text,
-      ),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<StockBloc>().add(
+        LoadStockEvent(
+          shop: selectedShop.name,
+          fromDate: _fromDateController.text,
+          toDate: _toDateController.text,
+          search: _searchController.text,
+        ),
+      );
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   Future<void> _selectDate(BuildContext context, TextEditingController controller) async {

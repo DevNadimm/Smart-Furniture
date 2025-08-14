@@ -12,6 +12,7 @@ class StockBloc extends Bloc<StockEvent, StockState> {
       emit(StockLoading());
       try {
         final data = await StockRepository.fetchData(
+          event.shop,
           event.fromDate,
           event.toDate,
           event.search,

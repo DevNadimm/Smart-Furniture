@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'package:smart_furniture/core/constants/api_endpoints.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
 import 'package:http/http.dart' as http;
 
 class StockRepository {
-  static Future<StockModel?> fetchData(String? fromDate, String? toDate, String? search) async {
-    const baseUrl = "https://sfapi.qualityf.xyz/api";
+  static Future<StockModel?> fetchData(String shop, String? fromDate, String? toDate, String? search) async {
+    ApiEndpoints api = ApiEndpoints(shop: shop);
+    final endpoint = api.stock;
 
     final queryParams = {
       if (fromDate != null && fromDate.isNotEmpty) 'from': fromDate,
@@ -13,7 +15,7 @@ class StockRepository {
       if (search != null && search.isNotEmpty) 'search': search,
     };
 
-    final uri = Uri.parse("$baseUrl/stock").replace(queryParameters: queryParams);
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print("URL: $uri");
 
     try {
