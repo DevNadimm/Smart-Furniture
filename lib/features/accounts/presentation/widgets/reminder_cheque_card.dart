@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
-import 'package:smart_furniture/features/accounts/data/models/pending_cheque_list_model.dart';
+import 'package:smart_furniture/features/accounts/data/models/reminder_cheque_list_model.dart';
 
-class PendingChequeCard extends StatelessWidget {
-  final PendingChequeData? chequeData;
+class ReminderChequeCard extends StatelessWidget {
+  final ReminderChequeData? chequeData;
 
-  const PendingChequeCard({super.key, required this.chequeData});
+  const ReminderChequeCard({super.key, required this.chequeData});
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +71,13 @@ class PendingChequeCard extends StatelessWidget {
                     chequeData?.chequeAmount,
                     AppColors.primaryColor,
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 8),
                   Text(
                     "Issue Date: ${DateFormatters.readableDate(chequeData?.date)}",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  Text(
+                    "Reminder Date: ${DateFormatters.readableDate(chequeData?.reminderDate)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
@@ -120,6 +124,7 @@ class PendingChequeCard extends StatelessWidget {
   }
 
   Widget _statusTag(String status) {
+    if (status.isEmpty) return const SizedBox();
     return Text(
       "${status[0].toUpperCase()}${status.substring(1)}",
       style: GoogleFonts.poppins(
