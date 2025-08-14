@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class CashTransactionRepository {
   static Future<CashTransactionModel?> fetchData(String shop, String? type, String? fromDate, String? toDate) async {
     if (type == null || type.isEmpty || fromDate == null || fromDate.isEmpty || toDate == null || toDate.isEmpty) {
-      throw Exception(ErrorMessages.selectDateFiltersBeforeFetch);
+      throw Exception(ErrorMessages.selectAllFiltersBeforeFetch);
     }
 
     ApiEndpoints api = ApiEndpoints(shop: shop);
