@@ -2,6 +2,7 @@ class AppImages {
   AppImages._();
 
   static const String logo = '';
+  static const String smartFurnitureSplash = 'assets/images/app/smart_furniture_splash.png';
   static const String noData = '';
   static const String errorImage = '';
   static const String loadingImage = '';
