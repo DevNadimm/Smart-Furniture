@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:smart_furniture/core/constants/api_endpoints.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_return_model.dart';
 
 class PurchaseReturnRepository {
-  static Future<PurchaseReturnModel?> fetchData(String? fromDate, String? toDate, String? supplierId) async {
-    const baseUrl = "https://sfapi.qualityf.xyz/api";
+  static Future<PurchaseReturnModel?> fetchData(String shop, String? fromDate, String? toDate, String? supplierId) async {
+    ApiEndpoints api = ApiEndpoints(shop: shop);
+    final endpoint = api.purchaseReturn;
 
     final queryParams = {
       if (fromDate != null && fromDate.isNotEmpty) 'from': fromDate,
@@ -13,7 +15,7 @@ class PurchaseReturnRepository {
       if (supplierId != null && supplierId.isNotEmpty) 'supplier_id': supplierId,
     };
 
-    final uri = Uri.parse("$baseUrl/purchase-return").replace(queryParameters: queryParams);
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print("URL: $uri");
 
     try {

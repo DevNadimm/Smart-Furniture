@@ -12,6 +12,7 @@ class PurchaseReturnBloc extends Bloc<PurchaseReturnEvent, PurchaseReturnState> 
       emit(PurchaseReturnLoading());
       try {
         final data = await PurchaseReturnRepository.fetchData(
+          event.shop,
           event.fromDate,
           event.toDate,
           event.supplierId,

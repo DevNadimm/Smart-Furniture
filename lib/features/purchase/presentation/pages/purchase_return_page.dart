@@ -49,13 +49,19 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
   }
 
   void _fetchData() {
-    context.read<PurchaseReturnBloc>().add(
-      LoadPurchaseReturnEvent(
-        fromDate: _startDateController.text,
-        toDate: _endDateController.text,
-        supplierId: _supplierIdController.text,
-      ),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<PurchaseReturnBloc>().add(
+        LoadPurchaseReturnEvent(
+          shop: selectedShop.name,
+          fromDate: _startDateController.text,
+          toDate: _endDateController.text,
+          supplierId: _supplierIdController.text,
+        ),
+      );
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   void _fetchSuppliers() {
