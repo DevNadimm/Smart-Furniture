@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/app.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/cash_transaction/cash_transaction_bloc.dart';
+import 'package:smart_furniture/features/accounts/presentation/blocs/pending_cheque_list/pending_cheque_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/damage_list/damage_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_ledger/product_ledger_bloc.dart';
@@ -37,6 +38,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => SalaryPaymentBloc()),
         BlocProvider(create: (_) => EmployeeListBloc()),
         BlocProvider(create: (_) => CashTransactionBloc()),
+        BlocProvider(create: (_) => PendingChequeListBloc()),
       ],
       child: const MyApp(),
     ),

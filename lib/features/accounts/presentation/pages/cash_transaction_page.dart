@@ -28,7 +28,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
-  final List<String> _typeList = ['All', 'Payment', 'recieve'];
+  final List<String> _typeList = ['All', 'Payment', 'Recieve'];
 
   @override
   void dispose() {

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/accounts/presentation/pages/cash_transaction_page.dart';
+import 'package:smart_furniture/features/accounts/presentation/pages/pending_cheque_list_page.dart';
 import 'package:smart_furniture/features/administration/presentation/pages/product_list_page.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
 
@@ -31,7 +32,7 @@ class AccountsModuleLocalDataSource {
         subTitle: strings.pendingChequeListSubtitle,
         iconPath: AppImages.cheque,
         onTap: () {
-          Navigator.push(context, ProductListPage.route());
+          Navigator.push(context, PendingChequeListPage.route());
         },
       ),
       SubModule(
