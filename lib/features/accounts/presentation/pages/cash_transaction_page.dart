@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -136,17 +137,16 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
                         message: 'Choose the cash transaction type and specify the "Start" and "End" dates above to view transaction details.',
                       );
                     } else if (state is CashTransactionError) {
-                      return const EmptyStateWidget(
-                        icon: HugeIcons.strokeRoundedMoney01,
-                        title: 'Select a Type and Date Range',
-                        message: 'Choose the cash transaction type and specify the "Start" and "End" dates above to view transaction details.',
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Transactions',
+                        message: ErrorMessages.networkError,
                       );
                     } else if (state is CashTransactionLoaded) {
                       final cashTransactions = state.cashTransactionModel.data?.cashTransactions;
                       if (cashTransactions?.isEmpty ?? false) {
                         return const EmptyStateWidget(
-                          title: 'No Product Ledger Records Found',
-                          message: 'We couldn’t find any product ledger records for the selected date range. Try adjusting your filters or selecting a different time period.',
+                          title: 'No Cash Transactions Found',
+                          message: 'We couldn’t find any cash transaction records for the selected type and date range. Try adjusting your filters or selecting a different time period.',
                         );
                       } else {
                         return ListView.builder(
