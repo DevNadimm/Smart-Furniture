@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/employee_list/employee_list_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/widgets/employee_card.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class EmployeeListPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const EmployeeListPage());
@@ -25,9 +27,14 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
   }
 
   void _fetchData() {
-    context.read<EmployeeListBloc>().add(
-      LoadEmployeeListEvent(),
-    );
+    final selectedShop = context.read<ShopSelectionCubit>().state;
+    if (selectedShop != null) {
+      context.read<EmployeeListBloc>().add(
+        LoadEmployeeListEvent(selectedShop.name),
+      );
+    } else {
+      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+    }
   }
 
   @override

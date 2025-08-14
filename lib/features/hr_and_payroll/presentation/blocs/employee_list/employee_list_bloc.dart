@@ -11,7 +11,7 @@ class EmployeeListBloc extends Bloc<EmployeeListEvent, EmployeeListState> {
     on<LoadEmployeeListEvent>((event, emit) async {
       emit(EmployeeListLoading());
       try {
-        final data = await EmployeeListRepository.fetchData();
+        final data = await EmployeeListRepository.fetchData(event.shop);
         emit(EmployeeListLoaded(data!));
       } catch (e) {
         emit(EmployeeListError(HelperFunctions.cleanErrorMessage(e.toString())));
