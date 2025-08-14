@@ -12,6 +12,7 @@ import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/cash_transaction/cash_transaction_bloc.dart';
+import 'package:smart_furniture/features/accounts/presentation/widgets/cash_transaction_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class CashTransactionPage extends StatefulWidget {
@@ -155,7 +156,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
                           itemCount: cashTransactions?.length ?? 0,
                           itemBuilder: (context, index) {
                             final data = cashTransactions?[index];
-                            return Text(data?.accountName ?? 'N/A');
+                            return CashTransactionCard(transaction: data);
                           },
                         );
                       }
