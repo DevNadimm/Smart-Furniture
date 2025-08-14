@@ -1,4 +1,20 @@
 class SalaryPaymentModel {
+  final bool? success;
+  final List<SalaryPaymentData>? data;
+
+  SalaryPaymentModel({this.success, this.data});
+
+  factory SalaryPaymentModel.fromJson(Map<String, dynamic> json) {
+    return SalaryPaymentModel(
+      success: json['success'] as bool?,
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => SalaryPaymentData.fromJson(e))
+          .toList(),
+    );
+  }
+}
+
+class SalaryPaymentData {
   final int? id;
   final String? branchId;
   final String? empId;
@@ -11,7 +27,7 @@ class SalaryPaymentModel {
   final String? updatedAt;
   final Employee? employee;
 
-  SalaryPaymentModel({
+  SalaryPaymentData({
     this.id,
     this.branchId,
     this.empId,
@@ -25,8 +41,8 @@ class SalaryPaymentModel {
     this.employee,
   });
 
-  factory SalaryPaymentModel.fromJson(Map<String, dynamic> json) {
-    return SalaryPaymentModel(
+  factory SalaryPaymentData.fromJson(Map<String, dynamic> json) {
+    return SalaryPaymentData(
       id: json['id'] as int?,
       branchId: json['branch_id'] as String?,
       empId: json['emp_id'] as String?,
@@ -38,7 +54,7 @@ class SalaryPaymentModel {
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       employee: json['employee'] != null
-          ? Employee.fromJson(json['employee'])
+          ? Employee.fromJson(json['employee'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -49,11 +65,7 @@ class Employee {
   final String? name;
   final String? empId;
 
-  Employee({
-    this.id,
-    this.name,
-    this.empId,
-  });
+  Employee({this.id, this.name, this.empId});
 
   factory Employee.fromJson(Map<String, dynamic> json) {
     return Employee(

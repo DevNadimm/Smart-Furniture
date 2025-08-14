@@ -7,9 +7,9 @@ class SalaryPaymentInitial extends SalaryPaymentState {}
 class SalaryPaymentLoading extends SalaryPaymentState {}
 
 class SalaryPaymentLoaded extends SalaryPaymentState {
-  final List<SalaryPaymentModel> salaryPaymentModelList;
+  final SalaryPaymentModel salaryPaymentModel;
 
-  SalaryPaymentLoaded(this.salaryPaymentModelList);
+  SalaryPaymentLoaded(this.salaryPaymentModel);
 }
 
 class SalaryPaymentError extends SalaryPaymentState {

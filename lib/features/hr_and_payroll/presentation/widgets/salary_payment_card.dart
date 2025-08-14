@@ -5,9 +5,9 @@ import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/hr_and_payroll/data/models/salary_payment_model.dart';
 
 class SalaryPaymentCard extends StatelessWidget {
-  final SalaryPaymentModel? salaryPayment;
+  final SalaryPaymentData? salaryPaymentData;
 
-  const SalaryPaymentCard({super.key, required this.salaryPayment});
+  const SalaryPaymentCard({super.key, required this.salaryPaymentData});
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +36,13 @@ class SalaryPaymentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(salaryPayment?.date),
+                    DateFormatters.readableDate(salaryPaymentData?.date),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: AppColors.primaryColor,
                         ),
                   ),
                   Text(
-                    salaryPayment?.month ?? "-",
+                    salaryPaymentData?.month ?? "-",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: AppColors.primaryColor,
                         ),
@@ -56,12 +56,12 @@ class SalaryPaymentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    salaryPayment?.name ?? "Unknown Employee",
+                    salaryPaymentData?.name ?? "Unknown Employee",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  if (salaryPayment?.employee?.empId != null)
+                  if (salaryPaymentData?.employee?.empId != null)
                     Text(
-                      "ID: ${salaryPayment?.employee?.empId}",
+                      "ID: ${salaryPaymentData?.employee?.empId}",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             color: AppColors.lightFontColor,
                           ),
@@ -74,12 +74,12 @@ class SalaryPaymentCard extends StatelessWidget {
                     children: [
                       _priceTag(
                         "Payment",
-                        salaryPayment?.paymentAmount,
+                        salaryPaymentData?.paymentAmount,
                         AppColors.success,
                       ),
                       _priceTag(
                         "Deduction",
-                        salaryPayment?.deductedAmount,
+                        salaryPaymentData?.deductedAmount,
                         AppColors.warning,
                       ),
                     ],

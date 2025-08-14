@@ -69,7 +69,7 @@ class _SalaryPaymentPageState extends State<SalaryPaymentPage> {
                       );
                     }
                     if (state is SalaryPaymentLoaded) {
-                      if (state.salaryPaymentModelList.isEmpty) {
+                      if (state.salaryPaymentModel.data?.isEmpty ?? true) {
                         return const EmptyStateWidget(
                           title: 'No Salary Payment Records Found',
                           message: 'We couldn’t find any salary payment records for the selected date range. Try adjusting your filters or selecting a different time period.',
@@ -78,10 +78,10 @@ class _SalaryPaymentPageState extends State<SalaryPaymentPage> {
                         return ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.salaryPaymentModelList.length,
+                          itemCount: state.salaryPaymentModel.data?.length ?? 0,
                           itemBuilder: (context, index) {
-                            final salaryPayment = state.salaryPaymentModelList[index];
-                            return SalaryPaymentCard(salaryPayment: salaryPayment);
+                            final salaryPaymentData = state.salaryPaymentModel.data?[index];
+                            return SalaryPaymentCard(salaryPaymentData: salaryPaymentData);
                           },
                         );
                       }
