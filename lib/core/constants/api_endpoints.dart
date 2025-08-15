@@ -36,4 +36,5 @@ class ApiEndpoints {
   String get additionalPayments => '$baseUrl/accounts/additionalPayments';
 
   // 📦 Misc
+  String get bankAccounts => '$baseUrl/bank-accounts';
 }

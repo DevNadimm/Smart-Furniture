@@ -20,6 +20,7 @@ class ErrorMessages {
   static const String fetchReminderChequeListFailed = 'Failed to fetch reminder cheque list. Please try again later.';
   static const String fetchBalanceSheetFailed = 'Failed to fetch balance sheet. Please try again later.';
   static const String fetchAdditionalPaymentsFailed = 'Failed to fetch additional payments. Please try again later.';
+  static const String fetchBankAccountsFailed = 'Failed to fetch bank accounts. Please try again later.';
   static const String selectProductBeforeFetch = 'Please select a product before fetching data.';
   static const String selectAllFiltersBeforeFetch = 'Please select all filters before fetching data.';
   static const String selectDateFiltersBeforeFetch = 'Please select date filters before fetching data.';
