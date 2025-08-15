@@ -133,7 +133,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
                       return const Loader();
                     } else if (state is CashTransactionInitial) {
                       return const EmptyStateWidget(
-                        icon: HugeIcons.strokeRoundedMoney01,
+                        icon: HugeIcons.strokeRoundedDateTime,
                         title: 'Select a Type and Date Range',
                         message: 'Choose the cash transaction type and specify the "Start" and "End" dates above to view transaction details.',
                       );

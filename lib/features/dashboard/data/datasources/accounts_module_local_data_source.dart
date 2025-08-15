@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
+import 'package:smart_furniture/features/accounts/presentation/pages/balance_sheet_page.dart';
 import 'package:smart_furniture/features/accounts/presentation/pages/cash_transaction_page.dart';
 import 'package:smart_furniture/features/accounts/presentation/pages/pending_cheque_list_page.dart';
 import 'package:smart_furniture/features/accounts/presentation/pages/reminder_cheque_list_page.dart';
@@ -49,7 +50,7 @@ class AccountsModuleLocalDataSource {
         subTitle: strings.balanceSheetSubtitle,
         iconPath: AppImages.reports,
         onTap: () {
-          Navigator.push(context, ProductListPage.route());
+          Navigator.push(context, BalanceSheetPage.route());
         },
       ),
     ];
