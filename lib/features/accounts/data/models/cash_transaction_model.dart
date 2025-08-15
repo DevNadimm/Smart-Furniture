@@ -1,29 +1,15 @@
 class CashTransactionModel {
   final bool? success;
-  final DataModel? data;
-  final SummaryModel? summary;
+  final List<CashTransactionData>? data;
 
-  CashTransactionModel({this.success, this.data, this.summary});
+  CashTransactionModel({this.success, this.data});
 
   factory CashTransactionModel.fromJson(Map<String, dynamic> json) {
     return CashTransactionModel(
       success: json['success'] as bool?,
-      data: json['data'] != null ? DataModel.fromJson(json['data']) : null,
-      summary: json['summary'] != null ? SummaryModel.fromJson(json['summary']) : null,
-    );
-  }
-}
-
-class DataModel {
-  final List<CashTransactionData>? cashTransactions;
-
-  DataModel({this.cashTransactions});
-
-  factory DataModel.fromJson(Map<String, dynamic> json) {
-    return DataModel(
-      cashTransactions: json['cash_transactions'] != null
+      data: json['data'] != null
           ? List<CashTransactionData>.from(
-          json['cash_transactions'].map((x) => CashTransactionData.fromJson(x)))
+          json['data'].map((x) => CashTransactionData.fromJson(x)))
           : null,
     );
   }
@@ -72,22 +58,6 @@ class CashTransactionData {
       savedBy: json['saved_by']?.toString(),
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-    );
-  }
-}
-
-class SummaryModel {
-  final num? cashIn;
-  final num? cashOut;
-  final num? balance;
-
-  SummaryModel({this.cashIn, this.cashOut, this.balance});
-
-  factory SummaryModel.fromJson(Map<String, dynamic> json) {
-    return SummaryModel(
-      cashIn: json['cash_in'] as num?,
-      cashOut: json['cash_out'] as num?,
-      balance: json['balance'] as num?,
     );
   }
 }

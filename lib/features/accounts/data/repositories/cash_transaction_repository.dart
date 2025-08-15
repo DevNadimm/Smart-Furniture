@@ -10,6 +10,10 @@ class CashTransactionRepository {
       throw Exception(ErrorMessages.selectAllFiltersBeforeFetch);
     }
 
+    if (type == 'All') type = 'all';
+    if (type == 'Receive') type = 'recieve';
+    if (type == 'Payment') type = 'payment';
+
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.cashTransaction;
 
@@ -27,7 +31,6 @@ class CashTransactionRepository {
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonMap = jsonDecode(res.body);
-
         return CashTransactionModel.fromJson(jsonMap);
       } else {
         throw Exception(ErrorMessages.fetchCashTransactionsFailed);

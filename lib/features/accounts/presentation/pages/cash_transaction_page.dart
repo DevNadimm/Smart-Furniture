@@ -28,7 +28,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
-  final List<String> _typeList = ['All', 'Payment', 'Recieve'];
+  final List<String> _typeList = ['All', 'Payment', 'Receive'];
 
   @override
   void dispose() {
@@ -143,7 +143,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
                         message: ErrorMessages.networkError,
                       );
                     } else if (state is CashTransactionLoaded) {
-                      final cashTransactions = state.cashTransactionModel.data?.cashTransactions;
+                      final cashTransactions = state.cashTransactionModel.data;
                       if (cashTransactions?.isEmpty ?? false) {
                         return const EmptyStateWidget(
                           title: 'No Cash Transactions Found',
