@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/accounts/data/models/pending_cheque_list_model.dart';
 
@@ -68,7 +69,7 @@ class PendingChequeCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   _priceTag(
                     "Amount",
-                    chequeData?.chequeAmount,
+                    "${CurrencyFormatter.format(int.tryParse(chequeData?.chequeAmount ?? '0'))} Tk",
                     AppColors.primaryColor,
                   ),
                   const SizedBox(height: 6),

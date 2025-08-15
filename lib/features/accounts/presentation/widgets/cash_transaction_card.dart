@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/accounts/data/models/cash_transaction_model.dart';
 
@@ -70,28 +71,38 @@ class CashTransactionCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            transaction?.accountName ?? 'N/A',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              transaction?.accountName ?? 'Unknown Account',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            transaction?.description ?? 'No Description',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppColors.lightFontColor,
+                            Text(
+                              transaction?.description ?? 'No Description',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: AppColors.lightFontColor,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _amountTag("Received", transaction?.receivedAmount, AppColors.success),
-                          _amountTag("Paid", transaction?.paidAmount, AppColors.warning),
+                          _amountTag(
+                            "Received",
+                            "${CurrencyFormatter.format(int.tryParse(transaction?.receivedAmount ?? '0'))} Tk",
+                            AppColors.success,
+                          ),
+                          _amountTag(
+                            "Paid",
+                            "${CurrencyFormatter.format(int.tryParse(transaction?.paidAmount ?? '0'))} Tk",
+                            AppColors.warning,
+                          ),
                         ],
                       )
                     ],

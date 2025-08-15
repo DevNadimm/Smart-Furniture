@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
 
@@ -69,31 +70,45 @@ class SalesRecordCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product?.productName ?? 'N/A',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product?.productName ?? 'N/A',
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            product?.category?.name ?? 'N/A',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppColors.lightFontColor,
+                            Text(
+                              product?.category?.name ?? 'N/A',
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: AppColors.lightFontColor,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _priceTag("Price", product?.salePrice, AppColors.primaryColor),
+                          _priceTag(
+                            "Price",
+                            "${CurrencyFormatter.format(int.tryParse(product?.salePrice ?? '0'))} Tk",
+                            AppColors.primaryColor,
+                          ),
                           if (product?.totalDiscount != null)
-                            _priceTag("Discount", product?.totalDiscount, AppColors.warning),
+                            _priceTag(
+                              "Discount",
+                              "${CurrencyFormatter.format(int.tryParse(product?.totalDiscount ?? '0'))} Tk",
+                              AppColors.warning,
+                            ),
                           if (product?.totalAmount != null)
-                            _priceTag("Total", product?.totalAmount, AppColors.success),
+                            _priceTag(
+                              "Total",
+                              "${CurrencyFormatter.format(int.tryParse(product?.totalAmount ?? '0'))} Tk",
+                              AppColors.success,
+                            ),
                         ],
                       )
                     ],

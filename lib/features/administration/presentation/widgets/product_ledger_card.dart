@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/administration/data/models/product_ledger_model.dart';
 
@@ -69,13 +70,13 @@ class ProductLedgerCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            ledgerData?.type ?? 'N/A',
+                            "${ledgerData?.type?[0].toUpperCase()}${ledgerData?.type?.substring(1)}",
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            "Rate: ${ledgerData?.rate ?? '0.00'}",
+                            "Rate: ${CurrencyFormatter.format(int.tryParse(ledgerData?.rate ?? '0.00'))} Tk",
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: AppColors.lightFontColor,
                             ),
@@ -85,8 +86,14 @@ class ProductLedgerCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _quantityTag("In Qty", ledgerData?.inQty),
-                          _quantityTag("Out Qty", ledgerData?.outQty),
+                          _quantityTag(
+                            "In Quantity",
+                            ledgerData?.inQty,
+                          ),
+                          _quantityTag(
+                            "Out Quantity",
+                            ledgerData?.outQty,
+                          ),
                         ],
                       ),
                     ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/administration/data/models/product_list_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -57,16 +58,23 @@ class ProductCard extends StatelessWidget {
                     ),
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
-                  const SizedBox(height: 6),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _priceTag("Purchase Rate", product?.purchaseRate, AppColors.warning),
-                      _priceTag("Sales Rate", product?.salesRate, AppColors.success),
-                      if (product?.wholesaleRate != null)
-                        _priceTag("Wholesale Rate", product?.wholesaleRate, AppColors.primaryColor),
-                    ],
+                  const SizedBox(height: 1),
+                  _priceTag(
+                    "Purchase Rate",
+                    "${CurrencyFormatter.format(int.tryParse(product?.purchaseRate ?? '0'))} Tk",
+                    AppColors.warning,
                   ),
+                  _priceTag(
+                    "Sales Rate",
+                    "${CurrencyFormatter.format(int.tryParse(product?.salesRate ?? '0'))} Tk",
+                    AppColors.success,
+                  ),
+                  if (product?.wholesaleRate != null)
+                    _priceTag(
+                      "Wholesale Rate",
+                      "${CurrencyFormatter.format(int.tryParse(product?.wholesaleRate ?? '0'))} Tk",
+                      AppColors.primaryColor,
+                    ),
                 ],
               ),
             ),

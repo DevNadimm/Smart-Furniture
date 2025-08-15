@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/hr_and_payroll/data/models/salary_payment_model.dart';
 
@@ -74,12 +75,12 @@ class SalaryPaymentCard extends StatelessWidget {
                     children: [
                       _priceTag(
                         "Payment",
-                        salaryPaymentData?.paymentAmount,
+                        "${CurrencyFormatter.format(int.tryParse(salaryPaymentData?.paymentAmount ?? '0'))} Tk",
                         AppColors.success,
                       ),
                       _priceTag(
                         "Deduction",
-                        salaryPaymentData?.deductedAmount,
+                        "${CurrencyFormatter.format(int.tryParse(salaryPaymentData?.deductedAmount ?? '0'))} Tk",
                         AppColors.warning,
                       ),
                     ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/administration/data/models/damage_list_model.dart';
 
@@ -79,8 +80,16 @@ class DamageCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _infoTag("Qty", damageData?.quantity, AppColors.primaryColor),
-                          _infoTag("Amount", damageData?.amount, AppColors.error),
+                          _infoTag(
+                            "Quantity",
+                            damageData?.quantity,
+                            AppColors.primaryColor,
+                          ),
+                          _infoTag(
+                            "Amount",
+                            "${CurrencyFormatter.format(int.tryParse(damageData?.amount ?? '0'))} Tk",
+                            AppColors.error,
+                          ),
                         ],
                       )
                     ],

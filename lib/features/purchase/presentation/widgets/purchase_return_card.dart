@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_return_model.dart';
 
@@ -53,8 +54,6 @@ class PurchaseReturnCard extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Body
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -86,9 +85,21 @@ class PurchaseReturnCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _priceTag("Return Rate", returnData?.returnRate, AppColors.primaryColor),
-                          _priceTag("Return Quantity", returnData?.returnQuantity, AppColors.warning),
-                          _priceTag("Return Amount", returnData?.returnAmount, AppColors.success),
+                          _priceTag(
+                            "Return Rate",
+                            "${CurrencyFormatter.format(int.tryParse(returnData?.returnRate ?? '0'))} Tk",
+                            AppColors.primaryColor,
+                          ),
+                          _priceTag(
+                            "Return Quantity",
+                            returnData?.returnQuantity,
+                            AppColors.warning,
+                          ),
+                          _priceTag(
+                            "Return Amount",
+                            "${CurrencyFormatter.format(int.tryParse(returnData?.returnAmount ?? '0'))} Tk",
+                            AppColors.success,
+                          ),
                         ],
                       )
                     ],

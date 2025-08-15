@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
 
 class StockCard extends StatelessWidget {
@@ -27,7 +28,6 @@ class StockCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Column(
           children: [
-            // Header - Brand and Category (unchanged)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
@@ -50,8 +50,6 @@ class StockCard extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Body - Product Details (reorganized without SKU)
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -68,19 +66,31 @@ class StockCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _priceTag("Purchase", stockData?.purchaseRate, AppColors.warning),
-                          _priceTag("Sales", stockData?.salesRate, AppColors.primaryColor),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _priceTag(
+                              "Purchase",
+                              "${CurrencyFormatter.format(int.tryParse(stockData?.purchaseRate ?? '0'))} Tk",
+                              AppColors.warning,
+                            ),
+                            _priceTag(
+                              "Sales",
+                              "${CurrencyFormatter.format(int.tryParse(stockData?.salesRate ?? '0'))} Tk",
+                              AppColors.primaryColor,
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          _priceTag("Total Purchased", stockData?.totalPurchased, AppColors.success),
-                          _priceTag("Total Sold", stockData?.totalSold, AppColors.info),
-                        ],
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            _priceTag("Total Purchased", stockData?.totalPurchased, AppColors.success),
+                            _priceTag("Total Sold", stockData?.totalSold, AppColors.info),
+                          ],
+                        ),
                       ),
                     ],
                   ),

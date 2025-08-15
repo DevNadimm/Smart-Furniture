@@ -185,7 +185,7 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                     }
                     if (state is ProductLedgerInitial) {
                       return const EmptyStateWidget(
-                        icon: HugeIcons.strokeRoundedDeliveryBox01,
+                        icon: HugeIcons.strokeRoundedDateTime,
                         title: 'Select a Product and Date Range',
                         message: 'Choose a product and specify the "Start" and "End" dates above to view its ledger details.',
                       );

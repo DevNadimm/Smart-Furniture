@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/hr_and_payroll/data/models/employee_list_model.dart';
 
@@ -68,8 +69,8 @@ class EmployeeCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _infoRow("Join Date", DateFormatters.readableDate(employee?.joinDate ?? '')),
-                      _infoRow("Salary", employee?.salaryRange),
-                      _infoRow("Status", employee?.activationStatus),
+                      _infoRow("Salary", "${CurrencyFormatter.format(int.tryParse(employee?.salaryRange ?? '0'))} Tk"),
+                      _infoRow("Status", "${employee?.activationStatus?[0].toUpperCase()}${employee?.activationStatus?.substring(1)}"),
                       _infoRow("Contact", employee?.contact),
                       _infoRow("Email", employee?.email),
                     ],

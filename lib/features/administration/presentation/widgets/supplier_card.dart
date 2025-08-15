@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/administration/data/models/supplier_list_model.dart';
 
 class SupplierCard extends StatelessWidget {
@@ -82,7 +83,11 @@ class SupplierCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _priceTag("Previous Due", supplier?.previousDue, AppColors.warning),
+                          _priceTag(
+                            "Previous Due",
+                            "${CurrencyFormatter.format(int.tryParse(supplier?.previousDue ?? '0'))} Tk",
+                            AppColors.warning,
+                          ),
                         ],
                       ),
                     ],

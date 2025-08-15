@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_record_model.dart';
 
@@ -28,7 +29,6 @@ class PurchaseRecordCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Column(
           children: [
-            // Header
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
@@ -53,8 +53,6 @@ class PurchaseRecordCard extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Body
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -71,8 +69,6 @@ class PurchaseRecordCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
-
-                  // Product Info
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -97,14 +93,12 @@ class PurchaseRecordCard extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      // Price info
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
                             "Purchase Price",
-                            purchaseRecord?.purchasePrice,
+                            "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.purchasePrice ?? '0'))} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
@@ -114,7 +108,7 @@ class PurchaseRecordCard extends StatelessWidget {
                           ),
                           _priceTag(
                             "Total",
-                            purchaseRecord?.total,
+                            "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.total ?? '0'))} Tk",
                             AppColors.success,
                           ),
                         ],

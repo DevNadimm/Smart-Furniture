@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/administration/data/models/customer_list_model.dart';
 
 class CustomerCard extends StatelessWidget {
@@ -80,8 +81,16 @@ class CustomerCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _priceTag("Previous Due", customer?.previousDue, AppColors.warning),
-                          _priceTag("Credit Limit", customer?.creditLimit, AppColors.success),
+                          _priceTag(
+                            "Previous Due",
+                            "${CurrencyFormatter.format(int.tryParse(customer?.previousDue ?? '0'))} Tk",
+                            AppColors.warning,
+                          ),
+                          _priceTag(
+                            "Credit Limit",
+                            "${CurrencyFormatter.format(int.tryParse(customer?.creditLimit ?? '0'))} Tk",
+                            AppColors.success,
+                          ),
                         ],
                       ),
                     ],

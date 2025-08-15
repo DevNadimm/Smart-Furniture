@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_return_model.dart';
 
@@ -79,9 +80,21 @@ class SalesReturnCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          _priceTag("Rate", salesReturn?.returnRate, AppColors.primaryColor),
-                          _priceTag("Quantity", salesReturn?.returnQuantity, AppColors.warning),
-                          _priceTag("Amount", salesReturn?.returnAmount, AppColors.success),
+                          _priceTag(
+                            "Rate",
+                            "${CurrencyFormatter.format(int.tryParse(salesReturn?.returnRate ?? '0'))} Tk",
+                            AppColors.primaryColor,
+                          ),
+                          _priceTag(
+                            "Quantity",
+                            salesReturn?.returnQuantity,
+                            AppColors.warning,
+                          ),
+                          _priceTag(
+                            "Amount",
+                            "${CurrencyFormatter.format(int.tryParse(salesReturn?.returnAmount ?? '0'))} Tk",
+                            AppColors.success,
+                          ),
                         ],
                       )
                     ],
