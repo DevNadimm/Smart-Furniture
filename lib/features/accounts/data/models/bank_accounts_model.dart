@@ -9,8 +9,8 @@ class BankAccountsModel {
       success: json['success'] as bool?,
       data: json['data'] != null
           ? List<BankAccountData>.from(
-        (json['data'] as List).map((x) => BankAccountData.fromJson(x)),
-      )
+              (json['data'] as List).map((x) => BankAccountData.fromJson(x)),
+            )
           : null,
     );
   }
