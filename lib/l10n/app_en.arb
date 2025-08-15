@@ -62,12 +62,12 @@
   "bankTransactionSubtitle": "View all bank transactions",
   "cashTransactionTitle": "Cash Transaction",
   "cashTransactionSubtitle": "View all cash transactions",
-  "cashStatementTitle": "Cash Statement",
-  "cashStatementSubtitle": "View all cash statements",
   "pendingChequeListTitle": "Pending Cheque List",
   "pendingChequeListSubtitle": "View all pending cheques",
   "reminderChequeListTitle": "Reminder Cheque List",
   "reminderChequeListSubtitle": "View all reminder cheques",
   "balanceSheetTitle": "Balance Sheet",
-  "balanceSheetSubtitle": "View overall balance details"
+  "balanceSheetSubtitle": "View overall balance details",
+  "additionalPaymentsTitle": "Additional Payments",
+  "additionalPaymentsSubtitle": "View all additional payments"
 }

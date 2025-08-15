@@ -26,5 +26,6 @@ class AppImages {
   static const String productLedger = 'assets/images/modules/product_ledger.png';
   static const String bankTransaction = 'assets/images/modules/bank_transaction.png';
   static const String cashTransaction = 'assets/images/modules/cash_transaction.png';
+  static const String additionalPayments = 'assets/images/modules/cash_transaction.png';
   static const String cheque = 'assets/images/modules/cheque.png';
 }

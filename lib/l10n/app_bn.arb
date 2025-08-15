@@ -62,12 +62,12 @@
   "bankTransactionSubtitle": "সকল ব্যাংক লেনদেন দেখুন",
   "cashTransactionTitle": "নগদ লেনদেন",
   "cashTransactionSubtitle": "সকল নগদ লেনদেন দেখুন",
-  "cashStatementTitle": "নগদ বিবৃতি",
-  "cashStatementSubtitle": "সকল নগদ বিবৃতি দেখুন",
   "pendingChequeListTitle": "অপেক্ষমান চেক তালিকা",
   "pendingChequeListSubtitle": "সকল অপেক্ষমান চেক দেখুন",
   "reminderChequeListTitle": "স্মারক চেক তালিকা",
   "reminderChequeListSubtitle": "সকল স্মারক চেক দেখুন",
   "balanceSheetTitle": "ব্যালেন্স শিট",
-  "balanceSheetSubtitle": "সামগ্রিক ব্যালেন্স বিবরণ দেখুন"
+  "balanceSheetSubtitle": "সামগ্রিক ব্যালেন্স বিবরণ দেখুন",
+  "additionalPaymentsTitle": "অতিরিক্ত অর্থপ্রদান",
+  "additionalPaymentsSubtitle": "সমস্ত অতিরিক্ত অর্থপ্রদানের বিবরণ দেখুন"
 }

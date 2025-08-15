@@ -53,6 +53,14 @@ class AccountsModuleLocalDataSource {
           Navigator.push(context, BalanceSheetPage.route());
         },
       ),
+      SubModule(
+        title: strings.additionalPaymentsTitle,
+        subTitle: strings.additionalPaymentsSubtitle,
+        iconPath: AppImages.additionalPayments,
+        onTap: () {
+          Navigator.push(context, BalanceSheetPage.route());
+        },
+      ),
     ];
   }
 }
