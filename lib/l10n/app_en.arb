@@ -69,5 +69,13 @@
   "balanceSheetTitle": "Balance Sheet",
   "balanceSheetSubtitle": "View overall balance details",
   "additionalPaymentsTitle": "Additional Payments",
-  "additionalPaymentsSubtitle": "View all additional payments"
+  "additionalPaymentsSubtitle": "View all additional payments",
+
+  "@@reportsModule": "===== Reports Module =====",
+  "supplierPaymentReportTitle": "Supplier Payment Report",
+  "supplierPaymentReportSubtitle": "View all supplier payment details",
+  "customerPaymentReportTitle": "Customer Payment Report",
+  "customerPaymentReportSubtitle": "View all customer payment details",
+  "profitLossReportTitle": "Profit & Loss Report",
+  "profitLossReportSubtitle": "View profit and loss summary"
 }

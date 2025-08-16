@@ -35,6 +35,12 @@ class ApiEndpoints {
   String get balanceSheet => '$baseUrl/report-module/balance-sheet';
   String get additionalPayments => '$baseUrl/accounts/additionalPayments';
 
+  // 📦 Reports
+  String get dailyReport => '$baseUrl/daily-report';
+  String get supplierPaymentReports => '$baseUrl/report-module/supplier-payment-report';
+  String get customerPaymentReports => '$baseUrl/report-module/customer-payment-report';
+  String get profitLoss => '$baseUrl/report-module/profit-loss';
+
   // 📦 Misc
   String get bankAccounts => '$baseUrl/bank-accounts';
 }

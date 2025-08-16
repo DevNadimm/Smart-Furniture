@@ -69,5 +69,13 @@
   "balanceSheetTitle": "ব্যালেন্স শিট",
   "balanceSheetSubtitle": "সামগ্রিক ব্যালেন্স বিবরণ দেখুন",
   "additionalPaymentsTitle": "অতিরিক্ত অর্থপ্রদান",
-  "additionalPaymentsSubtitle": "সমস্ত অতিরিক্ত অর্থপ্রদানের বিবরণ দেখুন"
+  "additionalPaymentsSubtitle": "সমস্ত অতিরিক্ত অর্থপ্রদানের বিবরণ দেখুন",
+
+  "@@reportsModuleBn": "===== Reports Module =====",
+  "supplierPaymentReportTitle": "সরবরাহকারী অর্থপ্রদান রিপোর্ট",
+  "supplierPaymentReportSubtitle": "সমস্ত সরবরাহকারীর অর্থপ্রদানের বিবরণ দেখুন",
+  "customerPaymentReportTitle": "গ্রাহক অর্থপ্রদান রিপোর্ট",
+  "customerPaymentReportSubtitle": "সমস্ত গ্রাহকের অর্থপ্রদানের বিবরণ দেখুন",
+  "profitLossReportTitle": "লাভ-ক্ষতি রিপোর্ট",
+  "profitLossReportSubtitle": "লাভ ও ক্ষতির সারসংক্ষেপ দেখুন"
 }
