@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/app.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/additional_payments/additional_payments_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/balance_sheet/balance_sheet_bloc.dart';
+import 'package:smart_furniture/features/accounts/presentation/blocs/bank_accounts/bank_accounts_bloc.dart';
+import 'package:smart_furniture/features/accounts/presentation/blocs/bank_transaction/bank_transaction_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/cash_transaction/cash_transaction_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/pending_cheque_list/pending_cheque_list_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/reminder_cheque_list/reminder_cheque_list_bloc.dart';
@@ -40,11 +42,13 @@ Future<void> main() async {
         BlocProvider(create: (_) => ProductLedgerBloc()),
         BlocProvider(create: (_) => SalaryPaymentBloc()),
         BlocProvider(create: (_) => EmployeeListBloc()),
+        BlocProvider(create: (_) => BankTransactionBloc()),
         BlocProvider(create: (_) => CashTransactionBloc()),
         BlocProvider(create: (_) => PendingChequeListBloc()),
         BlocProvider(create: (_) => ReminderChequeListBloc()),
         BlocProvider(create: (_) => BalanceSheetBloc()),
         BlocProvider(create: (_) => AdditionalPaymentsBloc()),
+        BlocProvider(create: (_) => BankAccountsBloc()),
       ],
       child: const MyApp(),
     ),

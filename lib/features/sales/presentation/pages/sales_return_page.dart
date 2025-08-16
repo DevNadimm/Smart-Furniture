@@ -148,7 +148,7 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
                 return FilterBar(
                   startDateController: _fromDateController,
                   endDateController: _toDateController,
-                  onApplyFilter: () {},
+                  onApplyFilter: _fetchData,
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
                   filterPickerLabel: 'Customer',
