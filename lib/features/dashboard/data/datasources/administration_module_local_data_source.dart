@@ -6,7 +6,7 @@ import 'package:smart_furniture/features/administration/presentation/pages/damag
 import 'package:smart_furniture/features/administration/presentation/pages/product_ledger_page.dart';
 import 'package:smart_furniture/features/administration/presentation/pages/product_list_page.dart';
 import 'package:smart_furniture/features/administration/presentation/pages/supplier_list_page.dart';
-import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
+import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
 
 class AdministrationModuleLocalDataSource {
   static List<SubModule> getAdministrationModules(BuildContext context) {

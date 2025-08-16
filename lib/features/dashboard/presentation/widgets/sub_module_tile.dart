@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
-import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
+import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
 
 class SubModuleTile extends StatelessWidget {
   final SubModule module;

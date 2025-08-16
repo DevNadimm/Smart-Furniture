@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
-import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
+import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/pages/employee_list_page.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/pages/salary_payment_page.dart';
 

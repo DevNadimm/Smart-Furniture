@@ -7,7 +7,7 @@ import 'package:smart_furniture/features/accounts/presentation/pages/bank_transa
 import 'package:smart_furniture/features/accounts/presentation/pages/cash_transaction_page.dart';
 import 'package:smart_furniture/features/accounts/presentation/pages/pending_cheque_list_page.dart';
 import 'package:smart_furniture/features/accounts/presentation/pages/reminder_cheque_list_page.dart';
-import 'package:smart_furniture/features/dashboard/domain/entities/sales_module.dart';
+import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
 
 class AccountsModuleLocalDataSource {
   static List<SubModule> getAccountsModules(BuildContext context) {
