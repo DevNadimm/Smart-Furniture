@@ -21,6 +21,9 @@ class ErrorMessages {
   static const String fetchBalanceSheetFailed = 'Failed to fetch balance sheet. Please try again later.';
   static const String fetchAdditionalPaymentsFailed = 'Failed to fetch additional payments. Please try again later.';
   static const String fetchBankAccountsFailed = 'Failed to fetch bank accounts. Please try again later.';
+  static const String fetchSupplierPaymentReportFailed = 'Failed to fetch supplier payment report. Please try again later.';
+  static const String fetchCustomerPaymentReportFailed = 'Failed to fetch customer payment report. Please try again later.';
+  static const String fetchProfitLossReportFailed = 'Failed to fetch profit and loss report. Please try again later.';
   static const String selectProductBeforeFetch = 'Please select a product before fetching data.';
   static const String selectAllFiltersBeforeFetch = 'Please select all filters before fetching data.';
   static const String selectDateFiltersBeforeFetch = 'Please select date filters before fetching data.';
