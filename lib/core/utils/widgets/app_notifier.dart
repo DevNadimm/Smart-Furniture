@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
-
-enum MessageType { success, error, info, warning }
+import 'package:smart_furniture/core/utils/enums/message_type.dart';
 
 class AppNotifier {
   static Color _getBackgroundColor(MessageType type) {

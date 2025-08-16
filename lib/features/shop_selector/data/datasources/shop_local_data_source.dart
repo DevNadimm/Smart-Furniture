@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smart_furniture/core/utils/enums/shop_type.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
-import 'package:smart_furniture/features/shop_selector/domain/entities/shop_type.dart';
+
 List<Shop> shops = [
   Shop(
     shopType: ShopType.shop1,
