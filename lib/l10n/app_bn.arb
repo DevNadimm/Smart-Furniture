@@ -72,10 +72,10 @@
   "additionalPaymentsSubtitle": "সমস্ত অতিরিক্ত অর্থপ্রদানের বিবরণ দেখুন",
 
   "@@reportsModuleBn": "===== Reports Module =====",
-  "supplierPaymentReportTitle": "সরবরাহকারী অর্থপ্রদান রিপোর্ট",
+  "supplierPaymentReportTitle": "সরবরাহকারী অর্থপ্রদান",
   "supplierPaymentReportSubtitle": "সমস্ত সরবরাহকারীর অর্থপ্রদানের বিবরণ দেখুন",
-  "customerPaymentReportTitle": "গ্রাহক অর্থপ্রদান রিপোর্ট",
+  "customerPaymentReportTitle": "গ্রাহক অর্থপ্রদান",
   "customerPaymentReportSubtitle": "সমস্ত গ্রাহকের অর্থপ্রদানের বিবরণ দেখুন",
-  "profitLossReportTitle": "লাভ-ক্ষতি রিপোর্ট",
+  "profitLossReportTitle": "লাভ-ক্ষতি",
   "profitLossReportSubtitle": "লাভ ও ক্ষতির সারসংক্ষেপ দেখুন"
 }

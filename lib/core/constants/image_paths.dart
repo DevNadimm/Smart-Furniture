@@ -28,4 +28,5 @@ class AppImages {
   static const String cashTransaction = 'assets/images/modules/cash_transaction.png';
   static const String additionalPayments = 'assets/images/modules/cash_transaction.png';
   static const String cheque = 'assets/images/modules/cheque.png';
+  static const String profitLoss = 'assets/images/modules/profit_loss.png';
 }

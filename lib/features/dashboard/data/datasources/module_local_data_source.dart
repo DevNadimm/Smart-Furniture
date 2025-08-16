@@ -6,6 +6,7 @@ import 'package:smart_furniture/features/dashboard/presentation/pages/accounts_m
 import 'package:smart_furniture/features/dashboard/presentation/pages/administration_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/hr_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/purchase_module_page.dart';
+import 'package:smart_furniture/features/dashboard/presentation/pages/reports_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/sales_module_page.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
 
@@ -67,7 +68,7 @@ class ModuleLocalDataSource {
         subTitle: strings.reportsSubTitle,
         iconPath: AppImages.reports,
         onTap: () {
-          // Navigate to Full Reports Page
+          Navigator.push(context, ReportsModulePage.route());
         },
       ),
       Module(
