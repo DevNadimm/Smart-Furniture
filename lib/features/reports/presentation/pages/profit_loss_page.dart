@@ -13,6 +13,7 @@ import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/reports/presentation/blocs/profit_loss/profit_loss_bloc.dart';
+import 'package:smart_furniture/features/reports/presentation/widgets/profit_loss_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class ProfitLossPage extends StatefulWidget {
@@ -194,7 +195,7 @@ class _ProfitLossPageState extends State<ProfitLossPage> {
                           itemCount: profitLoss?.length ?? 0,
                           itemBuilder: (context, index) {
                             final data = profitLoss?[index];
-                            return Text(data?.status ?? '');
+                            return ProfitLossCard(data: data!);
                           },
                         );
                       }

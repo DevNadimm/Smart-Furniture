@@ -21,7 +21,7 @@ class ProfitLossRepository {
     };
 
     final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
-    print("Profit Loss URL: $uri");
+    print("URL: $uri");
 
     try {
       final res = await http.get(uri);
