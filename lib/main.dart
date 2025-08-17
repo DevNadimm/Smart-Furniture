@@ -18,6 +18,9 @@ import 'package:smart_furniture/features/language_selector/presentation/cubit/la
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_record/purchase_record_bloc.dart';
 import 'package:smart_furniture/features/purchase/presentation/blocs/purchase_return/purchase_return_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/supplier_list/supplier_list_bloc.dart';
+import 'package:smart_furniture/features/reports/presentation/blocs/customer_payment/customer_payment_bloc.dart';
+import 'package:smart_furniture/features/reports/presentation/blocs/profit_loss/profit_loss_bloc.dart';
+import 'package:smart_furniture/features/reports/presentation/blocs/supplier_payment/supplier_payment_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_record/sales_record_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/sales_return_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/stock/stock_bloc.dart';
@@ -49,6 +52,9 @@ Future<void> main() async {
         BlocProvider(create: (_) => BalanceSheetBloc()),
         BlocProvider(create: (_) => AdditionalPaymentsBloc()),
         BlocProvider(create: (_) => BankAccountsBloc()),
+        BlocProvider(create: (_) => CustomerPaymentBloc()),
+        BlocProvider(create: (_) => SupplierPaymentBloc()),
+        BlocProvider(create: (_) => ProfitLossBloc()),
       ],
       child: const MyApp(),
     ),

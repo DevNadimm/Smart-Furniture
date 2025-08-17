@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
+import 'package:smart_furniture/features/reports/presentation/pages/profit_loss_page.dart';
 
 class ReportsModuleLocalDataSource {
   static List<SubModule> getReportsModules(BuildContext context) {
@@ -24,7 +25,9 @@ class ReportsModuleLocalDataSource {
         title: strings.profitLossReportTitle,
         subTitle: strings.profitLossReportSubtitle,
         iconPath: AppImages.profitLoss,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, ProfitLossPage.route());
+        },
       ),
     ];
   }
