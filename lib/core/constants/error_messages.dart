@@ -38,6 +38,7 @@ class ErrorMessages {
 
   // Validation & General Errors
   static const String selectProductBeforeFetch = 'Please select a product before fetching data.';
+  static const String selectSupplierBeforeFetch = 'Please select a supplier before fetching data.';
   static const String selectAllFiltersBeforeFetch = 'Please select all filters before fetching data.';
   static const String selectDateFiltersBeforeFetch = 'Please select date filters before fetching data.';
   static const String networkError = 'Network error occurred. Please check your connection and try again later.';

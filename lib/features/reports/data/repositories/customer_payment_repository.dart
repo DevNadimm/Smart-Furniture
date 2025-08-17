@@ -6,18 +6,22 @@ import 'package:smart_furniture/features/reports/data/models/customer_payment_mo
 
 class CustomerPaymentRepository {
   static Future<CustomerPaymentModel?> fetchData(
-      String shop,
-      String? fromDate,
-      String? toDate,
-      String? customerId,
-      ) async {
+    String shop,
+    String? fromDate,
+    String? toDate,
+    String? customerId,
+  ) async {
+    if ((customerId == null || customerId.isEmpty) || (fromDate == null || fromDate.isEmpty) || (toDate == null || toDate.isEmpty)) {
+      throw Exception(ErrorMessages.selectAllFiltersBeforeFetch);
+    }
+
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.customerPaymentReports;
 
     final queryParams = {
-      if (customerId?.isNotEmpty ?? false) 'customer_id': customerId!,
-      if (fromDate?.isNotEmpty ?? false) 'from': fromDate!,
-      if (toDate?.isNotEmpty ?? false) 'to': toDate!,
+      if (customerId.isNotEmpty) 'customer_id': customerId,
+      if (fromDate.isNotEmpty) 'from': fromDate,
+      if (toDate.isNotEmpty) 'to': toDate,
     };
 
     final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);

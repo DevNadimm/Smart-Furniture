@@ -9,11 +9,15 @@ class SupplierPaymentRepository {
     String shop,
     String? supplierId,
   ) async {
+    if (supplierId == null || supplierId.isEmpty) {
+      throw Exception(ErrorMessages.selectSupplierBeforeFetch);
+    }
+
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.supplierPaymentReports;
 
     final queryParams = {
-      if (supplierId?.isNotEmpty ?? false) 'supplier_id': supplierId!,
+      if (supplierId.isNotEmpty) 'supplier_id': supplierId,
     };
 
     final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
