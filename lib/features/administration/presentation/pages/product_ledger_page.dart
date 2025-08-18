@@ -144,7 +144,7 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                   onFilterPickerTap: () {
                     _selectProductPicker(state.productListModel.data!.map((e) => e.productName ?? '').toList());
                   },
-                  filterPickerLabel: 'Product',
+                  filterPickerLabel: strings.product,
                 );
               } else if (state is ProductListLoading) {
                 return FilterBar(
@@ -153,16 +153,16 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                   onApplyFilter: () {},
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
-                  filterPickerLabel: 'Product',
+                  filterPickerLabel: strings.product,
                 );
               } else if (state is ProductListError) {
                 return FilterBar(
                   startDateController: _fromDateController,
                   endDateController: _toDateController,
-                  onApplyFilter: () {},
+                  onApplyFilter: _fetchData,
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
-                  filterPickerLabel: 'Product',
+                  filterPickerLabel: strings.product,
                 );
               } else {
                 return const SizedBox.shrink();

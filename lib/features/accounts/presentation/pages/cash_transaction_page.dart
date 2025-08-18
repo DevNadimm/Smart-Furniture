@@ -117,7 +117,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
             onFilterPickerTap: () {
               _selectTypePicker(_typeList);
             },
-            filterPickerLabel: 'Type',
+            filterPickerLabel: strings.type,
           ),
           Expanded(
             child: SingleChildScrollView(

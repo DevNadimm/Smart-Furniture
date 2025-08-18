@@ -81,7 +81,7 @@ class _DailyReportsPageState extends State<DailyReportsPage> {
         children: [
           FilterBar(
             startDateController: _dateController,
-            startDateLabel: "Select Date",
+            startDateLabel: strings.selectDate,
             onSelectDate: _selectDate,
             onApplyFilter: _fetchData,
           ),

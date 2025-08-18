@@ -40,8 +40,8 @@
   "purchaseReturnSubtitle": "ফেরতকৃত ক্রয় দেখুন",
 
   "@@hrModule": "===== Hr Module =====",
-  "salaryPaymentTitle": "বেতন প্রদান",
-  "salaryPaymentSubtitle": "কর্মচারীদের বেতনের তথ্য দেখুন",
+  "salaryPaymentsTitle": "বেতন প্রদান",
+  "salaryPaymentsSubtitle": "কর্মচারীদের বেতনের তথ্য দেখুন",
   "employeeListTitle": "কর্মচারীর তালিকা",
   "employeeListSubtitle": "সমস্ত কর্মচারী দেখুন",
 
@@ -72,21 +72,33 @@
   "additionalPaymentsSubtitle": "সমস্ত অতিরিক্ত অর্থপ্রদানের বিবরণ দেখুন",
 
   "@@reportsModuleBn": "===== Reports Module =====",
-  "supplierPaymentReportTitle": "সরবরাহকারী অর্থপ্রদান",
-  "supplierPaymentReportSubtitle": "সমস্ত সরবরাহকারীর অর্থপ্রদানের বিবরণ দেখুন",
-  "customerPaymentReportTitle": "গ্রাহক অর্থপ্রদান",
-  "customerPaymentReportSubtitle": "সমস্ত গ্রাহকের অর্থপ্রদানের বিবরণ দেখুন",
+  "supplierPaymentsReportTitle": "সরবরাহকারী অর্থপ্রদান",
+  "supplierPaymentsReportSubtitle": "সমস্ত সরবরাহকারীর অর্থপ্রদানের বিবরণ দেখুন",
+  "customerPaymentsReportTitle": "গ্রাহক অর্থপ্রদান",
+  "customerPaymentsReportSubtitle": "সমস্ত গ্রাহকের অর্থপ্রদানের বিবরণ দেখুন",
   "profitLossReportTitle": "লাভ-ক্ষতি",
   "profitLossReportSubtitle": "লাভ ও ক্ষতির সারসংক্ষেপ দেখুন",
 
   "@@dailyReportsModule": "===== Daily Reports Module =====",
-  "cashPayment": "নগদ পেমেন্ট",
-  "employeePayment": "কর্মচারীর পেমেন্ট",
+  "cashPayments": "নগদ পেমেন্ট",
+  "employeePayments": "কর্মচারীর পেমেন্ট",
 
   "paid": "দেওয়া হয়েছে",
   "due": "বাকি",
   "total": "মোট",
   "amount": "টাকা",
   "payment": "পেমেন্ট",
-  "deducted": "কমানো হয়েছে"
+  "deducted": "কমানো হয়েছে",
+  "filter": "ফিল্টার",
+  "select": "নির্বাচন করুন",
+  "startDate": "শুরুর তারিখ",
+  "endDate": "শেষ তারিখ",
+  "selectDate": "তারিখ নির্বাচন করুন",
+  "customer": "গ্রাহক",
+  "supplier": "সাপ্লায়ার",
+  "account": "অ্যাকাউন্ট",
+  "type": "টাইপ",
+  "product": "পণ্য",
+  "selectProduct": "পণ্য নির্বাচন করুন",
+  "selectSupplier": "সাপ্লায়ার নির্বাচন করুন"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/dashboard/data/datasources/module_local_data_source.dart';
 import 'package:smart_furniture/features/dashboard/presentation/widgets/module_card.dart';
+import 'package:smart_furniture/features/language_selector/presentation/pages/language_selection_page.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -25,8 +26,13 @@ class DashboardPage extends StatelessWidget {
                 _buildHeader(context),
                 const SizedBox(height: 32),
                 _buildGridView(context),
-                // const SizedBox(height: 16),
-                // ElevatedButton(onPressed: () => Navigator.push(context, LanguageSelectionPage.route()), child: const Text("Change Localization"))
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(context, LanguageSelectionPage.route(), (route) => false);
+                  },
+                  child: const Text("Change Localization"),
+                ),
               ],
             ),
           ),

@@ -136,7 +136,7 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
                   onFilterPickerTap: () {
                     _selectSupplierPicker(state.supplierListModel.data!.map((e) => e.supplierName ?? '').toList());
                   },
-                  filterPickerLabel: 'Supplier',
+                  filterPickerLabel: strings.supplier,
                 );
               } else if (state is SupplierListLoading) {
                  return FilterBar(
@@ -145,16 +145,16 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
                    onApplyFilter: () {},
                    onSelectDate: _selectDate,
                    showFilterPicker: true,
-                   filterPickerLabel: 'Supplier',
+                   filterPickerLabel: strings.supplier,
                  );
                } else if (state is SupplierListError) {
                  return FilterBar(
                    startDateController: _startDateController,
                    endDateController: _endDateController,
-                   onApplyFilter: () {},
+                   onApplyFilter: _fetchData,
                    onSelectDate: _selectDate,
                    showFilterPicker: true,
-                   filterPickerLabel: 'Supplier',
+                   filterPickerLabel: strings.supplier,
                  );
                } else {
                 return const SizedBox.shrink();

@@ -20,8 +20,8 @@ class FilterBar extends StatelessWidget {
     super.key,
     this.startDateController,
     this.endDateController,
-    this.startDateLabel = "Start Date",
-    this.endDateLabel = "End Date",
+    this.startDateLabel,
+    this.endDateLabel,
     this.showFilterPicker = false,
     this.filterPickerController,
     this.onFilterPickerTap,
@@ -38,10 +38,10 @@ class FilterBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          if (startDateController != null) _buildDateField(context, startDateLabel.toString(), startDateController!),
+          if (startDateController != null) _buildDateField(context, startDateLabel ?? strings.startDate, startDateController!),
           if (startDateController != null) const SizedBox(width: 8),
 
-          if (endDateController != null) _buildDateField(context, endDateLabel.toString(), endDateController!),
+          if (endDateController != null) _buildDateField(context, endDateLabel ?? strings.endDate, endDateController!),
           if (endDateController != null) const SizedBox(width: 8),
 
           if (showFilterPicker) ...[
@@ -54,10 +54,7 @@ class FilterBar extends StatelessWidget {
                   style: const TextStyle(fontSize: 14),
                   decoration: InputDecoration(
                     labelText: filterPickerLabel ?? strings.select,
-                    labelStyle: Theme.of(context)
-                        .inputDecorationTheme
-                        .labelStyle
-                        ?.copyWith(fontSize: 14),
+                    labelStyle: Theme.of(context).inputDecorationTheme.labelStyle?.copyWith(fontSize: 14),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                   ),
                   onTap: onFilterPickerTap,

@@ -134,7 +134,7 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
                   onFilterPickerTap: () {
                     _selectCustomerPicker(state.customerListModel.data!.map((e) => e.customerName ?? '').toList());
                   },
-                  filterPickerLabel: 'Customer',
+                  filterPickerLabel: strings.customer,
                 );
               } else if (state is CustomerListLoading) {
                 return FilterBar(
@@ -143,7 +143,7 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
                   onApplyFilter: () {},
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
-                  filterPickerLabel: 'Customer',
+                  filterPickerLabel: strings.customer,
                 );
               } else if (state is CustomerListError) {
                 return FilterBar(
@@ -152,7 +152,7 @@ class _SalesReturnPageState extends State<SalesReturnPage> {
                   onApplyFilter: _fetchData,
                   onSelectDate: _selectDate,
                   showFilterPicker: true,
-                  filterPickerLabel: 'Customer',
+                  filterPickerLabel: strings.customer,
                 );
               } else {
                 return const SizedBox.shrink();

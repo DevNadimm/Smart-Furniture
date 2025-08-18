@@ -88,5 +88,17 @@
   "total": "Total",
   "amount": "Amount",
   "payment": "Payment",
-  "deducted": "Deducted"
+  "deducted": "Deducted",
+  "filter": "Filter",
+  "select": "Select",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "selectDate": "Select Date",
+  "customer": "Customer",
+  "supplier": "Supplier",
+  "account": "Account",
+  "type": "Type",
+  "product": "Product",
+  "selectProduct": "Select Product",
+  "selectSupplier": "Select Supplier"
 }

@@ -117,19 +117,19 @@ class _DamageListPageState extends State<DamageListPage> {
                   onFilterPickerTap: () {
                     _selectProductPicker(state.productListModel.data!.map((e) => e.productName ?? '').toList());
                   },
-                  filterPickerLabel: 'Select Product',
+                  filterPickerLabel: strings.selectProduct,
                 );
               } else if (state is ProductListLoading) {
                 return FilterBar(
                   onApplyFilter: () {},
                   showFilterPicker: true,
-                  filterPickerLabel: 'Select Product',
+                  filterPickerLabel: strings.selectProduct,
                 );
               } else if (state is ProductListError) {
                 return FilterBar(
-                  onApplyFilter: () {},
+                  onApplyFilter: _fetchData,
                   showFilterPicker: true,
-                  filterPickerLabel: 'Select Product',
+                  filterPickerLabel: strings.selectProduct,
                 );
               } else {
                 return const SizedBox.shrink();

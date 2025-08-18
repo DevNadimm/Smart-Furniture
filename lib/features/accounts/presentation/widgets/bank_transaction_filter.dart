@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BankTransactionFilter extends StatelessWidget {
   final TextEditingController startDateController;
@@ -24,20 +25,22 @@ class BankTransactionFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          _buildDateField(context, 'Start Date', startDateController),
+          _buildDateField(context, strings.startDate, startDateController),
           const SizedBox(width: 8),
 
-          _buildDateField(context, 'End Date', endDateController),
+          _buildDateField(context, strings.endDate, endDateController),
           const SizedBox(width: 8),
 
-          _buildFilterPickerField(context, 'Account', accountNameController, onAccountPickerTap),
+          _buildFilterPickerField(context, strings.account, accountNameController, onAccountPickerTap),
           const SizedBox(width: 8),
 
-          _buildFilterPickerField(context, 'Type', typeController, onTypePickerTap),
+          _buildFilterPickerField(context, strings.type, typeController, onTypePickerTap),
           const SizedBox(width: 8),
 
           SizedBox(
@@ -47,8 +50,8 @@ class BankTransactionFilter extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
-              child: const Text(
-                'Filter',
+              child: Text(
+                strings.filter,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ),

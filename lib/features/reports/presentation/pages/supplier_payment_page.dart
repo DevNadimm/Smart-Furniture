@@ -120,7 +120,7 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
                   };
                   return FilterBar(
                     showFilterPicker: true,
-                    filterPickerLabel: 'Select Supplier',
+                    filterPickerLabel: strings.selectSupplier,
                     filterPickerController: _supplierNameController,
                     onFilterPickerTap: () => _selectSupplierPicker(state.supplierListModel.data!.map((e) => e.supplierName ?? '').toList()),
                     onApplyFilter: _fetchData,
@@ -128,7 +128,7 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
                 } else if (state is SupplierListLoading) {
                   return FilterBar(
                     showFilterPicker: true,
-                    filterPickerLabel: 'Select Supplier',
+                    filterPickerLabel: strings.selectSupplier,
                     filterPickerController: _supplierNameController,
                     onFilterPickerTap: () {},
                     onApplyFilter: () {},
@@ -136,7 +136,7 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
                 } else if (state is SupplierListError) {
                   return FilterBar(
                     showFilterPicker: true,
-                    filterPickerLabel: 'Select Supplier',
+                    filterPickerLabel: strings.selectSupplier,
                     filterPickerController: _supplierNameController,
                     onFilterPickerTap: () {},
                     onApplyFilter: _fetchData,
