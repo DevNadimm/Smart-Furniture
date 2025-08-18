@@ -104,8 +104,6 @@ class ProfitLossCard extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      // Right: Financial Summary
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
