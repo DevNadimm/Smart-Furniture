@@ -4,6 +4,7 @@ import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/daily_reports/data/models/daily_reports_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaleCard extends StatelessWidget {
   final Sale? sale;
@@ -12,6 +13,7 @@ class SaleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context);
     final product = sale?.salesProduct?.isNotEmpty == true
         ? sale!.salesProduct!.first
         : null;
@@ -47,7 +49,7 @@ class SaleCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${sale?.invoiceNo ?? '-'}",
+                    "Invoice: ${sale?.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -60,7 +62,6 @@ class SaleCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Customer Info
                   Text(
                     sale?.customerName ?? 'Unknown Customer',
                     style: Theme.of(context).textTheme.headlineSmall,
@@ -101,15 +102,15 @@ class SaleCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Paid",
+                            strings!.paid,
                             "${CurrencyFormatter.format(int.tryParse(sale?.totalPaid ?? '0'))} Tk",
                           ),
                           _priceTag(
-                            "Due",
+                            strings.due,
                             "${CurrencyFormatter.format(int.tryParse(sale?.totalDue ?? '0'))} Tk",
                           ),
                           _priceTag(
-                            "Total",
+                            strings.total,
                             "${CurrencyFormatter.format(int.tryParse(sale?.totalAmount ?? '0'))} Tk",
                           ),
                         ],

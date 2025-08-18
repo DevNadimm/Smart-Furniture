@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class FilterBar extends StatelessWidget {
   final TextEditingController? startDateController;
   final TextEditingController? endDateController;
+  final String? startDateLabel;
+  final String? endDateLabel;
 
   /// Optional picker for filtering (e.g., supplier, customer)
   final bool showFilterPicker;
@@ -17,6 +19,8 @@ class FilterBar extends StatelessWidget {
     super.key,
     this.startDateController,
     this.endDateController,
+    this.startDateLabel = "Start Date",
+    this.endDateLabel = "End Date",
     this.showFilterPicker = false,
     this.filterPickerController,
     this.onFilterPickerTap,
@@ -31,10 +35,10 @@ class FilterBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          if (startDateController != null) _buildDateField(context, 'Start Date', startDateController!),
+          if (startDateController != null) _buildDateField(context, startDateLabel.toString(), startDateController!),
           if (startDateController != null) const SizedBox(width: 8),
 
-          if (endDateController != null) _buildDateField(context, 'End Date', endDateController!),
+          if (endDateController != null) _buildDateField(context, endDateLabel.toString(), endDateController!),
           if (endDateController != null) const SizedBox(width: 8),
 
           if (showFilterPicker) ...[

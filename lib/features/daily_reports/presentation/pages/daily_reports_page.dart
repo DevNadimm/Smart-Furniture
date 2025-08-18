@@ -81,6 +81,7 @@ class _DailyReportsPageState extends State<DailyReportsPage> {
         children: [
           FilterBar(
             startDateController: _dateController,
+            startDateLabel: "Select Date",
             onSelectDate: _selectDate,
             onApplyFilter: _fetchData,
           ),
@@ -115,31 +116,31 @@ class _DailyReportsPageState extends State<DailyReportsPage> {
                           children: [
 
                             ReportSection<Sale>(
-                              title: "Sales",
+                              title: strings.sales,
                               items: dailyReports.sales,
                               itemBuilder: (sale) => SaleCard(sale: sale),
                             ),
 
                             ReportSection<CashPayment>(
-                              title: "Cash Payments",
+                              title: strings.cashPayments,
                               items: dailyReports.cashPayments,
                               itemBuilder: (cash) => CashPaymentCard(payment: cash),
                             ),
 
                             ReportSection<SupplierPayment>(
-                              title: "Supplier Payments",
+                              title: strings.supplierPaymentsReportTitle,
                               items: dailyReports.supplierPayments,
                               itemBuilder: (supplier) => SupplierPaymentCard(payment: supplier),
                             ),
 
                             ReportSection<EmployeePayment>(
-                              title: "Employee Payments",
+                              title: strings.employeePayments,
                               items: dailyReports.employeePayments,
                               itemBuilder: (emp) => EmployeePaymentCard(employeePayment: emp),
                             ),
 
                             ReportSection<AdditionalPayment>(
-                              title: "Additional Payments",
+                              title: strings.additionalPaymentsTitle,
                               items: dailyReports.additionalPayments,
                               itemBuilder: (add) => AdditionalPaymentCard(payment: add),
                             ),

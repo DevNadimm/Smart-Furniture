@@ -77,5 +77,16 @@
   "customerPaymentReportTitle": "গ্রাহক অর্থপ্রদান",
   "customerPaymentReportSubtitle": "সমস্ত গ্রাহকের অর্থপ্রদানের বিবরণ দেখুন",
   "profitLossReportTitle": "লাভ-ক্ষতি",
-  "profitLossReportSubtitle": "লাভ ও ক্ষতির সারসংক্ষেপ দেখুন"
+  "profitLossReportSubtitle": "লাভ ও ক্ষতির সারসংক্ষেপ দেখুন",
+
+  "@@dailyReportsModule": "===== Daily Reports Module =====",
+  "cashPayment": "নগদ পেমেন্ট",
+  "employeePayment": "কর্মচারীর পেমেন্ট",
+
+  "paid": "দেওয়া হয়েছে",
+  "due": "বাকি",
+  "total": "মোট",
+  "amount": "টাকা",
+  "payment": "পেমেন্ট",
+  "deducted": "কমানো হয়েছে"
 }

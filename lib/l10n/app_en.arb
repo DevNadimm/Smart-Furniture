@@ -40,8 +40,8 @@
   "purchaseReturnSubtitle": "View returned purchases",
 
   "@@hrModule": "===== Hr Module =====",
-  "salaryPaymentTitle": "Salary Payment",
-  "salaryPaymentSubtitle": "View employee salary details",
+  "salaryPaymentsTitle": "Salary Payments",
+  "salaryPaymentsSubtitle": "View employee salary details",
   "employeeListTitle": "Employee List",
   "employeeListSubtitle": "View all employees",
 
@@ -72,10 +72,21 @@
   "additionalPaymentsSubtitle": "View all additional payments",
 
   "@@reportsModule": "===== Reports Module =====",
-  "supplierPaymentReportTitle": "Supplier Payment",
-  "supplierPaymentReportSubtitle": "View all supplier payment details",
-  "customerPaymentReportTitle": "Customer Payment",
-  "customerPaymentReportSubtitle": "View all customer payment details",
+  "supplierPaymentsReportTitle": "Supplier Payments",
+  "supplierPaymentsReportSubtitle": "View all supplier payments details",
+  "customerPaymentsReportTitle": "Customer Payments",
+  "customerPaymentsReportSubtitle": "View all customer payments details",
   "profitLossReportTitle": "Profit & Loss",
-  "profitLossReportSubtitle": "View profit and loss summary"
+  "profitLossReportSubtitle": "View profit and loss summary",
+
+  "@@dailyReportsModule": "===== Daily Reports Module =====",
+  "cashPayments" : "Cash Payments",
+  "employeePayments" : "Employee Payments",
+
+  "paid": "Paid",
+  "due": "Due",
+  "total": "Total",
+  "amount": "Amount",
+  "payment": "Payment",
+  "deducted": "Deducted"
 }

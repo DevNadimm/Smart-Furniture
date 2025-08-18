@@ -11,8 +11,8 @@ class HrModuleLocalDataSource {
 
     return [
       SubModule(
-        title: strings.salaryPaymentTitle,
-        subTitle: strings.salaryPaymentSubtitle,
+        title: strings.salaryPaymentsTitle,
+        subTitle: strings.salaryPaymentsSubtitle,
         iconPath: AppImages.salary,
         onTap: () {
           Navigator.push(context, SalaryPaymentPage.route());

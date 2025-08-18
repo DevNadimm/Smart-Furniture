@@ -12,16 +12,16 @@ class ReportsModuleLocalDataSource {
 
     return [
       SubModule(
-        title: strings.supplierPaymentReportTitle,
-        subTitle: strings.supplierPaymentReportSubtitle,
+        title: strings.supplierPaymentsReportTitle,
+        subTitle: strings.supplierPaymentsReportSubtitle,
         iconPath: AppImages.reports,
         onTap: () {
           Navigator.push(context, SupplierPaymentPage.route());
         },
       ),
       SubModule(
-        title: strings.customerPaymentReportTitle,
-        subTitle: strings.customerPaymentReportSubtitle,
+        title: strings.customerPaymentsReportTitle,
+        subTitle: strings.customerPaymentsReportSubtitle,
         iconPath: AppImages.reports,
         onTap: () {
           Navigator.push(context, CustomerPaymentPage.route());

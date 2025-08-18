@@ -45,7 +45,7 @@ class _SalaryPaymentPageState extends State<SalaryPaymentPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings!.salaryPaymentTitle),
+        title: Text(strings!.salaryPaymentsTitle),
       ),
       body: Column(
         children: [

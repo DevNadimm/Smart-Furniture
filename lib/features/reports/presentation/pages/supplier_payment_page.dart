@@ -100,7 +100,7 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.supplierPaymentReportTitle),
+        title: Text(strings.supplierPaymentsReportTitle),
         leading: IconButton(
           onPressed: () {
             _resetSupplierPayment();

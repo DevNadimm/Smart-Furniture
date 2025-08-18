@@ -119,7 +119,7 @@ class _CustomerPaymentPageState extends State<CustomerPaymentPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.customerPaymentReportTitle),
+        title: Text(strings.customerPaymentsReportTitle),
         leading: IconButton(
           onPressed: () {
             _resetCustomerPayment();
