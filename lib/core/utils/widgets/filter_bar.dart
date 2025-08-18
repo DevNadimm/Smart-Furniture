@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FilterBar extends StatelessWidget {
   final TextEditingController? startDateController;
@@ -31,6 +32,8 @@ class FilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
@@ -50,7 +53,7 @@ class FilterBar extends StatelessWidget {
                   readOnly: true,
                   style: const TextStyle(fontSize: 14),
                   decoration: InputDecoration(
-                    labelText: filterPickerLabel ?? 'Select',
+                    labelText: filterPickerLabel ?? strings.select,
                     labelStyle: Theme.of(context)
                         .inputDecorationTheme
                         .labelStyle
@@ -71,9 +74,9 @@ class FilterBar extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
-              child: const Text(
-                'Filter',
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+              child: Text(
+                strings.filter,
+                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ),
           ),
