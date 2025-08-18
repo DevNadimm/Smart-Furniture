@@ -35,6 +35,7 @@ class ErrorMessages {
   static const String fetchSupplierPaymentReportFailed = 'Failed to fetch supplier payment report. Please try again later.';
   static const String fetchCustomerPaymentReportFailed = 'Failed to fetch customer payment report. Please try again later.';
   static const String fetchProfitLossReportFailed = 'Failed to fetch profit and loss report. Please try again later.';
+  static const String fetchDailyReportsFailed = 'Failed to fetch daily reports. Please try again later.';
 
   // Validation & General Errors
   static const String selectProductBeforeFetch = 'Please select a product before fetching data.';

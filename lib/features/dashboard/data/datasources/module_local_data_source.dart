@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
+import 'package:smart_furniture/features/daily_reports/presentation/pages/daily_reports_page.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/accounts_module_page.dart';
@@ -60,7 +61,7 @@ class ModuleLocalDataSource {
         subTitle: strings.dailyReportsSubTitle,
         iconPath: AppImages.dailyReports,
         onTap: () {
-          // Navigate to Daily Report Page
+          Navigator.push(context, DailyReportsPage.route());
         },
       ),
       Module(

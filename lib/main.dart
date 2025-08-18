@@ -12,6 +12,7 @@ import 'package:smart_furniture/features/administration/presentation/blocs/custo
 import 'package:smart_furniture/features/administration/presentation/blocs/damage_list/damage_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_ledger/product_ledger_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:smart_furniture/features/daily_reports/presentation/blocs/daily_reports_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/employee_list/employee_list_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/salary_payment/salary_payment_bloc.dart';
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
@@ -55,6 +56,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => CustomerPaymentBloc()),
         BlocProvider(create: (_) => SupplierPaymentBloc()),
         BlocProvider(create: (_) => ProfitLossBloc()),
+        BlocProvider(create: (_) => DailyReportsBloc()),
       ],
       child: const MyApp(),
     ),
