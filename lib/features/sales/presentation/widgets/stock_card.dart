@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
 
 class StockCard extends StatelessWidget {
@@ -11,6 +12,11 @@ class StockCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final brand = stockData?.brand ?? "Unknown Brand";
+    final productName = stockData?.productName ?? "Unknown Product";
+    final categoryName = stockData?.categoryName ?? 'Unknown Category';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -35,14 +41,16 @@ class StockCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    stockData?.brand ?? 'Unknown Brand',
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: AppColors.primaryColor,
+                  Expanded(
+                    child: Text(
+                      brand,
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ),
                   Text(
-                    stockData?.categoryName ?? 'Unknown Category',
+                    categoryName,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -57,7 +65,7 @@ class StockCard extends StatelessWidget {
                 children: [
                   // Product Name
                   Text(
-                    stockData?.productName ?? 'Unnamed Product',
+                    productName,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -71,13 +79,13 @@ class StockCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _priceTag(
-                              "Purchase",
-                              "${CurrencyFormatter.format(int.tryParse(stockData?.purchaseRate ?? '0'))} Tk",
+                              strings.purchase,
+                              "${CurrencyFormatter.format(int.tryParse(stockData?.purchaseRate ?? '0'), context: context)} Tk",
                               AppColors.warning,
                             ),
                             _priceTag(
-                              "Sales",
-                              "${CurrencyFormatter.format(int.tryParse(stockData?.salesRate ?? '0'))} Tk",
+                              strings.sales,
+                              "${CurrencyFormatter.format(int.tryParse(stockData?.salesRate ?? '0'), context: context)} Tk",
                               AppColors.primaryColor,
                             ),
                           ],
@@ -87,8 +95,16 @@ class StockCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            _priceTag("Total Purchased", stockData?.totalPurchased, AppColors.success),
-                            _priceTag("Total Sold", stockData?.totalSold, AppColors.info),
+                            _priceTag(
+                              strings.totalPurchased,
+                              CurrencyFormatter.format(int.tryParse(stockData?.totalPurchased ?? '0'), context: context),
+                              AppColors.success,
+                            ),
+                            _priceTag(
+                              strings.totalSold,
+                              CurrencyFormatter.format(int.tryParse(stockData?.totalSold ?? '0'), context: context),
+                              AppColors.info,
+                            ),
                           ],
                         ),
                       ),
@@ -97,7 +113,7 @@ class StockCard extends StatelessWidget {
                   const SizedBox(height: 10),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   Text(
-                    "Current Stocks: ${stockData?.remainingStock ?? '0'} pcs",
+                    "${strings.currentStocks}: ${CurrencyFormatter.format(int.tryParse(stockData?.remainingStock ?? '0'), context: context)} ${strings.pcs}",
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: stockData?.remainingStock == '0'
                               ? AppColors.error

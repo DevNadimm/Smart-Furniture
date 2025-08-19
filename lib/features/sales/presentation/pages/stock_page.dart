@@ -101,7 +101,7 @@ class _StockPageState extends State<StockPage> {
             ? AppBarSearchField(
                 controller: _searchController,
                 onSubmitted: _onSearchSubmitted,
-                hintText: 'Search Stocks...',
+                hintText: strings.searchStocks,
               )
             : Text(strings.stockTitle),
         actions: [

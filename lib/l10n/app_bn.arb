@@ -110,4 +110,9 @@
   "returnAmount": "রিটার্ন পরিমাণ",
   "price": "মূল্য",
   "discount": "ছাড়",
+  "totalPurchased": "মোট ক্রয়কৃত",
+  "totalSold": "মোট বিক্রি",
+  "currentStocks": "বর্তমান স্টক",
+  "pcs": "পিস",
+  "searchStocks": "স্টক খুঁজুন..."
 }

@@ -1,19 +1,22 @@
 class StockModel {
+  final bool? success;
   final List<StockData>? data;
   final CalculateData? calculateData;
 
   StockModel({
+    this.success,
     this.data,
     this.calculateData,
   });
 
   factory StockModel.fromJson(Map<String, dynamic> json) {
     return StockModel(
+      success: json['success'] as bool?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((item) => StockData.fromJson(item))
+          ?.map((item) => StockData.fromJson(item as Map<String, dynamic>))
           .toList(),
       calculateData: json['calculateData'] != null
-          ? CalculateData.fromJson(json['calculateData'])
+          ? CalculateData.fromJson(json['calculateData'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -72,7 +75,7 @@ class StockData {
       totalPurchaseReturn: json['total_purchase_return'] as String?,
       totalSold: json['total_sold'] as String?,
       totalSaleReturn: json['total_sale_return'] as String?,
-      totalDamages: json['total_demages'] as String?, // note spelling "demages"
+      totalDamages: json['total_demages'] as String?,
       remainingStock: json['remaining_stock'] as String?,
     );
   }

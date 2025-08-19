@@ -110,4 +110,9 @@
   "returnAmount": "Return Amount",
   "price": "Price",
   "discount": "Discount",
+  "totalPurchased": "Total Purchased",
+  "totalSold": "Total Sold",
+  "currentStocks": "Current Stocks",
+  "pcs": "pcs",
+  "searchStocks": "Search Stocks..."
 }
