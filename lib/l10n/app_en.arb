@@ -104,5 +104,8 @@
   "purchasePrice": "Purchase Price",
   "invoice": "Invoice",
   "category": "Category",
-  "quantity": "Quantity"
+  "quantity": "Quantity",
+  "returnRate": "Return Rate",
+  "returnQuantity": "Return Quantity",
+  "returnAmount": "Return Amount"
 }

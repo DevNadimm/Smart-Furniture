@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_return_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PurchaseReturnCard extends StatelessWidget {
   final ReturnData? returnData;
@@ -12,6 +14,7 @@ class PurchaseReturnCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     final product = returnData?.product;
     final supplier = returnData?.supplier;
 
@@ -46,7 +49,7 @@ class PurchaseReturnCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${returnData?.invoiceNo ?? '-'}",
+                    "${strings.invoice}: ${returnData?.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -60,7 +63,7 @@ class PurchaseReturnCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    supplier?.supplierName ?? 'Unknown Supplier',
+                    "${strings.supplier}: ${LocalizationService.getText(context, en: supplier?.supplierName ?? 'N/A', bn: supplier?.supplierNameBangla ?? 'N/A')}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -74,7 +77,7 @@ class PurchaseReturnCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              product?.productName ?? 'N/A',
+                              "${strings.product}: ${LocalizationService.getText(context, en: product?.productName ?? 'N/A', bn: product?.productNameBangla ?? 'N/A')}",
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
@@ -86,18 +89,18 @@ class PurchaseReturnCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Return Rate",
-                            "${CurrencyFormatter.format(int.tryParse(returnData?.returnRate ?? '0'))} Tk",
+                            AppLocalizations.of(context)!.returnRate,
+                            "${CurrencyFormatter.format(int.tryParse(returnData?.returnRate ?? '0'), context: context)} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
-                            "Return Quantity",
-                            returnData?.returnQuantity,
+                            AppLocalizations.of(context)!.returnQuantity,
+                            CurrencyFormatter.format(int.tryParse(returnData?.returnQuantity ?? '0'), context: context),
                             AppColors.warning,
                           ),
                           _priceTag(
-                            "Return Amount",
-                            "${CurrencyFormatter.format(int.tryParse(returnData?.returnAmount ?? '0'))} Tk",
+                            AppLocalizations.of(context)!.returnAmount,
+                            "${CurrencyFormatter.format(int.tryParse(returnData?.returnAmount ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
                         ],

@@ -16,14 +16,6 @@ class PurchaseReturnModel {
           : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data?.map((item) => item.toJson()).toList(),
-      'calculateData': calculateData?.toJson(),
-    };
-  }
 }
 
 class ReturnData {
@@ -105,74 +97,37 @@ class ReturnData {
           : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'return_date': returnDate,
-      'supplier_id': supplierId,
-      'employee_id': employeeId,
-      'product_id': productId,
-      'user_id': userId,
-      'category_id': categoryId,
-      'purchase_id': purchaseId,
-      'previous_invoice_id': previousInvoiceId,
-      'previous_invoice_no': previousInvoiceNo,
-      'invoice_no': invoiceNo,
-      'return_quantity': returnQuantity,
-      'return_rate': returnRate,
-      'return_amount': returnAmount,
-      'total': total,
-      'purchase_price': purchasePrice,
-      'note': note,
-      'branch_id': branchId,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-      'product': product?.toJson(),
-      'supplier': supplier?.toJson(),
-    };
-  }
 }
 
 class Product {
   final int? id;
   final String? productName;
+  final String? productNameBangla;
 
-  Product({this.id, this.productName});
+  Product({this.id, this.productName, this.productNameBangla});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'],
       productName: json['product_name'],
+      productNameBangla: json['product_name_bangla'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'product_name': productName,
-    };
   }
 }
 
 class Supplier {
   final int? id;
   final String? supplierName;
+  final String? supplierNameBangla;
 
-  Supplier({this.id, this.supplierName});
+  Supplier({this.id, this.supplierName, this.supplierNameBangla});
 
   factory Supplier.fromJson(Map<String, dynamic> json) {
     return Supplier(
       id: json['id'],
       supplierName: json['supplier_name'],
+      supplierNameBangla: json['supplier_name_bangla'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'supplier_name': supplierName,
-    };
   }
 }
 
@@ -187,12 +142,5 @@ class CalculateData {
       returnQuantity: json['return_quantity'],
       returnAmount: json['return_amount'],
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'return_quantity': returnQuantity,
-      'return_amount': returnAmount,
-    };
   }
 }
