@@ -42,6 +42,7 @@ class PurchaseRecordData {
   final String? branchId;
   final String? createdAt;
   final String? updatedAt;
+  final Product? product;
   final Supplier? supplier;
   final Category? category;
 
@@ -70,6 +71,7 @@ class PurchaseRecordData {
     this.branchId,
     this.createdAt,
     this.updatedAt,
+    this.product,
     this.supplier,
     this.category,
   });
@@ -100,6 +102,9 @@ class PurchaseRecordData {
       branchId: json['branch_id'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
+      product: json['product'] != null
+          ? Product.fromJson(json['product'] as Map<String, dynamic>)
+          : null,
       supplier: json['supplier'] != null
           ? Supplier.fromJson(json['supplier'] as Map<String, dynamic>)
           : null,
@@ -110,19 +115,42 @@ class PurchaseRecordData {
   }
 }
 
+class Product {
+  final int? id;
+  final String? productName;
+  final String? productNameBangla;
+
+  Product({
+    this.id,
+    this.productName,
+    this.productNameBangla,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'] as int?,
+      productName: json['product_name'] as String?,
+      productNameBangla: json['product_name_bangla'] as String?,
+    );
+  }
+}
+
 class Supplier {
   final int? id;
   final String? supplierName;
+  final String? supplierNameBangla;
 
   Supplier({
     this.id,
     this.supplierName,
+    this.supplierNameBangla,
   });
 
   factory Supplier.fromJson(Map<String, dynamic> json) {
     return Supplier(
       id: json['id'] as int?,
       supplierName: json['supplier_name'] as String?,
+      supplierNameBangla: json['supplier_name_bangla'] as String?,
     );
   }
 }
@@ -130,16 +158,19 @@ class Supplier {
 class Category {
   final int? id;
   final String? name;
+  final String? nameBangla;
 
   Category({
     this.id,
     this.name,
+    this.nameBangla,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
       id: json['id'] as int?,
       name: json['name'] as String?,
+      nameBangla: json['name_bangla'] as String?,
     );
   }
 }

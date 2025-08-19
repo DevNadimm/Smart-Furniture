@@ -100,5 +100,6 @@
   "type": "Type",
   "product": "Product",
   "selectProduct": "Select Product",
-  "selectSupplier": "Select Supplier"
+  "selectSupplier": "Select Supplier",
+  "purchasePrice": "Purchase Price"
 }

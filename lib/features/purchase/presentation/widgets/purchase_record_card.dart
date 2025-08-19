@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_record_model.dart';
 
 class PurchaseRecordCard extends StatelessWidget {
@@ -12,6 +14,7 @@ class PurchaseRecordCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -77,7 +80,7 @@ class PurchaseRecordCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              purchaseRecord?.productName ?? 'N/A',
+                              "${strings.product}: ${LocalizationService.getText(context, en: purchaseRecord?.product?.productName ?? "N/A", bn: purchaseRecord?.product?.productNameBangla ?? "N/A")}",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium
@@ -97,18 +100,18 @@ class PurchaseRecordCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Purchase Price",
-                            "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.purchasePrice ?? '0'))} Tk",
+                            strings.purchasePrice,
+                            "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.purchasePrice ?? '0'), context: context)} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
                             "Quantity",
-                            purchaseRecord?.quantity,
+                            CurrencyFormatter.format(int.tryParse(purchaseRecord?.quantity ?? '0'), context: context),
                             AppColors.warning,
                           ),
                           _priceTag(
                             "Total",
-                            "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.total ?? '0'))} Tk",
+                            "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.total ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
                         ],
