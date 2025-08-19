@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_return_model.dart';
 
 class SalesReturnCard extends StatelessWidget {
@@ -12,6 +14,12 @@ class SalesReturnCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final customerName = salesReturn?.customer?.customerName ?? 'N/A';
+    final customerNameBn = salesReturn?.customer?.customerNameBangla ?? 'N/A';
+    final productName = salesReturn?.product?.productName ?? 'N/A';
+    final productNameBn = salesReturn?.product?.productNameBangla ?? 'N/A';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -43,7 +51,7 @@ class SalesReturnCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${salesReturn?.invoiceNo ?? '-'}",
+                    "${strings.invoice}: ${salesReturn?.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -57,7 +65,7 @@ class SalesReturnCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    salesReturn?.customer?.customerName ?? 'Unknown Customer',
+                    "${strings.customer}: ${LocalizationService.getText(context, en: customerName, bn: customerNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -71,7 +79,7 @@ class SalesReturnCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              salesReturn?.product?.productName ?? 'N/A',
+                              "${strings.product}: ${LocalizationService.getText(context, en: productName, bn: productNameBn)}",
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600,),
                             ),
                           ],
@@ -81,18 +89,18 @@ class SalesReturnCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Rate",
-                            "${CurrencyFormatter.format(int.tryParse(salesReturn?.returnRate ?? '0'))} Tk",
+                            strings.price,
+                            "${CurrencyFormatter.format(int.tryParse(salesReturn?.returnRate ?? '0'), context: context)} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
-                            "Quantity",
-                            salesReturn?.returnQuantity,
+                            strings.quantity,
+                            CurrencyFormatter.format(int.tryParse(salesReturn?.returnQuantity ?? '0'), context: context),
                             AppColors.warning,
                           ),
                           _priceTag(
-                            "Amount",
-                            "${CurrencyFormatter.format(int.tryParse(salesReturn?.returnAmount ?? '0'))} Tk",
+                            strings.amount,
+                            "${CurrencyFormatter.format(int.tryParse(salesReturn?.returnAmount ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
                         ],

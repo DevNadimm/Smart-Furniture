@@ -3,11 +3,7 @@ class SalesReturnModel {
   final List<SalesReturnData>? data;
   final CalculateData? calculateData;
 
-  SalesReturnModel({
-    this.success,
-    this.data,
-    this.calculateData,
-  });
+  SalesReturnModel({this.success, this.data, this.calculateData});
 
   factory SalesReturnModel.fromJson(Map<String, dynamic> json) {
     return SalesReturnModel(
@@ -16,7 +12,8 @@ class SalesReturnModel {
           ?.map((e) => SalesReturnData.fromJson(e as Map<String, dynamic>))
           .toList(),
       calculateData: json['calculateData'] != null
-          ? CalculateData.fromJson(json['calculateData'] as Map<String, dynamic>)
+          ? CalculateData.fromJson(
+          json['calculateData'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -106,16 +103,15 @@ class SalesReturnData {
 class Customer {
   final int? id;
   final String? customerName;
+  final String? customerNameBangla;
 
-  Customer({
-    this.id,
-    this.customerName,
-  });
+  Customer({this.id, this.customerName, this.customerNameBangla});
 
   factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(
       id: json['id'] as int?,
       customerName: json['customer_name'] as String?,
+      customerNameBangla: json['customer_name_bangla'] as String?,
     );
   }
 }
@@ -123,16 +119,15 @@ class Customer {
 class Product {
   final int? id;
   final String? productName;
+  final String? productNameBangla;
 
-  Product({
-    this.id,
-    this.productName,
-  });
+  Product({this.id, this.productName, this.productNameBangla});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'] as int?,
       productName: json['product_name'] as String?,
+      productNameBangla: json['product_name_bangla'] as String?,
     );
   }
 }
@@ -141,10 +136,7 @@ class CalculateData {
   final int? returnQuantity;
   final int? returnAmount;
 
-  CalculateData({
-    this.returnQuantity,
-    this.returnAmount,
-  });
+  CalculateData({this.returnQuantity, this.returnAmount});
 
   factory CalculateData.fromJson(Map<String, dynamic> json) {
     return CalculateData(
