@@ -37,7 +37,7 @@ class EmployeePaymentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(employeePayment?.date ?? ""),
+                    DateFormatters.readableDate(context, employeePayment?.date ?? ""),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

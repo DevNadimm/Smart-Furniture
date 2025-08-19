@@ -37,7 +37,7 @@ class DamageCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(damageData?.date).toString(),
+                    DateFormatters.readableDate(context, damageData?.date).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

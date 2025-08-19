@@ -41,6 +41,7 @@ class PurchaseRecordCard extends StatelessWidget {
                 children: [
                   Text(
                     DateFormatters.readableDate(
+                      context,
                       purchaseRecord?.purchaseDate ?? '',
                     ),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -48,7 +49,7 @@ class PurchaseRecordCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${purchaseRecord?.invoiceNo ?? '-'}",
+                    "${strings.invoice}: ${purchaseRecord?.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),

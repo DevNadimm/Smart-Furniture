@@ -40,7 +40,7 @@ class PurchaseReturnCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(returnData?.returnDate ?? '').toString(),
+                    DateFormatters.readableDate(context, returnData?.returnDate ?? '').toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

@@ -45,7 +45,7 @@ class ProfitLossCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(data.invoiceDate ?? ""),
+                    DateFormatters.readableDate(context, data.invoiceDate ?? ""),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

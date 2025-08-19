@@ -101,5 +101,6 @@
   "product": "পণ্য",
   "selectProduct": "পণ্য নির্বাচন করুন",
   "selectSupplier": "সাপ্লায়ার নির্বাচন করুন",
-  "purchasePrice": "ক্রয়মূল্য"
+  "purchasePrice": "ক্রয়মূল্য",
+  "invoice": "চালান"
 }

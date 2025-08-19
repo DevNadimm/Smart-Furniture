@@ -37,7 +37,7 @@ class ProductLedgerCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(ledgerData?.date ?? '').toString(),
+                    DateFormatters.readableDate(context, ledgerData?.date ?? '').toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

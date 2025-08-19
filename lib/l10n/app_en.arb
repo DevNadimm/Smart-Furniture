@@ -101,5 +101,6 @@
   "product": "Product",
   "selectProduct": "Select Product",
   "selectSupplier": "Select Supplier",
-  "purchasePrice": "Purchase Price"
+  "purchasePrice": "Purchase Price",
+  "invoice": "Invoice"
 }

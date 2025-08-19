@@ -42,7 +42,7 @@ class SupplierPaymentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(invoice?.invoiceDate ?? ''),
+                    DateFormatters.readableDate(context, invoice?.invoiceDate ?? ''),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

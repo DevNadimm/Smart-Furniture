@@ -38,6 +38,7 @@ class PendingChequeCard extends StatelessWidget {
                 children: [
                   Text(
                     DateFormatters.readableDate(
+                      context,
                       chequeData?.chequeDate.toString(),
                     ).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -74,11 +75,11 @@ class PendingChequeCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    "Issue Date: ${DateFormatters.readableDate(chequeData?.date)}",
+                    "Issue Date: ${DateFormatters.readableDate(context, chequeData?.date)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
-                    "Submit Date: ${DateFormatters.readableDate(chequeData?.submitDate)}",
+                    "Submit Date: ${DateFormatters.readableDate(context, chequeData?.submitDate)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   if (chequeData?.description?.isNotEmpty == true) ...[

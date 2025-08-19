@@ -37,7 +37,7 @@ class BankTransactionCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(transaction?.transactionDate ?? ''),
+                    DateFormatters.readableDate(context, transaction?.transactionDate ?? ''),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

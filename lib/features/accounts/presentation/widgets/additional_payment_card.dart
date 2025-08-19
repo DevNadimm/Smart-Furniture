@@ -35,7 +35,7 @@ class AdditionalPaymentCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withOpacity(0.1),
               child: Text(
-                DateFormatters.readableDate(payment?.date ?? ''),
+                DateFormatters.readableDate(context, payment?.date ?? ''),
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   color: AppColors.primaryColor,
                 ),

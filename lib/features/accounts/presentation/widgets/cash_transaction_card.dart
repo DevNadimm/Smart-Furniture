@@ -42,7 +42,7 @@ class CashTransactionCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(transaction?.date ?? '').toString(),
+                    DateFormatters.readableDate(context, transaction?.date ?? '').toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

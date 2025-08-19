@@ -38,6 +38,7 @@ class ReminderChequeCard extends StatelessWidget {
                 children: [
                   Text(
                     DateFormatters.readableDate(
+                      context,
                       chequeData?.chequeDate.toString(),
                     ).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -74,15 +75,15 @@ class ReminderChequeCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Issue Date: ${DateFormatters.readableDate(chequeData?.date)}",
+                    "Issue Date: ${DateFormatters.readableDate(context, chequeData?.date)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
-                    "Reminder Date: ${DateFormatters.readableDate(chequeData?.reminderDate)}",
+                    "Reminder Date: ${DateFormatters.readableDate(context, chequeData?.reminderDate)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
-                    "Submit Date: ${DateFormatters.readableDate(chequeData?.submitDate)}",
+                    "Submit Date: ${DateFormatters.readableDate(context, chequeData?.submitDate)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   if (chequeData?.description?.isNotEmpty == true) ...[

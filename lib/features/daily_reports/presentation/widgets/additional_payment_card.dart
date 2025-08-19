@@ -38,7 +38,7 @@ class AdditionalPaymentCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      DateFormatters.readableDate(payment?.date ?? '').toString(),
+                      DateFormatters.readableDate(context, payment?.date ?? '').toString(),
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: AppColors.primaryColor,
                       ),

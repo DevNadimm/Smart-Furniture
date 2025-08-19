@@ -37,7 +37,7 @@ class SalesReturnCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormatters.readableDate(salesReturn?.returnDate).toString(),
+                    DateFormatters.readableDate(context, salesReturn?.returnDate).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),

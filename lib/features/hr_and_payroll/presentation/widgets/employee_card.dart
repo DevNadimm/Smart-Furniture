@@ -68,7 +68,7 @@ class EmployeeCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _infoRow("Join Date", DateFormatters.readableDate(employee?.joinDate ?? '')),
+                      _infoRow("Join Date", DateFormatters.readableDate(context, employee?.joinDate ?? '')),
                       _infoRow("Salary", "${CurrencyFormatter.format(int.tryParse(employee?.salaryRange ?? '0'))} Tk"),
                       _infoRow("Status", "${employee?.activationStatus?[0].toUpperCase()}${employee?.activationStatus?.substring(1)}"),
                       _infoRow("Contact", employee?.contact),

@@ -38,6 +38,7 @@ class SupplierPaymentCard extends StatelessWidget {
                 children: [
                   Text(
                     DateFormatters.readableDate(
+                      context,
                       payment?.date.toString(),
                     ).toString(),
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
