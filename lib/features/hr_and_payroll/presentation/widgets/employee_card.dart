@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/hr_and_payroll/data/models/employee_list_model.dart';
 
 class EmployeeCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class EmployeeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -68,11 +70,11 @@ class EmployeeCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _infoRow("Join Date", DateFormatters.readableDate(context, employee?.joinDate ?? '')),
-                      _infoRow("Salary", "${CurrencyFormatter.format(int.tryParse(employee?.salaryRange ?? '0'))} Tk"),
-                      _infoRow("Status", "${employee?.activationStatus?[0].toUpperCase()}${employee?.activationStatus?.substring(1)}"),
-                      _infoRow("Contact", employee?.contact),
-                      _infoRow("Email", employee?.email),
+                      _infoRow(strings.joinDate, DateFormatters.readableDate(context, employee?.joinDate ?? '')),
+                      _infoRow(strings.salary, "${CurrencyFormatter.format(int.tryParse(employee?.salaryRange ?? '0'), context: context)} Tk"),
+                      _infoRow(strings.status, "${employee?.activationStatus?[0].toUpperCase()}${employee?.activationStatus?.substring(1)}"),
+                      _infoRow(strings.contact, employee?.contact),
+                      _infoRow(strings.email, employee?.email),
                     ],
                   ),
                 ],

@@ -114,5 +114,11 @@
   "totalSold": "মোট বিক্রি",
   "currentStocks": "বর্তমান স্টক",
   "pcs": "পিস",
-  "searchStocks": "স্টক খুঁজুন..."
+  "searchStocks": "স্টক খুঁজুন...",
+  "deduction": "কাটা হয়েছে",
+  "joinDate": "যোগদানের তারিখ",
+  "salary": "বেতন",
+  "status": "অবস্থা",
+  "contact": "যোগাযোগ",
+  "email": "ইমেইল"
 }

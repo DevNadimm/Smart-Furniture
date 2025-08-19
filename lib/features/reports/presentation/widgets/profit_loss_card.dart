@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/reports/data/models/profit_loss_model.dart';
 
@@ -15,6 +16,7 @@ class ProfitLossCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     final SaleProduct? product =
     data.saleProduct != null && data.saleProduct!.isNotEmpty
         ? data.saleProduct!.first
@@ -51,7 +53,7 @@ class ProfitLossCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${data.invoiceNo ?? '-'}",
+                    "${strings.invoice}: ${data.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -73,7 +75,7 @@ class ProfitLossCard extends StatelessWidget {
                           ?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      "Quantity: ${product.quantity ?? '0'} • Sale: ${CurrencyFormatter.format(int.tryParse(product.salePrice ?? '0') ?? 0)} Tk",
+                      "${strings.quantity}: ${CurrencyFormatter.format(int.tryParse(product.quantity ?? '0') ?? 0, context: context)} • ${strings.sales}: ${CurrencyFormatter.format(int.tryParse(product.salePrice ?? '0') ?? 0, context: context)} Tk",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.lightFontColor,
                       ),
@@ -108,18 +110,18 @@ class ProfitLossCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Total",
-                            "${CurrencyFormatter.format(int.tryParse(data.totalAmount ?? '0') ?? 0)} Tk",
+                            strings.total,
+                            "${CurrencyFormatter.format(int.tryParse(data.totalAmount ?? '0') ?? 0, context: context)} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
-                            "Paid",
-                            "${CurrencyFormatter.format(int.tryParse(data.totalPaid ?? '0') ?? 0)} Tk",
+                            strings.paid,
+                            "${CurrencyFormatter.format(int.tryParse(data.totalPaid ?? '0') ?? 0, context: context)} Tk",
                             AppColors.success,
                           ),
                           _priceTag(
-                            "Due",
-                            "${CurrencyFormatter.format(int.tryParse(data.totalDue ?? '0') ?? 0)} Tk",
+                            strings.due,
+                            "${CurrencyFormatter.format(int.tryParse(data.totalDue ?? '0') ?? 0, context: context)} Tk",
                             AppColors.warning,
                           ),
                         ],

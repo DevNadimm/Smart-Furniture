@@ -114,5 +114,11 @@
   "totalSold": "Total Sold",
   "currentStocks": "Current Stocks",
   "pcs": "pcs",
-  "searchStocks": "Search Stocks..."
+  "searchStocks": "Search Stocks...",
+  "deduction": "Deduction",
+  "joinDate": "Join Date",
+  "salary": "Salary",
+  "status": "Status",
+  "contact": "Contact",
+  "email": "Email"
 }

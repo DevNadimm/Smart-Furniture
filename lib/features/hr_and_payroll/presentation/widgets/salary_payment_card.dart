@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/hr_and_payroll/data/models/salary_payment_model.dart';
 
 class SalaryPaymentCard extends StatelessWidget {
@@ -12,6 +13,8 @@ class SalaryPaymentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final employeeName = salaryPaymentData?.name ?? "Unknown Employee";
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -43,7 +46,7 @@ class SalaryPaymentCard extends StatelessWidget {
                         ),
                   ),
                   Text(
-                    salaryPaymentData?.month ?? "-",
+                    salaryPaymentData?.month ?? "N/A",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: AppColors.primaryColor,
                         ),
@@ -57,7 +60,7 @@ class SalaryPaymentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    salaryPaymentData?.name ?? "Unknown Employee",
+                    employeeName,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   if (salaryPaymentData?.employee?.empId != null)
@@ -74,13 +77,13 @@ class SalaryPaymentCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _priceTag(
-                        "Payment",
-                        "${CurrencyFormatter.format(int.tryParse(salaryPaymentData?.paymentAmount ?? '0'))} Tk",
+                        strings.payment,
+                        "${CurrencyFormatter.format(int.tryParse(salaryPaymentData?.paymentAmount ?? '0'), context: context)} Tk",
                         AppColors.success,
                       ),
                       _priceTag(
-                        "Deduction",
-                        "${CurrencyFormatter.format(int.tryParse(salaryPaymentData?.deductedAmount ?? '0'))} Tk",
+                        strings.deduction,
+                        "${CurrencyFormatter.format(int.tryParse(salaryPaymentData?.deductedAmount ?? '0'), context: context)} Tk",
                         AppColors.warning,
                       ),
                     ],
