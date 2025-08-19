@@ -5,7 +5,7 @@ import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
 
 class SalesRecordRepository {
-  static Future<List<SalesRecordModel>?> fetchData(String shop, String? fromDate, String? toDate) async {
+  static Future<SalesRecordModel?> fetchData(String shop, String? fromDate, String? toDate) async {
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.salesRecord;
 
@@ -22,11 +22,7 @@ class SalesRecordRepository {
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonMap = jsonDecode(res.body);
-
-        if (jsonMap["data"] != null && jsonMap["data"] is List) {
-          final List<dynamic> dataList = jsonMap["data"];
-          return dataList.map((item) => SalesRecordModel.fromJson(item)).toList();
-        }
+        return SalesRecordModel.fromJson(jsonMap);
       } else {
         throw Exception(ErrorMessages.fetchSalesRecordFailed);
       }

@@ -107,5 +107,7 @@
   "quantity": "পরিমাণ",
   "returnRate": "রিটার্ন রেট",
   "returnQuantity": "রিটার্ন সংখ্যা",
-  "returnAmount": "রিটার্ন পরিমাণ"
+  "returnAmount": "রিটার্ন পরিমাণ",
+  "price": "মূল্য",
+  "discount": "ছাড়"
 }

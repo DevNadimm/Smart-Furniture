@@ -107,5 +107,7 @@
   "quantity": "Quantity",
   "returnRate": "Return Rate",
   "returnQuantity": "Return Quantity",
-  "returnAmount": "Return Amount"
+  "returnAmount": "Return Amount",
+  "price": "Price",
+  "discount": "Discount"
 }

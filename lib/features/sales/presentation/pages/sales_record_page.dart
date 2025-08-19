@@ -103,7 +103,7 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
                       );
                     }
                     if (state is SalesRecordLoaded) {
-                      if (state.salesRecord!.isEmpty) {
+                      if (state.salesRecord!.data!.isEmpty) {
                         return const EmptyStateWidget(
                           title: 'No Sales Records Found',
                           message: 'We couldn’t find any sales records for the selected date range. Try adjusting your filters or selecting a different time period.',
@@ -112,9 +112,9 @@ class _SalesRecordPageState extends State<SalesRecordPage> {
                         return ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.salesRecord?.length ?? 0,
+                          itemCount: state.salesRecord?.data?.length ?? 0,
                           itemBuilder: (context, index) {
-                            final record = state.salesRecord?[index];
+                            final record = state.salesRecord?.data?[index];
                             return SalesRecordCard(salesRecord: record);
                           },
                         );

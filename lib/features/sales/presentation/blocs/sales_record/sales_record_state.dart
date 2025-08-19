@@ -7,7 +7,7 @@ class SalesRecordInitial extends SalesRecordState {}
 class SalesRecordLoading extends SalesRecordState {}
 
 class SalesRecordLoaded extends SalesRecordState {
-  final List<SalesRecordModel>? salesRecord;
+  final SalesRecordModel? salesRecord;
 
   SalesRecordLoaded(this.salesRecord);
 }
