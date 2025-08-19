@@ -102,5 +102,7 @@
   "selectProduct": "Select Product",
   "selectSupplier": "Select Supplier",
   "purchasePrice": "Purchase Price",
-  "invoice": "Invoice"
+  "invoice": "Invoice",
+  "category": "Category",
+  "quantity": "Quantity"
 }

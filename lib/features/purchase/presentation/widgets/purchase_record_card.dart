@@ -63,9 +63,9 @@ class PurchaseRecordCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    purchaseRecord?.supplier?.supplierName != null
-                        ? "Supplier: ${purchaseRecord?.supplier?.supplierName}"
-                        : 'Unknown Supplier',
+                    purchaseRecord?.supplier != null
+                        ? "${strings.supplier}: ${LocalizationService.getText(context, en: purchaseRecord?.supplier?.supplierName ?? 'N/A', bn: purchaseRecord?.supplier?.supplierNameBangla ?? 'N/A')}"
+                        : "${strings.supplier}: N/A",
                     style: Theme.of(context).textTheme.headlineSmall,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -88,7 +88,7 @@ class PurchaseRecordCard extends StatelessWidget {
                                   ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                             Text(
-                              "Category: ${purchaseRecord?.category?.name ?? 'N/A'}",
+                              "${strings.category}: ${LocalizationService.getText(context, en: purchaseRecord?.category?.name ?? 'N/A', bn: purchaseRecord?.category?.nameBangla ?? 'N/A')}",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
@@ -106,12 +106,12 @@ class PurchaseRecordCard extends StatelessWidget {
                             AppColors.primaryColor,
                           ),
                           _priceTag(
-                            "Quantity",
+                            strings.quantity,
                             CurrencyFormatter.format(int.tryParse(purchaseRecord?.quantity ?? '0'), context: context),
                             AppColors.warning,
                           ),
                           _priceTag(
-                            "Total",
+                            strings.total,
                             "${CurrencyFormatter.format(int.tryParse(purchaseRecord?.total ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
