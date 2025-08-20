@@ -25,7 +25,7 @@ class SupplierData {
       json['supplier'] != null ? Supplier.fromJson(json['supplier']) : null,
       summary:
       json['summary'] != null ? Summary.fromJson(json['summary']) : null,
-      invoices: (json['invoices'] as List<dynamic>?)
+      invoices: (json['invoices'] as List?)
           ?.map((e) => Invoice.fromJson(e))
           .toList(),
     );
@@ -251,7 +251,7 @@ class Invoice {
       cash: json['cash']?.toString(),
       mobileBankingType: json['mobile_banking_type'] as String?,
       mobileBankingAmount: json['mobile_banking_amount']?.toString(),
-      mobileBankingTrxId: json['mobile_banking_trx_id`']?.toString(),
+      mobileBankingTrxId: json['mobile_banking_trx_id']?.toString(),
       cardAmount: json['card_amount']?.toString(),
       cardTrx: json['card_trx']?.toString(),
       chequeAmount: json['cheque_amount']?.toString(),
@@ -266,12 +266,10 @@ class Invoice {
       note: json['note'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      supplier: json['supplier'] != null
-          ? Supplier.fromJson(json['supplier'])
-          : null,
-      purchase: json['purchase'] != null
-          ? Purchase.fromJson(json['purchase'])
-          : null,
+      supplier:
+      json['supplier'] != null ? Supplier.fromJson(json['supplier']) : null,
+      purchase:
+      json['purchase'] != null ? Purchase.fromJson(json['purchase']) : null,
     );
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/reports/data/models/supplier_payment_model.dart';
 
 class SupplierPaymentCard extends StatelessWidget {
@@ -17,6 +19,10 @@ class SupplierPaymentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final supplierName = supplier?.supplierName ?? 'N/A';
+    final supplierNameBn = supplier?.supplierNameBangla ?? 'N/A';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -48,7 +54,7 @@ class SupplierPaymentCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${invoice?.invoiceNo ?? '-'}",
+                    "${strings.invoice}: ${invoice?.invoiceNo ?? '-'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -62,7 +68,7 @@ class SupplierPaymentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    supplier?.supplierName ?? 'Unknown Supplier',
+                    "${strings.supplier}: ${LocalizationService.getText(context, en: supplierName, bn: supplierNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -85,7 +91,7 @@ class SupplierPaymentCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              invoice?.type?.toUpperCase() ?? "N/A",
+                              "${strings.type}: ${invoice?.type?.toUpperCase() ?? "N/A"}",
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
@@ -103,18 +109,18 @@ class SupplierPaymentCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Total",
-                            "${CurrencyFormatter.format(int.tryParse(invoice?.totalAmount ?? '0'))} Tk",
+                            strings.total,
+                            "${CurrencyFormatter.format(int.tryParse(invoice?.totalAmount ?? '0'), context: context)} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
-                            "Paid",
-                            "${CurrencyFormatter.format(int.tryParse(invoice?.totalPaid ?? '0'))} Tk",
+                            strings.paid,
+                            "${CurrencyFormatter.format(int.tryParse(invoice?.totalPaid ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
                           _priceTag(
-                            "Due",
-                            "${CurrencyFormatter.format(int.tryParse(invoice?.totalDue ?? '0'))} Tk",
+                            strings.due,
+                            "${CurrencyFormatter.format(int.tryParse(invoice?.totalDue ?? '0'), context: context)} Tk",
                             AppColors.warning,
                           ),
                         ],

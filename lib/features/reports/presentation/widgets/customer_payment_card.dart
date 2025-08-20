@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/reports/data/models/customer_payment_model.dart';
 
 class CustomerPaymentCard extends StatelessWidget {
@@ -14,8 +16,13 @@ class CustomerPaymentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     final customer = customerPayment.customer;
     final summary = customerPayment.summary;
+
+    final customerName = customer?.customerName ?? 'N/A';
+    final customerNameBn = customer?.customerNameBangla ?? 'N/A';
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -40,15 +47,13 @@ class CustomerPaymentCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withOpacity(0.1),
               child: Text(
-                customer?.customerName ?? 'Unknown Customer',
+                "${strings.customer}: ${LocalizationService.getText(context, en: customerName, bn: customerNameBn)}",
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-
-            // Body: Payment Summary
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -56,7 +61,7 @@ class CustomerPaymentCard extends StatelessWidget {
                 children: [
                   if (customer?.mobile != null) ...[
                     Text(
-                      "Mobile: ${customer!.mobile}",
+                      "${strings.mobile}: ${customer!.mobile}",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.lightFontColor,
                       ),
@@ -66,7 +71,7 @@ class CustomerPaymentCard extends StatelessWidget {
 
                   if (customer?.address != null) ...[
                     Text(
-                      "Address: ${customer!.address}",
+                      "${strings.address}: ${customer!.address}",
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.lightFontColor,
                       ),
@@ -80,40 +85,37 @@ class CustomerPaymentCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Left side: Previous Due & Credit Limit
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           _priceTag(
-                            "Previous Due",
-                            "${CurrencyFormatter.format(int.tryParse(customer?.previousDue ?? '0') ?? 0)} Tk",
+                            strings.previousDue,
+                            "${CurrencyFormatter.format(int.tryParse(customer?.previousDue ?? '0') ?? 0, context: context)} Tk",
                             AppColors.warning,
                           ),
                           _priceTag(
-                            "Credit Limit",
-                            "${CurrencyFormatter.format(int.tryParse(customer?.creditLimit ?? '0') ?? 0)} Tk",
+                            strings.creditLimit,
+                            "${CurrencyFormatter.format(int.tryParse(customer?.creditLimit ?? '0') ?? 0, context: context)} Tk",
                             AppColors.success,
                           ),
                         ],
                       ),
-
-                      // Right side: Summary (Total, Paid, Due)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Total",
-                            "${CurrencyFormatter.format(summary?.totalAmount ?? 0)} Tk",
+                            strings.total,
+                            "${CurrencyFormatter.format(summary?.totalAmount ?? 0, context: context)} Tk",
                             AppColors.primaryColor,
                           ),
                           _priceTag(
-                            "Paid",
-                            "${CurrencyFormatter.format(summary?.totalPaid ?? 0)} Tk",
+                            strings.paid,
+                            "${CurrencyFormatter.format(summary?.totalPaid ?? 0, context: context)} Tk",
                             AppColors.success,
                           ),
                           _priceTag(
-                            "Due",
-                            "${CurrencyFormatter.format(summary?.totalDue ?? 0)} Tk",
+                            strings.due,
+                            "${CurrencyFormatter.format(summary?.totalDue ?? 0, context: context)} Tk",
                             AppColors.warning,
                           ),
                         ],

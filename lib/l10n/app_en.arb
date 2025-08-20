@@ -126,5 +126,9 @@
   "contact": "Contact",
   "email": "Email",
   "txn": "Txn",
-  "received": "Received"
+  "received": "Received",
+  "mobile": "Mobile",
+  "address": "Address",
+  "previousDue": "Previous Due",
+  "creditLimit": "Credit Limit"
 }
