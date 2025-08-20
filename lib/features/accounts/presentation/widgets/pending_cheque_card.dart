@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/accounts/data/models/pending_cheque_list_model.dart';
 
 class PendingChequeCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class PendingChequeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -55,12 +57,12 @@ class PendingChequeCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    chequeData?.bankName ?? 'Unknown Bank',
+                    "${strings.bank}: ${chequeData?.bankName ?? 'N/A'}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "Cheque No: ${chequeData?.chequeNumber ?? 'N/A'}",
+                    "${strings.chequeNo}: ${chequeData?.chequeNumber ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.lightFontColor,
                     ),
@@ -69,17 +71,17 @@ class PendingChequeCard extends StatelessWidget {
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
                   _priceTag(
-                    "Amount",
-                    "${CurrencyFormatter.format(int.tryParse(chequeData?.chequeAmount ?? '0'))} Tk",
+                    strings.amount,
+                    "${CurrencyFormatter.format(int.tryParse(chequeData?.chequeAmount ?? '0'), context: context)} Tk",
                     AppColors.primaryColor,
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    "Issue Date: ${DateFormatters.readableDate(context, chequeData?.date)}",
+                    "${strings.issueDate}: ${DateFormatters.readableDate(context, chequeData?.date)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Text(
-                    "Submit Date: ${DateFormatters.readableDate(context, chequeData?.submitDate)}",
+                    "${strings.submitDate}: ${DateFormatters.readableDate(context, chequeData?.submitDate)}",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   if (chequeData?.description?.isNotEmpty == true) ...[

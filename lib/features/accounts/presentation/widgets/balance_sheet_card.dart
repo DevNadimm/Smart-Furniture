@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/accounts/data/models/balance_sheet_model.dart';
 
 class BalanceSheetCard extends StatelessWidget {
@@ -33,7 +34,7 @@ class BalanceSheetCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withOpacity(0.1),
               child: Text(
-                "Balance Sheet Summary",
+                AppLocalizations.of(context)!.balanceSheetSummary,
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   color: AppColors.primaryColor,
                   fontWeight: FontWeight.w600,
@@ -44,27 +45,21 @@ class BalanceSheetCard extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  _buildRow(context, "Total Sales", balanceData?.totalSales, AppColors.success),
-                  _buildRow(context, "Total Purchase", balanceData?.totalPurchase, AppColors.warning),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Cash Received", balanceData?.cashReceived, AppColors.success),
-                  _buildRow(context, "Cash Paid", balanceData?.cashPaid, AppColors.warning),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Bank Deposit", balanceData?.bankDeposit, AppColors.success),
-                  _buildRow(context, "Bank Withdraw", balanceData?.bankWithdraw, AppColors.warning),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Supplier Payment Paid", balanceData?.supplierPaymentPaid, AppColors.warning),
-                  _buildRow(context, "Supplier Payment Receive", balanceData?.supplierPaymentReceive, AppColors.success),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Customer Payment Paid", balanceData?.customerPaymentPaid, AppColors.warning),
-                  _buildRow(context, "Customer Payment Receive", balanceData?.customerPaymentReceive, AppColors.success),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Employee Payment", balanceData?.employeePayment, AppColors.warning),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Cash In", balanceData?.cashIn, AppColors.success),
-                  _buildRow(context, "Cash Out", balanceData?.cashOut, AppColors.warning),
-                  const Divider(color: AppColors.borderColor, thickness: 1),
-                  _buildRow(context, "Cash Balance", balanceData?.cashBalance, AppColors.primaryColor),
+                  _buildRow(context, AppLocalizations.of(context)!.totalSales, balanceData?.totalSales, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.totalPurchase, balanceData?.totalPurchase, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.cashReceived, balanceData?.cashReceived, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.cashPaid, balanceData?.cashPaid, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.bankDeposit, balanceData?.bankDeposit, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.bankWithdraw, balanceData?.bankWithdraw, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.supplierPaymentPaid, balanceData?.supplierPaymentPaid, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.supplierPaymentReceive, balanceData?.supplierPaymentReceive, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.customerPaymentPaid, balanceData?.customerPaymentPaid, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.customerPaymentReceive, balanceData?.customerPaymentReceive, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.employeePayment, balanceData?.employeePayment, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.cashIn, balanceData?.cashIn, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.cashOut, balanceData?.cashOut, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.cashBalance, balanceData?.cashBalance, AppColors.primaryColor),
+
                 ],
               ),
             ),
@@ -95,7 +90,7 @@ class BalanceSheetCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              value != null ? "${CurrencyFormatter.format(value)} Tk" : '0.00 Tk',
+              value != null ? "${CurrencyFormatter.format(value, context: context)} Tk" : '0.00 Tk',
               style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                   fontWeight: FontWeight.w600,

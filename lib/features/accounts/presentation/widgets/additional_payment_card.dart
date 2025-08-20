@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/accounts/data/models/additional_payments_model.dart';
 
 class AdditionalPaymentCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class AdditionalPaymentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -47,18 +49,18 @@ class AdditionalPaymentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "To: ${payment?.paymentTo ?? 'N/A'}",
+                    "${strings.to}: ${payment?.paymentTo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
                   Text(
-                   "Description: ${payment?.description ?? 'N/A'}",
+                   "${strings.description}: ${payment?.description ?? 'N/A'}",
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: AppColors.lightFontColor,
                     ),
                   ),
                   const SizedBox(height: 6),
-                  _amountTag("Amount", payment?.amount),
+                  _amountTag(strings.amount, payment?.amount, context),
                 ],
               ),
             ),
@@ -68,8 +70,8 @@ class AdditionalPaymentCard extends StatelessWidget {
     );
   }
 
-  Widget _amountTag(String label, String? value) {
-    final formatted = value != null ? CurrencyFormatter.format(num.tryParse(value)) : '0 Tk';
+  Widget _amountTag(String label, String? value, BuildContext context) {
+    final formatted = value != null ? CurrencyFormatter.format(num.tryParse(value), context: context) : '0 Tk';
     return Container(
       margin: const EdgeInsets.only(top: 4),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

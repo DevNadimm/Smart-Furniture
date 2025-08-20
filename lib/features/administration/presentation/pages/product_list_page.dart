@@ -71,7 +71,7 @@ class _ProductListPageState extends State<ProductListPage> {
             ? AppBarSearchField(
                 controller: _searchController,
                 onSubmitted: _onSearchSubmitted,
-                hintText: 'Search Product...',
+                hintText: strings.searchProducts,
               )
             : Text(strings.productListTitle),
         actions: [

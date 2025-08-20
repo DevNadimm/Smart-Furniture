@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/accounts/data/models/cash_transaction_model.dart';
 
 class CashTransactionCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class CashTransactionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     String capitalize(String? s) {
       if (s == null || s.isEmpty) return 'Unknown Type';
       return s[0].toUpperCase() + s.substring(1);
@@ -94,13 +96,13 @@ class CashTransactionCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _amountTag(
-                            "Received",
-                            "${CurrencyFormatter.format(int.tryParse(transaction?.receivedAmount ?? '0'))} Tk",
+                            strings.received,
+                            "${CurrencyFormatter.format(int.tryParse(transaction?.receivedAmount ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
                           _amountTag(
-                            "Paid",
-                            "${CurrencyFormatter.format(int.tryParse(transaction?.paidAmount ?? '0'))} Tk",
+                            strings.paid,
+                            "${CurrencyFormatter.format(int.tryParse(transaction?.paidAmount ?? '0'), context: context)} Tk",
                             AppColors.warning,
                           ),
                         ],
