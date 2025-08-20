@@ -168,5 +168,9 @@
 
   "selectSupplierTitle": "Select Supplier",
   "selectSupplierSubtitle": "Choose a supplier from the list",
-  "selectSupplierSearchHint": "Search Supplier"
+  "selectSupplierSearchHint": "Search Supplier",
+
+  "selectCustomerTitle": "Select Customer",
+  "selectCustomerSubtitle": "Choose a customer from the list",
+  "selectCustomerSearchHint": "Search Customer"
 }
