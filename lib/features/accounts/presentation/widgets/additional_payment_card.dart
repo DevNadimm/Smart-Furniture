@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,6 +15,9 @@ class AdditionalPaymentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
+    final paymentTo = payment?.paymentTo ?? 'N/A';
+    final paymentToBn = payment?.paymentToBangla ?? 'N/A';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -49,7 +53,7 @@ class AdditionalPaymentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${strings.to}: ${payment?.paymentTo ?? 'N/A'}",
+                    "${strings.to}: ${LocalizationService.getText(context, en: paymentTo, bn: paymentToBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),

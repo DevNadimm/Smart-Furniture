@@ -9,7 +9,7 @@ class AdditionalPaymentsModel {
       success: json['success'] as bool?,
       data: json['data'] != null
           ? List<PaymentData>.from(
-              (json['data'] as List).map((x) => PaymentData.fromJson(x)))
+          (json['data'] as List).map((x) => PaymentData.fromJson(x)))
           : null,
     );
   }
@@ -18,6 +18,7 @@ class AdditionalPaymentsModel {
 class PaymentData {
   final int? id;
   final String? paymentTo;
+  final String? paymentToBangla;
   final String? amount;
   final String? date;
   final String? description;
@@ -27,6 +28,7 @@ class PaymentData {
   PaymentData({
     this.id,
     this.paymentTo,
+    this.paymentToBangla,
     this.amount,
     this.date,
     this.description,
@@ -38,6 +40,7 @@ class PaymentData {
     return PaymentData(
       id: json['id'] as int?,
       paymentTo: json['payment_to'] as String?,
+      paymentToBangla: json['payment_to_bangla'] as String?,
       amount: json['amount'] as String?,
       date: json['date'] as String?,
       description: json['description'] as String?,

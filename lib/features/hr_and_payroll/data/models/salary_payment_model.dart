@@ -63,14 +63,16 @@ class SalaryPaymentData {
 class Employee {
   final int? id;
   final String? name;
+  final String? nameBangla;
   final String? empId;
 
-  Employee({this.id, this.name, this.empId});
+  Employee({this.id, this.name, this.nameBangla, this.empId});
 
   factory Employee.fromJson(Map<String, dynamic> json) {
     return Employee(
       id: json['id'] as int?,
       name: json['name'] as String?,
+      nameBangla: json['name_bangla'] as String?,
       empId: json['emp_id'] as String?,
     );
   }
