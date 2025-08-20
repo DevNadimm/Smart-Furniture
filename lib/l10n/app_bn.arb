@@ -137,6 +137,7 @@
   "deposit": "জমা",
   "withdraw": "উত্তোলন",
   "issueDate": "ইস্যুর তারিখ",
+  "reminderDate": "স্মরণ তারিখ",
   "submitDate": "জমার তারিখ",
   "chequeNo": "চেক নং",
   "balanceSheetSummary": "ব্যালেন্স শীট সারসংক্ষেপ",

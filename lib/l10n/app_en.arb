@@ -137,6 +137,7 @@
   "deposit": "Deposit",
   "withdraw": "Withdraw",
   "issueDate": "Issue Date",
+  "reminderDate": "Reminder Date",
   "submitDate": "Submit Date",
   "chequeNo": "Cheque No",
   "balanceSheetSummary": "Balance Sheet Summary",
