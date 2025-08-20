@@ -7,6 +7,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -189,6 +190,12 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                         icon: HugeIcons.strokeRoundedDateTime,
                         title: 'Select a Product and Date Range',
                         message: 'Choose a product and specify the "Start" and "End" dates above to view its ledger details.',
+                      );
+                    }
+                    if (state is ProductLedgerError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Product Ledger',
+                        message: ErrorMessages.networkError,
                       );
                     }
                     if (state is ProductLedgerLoaded) {

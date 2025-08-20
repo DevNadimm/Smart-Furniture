@@ -7,6 +7,7 @@ import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_bar_search_field.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/widgets/product_card.dart';
@@ -102,6 +103,12 @@ class _ProductListPageState extends State<ProductListPage> {
                   builder: (context, state) {
                     if (state is ProductListLoading) {
                       return const Loader();
+                    }
+                    if (state is ProductListError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Products',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is ProductListLoaded) {
                       if (state.productListModel.data!.isEmpty) {

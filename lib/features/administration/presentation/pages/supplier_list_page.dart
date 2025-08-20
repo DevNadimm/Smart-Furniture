@@ -5,6 +5,7 @@ import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/supplier_list/supplier_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/widgets/supplier_card.dart';
@@ -61,6 +62,12 @@ class _SupplierListPageState extends State<SupplierListPage> {
                   builder: (context, state) {
                     if (state is SupplierListLoading) {
                       return const Loader();
+                    }
+                    if (state is SupplierListError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Suppliers',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is SupplierListLoaded) {
                       if (state.supplierListModel.data!.isEmpty) {

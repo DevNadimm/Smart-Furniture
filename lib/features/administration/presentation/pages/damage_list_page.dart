@@ -6,6 +6,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
@@ -155,6 +156,12 @@ class _DamageListPageState extends State<DamageListPage> {
                         icon: HugeIcons.strokeRoundedDeliveryBox01,
                         title: 'Select a Product',
                         message: 'Choose a product from the filter above to see its damage history.',
+                      );
+                    }
+                    if (state is DamageListError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Damage List',
+                        message: ErrorMessages.networkError,
                       );
                     }
                     if (state is DamageListLoaded) {

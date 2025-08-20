@@ -5,6 +5,7 @@ import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/widgets/customer_card.dart';
@@ -61,6 +62,12 @@ class _CustomerListPageState extends State<CustomerListPage> {
                   builder: (context, state) {
                     if (state is CustomerListLoading) {
                       return const Loader();
+                    }
+                    if (state is CustomerListError) {
+                      return const ErrorStateWidget(
+                        title: 'Failed to Load Customers',
+                        message: ErrorMessages.networkError,
+                      );
                     }
                     if (state is CustomerListLoaded) {
                       if (state.customerListModel.data!.isEmpty) {
