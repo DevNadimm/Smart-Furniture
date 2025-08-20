@@ -6,6 +6,10 @@
   "selectShopTitle": "দোকান নির্বাচন করুন",
   "selectShopSubtitle": "ডেটা এবং রিপোর্ট দেখতে একটি দোকান বেছে নিন।",
   "changeShopBtn": "দোকান পরিবর্তন করুন",
+  "shopSmartFurniture": "স্মার্ট ফার্নিচার",
+  "shopNoorjahanFurniture": "নূরজাহান ফার্নিচার",
+  "shopNaimFurniture": "নাইম ফার্নিচার",
+  "shopNoorjahanSteel": "নূরজাহান স্টিল",
 
   "@@moduleTitles": "===== Module Titles =====",
   "sales": "বিক্রয়",

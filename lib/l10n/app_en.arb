@@ -6,6 +6,10 @@
   "selectShopTitle": "Select a Shop",
   "selectShopSubtitle": "Choose a shop to view data and insights.",
   "changeShopBtn": "Switch Shop",
+  "shopSmartFurniture": "Smart Furniture",
+  "shopNoorjahanFurniture": "Noorjahan Furniture",
+  "shopNaimFurniture": "Naim Furniture",
+  "shopNoorjahanSteel": "Noorjahan Steel",
 
   "@@moduleTitles": "===== Module Titles =====",
   "sales": "Sales",

@@ -28,9 +28,9 @@ class ShopSelectionPage extends StatelessWidget {
             children: [
               _buildHeader(context, strings),
               const SizedBox(height: 32),
-              _buildShopGrid(),
+              _buildShopGrid(context),
               const Spacer(),
-              _buildBtn(strings),
+              _buildBtn(context, strings),
             ],
           ),
         ),
@@ -56,7 +56,9 @@ class ShopSelectionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildShopGrid() {
+  Widget _buildShopGrid(BuildContext context) {
+    final shops = ShopLocalDataSource.getShops(context);
+
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -65,18 +67,19 @@ class ShopSelectionPage extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.85,
+        childAspectRatio: 1.15,
       ),
       itemCount: shops.length,
       itemBuilder: (context, index) => ShopCard(shop: shops[index]),
     );
   }
 
-  Widget _buildBtn(AppLocalizations strings) {
+  Widget _buildBtn(BuildContext context, AppLocalizations strings) {
     return SizedBox(
       width: double.infinity,
       child: BlocBuilder<ShopSelectionCubit, ShopType?>(
         builder: (context, shopType) {
+          final shops = ShopLocalDataSource.getShops(context);
           Shop? shop = shops.firstWhereOrNull((shop) => shop.shopType == shopType);
 
           return ElevatedButton.icon(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/dashboard/data/datasources/module_local_data_source.dart';
 import 'package:smart_furniture/features/dashboard/presentation/widgets/module_card.dart';
 import 'package:smart_furniture/features/language_selector/presentation/pages/language_selection_page.dart';
@@ -16,56 +15,55 @@ class DashboardPage extends StatelessWidget {
     // final strings = AppLocalizations.of(context)!;
 
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeader(context),
-                const SizedBox(height: 32),
-                _buildGridView(context),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushAndRemoveUntil(context, LanguageSelectionPage.route(), (route) => false);
-                  },
-                  child: const Text("Change Localization"),
-                ),
-              ],
-            ),
+      appBar: AppBar(
+        title: Text(shop.name),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildGridView(context),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(context, LanguageSelectionPage.route(), (route) => false);
+                },
+                child: const Text("Change Localization"),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildHeader (BuildContext context, ) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(shop.name, style: Theme.of(context).textTheme.displaySmall,),
-        const SizedBox(height: 8),
-        Text(shop.description, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
-        const SizedBox(height: 6),
-        Row(
-          children: [
-            const Icon(Icons.location_on_rounded, size: 16, color: AppColors.lightFontColor),
-            const SizedBox(width: 4),
-            Expanded(
-              child: Text(
-                shop.location,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.lightFontColor),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget _buildHeader (BuildContext context, ) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(shop.name, style: Theme.of(context).textTheme.displaySmall,),
+  //       const SizedBox(height: 8),
+  //       Text(shop.description, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+  //       const SizedBox(height: 6),
+  //       Row(
+  //         children: [
+  //           const Icon(Icons.location_on_rounded, size: 16, color: AppColors.lightFontColor),
+  //           const SizedBox(width: 4),
+  //           Expanded(
+  //             child: Text(
+  //               shop.location,
+  //               style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.lightFontColor),
+  //               maxLines: 1,
+  //               overflow: TextOverflow.ellipsis,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildGridView(BuildContext context) {
     final modules = ModuleLocalDataSource.getModules(context);

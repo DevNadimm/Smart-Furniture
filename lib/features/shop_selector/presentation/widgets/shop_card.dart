@@ -72,34 +72,35 @@ class ShopCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 16),
+                    const Spacer(),
                     Text(
                       shop.name,
                       style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    const Spacer(),
-                    Text(
-                      shop.description,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 6),
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on_rounded, size: 16, color: AppColors.lightFontColor),
-                        const SizedBox(width: 4),
-                        Expanded(
-                          child: Text(
-                            shop.location,
-                            style: Theme.of(context).textTheme.bodySmall,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // const Spacer(),
+                    // Text(
+                    //   shop.description,
+                    //   style: Theme.of(context).textTheme.titleMedium,
+                    //   maxLines: 1,
+                    //   overflow: TextOverflow.ellipsis,
+                    // ),
+                    // const SizedBox(height: 6),
+                    // Row(
+                    //   children: [
+                    //     const Icon(Icons.location_on_rounded, size: 16, color: AppColors.lightFontColor),
+                    //     const SizedBox(width: 4),
+                    //     Expanded(
+                    //       child: Text(
+                    //         shop.location,
+                    //         style: Theme.of(context).textTheme.bodySmall,
+                    //         maxLines: 1,
+                    //         overflow: TextOverflow.ellipsis,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
