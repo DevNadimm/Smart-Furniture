@@ -18,6 +18,7 @@ class EmployeeData {
   final int? id;
   final String? empId;
   final String? name;
+  final String? nameBangla;
   final String? designation;
   final String? department;
   final String? joinDate;
@@ -40,6 +41,7 @@ class EmployeeData {
     this.id,
     this.empId,
     this.name,
+    this.nameBangla,
     this.designation,
     this.department,
     this.joinDate,
@@ -64,6 +66,7 @@ class EmployeeData {
       id: json['id'],
       empId: json['emp_id'],
       name: json['name'],
+      nameBangla: json['name_bangla'],
       designation: json['designation'],
       department: json['department'],
       joinDate: json['join_date'],

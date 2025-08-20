@@ -165,6 +165,7 @@
   "id": "ID",
   "inQuantity": "In Quantity",
   "outQuantity": "Out Quantity",
+  "name": "Name",
 
   "selectSupplierTitle": "Select Supplier",
   "selectSupplierSubtitle": "Choose a supplier from the list",

@@ -165,6 +165,7 @@
   "id": "আইডি",
   "inQuantity": "আগত পরিমাণ",
   "outQuantity": "বর্হিগত পরিমাণ",
+  "name": "নাম",
 
   "selectSupplierTitle": "সরবরাহকারী নির্বাচন করুন",
   "selectSupplierSubtitle": "তালিকা থেকে একজন সরবরাহকারী বেছে নিন",
