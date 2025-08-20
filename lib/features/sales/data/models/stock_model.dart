@@ -28,8 +28,11 @@ class StockData {
   final String? sizeId;
   final String? purchasePrice;
   final String? productName;
+  final String? productNameBangla;
   final String? categoryName;
-  final String? brand;
+  final String? categoryNameBangla;
+  final String? brandName;
+  final String? brandNameBangla;
   final String? sku;
   final String? purchaseRate;
   final String? salesRate;
@@ -46,8 +49,11 @@ class StockData {
     this.sizeId,
     this.purchasePrice,
     this.productName,
+    this.productNameBangla,
     this.categoryName,
-    this.brand,
+    this.categoryNameBangla,
+    this.brandName,
+    this.brandNameBangla,
     this.sku,
     this.purchaseRate,
     this.salesRate,
@@ -66,8 +72,11 @@ class StockData {
       sizeId: json['size_id'] as String?,
       purchasePrice: json['purchase_price'] as String?,
       productName: json['product_name'] as String?,
+      productNameBangla: json['product_name_bangla'] as String?,
       categoryName: json['category_name'] as String?,
-      brand: json['brand'] as String?,
+      categoryNameBangla: json['category_name_bangla'] as String?,
+      brandName: json['brand_name'] as String?,
+      brandNameBangla: json['brand_name_bangla'] as String?,
       sku: json['sku'] as String?,
       purchaseRate: json['purchase_rate'] as String?,
       salesRate: json['sales_rate'] as String?,

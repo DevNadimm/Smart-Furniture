@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
@@ -13,9 +14,12 @@ class StockCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
-    final brand = stockData?.brand ?? "Unknown Brand";
-    final productName = stockData?.productName ?? "Unknown Product";
-    final categoryName = stockData?.categoryName ?? 'Unknown Category';
+    final brandName = stockData?.brandName ?? "N/A";
+    final brandNameBn = stockData?.brandNameBangla ?? "N/A";
+    final productName = stockData?.productName ?? "N/A";
+    final productNameBn = stockData?.productNameBangla ?? "N/A";
+    final categoryName = stockData?.categoryName ?? 'N/A';
+    final categoryNameBn = stockData?.categoryNameBangla ?? 'N/A';
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -38,24 +42,11 @@ class StockCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withOpacity(0.1),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Text(
-                      brand,
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    categoryName,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                ],
+              child: Text(
+                "${strings.brand}: ${LocalizationService.getText(context, en: brandName, bn: brandNameBn)}",
+                style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  color: AppColors.primaryColor,
+                ),
               ),
             ),
             Padding(
@@ -65,8 +56,13 @@ class StockCard extends StatelessWidget {
                 children: [
                   // Product Name
                   Text(
-                    productName,
+                    "${strings.product}: ${LocalizationService.getText(context, en: productName, bn: productNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "${strings.category}: ${LocalizationService.getText(context, en: categoryName, bn: categoryNameBn)}",
+                    style: Theme.of(context).textTheme.bodyMedium!,
                   ),
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
