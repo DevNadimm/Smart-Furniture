@@ -5,6 +5,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
@@ -93,16 +94,16 @@ class _CustomerPaymentPageState extends State<CustomerPaymentPage> {
     }
   }
 
-  void _selectCustomerPicker(List<String> items) {
+  void _selectCustomerPicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Customer',
-          subtitle: 'Choose a customer from the list',
-          searchHint: 'Search Customer',
+          title: strings.selectCustomerTitle,
+          subtitle: strings.selectCustomerSubtitle,
+          searchHint: strings.selectCustomerSearchHint,
           selectedItem: _customerNameController.text,
           onItemSelected: (String selectedName) {
             _customerNameController.text = selectedName;
@@ -116,6 +117,7 @@ class _CustomerPaymentPageState extends State<CustomerPaymentPage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).languageCode;
 
     return Scaffold(
       appBar: AppBar(
@@ -135,7 +137,7 @@ class _CustomerPaymentPageState extends State<CustomerPaymentPage> {
                 if (state is CustomerListLoaded) {
                   _customerNameToId = {
                     for (var c in state.customerListModel.data!)
-                      c.customerName ?? '': c.id?.toString() ?? ''
+                      (locale == 'bn' ? (c.customerNameBangla ?? '') : (c.customerName ?? '')): (c.id?.toString() ?? '')
                   };
                   return FilterBar(
                     startDateController: _fromDateController,
@@ -143,7 +145,7 @@ class _CustomerPaymentPageState extends State<CustomerPaymentPage> {
                     showFilterPicker: true,
                     filterPickerLabel: strings.customer,
                     filterPickerController: _customerNameController,
-                    onFilterPickerTap: () => _selectCustomerPicker(state.customerListModel.data!.map((e) => e.customerName ?? '').toList()),
+                    onFilterPickerTap: () => _selectCustomerPicker(state.customerListModel.data!.map((e) => LocalizationService.getText(context, en: e.customerName ?? '', bn: e.customerNameBangla ?? '')).toList(), strings),
                     onSelectDate: _selectDate,
                     onApplyFilter: _fetchData,
                   );
