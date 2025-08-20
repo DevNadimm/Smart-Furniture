@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/administration/data/models/customer_list_model.dart';
 
@@ -11,6 +13,10 @@ class CustomerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final customerName = customer?.customerName ?? 'N/A';
+    final customerNameBn = customer?.customerNameBangla ?? 'N/A';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -36,14 +42,14 @@ class CustomerCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'ID: ${customer?.customerId ?? 'N/A'}',
+                    '${strings.id}: ${customer?.customerId ?? 'N/A'}',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),
                   ),
                   Expanded(
                     child: Text(
-                      'Type: ${customer?.customerType ?? 'N/A'}',
+                      '${strings.type}: ${customer?.customerType ?? 'N/A'}',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.primaryColor),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -59,7 +65,7 @@ class CustomerCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    customer?.customerName ?? 'Unknown Customer',
+                    "${strings.customer}: ${LocalizationService.getText(context, en: customerName, bn: customerNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -72,9 +78,9 @@ class CustomerCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _infoText("Contact", customer?.contactPerson ?? 'N/A'),
-                            _infoText("Mobile", customer?.mobile ?? 'N/A'),
-                            _infoText("Address", customer?.address ?? 'N/A'),
+                            _infoText(strings.contact, customer?.contactPerson ?? 'N/A'),
+                            _infoText(strings.mobile, customer?.mobile ?? 'N/A'),
+                            _infoText(strings.address, customer?.address ?? 'N/A'),
                           ],
                         ),
                       ),
@@ -82,13 +88,13 @@ class CustomerCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Previous Due",
-                            "${CurrencyFormatter.format(int.tryParse(customer?.previousDue ?? '0'))} Tk",
+                            strings.previousDue,
+                            "${CurrencyFormatter.format(int.tryParse(customer?.previousDue ?? '0'), context: context)} Tk",
                             AppColors.warning,
                           ),
                           _priceTag(
-                            "Credit Limit",
-                            "${CurrencyFormatter.format(int.tryParse(customer?.creditLimit ?? '0'))} Tk",
+                            strings.creditLimit,
+                            "${CurrencyFormatter.format(int.tryParse(customer?.creditLimit ?? '0'), context: context)} Tk",
                             AppColors.success,
                           ),
                         ],

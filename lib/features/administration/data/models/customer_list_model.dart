@@ -2,10 +2,7 @@ class CustomerListModel {
   final bool? success;
   final List<CustomerData>? data;
 
-  CustomerListModel({
-    this.success,
-    this.data,
-  });
+  CustomerListModel({this.success, this.data});
 
   factory CustomerListModel.fromJson(Map<String, dynamic> json) {
     return CustomerListModel(
@@ -21,6 +18,7 @@ class CustomerData {
   final int? id;
   final String? customerId;
   final String? customerName;
+  final String? customerNameBangla;
   final String? customerType;
   final String? contactPerson;
   final String? address;
@@ -40,6 +38,7 @@ class CustomerData {
     this.id,
     this.customerId,
     this.customerName,
+    this.customerNameBangla,
     this.customerType,
     this.contactPerson,
     this.address,
@@ -61,6 +60,7 @@ class CustomerData {
       id: json['id'] as int?,
       customerId: json['customer_id'] as String?,
       customerName: json['customer_name'] as String?,
+      customerNameBangla: json['customer_name_bangla'] as String?,
       customerType: json['customer_type'] as String?,
       contactPerson: json['contact_person'] as String?,
       address: json['address'] as String?,

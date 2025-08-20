@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/administration/data/models/damage_list_model.dart';
 
 class DamageCard extends StatelessWidget {
@@ -12,6 +14,10 @@ class DamageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final productName = damageData?.product?.productName ?? 'N/A';
+    final productNameBn = damageData?.product?.productNameBangla ?? 'N/A';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -43,7 +49,7 @@ class DamageCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Code: ${damageData?.code ?? '-'}",
+                    "${strings.code}: ${damageData?.code ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -57,7 +63,7 @@ class DamageCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    damageData?.productName ?? 'Unknown Product',
+                    "${strings.product}: ${LocalizationService.getText(context, en: productName, bn: productNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -69,7 +75,7 @@ class DamageCard extends StatelessWidget {
                       if (damageData?.description != null && damageData!.description!.isNotEmpty)
                         Expanded(
                           child: Text(
-                            damageData!.description!,
+                            "${strings.description}: ${damageData!.description!}",
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: AppColors.lightFontColor,
                             ),
@@ -81,13 +87,13 @@ class DamageCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _infoTag(
-                            "Quantity",
-                            damageData?.quantity,
+                            strings.quantity,
+                            CurrencyFormatter.format(int.tryParse(damageData?.quantity ?? '0'), context: context),
                             AppColors.primaryColor,
                           ),
                           _infoTag(
-                            "Amount",
-                            "${CurrencyFormatter.format(int.tryParse(damageData?.amount ?? '0'))} Tk",
+                            strings.amount,
+                            "${CurrencyFormatter.format(int.tryParse(damageData?.amount ?? '0'), context: context)} Tk",
                             AppColors.error,
                           ),
                         ],

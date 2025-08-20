@@ -156,5 +156,11 @@
   "cashOut": "Cash Out",
   "cashBalance": "Cash Balance",
   "description": "Description",
-  "to": "To"
+  "to": "To",
+  "brand": "Brand",
+  "purchaseRate": "Purchase Rate",
+  "salesRate": "Sales Rate",
+  "wholesaleRate": "Wholesale Rate",
+  "code": "Code",
+  "id": "ID"
 }

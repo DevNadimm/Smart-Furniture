@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/administration/data/models/product_list_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -11,6 +13,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -45,12 +48,12 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product?.productName ?? 'Unnamed Product',
+                    "${strings.product}: ${LocalizationService.getText(context, en: product?.productName ?? 'N/A', bn: product?.productNameBangla ?? 'N/A')}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   if (product?.brand != null && product!.brand!.isNotEmpty)
                     Text(
-                      "Brand: ${product!.brand}",
+                      "${strings.brand}: ${product?.brand ?? "N/A"}",
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
@@ -60,19 +63,19 @@ class ProductCard extends StatelessWidget {
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 1),
                   _priceTag(
-                    "Purchase Rate",
-                    "${CurrencyFormatter.format(int.tryParse(product?.purchaseRate ?? '0'))} Tk",
+                    strings.purchaseRate,
+                    "${CurrencyFormatter.format(int.tryParse(product?.purchaseRate ?? '0'), context: context)} Tk",
                     AppColors.warning,
                   ),
                   _priceTag(
-                    "Sales Rate",
-                    "${CurrencyFormatter.format(int.tryParse(product?.salesRate ?? '0'))} Tk",
+                    strings.salesRate,
+                    "${CurrencyFormatter.format(int.tryParse(product?.salesRate ?? '0'), context: context)} Tk",
                     AppColors.success,
                   ),
                   if (product?.wholesaleRate != null)
                     _priceTag(
-                      "Wholesale Rate",
-                      "${CurrencyFormatter.format(int.tryParse(product?.wholesaleRate ?? '0'))} Tk",
+                      strings.wholesaleRate,
+                      "${CurrencyFormatter.format(int.tryParse(product?.wholesaleRate ?? '0'), context: context)} Tk",
                       AppColors.primaryColor,
                     ),
                 ],
