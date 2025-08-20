@@ -124,5 +124,7 @@
   "salary": "Salary",
   "status": "Status",
   "contact": "Contact",
-  "email": "Email"
+  "email": "Email",
+  "txn": "Txn",
+  "received": "Received"
 }

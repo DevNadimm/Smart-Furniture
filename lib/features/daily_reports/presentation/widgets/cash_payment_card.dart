@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/daily_reports/data/models/daily_reports_model.dart';
@@ -12,6 +13,7 @@ class CashPaymentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -43,7 +45,7 @@ class CashPaymentCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Txn: ${payment?.transactionId ?? 'N/A'}",
+                    "${strings.txn}: ${payment?.transactionId ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -57,7 +59,7 @@ class CashPaymentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    payment?.accountName ?? 'Unknown Account',
+                    "${strings.account}: ${payment?.accountName ?? 'Unknown Account'}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
 
@@ -93,14 +95,14 @@ class CashPaymentCard extends StatelessWidget {
                           if (payment?.receivedAmount != null &&
                               payment!.receivedAmount != "0")
                             _priceTag(
-                              "Received",
-                              "${CurrencyFormatter.format(int.tryParse(payment!.receivedAmount ?? '0'))} Tk",
+                              strings.received,
+                              "${CurrencyFormatter.format(int.tryParse(payment!.receivedAmount ?? '0'), context: context)} Tk",
                             ),
                           if (payment?.paidAmount != null &&
                               payment!.paidAmount != "0")
                             _priceTag(
-                              "Paid",
-                              "${CurrencyFormatter.format(int.tryParse(payment!.paidAmount ?? '0'))} Tk",
+                              strings.paid,
+                              "${CurrencyFormatter.format(int.tryParse(payment!.paidAmount ?? '0'), context: context)} Tk",
                             ),
                         ],
                       )

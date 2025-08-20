@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/daily_reports/data/models/daily_reports_model.dart';
@@ -13,10 +14,17 @@ class SaleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context);
-    final product = sale?.salesProduct?.isNotEmpty == true
-        ? sale!.salesProduct!.first
-        : null;
+    final strings = AppLocalizations.of(context)!;
+    final customerName = sale?.salesProduct?.first.customer?.customerName ?? 'N/A';
+    final customerNameBn = sale?.salesProduct?.first.customer?.customerNameBangla ?? 'N/A';
+    final productName = sale?.salesProduct?.first.productName ?? 'N/A';
+    final productNameBn = sale?.salesProduct?.first.productName ?? 'N/A';
+    final productCategoryName = sale?.salesProduct?.first.category?.name ?? 'N/A';
+    final productCategoryNameBn = sale?.salesProduct?.first.category?.nameBangla ?? 'N/A';
+
+    // final product = sale?.salesProduct?.isNotEmpty == true
+    //     ? sale!.salesProduct!.first
+    //     : null;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -49,7 +57,7 @@ class SaleCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${sale?.invoiceNo ?? 'N/A'}",
+                    "${strings.invoice}: ${sale?.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -63,7 +71,7 @@ class SaleCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    sale?.customerName ?? 'Unknown Customer',
+                    "${strings.customer}: ${LocalizationService.getText(context, en: customerName, bn: customerNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   if (sale?.customerContact != null)
@@ -84,13 +92,13 @@ class SaleCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              product?.productName ?? 'N/A',
+                              "${strings.product}: ${LocalizationService.getText(context, en: productName, bn: productNameBn)}",
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
-                              product?.category?.name ?? 'N/A',
+                              "${strings.category}: ${LocalizationService.getText(context, en: productCategoryName, bn: productCategoryNameBn)}",
                               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 color: AppColors.lightFontColor,
                               ),
@@ -102,16 +110,16 @@ class SaleCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            strings!.paid,
-                            "${CurrencyFormatter.format(int.tryParse(sale?.totalPaid ?? '0'))} Tk",
+                            strings.paid,
+                            "${CurrencyFormatter.format(int.tryParse(sale?.totalPaid ?? '0'), context: context)} Tk",
                           ),
                           _priceTag(
                             strings.due,
-                            "${CurrencyFormatter.format(int.tryParse(sale?.totalDue ?? '0'))} Tk",
+                            "${CurrencyFormatter.format(int.tryParse(sale?.totalDue ?? '0'), context: context)} Tk",
                           ),
                           _priceTag(
                             strings.total,
-                            "${CurrencyFormatter.format(int.tryParse(sale?.totalAmount ?? '0'))} Tk",
+                            "${CurrencyFormatter.format(int.tryParse(sale?.totalAmount ?? '0'), context: context)} Tk",
                           ),
                         ],
                       )
