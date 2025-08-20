@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/daily_reports/data/models/daily_reports_model.dart';
 
@@ -12,6 +13,7 @@ class EmployeePaymentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -43,7 +45,7 @@ class EmployeePaymentCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Month: ${employeePayment?.month ?? 'N/A'}",
+                    employeePayment?.month ?? '-',
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -103,13 +105,13 @@ class EmployeePaymentCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Payment",
-                            "${CurrencyFormatter.format(int.tryParse(employeePayment?.paymentAmount ?? "0"))} Tk",
+                            strings.payment,
+                            "${CurrencyFormatter.format(int.tryParse(employeePayment?.paymentAmount ?? "0"), context: context)} Tk",
                           ),
                           if (employeePayment?.deductedAmount != null)
                             _priceTag(
-                              "Deducted",
-                              "${CurrencyFormatter.format(int.tryParse(employeePayment?.deductedAmount ?? "0"))} Tk",
+                              strings.deducted,
+                              "${CurrencyFormatter.format(int.tryParse(employeePayment?.deductedAmount ?? "0"), context: context)} Tk",
                             ),
                         ],
                       )
