@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
@@ -89,16 +90,16 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
     }
   }
 
-  void _selectSupplierPicker(List<String> items) {
+  void _selectSupplierPicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Supplier',
-          subtitle: 'Choose a supplier from the list',
-          searchHint: 'Search Supplier',
+          title: strings.selectSupplierTitle,
+          subtitle: strings.selectSupplierSubtitle,
+          searchHint: strings.selectSupplierSearchHint,
           selectedItem: _supplierNameController.text,
           onItemSelected: (String selectedName) {
             _supplierNameController.text = selectedName;
@@ -111,6 +112,7 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context).languageCode;
     final strings = AppLocalizations.of(context);
 
     return Scaffold(
@@ -122,9 +124,9 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
           BlocBuilder<SupplierListBloc, SupplierListState>(
             builder: (context, state) {
                if (state is SupplierListLoaded) {
-                _supplierNameToId = {
+                 _supplierNameToId = {
                   for (var s in state.supplierListModel.data!)
-                    s.supplierName ?? '': s.id?.toString() ?? ''
+                    (locale == 'bn' ? (s.supplierNameBangla ?? '') : (s.supplierName ?? '')): (s.id?.toString() ?? '')
                 };
                 return FilterBar(
                   startDateController: _startDateController,
@@ -134,7 +136,7 @@ class _PurchaseReturnPageState extends State<PurchaseReturnPage> {
                   showFilterPicker: true,
                   filterPickerController: _supplierNameController,
                   onFilterPickerTap: () {
-                    _selectSupplierPicker(state.supplierListModel.data!.map((e) => e.supplierName ?? '').toList());
+                    _selectSupplierPicker(state.supplierListModel.data!.map((e) => LocalizationService.getText(context, en: e.supplierName ?? '', bn: e.supplierNameBangla ?? '', )).toList(), strings);
                   },
                   filterPickerLabel: strings.supplier,
                 );

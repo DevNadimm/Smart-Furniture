@@ -164,5 +164,9 @@
   "code": "Code",
   "id": "ID",
   "inQuantity": "In Quantity",
-  "outQuantity": "Out Quantity"
+  "outQuantity": "Out Quantity",
+
+  "selectSupplierTitle": "Select Supplier",
+  "selectSupplierSubtitle": "Choose a supplier from the list",
+  "selectSupplierSearchHint": "Search Supplier"
 }
