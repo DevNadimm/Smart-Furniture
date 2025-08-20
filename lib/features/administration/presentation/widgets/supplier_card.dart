@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/administration/data/models/supplier_list_model.dart';
 
@@ -11,6 +13,10 @@ class SupplierCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final supplierName = supplier?.supplierName ?? 'N/A';
+    final supplierNameBn = supplier?.supplierNameBangla ?? 'N/A';
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -36,7 +42,7 @@ class SupplierCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'ID: ${supplier?.supplierId ?? 'N/A'}',
+                    '${strings.id}: ${supplier?.supplierId ?? 'N/A'}',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -61,7 +67,7 @@ class SupplierCard extends StatelessWidget {
                 children: [
                   // Supplier Name
                   Text(
-                    supplier?.supplierName ?? 'Unknown Supplier',
+                    "${strings.supplier}: ${LocalizationService.getText(context, en: supplierName, bn: supplierNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -74,9 +80,9 @@ class SupplierCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _infoText("Contact", supplier?.contactPerson ?? 'N/A'),
-                            _infoText("Phone", supplier?.contactNumber ?? 'N/A'),
-                            _infoText("Address", supplier?.address ?? 'N/A'),
+                            _infoText(strings.contact, supplier?.contactPerson ?? 'N/A'),
+                            _infoText(strings.mobile, supplier?.contactNumber ?? 'N/A'),
+                            _infoText(strings.address, supplier?.address ?? 'N/A'),
                           ],
                         ),
                       ),
@@ -84,8 +90,8 @@ class SupplierCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _priceTag(
-                            "Previous Due",
-                            "${CurrencyFormatter.format(int.tryParse(supplier?.previousDue ?? '0'))} Tk",
+                            strings.previousDue,
+                            "${CurrencyFormatter.format(int.tryParse(supplier?.previousDue ?? '0'), context: context)} Tk",
                             AppColors.warning,
                           ),
                         ],

@@ -8,7 +8,7 @@ class SupplierListModel {
     return SupplierListModel(
       success: json['success'] as bool?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((item) => SupplierData.fromJson(item))
+          ?.map((item) => SupplierData.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
   }
@@ -18,6 +18,7 @@ class SupplierData {
   final int? id;
   final String? supplierId;
   final String? supplierName;
+  final String? supplierNameBangla;
   final String? contactPerson;
   final String? address;
   final String? contactNumber;
@@ -32,6 +33,7 @@ class SupplierData {
     this.id,
     this.supplierId,
     this.supplierName,
+    this.supplierNameBangla,
     this.contactPerson,
     this.address,
     this.contactNumber,
@@ -48,6 +50,7 @@ class SupplierData {
       id: json['id'] as int?,
       supplierId: json['supplier_id']?.toString(),
       supplierName: json['supplier_name'] as String?,
+      supplierNameBangla: json['supplier_name_bangla'] as String?,
       contactPerson: json['contact_person'] as String?,
       address: json['address'] as String?,
       contactNumber: json['contact_number'] as String?,

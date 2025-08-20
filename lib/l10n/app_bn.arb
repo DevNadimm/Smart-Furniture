@@ -162,5 +162,7 @@
   "salesRate": "বিক্রয়মূল্য",
   "wholesaleRate": "হোলসেল মূল্য",
   "code": "কোড",
-  "id": "আইডি"
+  "id": "আইডি",
+  "inQuantity": "আগত পরিমাণ",
+  "outQuantity": "বর্হিগত পরিমাণ"
 }

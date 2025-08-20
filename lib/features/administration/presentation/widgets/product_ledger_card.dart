@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/administration/data/models/product_ledger_model.dart';
 
 class ProductLedgerCard extends StatelessWidget {
@@ -12,6 +13,9 @@ class ProductLedgerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       decoration: BoxDecoration(
@@ -43,7 +47,7 @@ class ProductLedgerCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Invoice: ${ledgerData?.invoiceNo ?? '-'}",
+                    "${strings.invoice}: ${ledgerData?.invoiceNo ?? 'N/A'}",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: AppColors.primaryColor,
                     ),
@@ -57,7 +61,7 @@ class ProductLedgerCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    ledgerData?.personeName ?? 'Unknown Person',
+                    "${strings.product}: ${ledgerData?.personeName ?? 'N/A'}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),
@@ -70,13 +74,13 @@ class ProductLedgerCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${ledgerData?.type?[0].toUpperCase()}${ledgerData?.type?.substring(1)}",
+                            "${strings.type}: ${ledgerData?.type?[0].toUpperCase()}${ledgerData?.type?.substring(1)}",
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Text(
-                            "Rate: ${CurrencyFormatter.format(int.tryParse(ledgerData?.rate ?? '0.00'))} Tk",
+                            "${strings.price}: ${CurrencyFormatter.format(int.tryParse(ledgerData?.rate ?? '0.00'), context: context)} Tk",
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: AppColors.lightFontColor,
                             ),
@@ -87,12 +91,12 @@ class ProductLedgerCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           _quantityTag(
-                            "In Quantity",
-                            ledgerData?.inQty,
+                            strings.inQuantity,
+                            CurrencyFormatter.format(ledgerData?.inQty ?? 0, context: context),
                           ),
                           _quantityTag(
-                            "Out Quantity",
-                            ledgerData?.outQty,
+                            strings.outQuantity,
+                            CurrencyFormatter.format(ledgerData?.outQty ?? 0, context: context),
                           ),
                         ],
                       ),
@@ -107,7 +111,7 @@ class ProductLedgerCard extends StatelessWidget {
     );
   }
 
-  Widget _quantityTag(String label, int? value) {
+  Widget _quantityTag(String label, String? value) {
     return Container(
       margin: const EdgeInsets.only(top: 4),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -116,7 +120,7 @@ class ProductLedgerCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        "$label: ${value ?? 0}",
+        "$label: ${value ?? '0'}",
         style: GoogleFonts.poppins(
           textStyle: const TextStyle(
             fontWeight: FontWeight.w600,

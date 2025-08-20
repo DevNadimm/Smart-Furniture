@@ -162,5 +162,7 @@
   "salesRate": "Sales Rate",
   "wholesaleRate": "Wholesale Rate",
   "code": "Code",
-  "id": "ID"
+  "id": "ID",
+  "inQuantity": "In Quantity",
+  "outQuantity": "Out Quantity"
 }
