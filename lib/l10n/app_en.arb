@@ -172,5 +172,13 @@
 
   "selectCustomerTitle": "Select Customer",
   "selectCustomerSubtitle": "Choose a customer from the list",
-  "selectCustomerSearchHint": "Search Customer"
+  "selectCustomerSearchHint": "Search Customer",
+
+  "selectTypeTitle": "Select Type",
+  "selectTypeSubtitle": "Choose a type from the list",
+  "selectTypeSearchHint": "Search Type",
+
+  "selectBankAccountTitle": "Select Bank Account",
+  "selectBankAccountSubtitle": "Choose a bank account from the list",
+  "selectBankAccountSearchHint": "Search Bank Account"
 }

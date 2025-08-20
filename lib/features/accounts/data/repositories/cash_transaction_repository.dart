@@ -10,9 +10,9 @@ class CashTransactionRepository {
       throw Exception(ErrorMessages.selectAllFiltersBeforeFetch);
     }
 
-    if (type == 'All') type = 'all';
-    if (type == 'Receive') type = 'recieve';
-    if (type == 'Payment') type = 'payment';
+    if (type.contains('All')) type = 'all';
+    if (type.contains('Receive')) type = 'recieve';
+    if (type.contains('Payment')) type = 'payment';
 
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.cashTransaction;

@@ -29,7 +29,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
   final TextEditingController _fromDateController = TextEditingController();
   final TextEditingController _toDateController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
-  final List<String> _typeList = ['All', 'Payment', 'Receive'];
+  final List<String> _typeList = ['All - সব', 'Payment - পেমেন্ট', 'Receive - রিসিভ'];
 
   @override
   void dispose() {
@@ -71,16 +71,16 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
     }
   }
 
-  void _selectTypePicker(List<String> items) {
+  void _selectTypePicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Type',
-          subtitle: 'Choose a type from the list',
-          searchHint: 'Search Type',
+          title: strings.selectTypeTitle,
+          subtitle: strings.selectTypeSubtitle,
+          searchHint: strings.selectTypeSearchHint,
           selectedItem: _typeController.text,
           onItemSelected: (String selectedName) {
             _typeController.text = selectedName;
@@ -115,7 +115,7 @@ class _CashTransactionPageState extends State<CashTransactionPage> {
             showFilterPicker: true,
             filterPickerController: _typeController,
             onFilterPickerTap: () {
-              _selectTypePicker(_typeList);
+              _selectTypePicker(_typeList, strings);
             },
             filterPickerLabel: strings.type,
           ),

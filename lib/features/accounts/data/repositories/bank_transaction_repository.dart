@@ -16,9 +16,9 @@ class BankTransactionRepository {
       throw Exception(ErrorMessages.selectAllFiltersBeforeFetch);
     }
 
-    if (type == 'All') type = 'all';
-    if (type == 'Deposit') type = 'deposit';
-    if (type == 'Withdraw') type = 'withdraw';
+    if (type.contains('All')) type = 'all';
+    if (type.contains('Deposit')) type = 'deposit';
+    if (type.contains('Withdraw')) type = 'withdraw';
 
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.bankTransaction;

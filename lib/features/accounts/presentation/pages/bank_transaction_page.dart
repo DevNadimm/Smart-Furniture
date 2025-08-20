@@ -32,7 +32,7 @@ class _BankTransactionPageState extends State<BankTransactionPage> {
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _accountNameController = TextEditingController();
   final TextEditingController _accountIdController = TextEditingController();
-  final List<String> _typeList = ['All', 'Deposit', 'Withdraw'];
+  final List<String> _typeList = ['All - সব', 'Deposit - জমা', 'Withdraw - উত্তোলন'];
   Map<String, String> _accountNameToId = {};
 
   @override
@@ -97,16 +97,16 @@ class _BankTransactionPageState extends State<BankTransactionPage> {
     }
   }
 
-  void _selectTypePicker(List<String> items) {
+  void _selectTypePicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Type',
-          subtitle: 'Choose a type from the list',
-          searchHint: 'Search Type',
+          title: strings.selectTypeTitle,
+          subtitle: strings.selectTypeSubtitle,
+          searchHint: strings.selectTypeSearchHint,
           selectedItem: _typeController.text,
           onItemSelected: (String selectedName) {
             _typeController.text = selectedName;
@@ -116,16 +116,16 @@ class _BankTransactionPageState extends State<BankTransactionPage> {
     );
   }
 
-  void _selectAccountPicker(List<String> items) {
+  void _selectAccountPicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Bank Account',
-          subtitle: 'Choose a bank account from the list',
-          searchHint: 'Search Bank Account',
+          title: strings.selectBankAccountTitle,
+          subtitle: strings.selectBankAccountSubtitle,
+          searchHint: strings.selectBankAccountSearchHint,
           selectedItem: _accountNameController.text,
           onItemSelected: (String selectedName) {
             _accountNameController.text = selectedName;
@@ -165,8 +165,8 @@ class _BankTransactionPageState extends State<BankTransactionPage> {
                   endDateController: _toDateController,
                   accountNameController: _accountNameController,
                   typeController: _typeController,
-                  onAccountPickerTap: () => _selectAccountPicker(state.bankAccountModel.data!.map((e) => e.bankName ?? '').toList()),
-                  onTypePickerTap: () => _selectTypePicker(_typeList),
+                  onAccountPickerTap: () => _selectAccountPicker(state.bankAccountModel.data!.map((e) => e.bankName ?? '').toList(), strings),
+                  onTypePickerTap: () => _selectTypePicker(_typeList, strings),
                   onSelectDate: _selectDate,
                   onApplyFilter: _fetchData,
                 );
@@ -177,7 +177,7 @@ class _BankTransactionPageState extends State<BankTransactionPage> {
                   accountNameController: _accountNameController,
                   typeController: _typeController,
                   onAccountPickerTap: () {},
-                  onTypePickerTap: () => _selectTypePicker(_typeList),
+                  onTypePickerTap: () => _selectTypePicker(_typeList, strings),
                   onSelectDate: _selectDate,
                   onApplyFilter: () {},
                 );
@@ -188,7 +188,7 @@ class _BankTransactionPageState extends State<BankTransactionPage> {
                   accountNameController: _accountNameController,
                   typeController: _typeController,
                   onAccountPickerTap: () {},
-                  onTypePickerTap: () => _selectTypePicker(_typeList),
+                  onTypePickerTap: () => _selectTypePicker(_typeList, strings),
                   onSelectDate: _selectDate,
                   onApplyFilter: _fetchData,
                 );
