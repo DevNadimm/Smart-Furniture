@@ -5,6 +5,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
@@ -91,16 +92,16 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
     }
   }
 
-  void _selectProductPicker(List<String> items) {
+  void _selectProductPicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Product',
-          subtitle: 'Choose a product from the list',
-          searchHint: 'Search Product',
+          title: strings.selectProductTitle,
+          subtitle: strings.selectProductSubtitle,
+          searchHint: strings.selectProductSearchHint,
           selectedItem: _productNameController.text,
           onItemSelected: (String selectedName) {
             _productNameController.text = selectedName;
@@ -114,6 +115,7 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).languageCode;
 
     return Scaffold(
       appBar: AppBar(
@@ -133,7 +135,7 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
               if (state is ProductListLoaded) {
                 _productNameToId = {
                   for (var p in state.productListModel.data!)
-                    p.productName ?? '': p.id?.toString() ?? ''
+                    (locale == 'bn' ? (p.productNameBangla ?? '') : (p.productName ?? '')): (p.id?.toString() ?? '')
                 };
                 return FilterBar(
                   startDateController: _fromDateController,
@@ -143,7 +145,7 @@ class _ProductLedgerPageState extends State<ProductLedgerPage> {
                   showFilterPicker: true,
                   filterPickerController: _productNameController,
                   onFilterPickerTap: () {
-                    _selectProductPicker(state.productListModel.data!.map((e) => e.productName ?? '').toList());
+                    _selectProductPicker(state.productListModel.data!.map((e) => LocalizationService.getText(context, en: e.productName ?? '', bn: e.productNameBangla ?? '')).toList(), strings);
                   },
                   filterPickerLabel: strings.product,
                 );

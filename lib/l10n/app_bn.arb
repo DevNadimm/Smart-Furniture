@@ -180,5 +180,9 @@
 
   "selectBankAccountTitle": "ব্যাংক একাউন্ট নির্বাচন করুন",
   "selectBankAccountSubtitle": "তালিকা থেকে একটি ব্যাংক একাউন্ট বেছে নিন",
-  "selectBankAccountSearchHint": "ব্যাংক একাউন্ট খুঁজুন"
+  "selectBankAccountSearchHint": "ব্যাংক একাউন্ট খুঁজুন",
+
+  "selectProductTitle": "পণ্য নির্বাচন করুন",
+  "selectProductSubtitle": "তালিকা থেকে একটি পণ্য বেছে নিন",
+  "selectProductSearchHint": "পণ্য খুঁজুন"
 }

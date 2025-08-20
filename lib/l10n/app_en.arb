@@ -180,5 +180,9 @@
 
   "selectBankAccountTitle": "Select Bank Account",
   "selectBankAccountSubtitle": "Choose a bank account from the list",
-  "selectBankAccountSearchHint": "Search Bank Account"
+  "selectBankAccountSearchHint": "Search Bank Account",
+
+  "selectProductTitle": "Select Product",
+  "selectProductSubtitle": "Choose a product from the list",
+  "selectProductSearchHint": "Search Product"
 }
