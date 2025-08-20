@@ -18,7 +18,8 @@ class ProductLedgerData {
   final String? date;
   final String? type;
   final String? invoiceNo;
-  final String? personeName;
+  final String? personName;
+  final String? personNameBangla;
   final String? rate;
   final int? inQty;
   final int? outQty;
@@ -27,7 +28,8 @@ class ProductLedgerData {
     this.date,
     this.type,
     this.invoiceNo,
-    this.personeName,
+    this.personName,
+    this.personNameBangla,
     this.rate,
     this.inQty,
     this.outQty,
@@ -38,7 +40,8 @@ class ProductLedgerData {
       date: json['date'] as String?,
       type: json['type'] as String?,
       invoiceNo: json['invoice_no'] as String?,
-      personeName: json['persone_name'] as String?,
+      personName: json['person_name'] as String?,
+      personNameBangla: json['person_name_bangla'] as String?,
       rate: json['rate'] as String?,
       inQty: json['in_qty'] as int?,
       outQty: json['out_qty'] as int?,

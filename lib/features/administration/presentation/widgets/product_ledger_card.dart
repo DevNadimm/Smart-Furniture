@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +15,8 @@ class ProductLedgerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
-
+    final personName = ledgerData?.personName ?? 'N/A';
+    final personNameBn = ledgerData?.personNameBangla ?? 'N/A';
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -61,7 +63,7 @@ class ProductLedgerCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "${strings.product}: ${ledgerData?.personeName ?? 'N/A'}",
+                    "${strings.brand}: ${LocalizationService.getText(context, en: personName, bn: personNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 6),

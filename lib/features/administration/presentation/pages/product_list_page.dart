@@ -42,7 +42,7 @@ class _ProductListPageState extends State<ProductListPage> {
   void _fetchData() {
     final selectedShop = context.read<ShopSelectionCubit>().state;
     if (selectedShop != null) {
-      context.read<ProductListBloc>().add(LoadProductListEvent(selectedShop.name, ''));
+      context.read<ProductListBloc>().add(LoadProductListEvent(selectedShop.name, _searchController.text));
     } else {
       AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
     }
