@@ -14,6 +14,11 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
+    final categoryName = product?.category?.name ?? "N/A";
+    final categoryNameBn = product?.category?.nameBangla ?? "N/A";
+    final brandName = product?.brand?.name ?? "N/A";
+    final brandNameBn = product?.brand?.nameBangla ?? "N/A";
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -36,7 +41,7 @@ class ProductCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withOpacity(0.1),
               child: Text(
-                product?.category?.name ?? 'Uncategorized',
+                "${strings.category}: ${LocalizationService.getText(context, en: categoryName, bn: categoryNameBn)}",
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   color: AppColors.primaryColor,
                 ),
@@ -51,14 +56,13 @@ class ProductCard extends StatelessWidget {
                     "${strings.product}: ${LocalizationService.getText(context, en: product?.productName ?? 'N/A', bn: product?.productNameBangla ?? 'N/A')}",
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  if (product?.brand != null && product!.brand!.isNotEmpty)
-                    Text(
-                      "${strings.brand}: ${product?.brand ?? "N/A"}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(color: AppColors.lightFontColor),
-                    ),
+                  Text(
+                    "${strings.brand}: ${LocalizationService.getText(context, en: brandName, bn: brandNameBn)}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(color: AppColors.lightFontColor),
+                  ),
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 1),

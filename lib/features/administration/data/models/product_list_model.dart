@@ -9,10 +9,11 @@ class ProductListModel {
 
   factory ProductListModel.fromJson(Map<String, dynamic> json) {
     return ProductListModel(
-      success: json['success'],
+      success: json['success'] as bool?,
       data: json['data'] != null
           ? List<ProductData>.from(
-          json['data'].map((item) => ProductData.fromJson(item)))
+          (json['data'] as List<dynamic>)
+              .map((item) => ProductData.fromJson(item)))
           : null,
     );
   }
@@ -24,7 +25,7 @@ class ProductData {
   final String? productName;
   final String? productNameBangla;
   final String? productImage;
-  final String? brand;
+  final Brand? brand;
   final Category? category;
   final String? model;
   final String? sku;
@@ -65,27 +66,47 @@ class ProductData {
 
   factory ProductData.fromJson(Map<String, dynamic> json) {
     return ProductData(
-      id: json['id'],
-      productId: json['product_id'],
-      productName: json['product_name'],
-      productNameBangla: json['product_name_bangla'],
-      productImage: json['product_image'],
-      brand: json['brand'],
+      id: json['id'] as int?,
+      productId: json['product_id'] as String?,
+      productName: json['product_name'] as String?,
+      productNameBangla: json['product_name_bangla'] as String?,
+      productImage: json['product_image'] as String?,
+      brand: json['brand'] != null ? Brand.fromJson(json['brand']) : null,
       category:
       json['category'] != null ? Category.fromJson(json['category']) : null,
-      model: json['model'],
-      sku: json['sku'],
-      size: json['size'],
-      unit: json['unit'],
-      vat: json['vat'],
-      reorderLevel: json['reorder_level'],
-      purchaseRate: json['purchase_rate'],
-      salesRate: json['sales_rate'],
-      wholesaleRate: json['wholesale_rate'],
-      isService: json['isService'],
-      branchId: json['branch_id'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      model: json['model'] as String?,
+      sku: json['sku'] as String?,
+      size: json['size'] as String?,
+      unit: json['unit'] as String?,
+      vat: json['vat'] as String?,
+      reorderLevel: json['reorder_level'] as String?,
+      purchaseRate: json['purchase_rate'] as String?,
+      salesRate: json['sales_rate'] as String?,
+      wholesaleRate: json['wholesale_rate'] as String?,
+      isService: json['isService'] as String?,
+      branchId: json['branch_id'] as String?,
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+  }
+}
+
+class Brand {
+  final int? id;
+  final String? name;
+  final String? nameBangla;
+
+  Brand({
+    this.id,
+    this.name,
+    this.nameBangla,
+  });
+
+  factory Brand.fromJson(Map<String, dynamic> json) {
+    return Brand(
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      nameBangla: json['name_bangla'] as String?,
     );
   }
 }
@@ -93,16 +114,19 @@ class ProductData {
 class Category {
   final int? id;
   final String? name;
+  final String? nameBangla;
 
   Category({
     this.id,
     this.name,
+    this.nameBangla,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] as int?,
+      name: json['name'] as String?,
+      nameBangla: json['name_bangla'] as String?,
     );
   }
 }
