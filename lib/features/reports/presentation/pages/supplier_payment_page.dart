@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
@@ -74,16 +75,16 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
     }
   }
 
-  void _selectSupplierPicker(List<String> items) {
+  void _selectSupplierPicker(List<String> items, AppLocalizations strings) {
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Supplier',
-          subtitle: 'Choose a supplier from the list',
-          searchHint: 'Search Supplier',
+          title: strings.selectSupplierTitle,
+          subtitle: strings.selectSupplierSubtitle,
+          searchHint: strings.selectSupplierSearchHint,
           selectedItem: _supplierNameController.text,
           onItemSelected: (String selectedName) {
             _supplierNameController.text = selectedName;
@@ -97,6 +98,7 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).languageCode;
 
     return Scaffold(
       appBar: AppBar(
@@ -116,13 +118,13 @@ class _SupplierPaymentPageState extends State<SupplierPaymentPage> {
                 if (state is SupplierListLoaded) {
                   _supplierNameToId = {
                     for (var s in state.supplierListModel.data!)
-                      s.supplierName ?? '': s.id?.toString() ?? ''
+                      (locale == 'bn' ? (s.supplierNameBangla ?? '') : (s.supplierName ?? '')): (s.id?.toString() ?? '')
                   };
                   return FilterBar(
                     showFilterPicker: true,
                     filterPickerLabel: strings.selectSupplier,
                     filterPickerController: _supplierNameController,
-                    onFilterPickerTap: () => _selectSupplierPicker(state.supplierListModel.data!.map((e) => e.supplierName ?? '').toList()),
+                    onFilterPickerTap: () => _selectSupplierPicker(state.supplierListModel.data!.map((e) => LocalizationService.getText(context, en: e.supplierName ?? '', bn: e.supplierNameBangla ?? '')).toList(), strings),
                     onApplyFilter: _fetchData,
                   );
                 } else if (state is SupplierListLoading) {
