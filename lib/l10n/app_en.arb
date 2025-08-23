@@ -167,6 +167,14 @@
   "outQuantity": "Out Quantity",
   "name": "Name",
 
+  "profitLossSummary": "Profit & Loss Summary",
+  "totalDiscount": "Total Discount",
+  "totalReturned": "Total Returned",
+  "totalDamaged": "Total Damaged",
+  "totalCashTransaction": "Total Cash Transaction",
+  "totalEmployeePayment": "Total Employee Payment",
+  "totalProfit": "Total Profit",
+
   "selectSupplierTitle": "Select Supplier",
   "selectSupplierSubtitle": "Choose a supplier from the list",
   "selectSupplierSearchHint": "Search Supplier",

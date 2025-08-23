@@ -8,7 +8,6 @@ import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
-import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
@@ -184,23 +183,8 @@ class _ProfitLossPageState extends State<ProfitLossPage> {
                         message: ErrorMessages.networkError,
                       );
                     } else if (state is ProfitLossLoaded) {
-                      final profitLoss = state.profitLossModel.data;
-                      if (profitLoss?.isEmpty ?? false) {
-                        return const EmptyStateWidget(
-                          title: 'No Profit & Loss Records Found',
-                          message: 'We couldn’t find any profit and loss records for the selected date range. Try adjusting your filters or selecting a different period.',
-                        );
-                      } else {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: profitLoss?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            final data = profitLoss?[index];
-                            return ProfitLossCard(data: data!);
-                          },
-                        );
-                      }
+                      final profitLoss = state.profitLossModel;
+                      return ProfitLossCard(profitLoss: profitLoss);
                     } else {
                       return const SizedBox.shrink();
                     }

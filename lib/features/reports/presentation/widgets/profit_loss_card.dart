@@ -3,25 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/reports/data/models/profit_loss_model.dart';
 
 class ProfitLossCard extends StatelessWidget {
-  final ProfitLossData data;
+  final ProfitLossModel? profitLoss;
 
-  const ProfitLossCard({
-    super.key,
-    required this.data,
-  });
+  const ProfitLossCard({super.key, required this.profitLoss});
 
   @override
   Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context)!;
-    final SaleProduct? product =
-    data.saleProduct != null && data.saleProduct!.isNotEmpty
-        ? data.saleProduct!.first
-        : null;
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -43,90 +33,41 @@ class ProfitLossCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withOpacity(0.1),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    DateFormatters.readableDate(context, data.invoiceDate ?? ""),
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                  Text(
-                    "${strings.invoice}: ${data.invoiceNo ?? 'N/A'}",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
-                ],
+              child: Text(
+                AppLocalizations.of(context)!.profitLossSummary,
+                style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                  color: AppColors.primaryColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (product != null) ...[
-                    Text(
-                      product.productName ?? 'N/A',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      "${strings.quantity}: ${CurrencyFormatter.format(int.tryParse(product.quantity ?? '0') ?? 0, context: context)} • ${strings.sales}: ${CurrencyFormatter.format(int.tryParse(product.salePrice ?? '0') ?? 0, context: context)} Tk",
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.lightFontColor,
-                      ),
-                    ),
-                    const SizedBox(height: 6),
-                    const Divider(color: AppColors.borderColor, thickness: 1),
-                    const SizedBox(height: 6),
-                  ],
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              (data.type ?? 'N/A').toUpperCase(),
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              "${data.status?[0].toUpperCase()}${data.status?.substring(1)}",
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: AppColors.lightFontColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          _priceTag(
-                            strings.total,
-                            "${CurrencyFormatter.format(int.tryParse(data.totalAmount ?? '0') ?? 0, context: context)} Tk",
-                            AppColors.primaryColor,
-                          ),
-                          _priceTag(
-                            strings.paid,
-                            "${CurrencyFormatter.format(int.tryParse(data.totalPaid ?? '0') ?? 0, context: context)} Tk",
-                            AppColors.success,
-                          ),
-                          _priceTag(
-                            strings.due,
-                            "${CurrencyFormatter.format(int.tryParse(data.totalDue ?? '0') ?? 0, context: context)} Tk",
-                            AppColors.warning,
-                          ),
-                        ],
-                      )
-                    ],
+                  _buildRow(context, AppLocalizations.of(context)!.totalPurchased, profitLoss?.totalPurchased, AppColors.warning),
+                  _buildRow(context, AppLocalizations.of(context)!.totalSold, profitLoss?.totalSold, AppColors.success),
+                  _buildRow(context, AppLocalizations.of(context)!.totalDiscount, profitLoss?.totalDiscount, Colors.orange),
+                  _buildRow(context, AppLocalizations.of(context)!.totalReturned, profitLoss?.totalReturnedValue, AppColors.error),
+                  _buildRow(context, AppLocalizations.of(context)!.totalDamaged, profitLoss?.totalDamaged, Colors.redAccent),
+                  _buildRow(
+                    context,
+                    AppLocalizations.of(context)!.totalCashTransaction,
+                    profitLoss?.totalCashTransaction,
+                    Colors.teal,
+                  ),
+                  _buildRow(
+                    context,
+                    AppLocalizations.of(context)!.totalEmployeePayment,
+                    profitLoss?.totalEmployeePayment,
+                    Colors.blueGrey,
+                  ),
+                  const Divider(color: AppColors.borderColor, thickness: 1),
+                  _buildRow(
+                    context,
+                    AppLocalizations.of(context)!.totalProfit,
+                    profitLoss?.totalProfit,
+                    (profitLoss?.totalProfit ?? 0) >= 0 ? AppColors.success : AppColors.error,
                   ),
                 ],
               ),
@@ -137,23 +78,40 @@ class ProfitLossCard extends StatelessWidget {
     );
   }
 
-  Widget _priceTag(String label, String value, Color color) {
-    return Container(
-      margin: const EdgeInsets.only(top: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        "$label: $value",
-        style: GoogleFonts.poppins(
-          textStyle: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 12,
-            color: color,
+  Widget _buildRow(BuildContext context, String label, num? value, Color color) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
-        ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              value != null
+                  ? "${CurrencyFormatter.format(value, context: context)} Tk"
+                  : '0.00 Tk',
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  color: color,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
