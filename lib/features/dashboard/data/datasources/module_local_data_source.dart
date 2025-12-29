@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/daily_reports/presentation/pages/daily_reports_page.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/module.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/accounts_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/administration_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/hr_module_page.dart';
@@ -10,6 +9,7 @@ import 'package:smart_furniture/features/dashboard/presentation/pages/purchase_m
 import 'package:smart_furniture/features/dashboard/presentation/pages/reports_module_page.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/sales_module_page.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ModuleLocalDataSource {
   static List<Module> getModules(BuildContext context) {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/accounts/data/models/reminder_cheque_list_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ReminderChequeCard extends StatelessWidget {
   final ReminderChequeData? chequeData;

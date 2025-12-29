@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -15,6 +14,7 @@ import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart'
 import 'package:smart_furniture/features/accounts/presentation/blocs/cash_transaction/cash_transaction_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/widgets/cash_transaction_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CashTransactionPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const CashTransactionPage());

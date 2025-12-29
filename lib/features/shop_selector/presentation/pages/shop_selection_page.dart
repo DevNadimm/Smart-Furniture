@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/utils/enums/shop_type.dart';
 import 'package:smart_furniture/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:smart_furniture/features/shop_selector/data/datasources/shop_local_data_source.dart';
@@ -9,6 +8,7 @@ import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart
 import 'package:collection/collection.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/widgets/shop_card.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ShopSelectionPage extends StatelessWidget {
   static route() => MaterialPageRoute(builder: (context) => const ShopSelectionPage());

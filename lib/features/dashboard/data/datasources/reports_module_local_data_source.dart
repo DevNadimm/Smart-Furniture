@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
 import 'package:smart_furniture/features/reports/presentation/pages/customer_payment_page.dart';
 import 'package:smart_furniture/features/reports/presentation/pages/profit_loss_page.dart';
 import 'package:smart_furniture/features/reports/presentation/pages/supplier_payment_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ReportsModuleLocalDataSource {
   static List<SubModule> getReportsModules(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/purchase/data/models/purchase_return_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class PurchaseReturnCard extends StatelessWidget {
   final ReturnData? returnData;

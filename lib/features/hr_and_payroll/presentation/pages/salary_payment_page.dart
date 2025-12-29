@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
@@ -10,6 +9,7 @@ import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/salary_payment/salary_payment_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/widgets/salary_payment_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class SalaryPaymentPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const SalaryPaymentPage());

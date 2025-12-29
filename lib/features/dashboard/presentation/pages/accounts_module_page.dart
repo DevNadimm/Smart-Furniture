@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/data/datasources/accounts_module_local_data_source.dart';
 import 'package:smart_furniture/features/dashboard/presentation/widgets/sub_module_tile.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class AccountsModulePage extends StatelessWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const AccountsModulePage());

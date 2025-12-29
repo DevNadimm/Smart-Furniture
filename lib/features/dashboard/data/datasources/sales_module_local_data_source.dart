@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
 import 'package:smart_furniture/features/sales/presentation/pages/sales_record_page.dart';
 import 'package:smart_furniture/features/sales/presentation/pages/sales_return_page.dart';
 import 'package:smart_furniture/features/sales/presentation/pages/stock_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class SalesModuleLocalDataSource {
   static List<SubModule> getSalesModules(BuildContext context) {

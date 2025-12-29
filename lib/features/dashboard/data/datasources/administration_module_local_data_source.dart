@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/administration/presentation/pages/customer_list_page.dart';
 import 'package:smart_furniture/features/administration/presentation/pages/damage_list_page.dart';
@@ -7,6 +6,7 @@ import 'package:smart_furniture/features/administration/presentation/pages/produ
 import 'package:smart_furniture/features/administration/presentation/pages/product_list_page.dart';
 import 'package:smart_furniture/features/administration/presentation/pages/supplier_list_page.dart';
 import 'package:smart_furniture/features/dashboard/domain/entities/sub_module.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class AdministrationModuleLocalDataSource {
   static List<SubModule> getAdministrationModules(BuildContext context) {

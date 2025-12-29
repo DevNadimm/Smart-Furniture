@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -17,6 +16,7 @@ import 'package:smart_furniture/features/administration/presentation/blocs/custo
 import 'package:smart_furniture/features/reports/presentation/blocs/customer_payment/customer_payment_bloc.dart';
 import 'package:smart_furniture/features/reports/presentation/widgets/customer_payment_card.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerPaymentPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (context) => const CustomerPaymentPage());
