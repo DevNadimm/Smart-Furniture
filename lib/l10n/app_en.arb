@@ -193,5 +193,15 @@
 
   "selectProductTitle": "Select Product",
   "selectProductSubtitle": "Choose a product from the list",
-  "selectProductSearchHint": "Search Product"
+  "selectProductSearchHint": "Search Product",
+
+  "selectCategoryTitle": "Select Category",
+  "selectCategorySubtitle": "Choose a category from the list",
+  "selectCategorySearchHint": "Search Category",
+
+  "totalPurchasesQuantity": "Total Purchases Quantity",
+  "totalSalesQuantity": "Total Sales Quantity",
+  "totalCurrentQuantity": "Total Current Quantity",
+  "totalPurchasesAmount": "Total Purchases Amount",
+  "totalSalesAmount": "Total Sales Amount"
 }

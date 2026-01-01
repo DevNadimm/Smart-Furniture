@@ -44,4 +44,7 @@ class ErrorMessages {
   static const String selectDateFiltersBeforeFetch = 'Please select date filters before fetching data.';
   static const String networkError = 'Network error occurred. Please check your connection and try again later.';
   static const String unknownError = 'An unknown error occurred. Please try again later.';
+
+  // Misc
+  static const String fetchCategoryListFailed = 'Failed to fetch category list. Please try again later.';
 }

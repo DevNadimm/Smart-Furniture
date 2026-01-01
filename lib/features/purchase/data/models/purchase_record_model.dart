@@ -1,10 +1,12 @@
 class PurchaseRecordModel {
   final bool? success;
   final List<PurchaseRecordData>? data;
+  final CalculateData? calculateData;
 
   PurchaseRecordModel({
     this.success,
     this.data,
+    this.calculateData,
   });
 
   factory PurchaseRecordModel.fromJson(Map<String, dynamic> json) {
@@ -13,6 +15,23 @@ class PurchaseRecordModel {
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => PurchaseRecordData.fromJson(e as Map<String, dynamic>))
           .toList(),
+      calculateData: json['calculateData'] != null
+          ? CalculateData.fromJson(json['calculateData'] as Map<String, dynamic>)
+          : null,
+    );
+  }
+}
+
+class CalculateData {
+  final int? totalQuantity;
+  final double? totalPurchaseAmount;
+
+  CalculateData({this.totalQuantity, this.totalPurchaseAmount});
+
+  factory CalculateData.fromJson(Map<String, dynamic> json) {
+    return CalculateData(
+      totalQuantity: json['total_quantity'] as int?,
+      totalPurchaseAmount: (json['total_purchase_amount'] as num?)?.toDouble(),
     );
   }
 }
@@ -120,11 +139,7 @@ class Product {
   final String? productName;
   final String? productNameBangla;
 
-  Product({
-    this.id,
-    this.productName,
-    this.productNameBangla,
-  });
+  Product({this.id, this.productName, this.productNameBangla});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
@@ -140,11 +155,7 @@ class Supplier {
   final String? supplierName;
   final String? supplierNameBangla;
 
-  Supplier({
-    this.id,
-    this.supplierName,
-    this.supplierNameBangla,
-  });
+  Supplier({this.id, this.supplierName, this.supplierNameBangla});
 
   factory Supplier.fromJson(Map<String, dynamic> json) {
     return Supplier(
@@ -160,11 +171,7 @@ class Category {
   final String? name;
   final String? nameBangla;
 
-  Category({
-    this.id,
-    this.name,
-    this.nameBangla,
-  });
+  Category({this.id, this.name, this.nameBangla});
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(

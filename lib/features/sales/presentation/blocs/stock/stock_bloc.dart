@@ -15,6 +15,7 @@ class StockBloc extends Bloc<StockEvent, StockState> {
           event.shop,
           event.fromDate,
           event.toDate,
+          event.categoryId,
           event.search,
         );
 

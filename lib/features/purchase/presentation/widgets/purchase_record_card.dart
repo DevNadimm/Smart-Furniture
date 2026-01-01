@@ -22,7 +22,7 @@ class PurchaseRecordCard extends StatelessWidget {
         color: AppColors.cardColor,
         boxShadow: [
           BoxShadow(
-            color: AppColors.grey.withOpacity(0.15),
+            color: AppColors.grey.withValues(alpha: 0.15),
             blurRadius: 8,
             offset: const Offset(0, 4),
           )
@@ -35,7 +35,7 @@ class PurchaseRecordCard extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
-              color: AppColors.primaryColor.withOpacity(0.1),
+              color: AppColors.primaryColor.withValues(alpha: 0.1),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -133,7 +133,7 @@ class PurchaseRecordCard extends StatelessWidget {
       margin: const EdgeInsets.only(top: 4),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(

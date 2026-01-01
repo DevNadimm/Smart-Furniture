@@ -11,7 +11,7 @@ class PurchaseRecordBloc extends Bloc<PurchaseRecordEvent, PurchaseRecordState> 
     on<LoadPurchaseRecordEvent>((event, emit) async {
       emit(PurchaseRecordLoading());
       try {
-        final data = await PurchaseRecordRepository.fetchData(event.shop, event.fromDate, event.toDate);
+        final data = await PurchaseRecordRepository.fetchData(event.shop, event.fromDate, event.toDate, event.categoryId);
         emit(PurchaseRecordLoaded(data!));
       } catch (e) {
         emit(PurchaseRecordError(HelperFunctions.cleanErrorMessage(e.toString())));

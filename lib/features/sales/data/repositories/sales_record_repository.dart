@@ -5,13 +5,14 @@ import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/features/sales/data/models/sales_record_model.dart';
 
 class SalesRecordRepository {
-  static Future<SalesRecordModel?> fetchData(String shop, String? fromDate, String? toDate) async {
+  static Future<SalesRecordModel?> fetchData(String shop, String? fromDate, String? toDate, String? categoryId) async {
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.salesRecord;
 
     final queryParams = {
       if (fromDate != null && fromDate.isNotEmpty) 'from': fromDate,
       if (toDate != null && toDate.isNotEmpty) 'to': toDate,
+      if (categoryId != null && categoryId.isNotEmpty) 'category_id': categoryId,
     };
 
     final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);

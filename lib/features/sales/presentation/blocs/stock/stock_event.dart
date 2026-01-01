@@ -6,12 +6,14 @@ class LoadStockEvent extends StockEvent {
   final String shop;
   final String? fromDate;
   final String? toDate;
+  final String? categoryId;
   final String? search;
 
   LoadStockEvent({
     required this.shop,
     required this.fromDate,
     required this.toDate,
+    required this.categoryId,
     required this.search,
   });
 }

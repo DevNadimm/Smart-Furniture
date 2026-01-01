@@ -16,16 +16,13 @@ class SalesRecordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
 
-    final product = salesRecord?.salesProduct?.isNotEmpty == true
+    // Get customer info from first product (assuming same customer for all products)
+    final firstProduct = salesRecord?.salesProduct?.isNotEmpty == true
         ? salesRecord!.salesProduct!.first
         : null;
 
-    final customerName = product?.customer?.customerName ?? 'N/A';
-    final customerNameBn = product?.customer?.customerNameBangla ?? 'N/A';
-    final productName = product?.product?.productName ?? 'N/A';
-    final productNameBn = product?.product?.productNameBangla ?? 'N/A';
-    final categoryName = product?.category?.name ?? 'N/A';
-    final categoryNameBn = product?.category?.nameBangla ?? 'N/A';
+    final customerName = firstProduct?.customer?.customerName ?? 'N/A';
+    final customerNameBn = firstProduct?.customer?.customerNameBangla ?? 'N/A';
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -44,6 +41,7 @@ class SalesRecordCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Column(
           children: [
+            // Header with date and invoice
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
@@ -69,11 +67,13 @@ class SalesRecordCard extends StatelessWidget {
                 ],
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Customer name
                   Text(
                     "${strings.customer}: ${LocalizationService.getText(context, en: customerName, bn: customerNameBn)}",
                     style: Theme.of(context).textTheme.headlineSmall,
@@ -81,50 +81,43 @@ class SalesRecordCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                  // All products list
+                  if (salesRecord?.salesProduct?.isNotEmpty == true)
+                    ...salesRecord!.salesProduct!.map((product) {
+                      return _buildProductItem(context, strings, product);
+                    }).toList(),
+
+                  // Total section
+                  if (salesRecord?.totalAmount != null &&
+                      salesRecord!.totalAmount != '0')
+                    Column(
+                      children: [
+                        // const SizedBox(height: 8),
+                        const Divider(
+                            color: AppColors.borderColor, thickness: 1),
+                        // const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "${strings.product}: ${LocalizationService.getText(context, en: productName, bn: productNameBn)}",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                            Text(
-                              "${strings.category}: ${LocalizationService.getText(context, en: categoryName, bn: categoryNameBn)}",
+                              strings.total,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium
-                                  ?.copyWith(color: AppColors.lightFontColor),
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            ),
+                            _priceTag(
+                              '',
+                              CurrencyFormatter.format(
+                                  int.tryParse(salesRecord?.totalAmount ?? '0'),
+                                  context: context),
+                              isTotal: true,
                             ),
                           ],
                         ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          _priceTag(
-                            strings.price,
-                            CurrencyFormatter.format(
-                                int.tryParse(product?.salePrice ?? '0'),
-                                context: context),
-                          ),
-                          if ((product?.total ?? '0') != '0')
-                            _priceTag(
-                              strings.total,
-                              CurrencyFormatter.format(
-                                  int.tryParse(product?.total ?? '0'),
-                                  context: context),
-                            ),
-                        ],
-                      )
-                    ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -134,20 +127,94 @@ class SalesRecordCard extends StatelessWidget {
     );
   }
 
-  Widget _priceTag(String label, String value) {
+  Widget _buildProductItem(
+      BuildContext context, AppLocalizations strings, SalesProduct product) {
+    final productName = product.product?.productName ?? 'N/A';
+    final productNameBn = product.product?.productNameBangla ?? 'N/A';
+    final categoryName = product.category?.name ?? 'N/A';
+    final categoryNameBn = product.category?.nameBangla ?? 'N/A';
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: AppColors.grey.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.borderColor.withOpacity(0.3)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${strings.product}: ${LocalizationService.getText(context, en: productName, bn: productNameBn)}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "${strings.category}: ${LocalizationService.getText(context, en: categoryName, bn: categoryNameBn)}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: AppColors.lightFontColor),
+                ),
+                if (product.quantity != null && product.quantity != '0')
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      "Qty: ${product.quantity}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: AppColors.lightFontColor),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              _priceTag(
+                strings.price,
+                CurrencyFormatter.format(int.tryParse(product.salePrice ?? '0'),
+                    context: context),
+              ),
+              if ((product.total ?? '0') != '0')
+                _priceTag(
+                  strings.total,
+                  CurrencyFormatter.format(int.tryParse(product.total ?? '0'),
+                      context: context),
+                ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _priceTag(String label, String value, {bool isTotal = false}) {
     return Container(
       margin: const EdgeInsets.only(top: 4),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor.withOpacity(0.1),
+        color: isTotal
+            ? AppColors.primaryColor.withOpacity(0.15)
+            : AppColors.primaryColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
-        "$label: $value Tk",
+        label.isEmpty ? "$value Tk" : "$label: $value Tk",
         style: GoogleFonts.poppins(
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 12,
+          textStyle: TextStyle(
+            fontWeight: isTotal ? FontWeight.w700 : FontWeight.w600,
+            fontSize: isTotal ? 13 : 12,
             color: AppColors.primaryColor,
           ),
         ),

@@ -5,13 +5,14 @@ import 'package:smart_furniture/features/sales/data/models/stock_model.dart';
 import 'package:http/http.dart' as http;
 
 class StockRepository {
-  static Future<StockModel?> fetchData(String shop, String? fromDate, String? toDate, String? search) async {
+  static Future<StockModel?> fetchData(String shop, String? fromDate, String? toDate, String? categoryId, String? search) async {
     ApiEndpoints api = ApiEndpoints(shop: shop);
     final endpoint = api.stock;
 
     final queryParams = {
       if (fromDate != null && fromDate.isNotEmpty) 'from': fromDate,
       if (toDate != null && toDate.isNotEmpty) 'to': toDate,
+      if (categoryId != null && categoryId.isNotEmpty) 'category_id': categoryId,
       if (search != null && search.isNotEmpty) 'search': search,
     };
 

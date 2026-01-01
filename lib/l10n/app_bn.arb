@@ -193,5 +193,15 @@
 
   "selectProductTitle": "পণ্য নির্বাচন করুন",
   "selectProductSubtitle": "তালিকা থেকে একটি পণ্য বেছে নিন",
-  "selectProductSearchHint": "পণ্য খুঁজুন"
+  "selectProductSearchHint": "পণ্য খুঁজুন",
+
+  "selectCategoryTitle": "ক্যাটেগরি নির্বাচন করুন",
+  "selectCategorySubtitle": "তালিকা থেকে একটি ক্যাটেগরি বেছে নিন",
+  "selectCategorySearchHint": "ক্যাটেগরি খুঁজুন",
+
+  "totalPurchasesQuantity": "মোট ক্রয় পরিমাণ",
+  "totalSalesQuantity": "মোট বিক্রয় পরিমাণ",
+  "totalCurrentQuantity": "মোট বর্তমান পরিমাণ",
+  "totalPurchasesAmount": "মোট ক্রয় মূল্য",
+  "totalSalesAmount": "মোট বিক্রয় মূল্য"
 }
