@@ -6,6 +6,10 @@ class ApiEndpoints {
   ApiEndpoints({required this.shop});
 
   String get baseUrl => BaseUrl.getBaseUrl(shop);
+  String get employeeBaseUrl => 'https://sff.jabedinternational.com';
+
+  // Login
+  String get login => '$employeeBaseUrl/api/login';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

@@ -58,7 +58,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               const SizedBox(height: 24),
               Text(
                 strings.adminLoginHeader,
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 12),
               Text(
@@ -85,7 +85,6 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
         
               SizedBox(
                 width: double.infinity,
-                height: 50,
                 child: ElevatedButton(
                   onPressed: _login,
                   child: Text(strings.adminLoginButton),

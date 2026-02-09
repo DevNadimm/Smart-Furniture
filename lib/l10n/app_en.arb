@@ -13,9 +13,20 @@
 
   "@@chooseUserRole": "===== Choose User Role =====",
   "chooseUserRoleHeader": "Choose Your Role",
-  "chooseUserRoleSubtitle": "Please select the role that best represents how you will use this application, so we can personalize your experience accordingly.",
+  "chooseUserRoleSubtitle": "Please select the role that best represents how you will use this application.",
   "adminRole": "Admin",
   "employeeRole": "Employee",
+
+  "dashboard": "Dashboard",
+  "furnitureManagementSystem": "Furniture Management System",
+  "quickAccess": "Quick Access",
+  "sales": "Sales",
+  "salesSubtitle": "Track sales and revenue",
+  "expense": "Expense",
+  "expenseSubtitle": "Monitor expenses and costs",
+  "stock": "Stock",
+  "stockSubtitle": "Manage inventory levels",
+  "logout": "Logout",
 
   "adminLoginHeader": "Enter Admin PIN",
   "adminLoginSubtitle": "Enter the administrator PIN provided to access the admin panel securely.",

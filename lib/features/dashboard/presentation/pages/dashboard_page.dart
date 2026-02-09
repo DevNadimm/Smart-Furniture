@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/dashboard/data/datasources/module_local_data_source.dart';
 import 'package:smart_furniture/features/dashboard/presentation/widgets/module_card.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
+import 'package:smart_furniture/features/splash/splash_page.dart';
 
 class DashboardPage extends StatelessWidget {
   final Shop shop;
@@ -16,6 +18,22 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(shop.name),
+        actions: [
+          IconButton(
+            onPressed: () {
+              AppPreferences.clearAll();
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const SplashPage()), (route) => false,
+              );
+            },
+            icon: const Icon(
+              Icons.power_settings_new_rounded,
+              color: Color(0xFFEF4444),
+            ),
+          ),
+          const SizedBox(width: 10),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

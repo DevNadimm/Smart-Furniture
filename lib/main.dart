@@ -12,6 +12,7 @@ import 'package:smart_furniture/features/administration/presentation/blocs/custo
 import 'package:smart_furniture/features/administration/presentation/blocs/damage_list/damage_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_ledger/product_ledger_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
+import 'package:smart_furniture/features/auth/presentation/blocs/employee_login/login_bloc.dart';
 import 'package:smart_furniture/features/common/presentation/blocs/category_list/category_list_bloc.dart';
 import 'package:smart_furniture/features/daily_reports/presentation/blocs/daily_reports_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/employee_list/employee_list_bloc.dart';
@@ -61,6 +62,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => DailyReportsBloc()),
         BlocProvider(create: (_) => CategoryListBloc()),
         BlocProvider(create: (_) => UserRoleCubit()),
+        BlocProvider(create: (_) => LoginBloc()),
       ],
       child: const MyApp(),
     ),

@@ -17,6 +17,17 @@
   "adminRole": "অ্যাডমিন",
   "employeeRole": "কর্মচারী",
 
+  "dashboard": "ড্যাশবোর্ড",
+  "furnitureManagementSystem": "ফার্নিচার ম্যানেজমেন্ট সিস্টেম",
+  "quickAccess": "দ্রুত অ্যাক্সেস",
+  "sales": "বিক্রয়",
+  "salesSubtitle": "বিক্রয় ও আয়ের তথ্য দেখুন",
+  "expense": "ব্যয়",
+  "expenseSubtitle": "খরচ ও ব্যয়ের হিসাব পর্যবেক্ষণ করুন",
+  "stock": "স্টক",
+  "stockSubtitle": "ইনভেন্টরি ব্যবস্থাপনা করুন",
+  "logout": "লগআউট",
+
   "adminLoginHeader": "অ্যাডমিন পিন লিখুন",
   "adminLoginSubtitle": "অ্যাডমিন প্যানেলে নিরাপদভাবে প্রবেশ করার জন্য প্রদত্ত অ্যাডমিনিস্ট্রেটর পিন লিখুন।",
   "adminPinLabel": "অ্যাডমিন পিন",

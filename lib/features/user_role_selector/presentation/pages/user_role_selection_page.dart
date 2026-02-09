@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/features/auth/presentation/pages/admin_login_page.dart';
-import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
+import 'package:smart_furniture/features/auth/presentation/pages/employee_login_page.dart';
 import 'package:smart_furniture/features/user_role_selector/presentation/cubit/user_role_cubit.dart';
 import 'package:smart_furniture/features/user_role_selector/presentation/widgets/user_role_card.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -81,7 +81,7 @@ class UserRoleSelectionPage extends StatelessWidget {
                           ? null
                           : () => role == 'admin'
                               ? Navigator.pushReplacement(context, AdminLoginPage.route())
-                              : Navigator.pushReplacement(context, ShopSelectionPage.route()),
+                              : Navigator.pushReplacement(context, EmployeeLoginPage.route()),
                       icon: const Icon(HugeIcons.strokeRoundedArrowRight02),
                       iconAlignment: IconAlignment.end,
                       label: Text(strings.nextScreenBtn),
