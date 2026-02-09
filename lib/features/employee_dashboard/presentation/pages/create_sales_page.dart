@@ -12,6 +12,7 @@ import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_sales_details_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/sale_item_model.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/create_sales_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/product_selection_page.dart';
 
@@ -194,51 +195,59 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
           : _paymentInfoController.text,
     };
 
-    // TODO: Send this data to your API
+    context.read<CreateSalesBloc>().add(CreateSalesSubmitEvent(saleData));
     print('Sale Data: $saleData');
-
-    // Show success message
-    AppNotifier.showToast('Sale created successfully', type: MessageType.success);
-    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<EmployeeSalesDetailsBloc, EmployeeSalesDetailsState>(
-      listener: (context, state) {
-        if (state is SalesDetailsError) {
-          AppNotifier.showToast(state.message, type: MessageType.error);
-        } else if (state is SalesDetailsLoaded) {
-          _customerNameToId = {
-            for (var c in state.salesDetailsModel.data!.customers!)
-              c.customer ?? '': (c.id?.toString() ?? '')
-          };
-          final data = state.salesDetailsModel.data;
-          if (data != null) {
-            setState(() {
-              _products = data.products ?? [];
-              _customers = data.customers ?? [];
-              _isBranchUser = data.isBranchUser ?? false;
-            });
-          }
+    return BlocConsumer<CreateSalesBloc, CreateSalesState>(
+      listener: (context, createSalesState) {
+        if (createSalesState is CreateSalesError) {
+          AppNotifier.showToast(createSalesState.message, type: MessageType.error);
+        } else if (createSalesState is CreateSalesSuccess) {
+          AppNotifier.showToast('Sale created successfully', type: MessageType.success);
+          Navigator.pop(context);
         }
       },
-      builder: (context, state) {
-        return Stack(
-          children: [
-            _content(),
-            if (state is SalesDetailsLoading)
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                color: AppColors.black.withValues(alpha: 0.6),
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.white,
-                  ),
-                ),
-              )
-          ],
+      builder: (context, createSalesState) {
+        return BlocConsumer<EmployeeSalesDetailsBloc, EmployeeSalesDetailsState>(
+          listener: (context, salesDetailsState) {
+            if (salesDetailsState is SalesDetailsError) {
+              AppNotifier.showToast(salesDetailsState.message, type: MessageType.error);
+            } else if (salesDetailsState is SalesDetailsLoaded) {
+              _customerNameToId = {
+                for (var c in salesDetailsState.salesDetailsModel.data!.customers!)
+                  c.customer ?? '': (c.id?.toString() ?? '')
+              };
+              final data = salesDetailsState.salesDetailsModel.data;
+              if (data != null) {
+                setState(() {
+                  _products = data.products ?? [];
+                  _customers = data.customers ?? [];
+                  _isBranchUser = data.isBranchUser ?? false;
+                });
+              }
+            }
+          },
+          builder: (context, salesDetailsState) {
+            return Stack(
+              children: [
+                _content(),
+                if (salesDetailsState is SalesDetailsLoading || createSalesState is CreateSalesLoading)
+                  Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    color: AppColors.black.withValues(alpha: 0.6),
+                    child: const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.white,
+                      ),
+                    ),
+                  )
+              ],
+            );
+          },
         );
       },
     );

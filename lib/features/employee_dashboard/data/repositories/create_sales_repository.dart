@@ -1,10 +1,11 @@
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:smart_furniture/core/constants/api_endpoints.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
 
 class CreateSalesRepository {
-  static Future<bool?> createSales(Map<String, dynamic> body) async {
+  static Future<bool> createSales(Map<String, dynamic> body) async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.createSales;
 
@@ -17,16 +18,16 @@ class CreateSalesRepository {
         uri,
         headers: {
           'Accept': 'application/json',
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
-        body: body,
+        body: jsonEncode(body),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return true;
-      } else {
-        throw Exception(ErrorMessages.createSalesFailed);
       }
+      throw Exception(ErrorMessages.createSalesFailed);
     } catch (e) {
       throw Exception(ErrorMessages.createSalesFailed);
     }

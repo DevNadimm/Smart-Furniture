@@ -15,6 +15,7 @@ import 'package:smart_furniture/features/administration/presentation/blocs/produ
 import 'package:smart_furniture/features/auth/presentation/blocs/employee_login/login_bloc.dart';
 import 'package:smart_furniture/features/common/presentation/blocs/category_list/category_list_bloc.dart';
 import 'package:smart_furniture/features/daily_reports/presentation/blocs/daily_reports_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/create_sales_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/stock/employee_stock_bloc.dart';
 import 'package:smart_furniture/features/hr_and_payroll/presentation/blocs/employee_list/employee_list_bloc.dart';
@@ -67,6 +68,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => LoginBloc()),
         BlocProvider(create: (_) => EmployeeStockBloc()),
         BlocProvider(create: (_) => EmployeeSalesDetailsBloc()),
+        BlocProvider(create: (_) => CreateSalesBloc()),
       ],
       child: const MyApp(),
     ),

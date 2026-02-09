@@ -48,4 +48,5 @@ class ErrorMessages {
   // Misc
   static const String fetchCategoryListFailed = 'Failed to fetch category list. Please try again later.';
   static const String salesDetails = 'Failed to fetch sales details. Please try again later.';
+  static const String createSalesFailed = 'Failed to create sales. Please try again later.';
 }
