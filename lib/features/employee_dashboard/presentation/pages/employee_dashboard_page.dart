@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/create_sales_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_stock_page.dart';
 import 'package:smart_furniture/features/splash/splash_page.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -114,7 +115,9 @@ class EmployeeDashboardPage extends StatelessWidget {
                             icon: HugeIcons.strokeRoundedInvoice01,
                             iconColor: const Color(0xFFEC4899),
                             backgroundColor: const Color(0xFFFDF2F8),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, EmployeeExpensePage.route());
+                            },
                           ),
                           const SizedBox(height: 16),
                           _ModuleCard(
