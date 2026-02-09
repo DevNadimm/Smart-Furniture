@@ -11,6 +11,18 @@
   "shopNaimFurniture": "Naim Furniture",
   "shopNoorjahanSteel": "Noorjahan Steel",
 
+  "@@chooseUserRole": "===== Choose User Role =====",
+  "chooseUserRoleHeader": "Choose Your Role",
+  "chooseUserRoleSubtitle": "Please select the role that best represents how you will use this application, so we can personalize your experience accordingly.",
+  "adminRole": "Admin",
+  "employeeRole": "Employee",
+
+  "adminLoginHeader": "Enter Admin PIN",
+  "adminLoginSubtitle": "Enter the administrator PIN provided to access the admin panel securely.",
+  "adminPinLabel": "Admin PIN",
+  "adminLoginButton": "Login",
+  "adminLoginError": "Invalid PIN. Please try again.",
+
   "@@moduleTitles": "===== Module Titles =====",
   "sales": "Sales",
   "salesSubTitle": "View sales entries and records",

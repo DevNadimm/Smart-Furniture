@@ -5,7 +5,7 @@ import 'package:smart_furniture/core/constants/image_paths.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/language_selector/presentation/cubit/language_cubit.dart';
 import 'package:smart_furniture/features/language_selector/presentation/widgets/language_card.dart';
-import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
+import 'package:smart_furniture/features/user_role_selector/presentation/pages/user_role_selection_page.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class LanguageSelectionPage extends StatelessWidget {
@@ -76,7 +76,7 @@ class LanguageSelectionPage extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () async {
                     await AppPreferences.markFirstTimeCompleted();
-                    Navigator.pushReplacement(context, ShopSelectionPage.route());
+                    Navigator.pushReplacement(context, UserRoleSelectionPage.route());
                   },
                   icon: const Icon(HugeIcons.strokeRoundedArrowRight02),
                   iconAlignment: IconAlignment.end,

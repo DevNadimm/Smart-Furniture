@@ -11,6 +11,18 @@
   "shopNaimFurniture": "নাইম ফার্নিচার",
   "shopNoorjahanSteel": "নূরজাহান স্টিল",
 
+  "@@chooseUserRole": "===== ব্যবহারকারীর ভূমিকা নির্বাচন =====",
+  "chooseUserRoleHeader": "আপনার রোল নির্বাচন করুন",
+  "chooseUserRoleSubtitle": "অ্যাপ্লিকেশনটি কীভাবে ব্যবহার করবেন তা প্রকাশ করে একটি ভূমিকা নির্বাচন করুন, যাতে অভিজ্ঞতাটি ব্যক্তিগতভাবে সাজানো যায়।",
+  "adminRole": "অ্যাডমিন",
+  "employeeRole": "কর্মচারী",
+
+  "adminLoginHeader": "অ্যাডমিন পিন লিখুন",
+  "adminLoginSubtitle": "অ্যাডমিন প্যানেলে নিরাপদভাবে প্রবেশ করার জন্য প্রদত্ত অ্যাডমিনিস্ট্রেটর পিন লিখুন।",
+  "adminPinLabel": "অ্যাডমিন পিন",
+  "adminLoginButton": "লগইন",
+  "adminLoginError": "ভুল পিন। অনুগ্রহ করে পুনরায় চেষ্টা করুন।",
+
   "@@moduleTitles": "===== Module Titles =====",
   "sales": "বিক্রয়",
   "salesSubTitle": "বিক্রয় এন্ট্রি ও রেকর্ড দেখুন",

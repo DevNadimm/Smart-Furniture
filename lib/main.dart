@@ -27,6 +27,7 @@ import 'package:smart_furniture/features/sales/presentation/blocs/sales_record/s
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/sales_return_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/stock/stock_bloc.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
+import 'package:smart_furniture/features/user_role_selector/presentation/cubit/user_role_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,6 +60,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => ProfitLossBloc()),
         BlocProvider(create: (_) => DailyReportsBloc()),
         BlocProvider(create: (_) => CategoryListBloc()),
+        BlocProvider(create: (_) => UserRoleCubit()),
       ],
       child: const MyApp(),
     ),
