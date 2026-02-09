@@ -10,6 +10,7 @@ class ApiEndpoints {
 
   // Login
   String get login => '$employeeBaseUrl/api/login';
+  String get branchStock => '$employeeBaseUrl/api/stock/branch';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

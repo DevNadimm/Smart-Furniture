@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_stock_page.dart';
 import 'package:smart_furniture/features/splash/splash_page.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
@@ -119,7 +120,9 @@ class EmployeeDashboardPage extends StatelessWidget {
                             icon: HugeIcons.strokeRoundedDeliveryBox01,
                             iconColor: const Color(0xFF06B6D4),
                             backgroundColor: const Color(0xFFECFEFF),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, EmployeeStockPage.route());
+                            },
                           ),
                         ],
                       ),
