@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/create_sales_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_stock_page.dart';
 import 'package:smart_furniture/features/splash/splash_page.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -102,7 +103,9 @@ class EmployeeDashboardPage extends StatelessWidget {
                             icon: HugeIcons.strokeRoundedDiscountTag02,
                             iconColor: const Color(0xFF8B5CF6),
                             backgroundColor: const Color(0xFFF5F3FF),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, CreateSalesPage.route());
+                            },
                           ),
                           const SizedBox(height: 16),
                           _ModuleCard(
