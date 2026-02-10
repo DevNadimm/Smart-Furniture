@@ -26,6 +26,7 @@
   "expenseSubtitle": "খরচ ও ব্যয়ের হিসাব পর্যবেক্ষণ করুন",
   "stock": "স্টক",
   "stockSubtitle": "ইনভেন্টরি ব্যবস্থাপনা করুন",
+  "customerSubtitle": "গ্রাহকের তথ্য পরিচালনা করুন",
   "logout": "লগআউট",
 
   "adminLoginHeader": "অ্যাডমিন পিন লিখুন",

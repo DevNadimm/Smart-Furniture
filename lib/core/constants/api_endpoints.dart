@@ -13,11 +13,16 @@ class ApiEndpoints {
   String get branchStock => '$employeeBaseUrl/api/stock/branch';
   String get salesDetails => '$employeeBaseUrl/api/sales/create-data';
   String get createSales => '$employeeBaseUrl/api/sales';
+  String get employeeSales => '$employeeBaseUrl/api/sales';
   String get expenseHeads => '$employeeBaseUrl/api/expense/heads';
   String get employeeExpenses => '$employeeBaseUrl/api/expense/transactions';
   String get createEmployeeExpense => '$employeeBaseUrl/api/expense/transactions';
   String updateEmployeeExpense(int id) => '$employeeBaseUrl/api/expense/transactions/$id';
   String deleteEmployeeExpense(int id) => '$employeeBaseUrl/api/expense/transactions/$id';
+  String get customers => '$employeeBaseUrl/api/customers';
+  String get createCustomer => '$employeeBaseUrl/api/customers';
+  String updateCustomer(int id) => '$employeeBaseUrl/api/customers/$id';
+  String deleteCustomer(int id) => '$employeeBaseUrl/api/customers/$id';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

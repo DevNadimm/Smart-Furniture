@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
-import 'package:smart_furniture/features/employee_dashboard/presentation/pages/create_sales_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_sales_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_stock_page.dart';
 import 'package:smart_furniture/features/splash/splash_page.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -105,7 +106,7 @@ class EmployeeDashboardPage extends StatelessWidget {
                             iconColor: const Color(0xFF8B5CF6),
                             backgroundColor: const Color(0xFFF5F3FF),
                             onTap: () {
-                              Navigator.push(context, CreateSalesPage.route());
+                              Navigator.push(context, EmployeeSalesPage.route());
                             },
                           ),
                           const SizedBox(height: 16),
@@ -128,6 +129,17 @@ class EmployeeDashboardPage extends StatelessWidget {
                             backgroundColor: const Color(0xFFECFEFF),
                             onTap: () {
                               Navigator.push(context, EmployeeStockPage.route());
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.customer,
+                            subtitle: strings.customerSubtitle,
+                            icon: HugeIcons.strokeRoundedUser03,
+                            iconColor: const Color(0xFF2563EB),
+                            backgroundColor: const Color(0xFFEFF6FF),
+                            onTap: () {
+                              Navigator.push(context, CustomerPage.route());
                             },
                           ),
                         ],
@@ -171,7 +183,7 @@ class _ModuleCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
@@ -208,15 +220,17 @@ class _ModuleCard extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF1E293B),
                         letterSpacing: -0.3,
+                        height: 1.3,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 6),
                     Text(
                       subtitle,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color(0xFF64748B),
                         fontWeight: FontWeight.w500,
+                        height: 1.2,
                       ),
                     ),
                   ],

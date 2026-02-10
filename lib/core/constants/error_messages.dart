@@ -49,9 +49,14 @@ class ErrorMessages {
   static const String fetchCategoryListFailed = 'Failed to fetch category list. Please try again later.';
   static const String salesDetails = 'Failed to fetch sales details. Please try again later.';
   static const String createSalesFailed = 'Failed to create sales. Please try again later.';
+  static const String fetchSalesFailed = 'Failed to fetch sales. Please try again later.';
   static const String fetchExpenseHeadFailed = 'Failed to fetch expense heads. Please try again later.';
   static const String fetchExpenseFailed = 'Failed to fetch expenses. Please try again later.';
   static const String createExpenseFailed = 'Failed to create expense. Please try again later.';
   static const String updateExpenseFailed = 'Failed to update expense. Please try again later.';
   static const String deleteExpenseFailed = 'Failed to delete expense. Please try again later.';
+  static const String fetchCustomerFailed = 'Failed to fetch customers. Please try again later.';
+  static const String createCustomerFailed = 'Failed to create customer. Please try again later.';
+  static const String updateCustomerFailed = 'Failed to update customer. Please try again later.';
+  static const String deleteCustomerFailed = 'Failed to delete customer. Please try again later.';
 }

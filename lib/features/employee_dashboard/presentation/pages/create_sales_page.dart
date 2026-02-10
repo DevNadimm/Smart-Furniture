@@ -12,7 +12,7 @@ import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_sales_details_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/sale_item_model.dart';
-import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/create_sales_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/employee_sales_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/product_selection_page.dart';
 
@@ -195,17 +195,17 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
           : _paymentInfoController.text,
     };
 
-    context.read<CreateSalesBloc>().add(CreateSalesSubmitEvent(saleData));
+    context.read<EmployeeSalesBloc>().add(CreateEmployeeSaleEvent(saleData));
     print('Sale Data: $saleData');
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CreateSalesBloc, CreateSalesState>(
+    return BlocConsumer<EmployeeSalesBloc, EmployeeSalesState>(
       listener: (context, createSalesState) {
-        if (createSalesState is CreateSalesError) {
+        if (createSalesState is EmployeeSalesError) {
           AppNotifier.showToast(createSalesState.message, type: MessageType.error);
-        } else if (createSalesState is CreateSalesSuccess) {
+        } else if (createSalesState is EmployeeSalesOperationSuccess) {
           AppNotifier.showToast('Sale created successfully', type: MessageType.success);
           Navigator.pop(context);
         }
@@ -234,7 +234,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
             return Stack(
               children: [
                 _content(),
-                if (salesDetailsState is SalesDetailsLoading || createSalesState is CreateSalesLoading)
+                if (salesDetailsState is SalesDetailsLoading || createSalesState is EmployeeSalesOperationLoading)
                   Container(
                     height: double.infinity,
                     width: double.infinity,

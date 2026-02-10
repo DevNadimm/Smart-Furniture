@@ -26,6 +26,7 @@
   "expenseSubtitle": "Monitor expenses and costs",
   "stock": "Stock",
   "stockSubtitle": "Manage inventory levels",
+  "customerSubtitle": "Manage customers and profiles",
   "logout": "Logout",
 
   "adminLoginHeader": "Enter Admin PIN",
