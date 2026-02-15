@@ -1,99 +1,99 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_furniture/core/constants/error_messages.dart';
-import 'package:smart_furniture/core/utils/enums/message_type.dart';
-import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
-import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
-import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
-import 'package:smart_furniture/core/utils/widgets/loader.dart';
-import 'package:smart_furniture/features/accounts/presentation/blocs/additional_payments/additional_payments_bloc.dart';
-import 'package:smart_furniture/features/accounts/presentation/widgets/additional_payment_card.dart';
-import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
-import 'package:smart_furniture/l10n/app_localizations.dart';
-
-class AdditionalPaymentsPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (context) => const AdditionalPaymentsPage());
-
-  const AdditionalPaymentsPage({super.key});
-
-  @override
-  State<AdditionalPaymentsPage> createState() => _AdditionalPaymentsPageState();
-}
-
-class _AdditionalPaymentsPageState extends State<AdditionalPaymentsPage> {
-  @override
-  void initState() {
-    super.initState();
-    _fetchData();
-  }
-
-  void _fetchData() {
-    final selectedShop = context.read<ShopSelectionCubit>().state;
-    if (selectedShop != null) {
-      context.read<AdditionalPaymentsBloc>().add(
-        LoadAdditionalPaymentsEvent(selectedShop.name),
-      );
-    } else {
-      AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(strings!.additionalPaymentsTitle),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: BlocConsumer<AdditionalPaymentsBloc, AdditionalPaymentsState>(
-                  listener: (context, state) {
-                    if (state is AdditionalPaymentsError) {
-                      AppNotifier.showToast(state.message, type: MessageType.error);
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is AdditionalPaymentsLoading) {
-                      return const Loader();
-                    }
-                    if (state is AdditionalPaymentsError) {
-                      return const ErrorStateWidget(
-                        title: 'Failed to Load Additional Payments',
-                        message: ErrorMessages.networkError,
-                      );
-                    }
-                    if (state is AdditionalPaymentsLoaded) {
-                      if (state.additionalPaymentsModel.data?.isEmpty ?? true) {
-                        return const EmptyStateWidget(
-                          title: 'No Additional Payments Found',
-                          message: 'There are currently no additional payments available.',
-                        );
-                      } else {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.additionalPaymentsModel.data?.length ?? 0,
-                          itemBuilder: (context, index) {
-                            final additionalPayment = state.additionalPaymentsModel.data![index];
-                            return AdditionalPaymentCard(payment: additionalPayment);
-                          },
-                        );
-                      }
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:smart_furniture/core/constants/error_messages.dart';
+// import 'package:smart_furniture/core/utils/enums/message_type.dart';
+// import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
+// import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
+// import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
+// import 'package:smart_furniture/core/utils/widgets/loader.dart';
+// import 'package:smart_furniture/features/accounts/presentation/blocs/additional_payments/additional_payments_bloc.dart';
+// import 'package:smart_furniture/features/accounts/presentation/widgets/additional_payment_card.dart';
+// import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
+// import 'package:smart_furniture/l10n/app_localizations.dart';
+//
+// class AdditionalPaymentsPage extends StatefulWidget {
+//   static Route route() => MaterialPageRoute(builder: (context) => const AdditionalPaymentsPage());
+//
+//   const AdditionalPaymentsPage({super.key});
+//
+//   @override
+//   State<AdditionalPaymentsPage> createState() => _AdditionalPaymentsPageState();
+// }
+//
+// class _AdditionalPaymentsPageState extends State<AdditionalPaymentsPage> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchData();
+//   }
+//
+//   void _fetchData() {
+//     final selectedShop = context.read<ShopSelectionCubit>().state;
+//     if (selectedShop != null) {
+//       context.read<AdditionalPaymentsBloc>().add(
+//         LoadAdditionalPaymentsEvent(selectedShop.name),
+//       );
+//     } else {
+//       AppNotifier.showToast(ErrorMessages.unknownError, type: MessageType.error);
+//     }
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final strings = AppLocalizations.of(context);
+//
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(strings!.additionalPaymentsTitle),
+//       ),
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: SingleChildScrollView(
+//               child: Padding(
+//                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+//                 child: BlocConsumer<AdditionalPaymentsBloc, AdditionalPaymentsState>(
+//                   listener: (context, state) {
+//                     if (state is AdditionalPaymentsError) {
+//                       AppNotifier.showToast(state.message, type: MessageType.error);
+//                     }
+//                   },
+//                   builder: (context, state) {
+//                     if (state is AdditionalPaymentsLoading) {
+//                       return const Loader();
+//                     }
+//                     if (state is AdditionalPaymentsError) {
+//                       return const ErrorStateWidget(
+//                         title: 'Failed to Load Additional Payments',
+//                         message: ErrorMessages.networkError,
+//                       );
+//                     }
+//                     if (state is AdditionalPaymentsLoaded) {
+//                       if (state.additionalPaymentsModel.data?.isEmpty ?? true) {
+//                         return const EmptyStateWidget(
+//                           title: 'No Additional Payments Found',
+//                           message: 'There are currently no additional payments available.',
+//                         );
+//                       } else {
+//                         return ListView.builder(
+//                           shrinkWrap: true,
+//                           physics: const NeverScrollableScrollPhysics(),
+//                           itemCount: state.additionalPaymentsModel.data?.length ?? 0,
+//                           itemBuilder: (context, index) {
+//                             final additionalPayment = state.additionalPaymentsModel.data![index];
+//                             return AdditionalPaymentCard(payment: additionalPayment);
+//                           },
+//                         );
+//                       }
+//                     }
+//                     return const SizedBox.shrink();
+//                   },
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

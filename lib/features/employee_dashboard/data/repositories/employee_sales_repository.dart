@@ -7,9 +7,13 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/employee
 
 class EmployeeSalesRepository {
   /// Fetch employee sales
-  static Future<EmployeeSalesModel?> fetchSales() async {
+  static Future<EmployeeSalesModel?> fetchSales({int? branchId}) async {
     final api = ApiEndpoints(shop: '');
-    final endpoint = api.employeeSales;
+    String endpoint = api.employeeSales;
+
+    if(branchId != null) {
+      endpoint += '?branch_id=$branchId';
+    }
 
     final uri = Uri.parse(endpoint);
     print('URL: $uri');

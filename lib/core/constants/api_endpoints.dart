@@ -23,6 +23,17 @@ class ApiEndpoints {
   String get createCustomer => '$employeeBaseUrl/api/customers';
   String updateCustomer(int id) => '$employeeBaseUrl/api/customers/$id';
   String deleteCustomer(int id) => '$employeeBaseUrl/api/customers/$id';
+  String get branches => '$employeeBaseUrl/api/branches';
+  String get customerDues => '$employeeBaseUrl/api/payments/customer-dues';
+  String customerWisePurchaseDues(int id) => '$employeeBaseUrl/api/payments/customer/$id/sales';
+  String get duePayment => '$employeeBaseUrl/api/payments/customer-payment/store';
+  String get finishedProducts => '$employeeBaseUrl/api/stock/finished-products';
+  String get companyRawMaterials => '$employeeBaseUrl/api/stock/raw-materials';
+  String get purchases => '$employeeBaseUrl/api/purchases';
+  String purchaseDetails(int id) => '$employeeBaseUrl/api/purchases/$id';
+  String get suppliers => '$employeeBaseUrl/api/suppliers';
+  String get supplierDues => '$employeeBaseUrl/api/payments/supplier-dues';
+  String supplierWisePurchaseDues(int id) => '$employeeBaseUrl/api/payments/supplier/$id/purchases';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

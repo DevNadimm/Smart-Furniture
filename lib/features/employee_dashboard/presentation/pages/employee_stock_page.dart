@@ -11,9 +11,12 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/widgets
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EmployeeStockPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const EmployeeStockPage());
+  static Route route({bool? isAdmin, int? branchId}) => MaterialPageRoute(builder: (_) => EmployeeStockPage(isAdmin: isAdmin ?? false, branchId: branchId));
 
-  const EmployeeStockPage({super.key});
+  final bool isAdmin;
+  final int? branchId;
+
+  const EmployeeStockPage({super.key, required this.isAdmin, this.branchId});
 
   @override
   State<EmployeeStockPage> createState() => _EmployeeStockPageState();
@@ -27,7 +30,7 @@ class _EmployeeStockPageState extends State<EmployeeStockPage> {
   }
 
   void _fetchStock() {
-    context.read<EmployeeStockBloc>().add(LoadStocksEvent());
+    context.read<EmployeeStockBloc>().add(LoadStocksEvent(branchId: widget.branchId));
   }
 
   @override

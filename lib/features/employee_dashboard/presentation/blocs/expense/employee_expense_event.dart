@@ -2,7 +2,11 @@ part of 'employee_expense_bloc.dart';
 
 abstract class EmployeeExpenseEvent {}
 
-class LoadEmployeeExpensesEvent extends EmployeeExpenseEvent {}
+class LoadEmployeeExpensesEvent extends EmployeeExpenseEvent {
+  final int? branchId;
+
+  LoadEmployeeExpensesEvent({this.branchId});
+}
 
 class CreateEmployeeExpenseEvent extends EmployeeExpenseEvent {
   final Map<String, dynamic> expenseData;

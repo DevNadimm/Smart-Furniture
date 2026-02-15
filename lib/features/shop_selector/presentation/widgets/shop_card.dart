@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
-import 'package:smart_furniture/core/utils/enums/shop_type.dart';
-import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
+import 'package:smart_furniture/features/shop_selector/data/models/branch_model.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
 class ShopCard extends StatelessWidget {
-  final Shop shop;
+  final BranchData branch;
 
-  const ShopCard({super.key, required this.shop});
+  const ShopCard({super.key, required this.branch});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ShopSelectionCubit, ShopType?>(
-      builder: (context, shopType) {
-        final bool isSelected = shop.shopType == shopType;
+    return BlocBuilder<ShopSelectionCubit, BranchData?>(
+      builder: (context, selectedBranch) {
+        final bool isSelected = selectedBranch?.id == branch.id;
 
         return Container(
           decoration: BoxDecoration(
@@ -37,7 +36,7 @@ class ShopCard extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               borderRadius: BorderRadius.circular(20),
-              onTap: () => context.read<ShopSelectionCubit>().selectShop(shop.shopType),
+              onTap: () => context.read<ShopSelectionCubit>().selectBranch(branch),
               child: Padding(
                 padding: const EdgeInsets.all(18),
                 child: Column(
@@ -49,23 +48,27 @@ class ShopCard extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: shop.color.withOpacity(0.1),
+                            color: AppColors.primaryColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: Image.asset(AppImages.store, color: shop.color, scale: 6),
+                          child: Image.asset(
+                            AppImages.store,
+                            color: AppColors.primaryColor,
+                            scale: 6,
+                          ),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: shop.isActive ? AppColors.success.withOpacity(0.1) : AppColors.error.withOpacity(0.1),
+                            color: AppColors.success.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            shop.isActive ? 'Active' : 'Inactive',
+                            'Active',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
-                              color: shop.isActive ? AppColors.success : AppColors.error,
+                              color: AppColors.success,
                             ),
                           ),
                         ),
@@ -74,33 +77,34 @@ class ShopCard extends StatelessWidget {
                     const SizedBox(height: 16),
                     const Spacer(),
                     Text(
-                      shop.name,
-                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w700),
+                      branch.name ?? 'Unknown Branch',
+                      style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    // const Spacer(),
-                    // Text(
-                    //   shop.description,
-                    //   style: Theme.of(context).textTheme.titleMedium,
-                    //   maxLines: 1,
-                    //   overflow: TextOverflow.ellipsis,
-                    // ),
-                    // const SizedBox(height: 6),
-                    // Row(
-                    //   children: [
-                    //     const Icon(Icons.location_on_rounded, size: 16, color: AppColors.lightFontColor),
-                    //     const SizedBox(width: 4),
-                    //     Expanded(
-                    //       child: Text(
-                    //         shop.location,
-                    //         style: Theme.of(context).textTheme.bodySmall,
-                    //         maxLines: 1,
-                    //         overflow: TextOverflow.ellipsis,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                    if (branch.area != null && branch.area!.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_rounded,
+                            size: 16,
+                            color: AppColors.lightFontColor,
+                          ),
+                          const SizedBox(width: 4),
+                          Expanded(
+                            child: Text(
+                              branch.area!,
+                              style: Theme.of(context).textTheme.bodySmall,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ],
                 ),
               ),

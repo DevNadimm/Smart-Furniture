@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_sales_page.dart';
@@ -140,6 +142,17 @@ class EmployeeDashboardPage extends StatelessWidget {
                             backgroundColor: const Color(0xFFEFF6FF),
                             onTap: () {
                               Navigator.push(context, CustomerPage.route());
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: 'Customer Dues',
+                            subtitle: 'Manage customer dues',
+                            icon: HugeIcons.strokeRoundedDollar02,
+                            iconColor: AppColors.error,
+                            backgroundColor: AppColors.error.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, CustomerDuesPage.route());
                             },
                           ),
                         ],

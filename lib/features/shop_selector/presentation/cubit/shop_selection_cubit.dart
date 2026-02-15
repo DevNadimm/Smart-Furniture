@@ -1,12 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_furniture/core/utils/enums/shop_type.dart';
+import 'package:smart_furniture/features/shop_selector/data/models/branch_model.dart';
 
-class ShopSelectionCubit extends Cubit<ShopType?> {
+class ShopSelectionCubit extends Cubit<BranchData?> {
   ShopSelectionCubit() : super(null);
 
-  /// Select a shop
-  void selectShop(ShopType shop) => emit(shop);
+  void selectBranch(BranchData branch) {
+    emit(branch);
+  }
 
-  /// Get the currently selected shop
-  ShopType? get currentShop => state;
+  void clearSelection() {
+    emit(null);
+  }
 }

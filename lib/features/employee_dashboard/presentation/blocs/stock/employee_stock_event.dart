@@ -2,4 +2,8 @@ part of 'employee_stock_bloc.dart';
 
 abstract class EmployeeStockEvent {}
 
-class LoadStocksEvent extends EmployeeStockEvent {}
+class LoadStocksEvent extends EmployeeStockEvent {
+  final int? branchId;
+
+  LoadStocksEvent({this.branchId});
+}

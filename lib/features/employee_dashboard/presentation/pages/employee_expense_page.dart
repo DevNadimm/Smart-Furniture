@@ -13,9 +13,12 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/pages/e
 import 'package:smart_furniture/features/employee_dashboard/presentation/widgets/employee_expense_card.dart';
 
 class EmployeeExpensePage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const EmployeeExpensePage());
+  static Route route({bool? isAdmin, int? branchId}) => MaterialPageRoute(builder: (_) => EmployeeExpensePage(isAdmin: isAdmin ?? false, branchId: branchId));
 
-  const EmployeeExpensePage({super.key});
+  final bool isAdmin;
+  final int? branchId;
+
+  const EmployeeExpensePage({super.key, required this.isAdmin, this.branchId});
 
   @override
   State<EmployeeExpensePage> createState() => _EmployeeExpensePageState();
@@ -29,7 +32,7 @@ class _EmployeeExpensePageState extends State<EmployeeExpensePage> {
   }
 
   void _fetchExpenses() {
-    context.read<EmployeeExpenseBloc>().add(LoadEmployeeExpensesEvent());
+    context.read<EmployeeExpenseBloc>().add(LoadEmployeeExpensesEvent(branchId: widget.branchId));
   }
 
   @override
@@ -38,7 +41,7 @@ class _EmployeeExpensePageState extends State<EmployeeExpensePage> {
       appBar: AppBar(
         title: const Text('Expenses'),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: !widget.isAdmin ? FloatingActionButton(
         onPressed: () => Navigator.push(
           context,
           CreateExpensePage.route(),
@@ -47,7 +50,7 @@ class _EmployeeExpensePageState extends State<EmployeeExpensePage> {
         foregroundColor: AppColors.white,
         elevation: 2,
         child: const Icon(Icons.add),
-      ),
+      ) : null,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: BlocConsumer<EmployeeExpenseBloc, EmployeeExpenseState>(
@@ -84,6 +87,7 @@ class _EmployeeExpensePageState extends State<EmployeeExpensePage> {
                 itemCount: state.expenseModel.data!.length,
                 itemBuilder: (context, index) {
                   return EmployeeExpenseCard(
+                    isAdmin: widget.isAdmin,
                     expense: state.expenseModel.data![index],
                     onEdit: () {
                       Navigator.push(

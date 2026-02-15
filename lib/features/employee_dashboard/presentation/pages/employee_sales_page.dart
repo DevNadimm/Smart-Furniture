@@ -12,9 +12,12 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/pages/c
 import 'package:smart_furniture/features/employee_dashboard/presentation/widgets/employee_sales_card.dart';
 
 class EmployeeSalesPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(builder: (_) => const EmployeeSalesPage());
+  static Route route({bool? isAdmin, int? branchId}) => MaterialPageRoute(builder: (_) => EmployeeSalesPage(isAdmin: isAdmin ?? false, branchId: branchId));
 
-  const EmployeeSalesPage({super.key});
+  final bool isAdmin;
+  final int? branchId;
+
+  const EmployeeSalesPage({super.key, required this.isAdmin, this.branchId});
 
   @override
   State<EmployeeSalesPage> createState() => _EmployeeSalesPageState();
@@ -28,7 +31,7 @@ class _EmployeeSalesPageState extends State<EmployeeSalesPage> {
   }
 
   void _fetchSales() {
-    context.read<EmployeeSalesBloc>().add(LoadEmployeeSalesEvent());
+    context.read<EmployeeSalesBloc>().add(LoadEmployeeSalesEvent(branchId: widget.branchId));
   }
 
   @override
@@ -37,7 +40,7 @@ class _EmployeeSalesPageState extends State<EmployeeSalesPage> {
       appBar: AppBar(
         title: const Text('Sales'),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: !widget.isAdmin ? FloatingActionButton(
         onPressed: () => Navigator.push(
           context,
           CreateSalesPage.route(),
@@ -46,7 +49,7 @@ class _EmployeeSalesPageState extends State<EmployeeSalesPage> {
         foregroundColor: AppColors.white,
         elevation: 2,
         child: const Icon(Icons.add),
-      ),
+      ) : null,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: BlocConsumer<EmployeeSalesBloc, EmployeeSalesState>(

@@ -8,11 +8,13 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/employee
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense/employee_expense_bloc.dart';
 
 class EmployeeExpenseCard extends StatelessWidget {
+  final bool isAdmin;
   final EmployeeExpenseData? expense;
   final VoidCallback? onEdit;
 
   const EmployeeExpenseCard({
     super.key,
+    required this.isAdmin,
     required this.expense,
     this.onEdit,
   });
@@ -44,15 +46,18 @@ class EmployeeExpenseCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Text(
-                      expense?.expense?.head ?? 'N/A',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                  Padding(
+                    padding: isAdmin ? const EdgeInsets.symmetric(vertical: 8.0) : const EdgeInsets.all(0),
+                    child: Expanded(
+                      child: Text(
+                        expense?.expense?.head ?? 'N/A',
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
-                  Row(
+                  isAdmin ? const SizedBox.shrink() : Row(
                     children: [
                       /// Edit Button
                       IconButton(

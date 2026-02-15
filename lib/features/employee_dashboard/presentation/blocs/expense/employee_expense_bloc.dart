@@ -12,7 +12,7 @@ class EmployeeExpenseBloc extends Bloc<EmployeeExpenseEvent, EmployeeExpenseStat
     on<LoadEmployeeExpensesEvent>((event, emit) async {
       emit(EmployeeExpenseLoading());
       try {
-        final data = await EmployeeExpenseRepository.fetchEmployeeExpenses();
+        final data = await EmployeeExpenseRepository.fetchEmployeeExpenses(branchId: event.branchId);
         emit(EmployeeExpenseLoaded(data!));
       } catch (e) {
         emit(EmployeeExpenseError(HelperFunctions.cleanErrorMessage(e.toString())));

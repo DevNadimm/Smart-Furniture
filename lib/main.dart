@@ -8,14 +8,24 @@ import 'package:smart_furniture/features/accounts/presentation/blocs/bank_transa
 import 'package:smart_furniture/features/accounts/presentation/blocs/cash_transaction/cash_transaction_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/pending_cheque_list/pending_cheque_list_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/reminder_cheque_list/reminder_cheque_list_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/purchase/purchase_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/purchase_details/purchase_details_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/supplier/supplier_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/supplier_due_details/supplier_due_details_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/supplier_dues/supplier_dues_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/customer_list/customer_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/damage_list/damage_list_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_ledger/product_ledger_bloc.dart';
 import 'package:smart_furniture/features/administration/presentation/blocs/product_list/product_list_bloc.dart';
 import 'package:smart_furniture/features/auth/presentation/blocs/employee_login/login_bloc.dart';
 import 'package:smart_furniture/features/common/presentation/blocs/category_list/category_list_bloc.dart';
+import 'package:smart_furniture/features/company/presentation/blocs/company_raw_material/company_raw_material_bloc.dart';
+import 'package:smart_furniture/features/company/presentation/blocs/finished_product/finished_product_bloc.dart';
 import 'package:smart_furniture/features/daily_reports/presentation/blocs/daily_reports_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer/customer_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer_dues/customer_dues_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer_purchase_dues/customer_purchase_dues_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/due_payment/due_payment_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense/employee_expense_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense_head/expense_head_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/employee_sales_bloc.dart';
@@ -33,6 +43,7 @@ import 'package:smart_furniture/features/reports/presentation/blocs/supplier_pay
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_record/sales_record_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/sales_return/sales_return_bloc.dart';
 import 'package:smart_furniture/features/sales/presentation/blocs/stock/stock_bloc.dart';
+import 'package:smart_furniture/features/shop_selector/presentation/cubit/branch_bloc.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 import 'package:smart_furniture/features/user_role_selector/presentation/cubit/user_role_cubit.dart';
 
@@ -75,6 +86,17 @@ Future<void> main() async {
         BlocProvider(create: (_) => ExpenseHeadBloc()),
         BlocProvider(create: (_) => EmployeeExpenseBloc()),
         BlocProvider(create: (_) => CustomerBloc()),
+        BlocProvider(create: (_) => BranchBloc()),
+        BlocProvider(create: (_) => CustomerDuesBloc()),
+        BlocProvider(create: (_) => CustomerPurchaseDuesBloc()),
+        BlocProvider(create: (_) => DuePaymentBloc()),
+        BlocProvider(create: (_) => FinishedProductBloc()),
+        BlocProvider(create: (_) => CompanyRawMaterialBloc()),
+        BlocProvider(create: (_) => PurchaseBloc()),
+        BlocProvider(create: (_) => PurchaseDetailsBloc()),
+        BlocProvider(create: (_) => SupplierBloc()),
+        BlocProvider(create: (_) => SupplierDuesBloc()),
+        BlocProvider(create: (_) => SupplierDueDetailsBloc()),
       ],
       child: const MyApp(),
     ),

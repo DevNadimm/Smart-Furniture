@@ -12,7 +12,7 @@ class EmployeeSalesBloc extends Bloc<EmployeeSalesEvent, EmployeeSalesState> {
     on<LoadEmployeeSalesEvent>((event, emit) async {
       emit(EmployeeSalesLoading());
       try {
-        final data = await EmployeeSalesRepository.fetchSales();
+        final data = await EmployeeSalesRepository.fetchSales(branchId: event.branchId);
         emit(EmployeeSalesLoaded(data!));
       } catch (e) {
         emit(EmployeeSalesError(HelperFunctions.cleanErrorMessage(e.toString())));

@@ -69,7 +69,7 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome back! Access your vaccination updates and reminders anytime.",
+                  "Welcome back! Access your sales updates, schedules, and business activities anytime.",
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

@@ -11,7 +11,7 @@ class EmployeeStockBloc extends Bloc<EmployeeStockEvent, EmployeeStockState> {
     on<LoadStocksEvent>((event, emit) async {
       emit(StockLoading());
       try {
-        final data = await EmployeeStockRepository.fetchStocks();
+        final data = await EmployeeStockRepository.fetchStocks(branchId: event.branchId);
         emit(StockLoaded(data!));
       } catch (e) {
         emit(StockError(HelperFunctions.cleanErrorMessage(e.toString())));

@@ -6,9 +6,13 @@ import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_stock_model.dart';
 
 class EmployeeStockRepository {
-  static Future<EmployeeStockModel?> fetchStocks() async {
+  static Future<EmployeeStockModel?> fetchStocks({int? branchId}) async {
     final api = ApiEndpoints(shop: '');
-    final endpoint = api.branchStock;
+    String endpoint = api.branchStock;
+
+    // if(branchId != null) {
+    //   endpoint += '?branch_id=$branchId';
+    // }
 
     final uri = Uri.parse(endpoint);
     print('URL: $uri');
