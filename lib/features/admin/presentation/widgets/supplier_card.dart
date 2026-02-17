@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/admin/data/models/supplier_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class SupplierCard extends StatelessWidget {
   final SupplierData supplier;
@@ -15,6 +16,8 @@ class SupplierCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -44,7 +47,7 @@ class SupplierCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        supplier.name ?? 'N/A',
+                        supplier.name ?? strings.notAvailable,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: AppColors.primaryColor,
                         ),
@@ -87,7 +90,7 @@ class SupplierCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedCall,
-                        label: 'Phone',
+                        label: strings.phone,
                         value: supplier.phone!,
                       ),
 
@@ -96,7 +99,7 @@ class SupplierCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedMail01,
-                        label: 'Email',
+                        label: strings.email,
                         value: supplier.email!,
                       ),
 
@@ -105,7 +108,7 @@ class SupplierCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedLocation01,
-                        label: 'Address',
+                        label: strings.address,
                         value: supplier.address!,
                         maxLines: 2,
                       ),

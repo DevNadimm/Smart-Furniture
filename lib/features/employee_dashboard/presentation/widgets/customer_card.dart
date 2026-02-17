@@ -5,19 +5,24 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer/customer_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerCard extends StatelessWidget {
   final CustomerData? customer;
   final VoidCallback? onEdit;
+  final bool isAdmin;
 
   const CustomerCard({
     super.key,
     required this.customer,
     this.onEdit,
+    this.isAdmin = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -44,39 +49,48 @@ class CustomerCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Text(
-                      customer?.name ?? 'N/A',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        customer?.name ?? strings.notAvailable,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(color: AppColors.primaryColor),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      /// Edit Button
-                      IconButton(
-                        onPressed: onEdit,
-                        icon: const HugeIcon(
-                          icon: HugeIcons.strokeRoundedEdit04,
-                          color: AppColors.primaryColor,
-                          size: 20,
+                  if (!isAdmin)
+                    Row(
+                      children: [
+                        /// Edit Button
+                        IconButton(
+                          onPressed: onEdit,
+                          icon: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedEdit04,
+                            color: AppColors.primaryColor,
+                            size: 20,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 4),
-                      /// Delete Button
-                      IconButton(
-                        onPressed: () => _showDeleteConfirmation(context),
-                        icon: const HugeIcon(
-                          icon: HugeIcons.strokeRoundedDelete03,
-                          color: AppColors.error,
-                          size: 20,
+                        const SizedBox(width: 4),
+
+                        /// Delete Button
+                        IconButton(
+                          onPressed: () => _showDeleteConfirmation(context),
+                          icon: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedDelete03,
+                            color: AppColors.error,
+                            size: 20,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ),
+
             /// Body
             Padding(
               padding: const EdgeInsets.all(12),
@@ -90,51 +104,63 @@ class CustomerCard extends StatelessWidget {
                       children: [
                         Text(
                           customer!.nameBn!,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.grey.withValues(alpha: 0.8),
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.grey.withValues(alpha: 0.8),
+                              ),
                         ),
                         const SizedBox(height: 6),
                       ],
                     ),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
+
                   /// Email
                   if (customer?.email != null && customer!.email!.isNotEmpty)
                     _buildInfoRow(
                       context,
                       icon: HugeIcons.strokeRoundedMail01,
-                      label: 'Email',
+                      label: strings.email,
                       value: customer!.email!,
                     ),
+
                   /// Phone
                   if (customer?.phone != null && customer!.phone!.isNotEmpty)
                     _buildInfoRow(
                       context,
                       icon: HugeIcons.strokeRoundedCall,
-                      label: 'Phone',
+                      label: strings.phone,
                       value: customer!.phone!,
                     ),
+
                   /// Address
-                  if (customer?.address != null && customer!.address!.isNotEmpty)
+                  if (customer?.address != null &&
+                      customer!.address!.isNotEmpty)
                     _buildInfoRow(
                       context,
                       icon: HugeIcons.strokeRoundedLocation01,
-                      label: 'Address',
+                      label: strings.address,
                       value: customer!.address!,
                       maxLines: 2,
                     ),
+
                   /// Branch ID
-                  if (customer?.branchId != null && customer!.branchId!.isNotEmpty)
+                  if (customer?.branchId != null &&
+                      customer!.branchId!.isNotEmpty)
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Branch',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                            strings.branch,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           _infoTag(
                             'ID: ${customer!.branchId}',
@@ -153,12 +179,12 @@ class CustomerCard extends StatelessWidget {
   }
 
   Widget _buildInfoRow(
-      BuildContext context, {
-        required IconData icon,
-        required String label,
-        required String value,
-        int maxLines = 1,
-      }) {
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required String value,
+    int maxLines = 1,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
@@ -177,9 +203,9 @@ class CustomerCard extends StatelessWidget {
                 Text(
                   label,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
+                        color: AppColors.grey,
+                        fontWeight: FontWeight.w500,
+                      ),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -215,28 +241,35 @@ class CustomerCard extends StatelessWidget {
   }
 
   void _showDeleteConfirmation(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text('Delete Customer', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
-          content: const Text('Are you sure you want to delete this customer?'),
+          title: Text(strings.deleteCustomer,
+              style:
+                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
+          content: Text(strings.deleteCustomerConfirm),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel', style: TextStyle(color: AppColors.grey)),
+              child: Text(strings.cancel,
+                  style: const TextStyle(color: AppColors.grey)),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
                 if (customer?.id != null) {
-                  context.read<CustomerBloc>().add(DeleteCustomerEvent(customer!.id!));
+                  context
+                      .read<CustomerBloc>()
+                      .add(DeleteCustomerEvent(customer!.id!));
                 }
               },
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.error,
               ),
-              child: const Text('Delete'),
+              child: Text(strings.delete),
             ),
           ],
         );

@@ -7,14 +7,17 @@ import 'package:smart_furniture/features/admin/data/models/purchase_details_mode
 import 'package:smart_furniture/features/admin/data/models/purchase_model.dart';
 
 class PurchaseRepository {
-  /// ===========================
-  /// Fetch all purchases
-  /// ===========================
-  static Future<PurchaseModel> fetchPurchase() async {
+  static Future<PurchaseModel> fetchPurchase({String? fromDate, String? toDate, String? categoryId}) async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.purchases;
 
-    final uri = Uri.parse(endpoint);
+    final queryParams = {
+      if (fromDate != null && fromDate.isNotEmpty) 'start_date': fromDate,
+      if (toDate != null && toDate.isNotEmpty) 'end_date': toDate,
+      if (categoryId != null && categoryId.isNotEmpty) 'category_id': categoryId,
+    };
+
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print('📡 [FETCH PURCHASES] URL => $uri');
 
     try {

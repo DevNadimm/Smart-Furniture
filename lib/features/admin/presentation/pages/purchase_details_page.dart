@@ -5,11 +5,12 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
+import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
-import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/admin/presentation/blocs/purchase_details/purchase_details_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class PurchaseDetailsPage extends StatefulWidget {
   final int purchaseId;
@@ -40,14 +41,16 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Purchase Details'),
+        title: Text(strings.purchaseDetails),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _fetchPurchaseDetails,
-            tooltip: 'Refresh',
+            tooltip: strings.refresh,
           ),
         ],
       ),
@@ -66,8 +69,8 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
           }
 
           if (state is PurchaseDetailsError) {
-            return const ErrorStateWidget(
-              title: 'Failed to Load Purchase Details',
+            return ErrorStateWidget(
+              title: strings.purchaseDetailsLoadError,
               message: ErrorMessages.networkError,
             );
           }
@@ -82,18 +85,18 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Purchase Info Card
-                    _buildPurchaseInfoCard(details),
+                    _buildPurchaseInfoCard(details, strings),
                     const SizedBox(height: 16),
 
                     // Supplier Info Card
                     if (details.supplier != null)
-                      _buildSupplierInfoCard(details.supplier!),
+                      _buildSupplierInfoCard(details.supplier!, strings),
                     const SizedBox(height: 16),
 
                     // Received By
                     if (details.receivedBy != null && details.receivedBy!.isNotEmpty)
                       _buildInfoCard(
-                        title: 'Received By',
+                        title: strings.receivedBy,
                         content: details.receivedBy!,
                         icon: HugeIcons.strokeRoundedUser,
                       ),
@@ -101,12 +104,12 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
 
                     // Purchase Items
                     if (details.purchaseDetails != null && details.purchaseDetails!.isNotEmpty)
-                      _buildPurchaseItemsSection(details.purchaseDetails!),
+                      _buildPurchaseItemsSection(details.purchaseDetails!, strings),
                     const SizedBox(height: 16),
 
                     // Summary Card
                     if (details.summary != null)
-                      _buildSummaryCard(details.summary!),
+                      _buildSummaryCard(details.summary!, strings),
                   ],
                 ),
               ),
@@ -119,7 +122,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseInfoCard(details) {
+  Widget _buildPurchaseInfoCard(details, AppLocalizations strings) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -156,7 +159,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      details.purchaseNo ?? 'N/A',
+                      details.purchaseNo ?? strings.notAvailable,
                       style: GoogleFonts.poppins(
                         color: AppColors.white,
                         fontSize: 18,
@@ -165,7 +168,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                     ),
                     if (details.purchaseDate != null && details.purchaseDate!.isNotEmpty)
                       Text(
-                        details.purchaseDate!,
+                        DateFormatters.readableDate(context, details.purchaseDate),
                         style: const TextStyle(
                           color: AppColors.white,
                           fontSize: 14,
@@ -181,7 +184,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildSupplierInfoCard(supplier) {
+  Widget _buildSupplierInfoCard(supplier, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -215,7 +218,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Supplier Information',
+                  strings.supplierInformation,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -232,25 +235,25 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 if (supplier.name != null && supplier.name!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedUser,
-                    label: 'Name',
+                    label: strings.name,
                     value: supplier.name!,
                   ),
                 if (supplier.phone != null && supplier.phone!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedCall,
-                    label: 'Phone',
+                    label: strings.phone,
                     value: supplier.phone!,
                   ),
                 if (supplier.email != null && supplier.email!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedMail01,
-                    label: 'Email',
+                    label: strings.email,
                     value: supplier.email!,
                   ),
                 if (supplier.address != null && supplier.address!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedLocation01,
-                    label: 'Address',
+                    label: strings.address,
                     value: supplier.address!,
                     maxLines: 2,
                   ),
@@ -314,7 +317,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseItemsSection(List<dynamic> items) {
+  Widget _buildPurchaseItemsSection(List<dynamic> items, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -348,7 +351,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Purchase Items',
+                  strings.purchaseItems,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -370,7 +373,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             ),
             itemBuilder: (context, index) {
               final item = items[index];
-              return _buildPurchaseItemCard(item);
+              return _buildPurchaseItemCard(item, strings);
             },
           ),
         ],
@@ -378,12 +381,12 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseItemCard(dynamic item) {
+  Widget _buildPurchaseItemCard(dynamic item, AppLocalizations strings) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          item.productName ?? 'N/A',
+          item.productName ?? strings.notAvailable,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             fontSize: 15,
@@ -395,15 +398,15 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildItemDetail(
-              label: 'Quantity',
+              label: strings.quantity,
               value: '${item.quantity ?? 0} ${item.unit ?? ''}',
             ),
             _buildItemDetail(
-              label: 'Unit Price',
+              label: strings.unitPrice,
               value: '৳${item.unitPrice?.toStringAsFixed(2) ?? '0.00'}',
             ),
             _buildItemDetail(
-              label: 'Total',
+              label: strings.total,
               value: '৳${item.totalPrice?.toStringAsFixed(2) ?? '0.00'}',
               isHighlighted: true,
             ),
@@ -441,7 +444,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildSummaryCard(summary) {
+  Widget _buildSummaryCard(summary, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -475,7 +478,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Payment Summary',
+                  strings.paymentSummary,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -490,12 +493,12 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             child: Column(
               children: [
                 _buildSummaryRow(
-                  label: 'Sub Total',
+                  label: strings.subTotal,
                   value: '৳${summary.subTotal?.toStringAsFixed(2) ?? '0.00'}',
                 ),
                 const SizedBox(height: 8),
                 _buildSummaryRow(
-                  label: 'Discount',
+                  label: strings.discount,
                   value: '৳${summary.discount?.toStringAsFixed(2) ?? '0.00'}',
                   valueColor: Colors.green,
                 ),
@@ -503,19 +506,19 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 const Divider(color: AppColors.borderColor, thickness: 1),
                 const SizedBox(height: 8),
                 _buildSummaryRow(
-                  label: 'Grand Total',
+                  label: strings.grandTotal,
                   value: '৳${summary.grandTotal?.toStringAsFixed(2) ?? '0.00'}',
                   isBold: true,
                 ),
                 const SizedBox(height: 8),
                 _buildSummaryRow(
-                  label: 'Paid Amount',
+                  label: strings.paidAmount,
                   value: '৳${summary.paidAmount?.toStringAsFixed(2) ?? '0.00'}',
                   valueColor: Colors.green,
                 ),
                 const SizedBox(height: 8),
                 _buildSummaryRow(
-                  label: 'Due Amount',
+                  label: strings.dueAmount,
                   value: '৳${summary.dueAmount?.toStringAsFixed(2) ?? '0.00'}',
                   valueColor: Colors.red,
                   isBold: true,

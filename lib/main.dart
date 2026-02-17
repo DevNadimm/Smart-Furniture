@@ -28,6 +28,7 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/c
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/due_payment/due_payment_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense/employee_expense_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense_head/expense_head_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/finished_product_category/finished_product_category_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/employee_sales_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/stock/employee_stock_bloc.dart';
@@ -97,6 +98,7 @@ Future<void> main() async {
         BlocProvider(create: (_) => SupplierBloc()),
         BlocProvider(create: (_) => SupplierDuesBloc()),
         BlocProvider(create: (_) => SupplierDueDetailsBloc()),
+        BlocProvider(create: (_) => FinishedProductCategoryBloc()),
       ],
       child: const MyApp(),
     ),

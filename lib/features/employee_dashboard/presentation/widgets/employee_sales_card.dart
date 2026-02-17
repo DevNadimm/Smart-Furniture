@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_sales_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EmployeeSalesCard extends StatelessWidget {
   final EmployeeSaleData? sale;
@@ -15,6 +17,8 @@ class EmployeeSalesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -42,16 +46,20 @@ class EmployeeSalesCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      sale?.saleNo ?? 'N/A',
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
+                      sale?.saleNo ?? strings.notAvailable,
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(color: AppColors.primaryColor),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  _statusTag(sale?.status ?? 'N/A'),
+                  _statusTag(context, sale?.status ?? strings.notAvailable),
                 ],
               ),
             ),
+
             /// Body
             Padding(
               padding: const EdgeInsets.all(12),
@@ -59,7 +67,8 @@ class EmployeeSalesCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Customer Name
-                  if (sale?.customerName != null && sale!.customerName!.isNotEmpty)
+                  if (sale?.customerName != null &&
+                      sale!.customerName!.isNotEmpty)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -84,6 +93,7 @@ class EmployeeSalesCard extends StatelessWidget {
                         const SizedBox(height: 6),
                       ],
                     ),
+
                   /// Branch Name
                   if (sale?.branchName != null && sale!.branchName!.isNotEmpty)
                     Column(
@@ -100,7 +110,10 @@ class EmployeeSalesCard extends StatelessWidget {
                             Expanded(
                               child: Text(
                                 sale!.branchName!,
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(color: AppColors.grey),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -112,36 +125,45 @@ class EmployeeSalesCard extends StatelessWidget {
                     ),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
+
                   /// Grand Total
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Grand Total',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                        strings.grandTotal,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       _infoTag(
-                        '\$${sale?.grandTotal ?? '0.00'}',
+                        "৳${CurrencyFormatter.format(sale?.grandTotal, context: context)}",
                         AppColors.primaryColor,
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
+
                   /// Paid Amount
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Paid',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                        strings.paid,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       _infoTag(
-                        '\$${sale?.paidAmount ?? '0.00'}',
+                        "৳${CurrencyFormatter.format(sale?.paidAmount, context: context)}",
                         AppColors.success,
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
+
                   /// Due Amount
                   if ((sale?.dueAmount ?? 0) > 0)
                     Column(
@@ -150,11 +172,14 @@ class EmployeeSalesCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Due',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                              strings.due,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                             _infoTag(
-                              '\$${sale?.dueAmount ?? '0.00'}',
+                              "৳${CurrencyFormatter.format(sale?.dueAmount, context: context)}",
                               AppColors.error,
                             ),
                           ],
@@ -162,32 +187,46 @@ class EmployeeSalesCard extends StatelessWidget {
                         const SizedBox(height: 8),
                       ],
                     ),
+
                   /// Item Count
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Items',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                        strings.items,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       Text(
-                        '${sale?.itemCount ?? 0}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+                        CurrencyFormatter.format(sale?.itemCount, context: context),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: AppColors.grey),
                       ),
                     ],
                   ),
                   const SizedBox(height: 8),
+
                   /// Sale Date
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Date',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                        strings.date,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       Text(
                         DateFormatters.readableDate(context, sale?.saleDate),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.grey),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: AppColors.grey),
                       ),
                     ],
                   ),
@@ -218,21 +257,29 @@ class EmployeeSalesCard extends StatelessWidget {
     );
   }
 
-  Widget _statusTag(String status) {
+  Widget _statusTag(BuildContext context, String status) {
+    final strings = AppLocalizations.of(context)!;
+
     Color statusColor;
+    String localizedStatus;
+
     switch (status.toLowerCase()) {
       case 'paid':
       case 'completed':
         statusColor = AppColors.success;
+        localizedStatus = strings.statusCompleted;
         break;
       case 'pending':
         statusColor = AppColors.warning;
+        localizedStatus = strings.statusPending;
         break;
       case 'cancelled':
         statusColor = AppColors.error;
+        localizedStatus = strings.statusCancelled;
         break;
       default:
         statusColor = AppColors.grey;
+        localizedStatus = status;
     }
 
     return Container(
@@ -242,7 +289,7 @@ class EmployeeSalesCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
-        status,
+        localizedStatus,
         style: GoogleFonts.poppins(
           fontWeight: FontWeight.w600,
           fontSize: 11,

@@ -146,8 +146,8 @@ class EmployeeDashboardPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           _ModuleCard(
-                            title: 'Customer Dues',
-                            subtitle: 'Manage customer dues',
+                            title: strings.customerDues,
+                            subtitle: strings.manageCustomerDues,
                             icon: HugeIcons.strokeRoundedDollar02,
                             iconColor: AppColors.error,
                             backgroundColor: AppColors.error.withValues(alpha: 0.1),

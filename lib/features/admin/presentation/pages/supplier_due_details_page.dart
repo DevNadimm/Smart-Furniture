@@ -5,11 +5,13 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/admin/presentation/blocs/supplier_due_details/supplier_due_details_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class SupplierDueDetailsPage extends StatefulWidget {
   final int supplierId;
@@ -40,14 +42,16 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Supplier Due Details'),
+        title: Text(strings.supplierDueDetails),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _fetchSupplierDueDetails,
-            tooltip: 'Refresh',
+            tooltip: strings.refresh,
           ),
         ],
       ),
@@ -66,8 +70,8 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
           }
 
           if (state is SupplierDueDetailsError) {
-            return const ErrorStateWidget(
-              title: 'Failed to Load Supplier Due Details',
+            return ErrorStateWidget(
+              title: strings.supplierDueDetailsLoadError,
               message: ErrorMessages.networkError,
             );
           }
@@ -85,16 +89,16 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                   children: [
                     // Supplier Info Card
                     if (supplier != null)
-                      _buildSupplierInfoCard(supplier),
+                      _buildSupplierInfoCard(supplier, strings),
                     const SizedBox(height: 16),
 
                     // Purchase Dues List
                     if (purchases != null && purchases.isNotEmpty)
-                      _buildPurchaseDuesSection(purchases)
+                      _buildPurchaseDuesSection(purchases, strings)
                     else
-                      const EmptyStateWidget(
-                        title: 'No Purchase Dues',
-                        message: 'This supplier has no outstanding purchase dues.',
+                      EmptyStateWidget(
+                        title: strings.noPurchaseDues,
+                        message: strings.noPurchaseDuesMessage,
                       ),
                   ],
                 ),
@@ -108,7 +112,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
     );
   }
 
-  Widget _buildSupplierInfoCard(supplier) {
+  Widget _buildSupplierInfoCard(supplier, AppLocalizations strings) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -145,7 +149,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      supplier.name ?? 'N/A',
+                      supplier.name ?? strings.notAvailable,
                       style: GoogleFonts.poppins(
                         color: AppColors.white,
                         fontSize: 18,
@@ -172,7 +176,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Total Due Amount',
+                strings.totalDueAmount,
                 style: GoogleFonts.poppins(
                   color: AppColors.white,
                   fontSize: 14,
@@ -180,7 +184,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                 ),
               ),
               Text(
-                '৳${supplier.totalDue?.toStringAsFixed(2) ?? '0.00'}',
+                '৳${CurrencyFormatter.format(num.tryParse(supplier.totalDue?.toStringAsFixed(2) ?? '0.00'), context: context)}',
                 style: GoogleFonts.poppins(
                   color: AppColors.white,
                   fontSize: 20,
@@ -194,7 +198,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseDuesSection(List purchases) {
+  Widget _buildPurchaseDuesSection(List purchases, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -228,7 +232,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Purchase Dues (${purchases.length})',
+                  '${strings.purchaseDuesTitle} (${CurrencyFormatter.format(purchases.length, context: context)})',
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -250,7 +254,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
             ),
             itemBuilder: (context, index) {
               final purchase = purchases[index];
-              return _buildPurchaseDueCard(purchase);
+              return _buildPurchaseDueCard(purchase, strings);
             },
           ),
         ],
@@ -258,7 +262,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseDueCard(dynamic purchase) {
+  Widget _buildPurchaseDueCard(dynamic purchase, AppLocalizations strings) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -280,7 +284,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      purchase.purchaseNo ?? 'N/A',
+                      purchase.purchaseNo ?? strings.notAvailable,
                       style: GoogleFonts.poppins(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
@@ -319,8 +323,8 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                 ),
                 child: Text(
                   purchase.dueAmount != null && purchase.dueAmount! > 0
-                      ? 'Due'
-                      : 'Paid',
+                      ? strings.statusDue
+                      : strings.statusPaid,
                   style: GoogleFonts.poppins(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -339,17 +343,17 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildPurchaseDetail(
-                label: 'Grand Total',
-                value: '৳${purchase.grandTotal?.toStringAsFixed(2) ?? '0.00'}',
+                label: strings.grandTotal,
+                value: '৳${CurrencyFormatter.format(num.tryParse(purchase.grandTotal?.toStringAsFixed(2) ?? '0.00'), context: context)}',
               ),
               _buildPurchaseDetail(
-                label: 'Paid Amount',
-                value: '৳${purchase.paidAmount?.toStringAsFixed(2) ?? '0.00'}',
+                label: strings.paidAmount,
+                value: '৳${CurrencyFormatter.format(num.tryParse(purchase.paidAmount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
                 valueColor: Colors.green,
               ),
               _buildPurchaseDetail(
-                label: 'Due Amount',
-                value: '৳${purchase.dueAmount?.toStringAsFixed(2) ?? '0.00'}',
+                label: strings.dueAmount,
+                value: '৳${CurrencyFormatter.format(num.tryParse(purchase.dueAmount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
                 valueColor: Colors.red,
                 isHighlighted: true,
               ),

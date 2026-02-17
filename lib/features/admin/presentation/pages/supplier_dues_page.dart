@@ -9,6 +9,7 @@ import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/summary_card.dart';
 import 'package:smart_furniture/features/admin/presentation/blocs/supplier_dues/supplier_dues_bloc.dart';
 import 'package:smart_furniture/features/admin/presentation/widgets/supplier_due_card.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class SupplierDuesPage extends StatefulWidget {
   static Route route() =>
@@ -33,14 +34,16 @@ class _SupplierDuesPageState extends State<SupplierDuesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Supplier Dues'),
+        title: Text(strings.supplierDues),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _fetchSupplierDues,
-            tooltip: 'Refresh',
+            tooltip: strings.refresh,
           ),
         ],
       ),
@@ -59,17 +62,17 @@ class _SupplierDuesPageState extends State<SupplierDuesPage> {
           }
 
           if (state is SupplierDuesError) {
-            return const ErrorStateWidget(
-              title: 'Failed to Load Supplier Dues',
+            return ErrorStateWidget(
+              title: strings.supplierDuesLoadError,
               message: ErrorMessages.networkError,
             );
           }
 
           if (state is SupplierDuesLoaded) {
             if (state.supplierDuesModel.data?.isEmpty ?? true) {
-              return const EmptyStateWidget(
-                title: 'No Supplier Dues Found',
-                message: 'Currently no supplier has any pending dues.',
+              return EmptyStateWidget(
+                title: strings.noSupplierDuesFound,
+                message: strings.noSupplierDuesMessage,
               );
             }
 
@@ -77,12 +80,12 @@ class _SupplierDuesPageState extends State<SupplierDuesPage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: SummaryCard(
                       amount: state.supplierDuesModel.totalDues?.toDouble() ?? 0.0,
-                      amountLabel: 'Total Dues',
+                      amountLabel: strings.totalDues,
                       quantity: state.supplierDuesModel.totalSuppliers ?? 0,
-                      quantityLabel: 'Total Suppliers',
+                      quantityLabel: strings.totalSuppliers,
                     ),
                   ),
                   ListView.builder(

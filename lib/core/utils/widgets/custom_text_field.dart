@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.label,
+    this.addCustomer,
     this.hintText,
     required this.controller,
     this.isRequired = false,
@@ -23,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   });
 
   final String label;
+  final Widget? addCustomer;
   final String? hintText;
   final TextEditingController controller;
   final bool isRequired;
@@ -47,25 +49,32 @@ class CustomTextField extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              label,
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primaryFontColor,
-                ),
+            Expanded(
+              child: Row(
+                children: [
+                  Text(
+                    label,
+                    style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primaryFontColor,
+                      ),
+                    ),
+                  ),
+                  if (isRequired)
+                    const Text(
+                      ' *',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                ],
               ),
             ),
-            if (isRequired)
-              const Text(
-                ' *',
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            if (addCustomer != null) addCustomer!
           ],
         ),
         const SizedBox(height: 10),

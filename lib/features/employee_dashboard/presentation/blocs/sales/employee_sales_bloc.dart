@@ -12,7 +12,7 @@ class EmployeeSalesBloc extends Bloc<EmployeeSalesEvent, EmployeeSalesState> {
     on<LoadEmployeeSalesEvent>((event, emit) async {
       emit(EmployeeSalesLoading());
       try {
-        final data = await EmployeeSalesRepository.fetchSales(branchId: event.branchId);
+        final data = await EmployeeSalesRepository.fetchSales(branchId: event.branchId, fromDate: event.fromDate, toDate: event.toDate, categoryId: event.categoryId);
         emit(EmployeeSalesLoaded(data!));
       } catch (e) {
         emit(EmployeeSalesError(HelperFunctions.cleanErrorMessage(e.toString())));
@@ -27,7 +27,7 @@ class EmployeeSalesBloc extends Bloc<EmployeeSalesEvent, EmployeeSalesState> {
         if (result) {
           emit(EmployeeSalesOperationSuccess('Sale created successfully'));
           // Reload sales after creation
-          add(LoadEmployeeSalesEvent());
+          add(LoadEmployeeSalesEvent(branchId: null, fromDate: '', toDate: '', categoryId: ''));
         } else {
           emit(EmployeeSalesError('Failed to create sale'));
         }

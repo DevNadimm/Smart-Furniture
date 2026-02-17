@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_sales_details_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/sale_item_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ProductSelectionPage extends StatefulWidget {
   final List<EmployeeProduct> products;
@@ -117,10 +118,12 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Select Products',
+        title: Text(
+          strings.selectProducts,
         ),
         actions: [
           if (_selectedItems.isNotEmpty)
@@ -133,7 +136,7 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  '${_selectedItems.length} selected',
+                  '${_selectedItems.length} ${strings.selected}',
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -155,7 +158,7 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Search products...',
+                  hintText: strings.searchProducts,
                   hintStyle: GoogleFonts.inter(
                     fontSize: 16,
                     color: const Color(0xFF9E9E9E),
@@ -190,7 +193,7 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   children: [
                     _buildCategoryChip(
-                      label: 'All',
+                      label: strings.all,
                       isSelected: _selectedCategoryId == null,
                       onTap: () {
                         setState(() {
@@ -220,72 +223,70 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
           Expanded(
             child: _filteredProducts.isEmpty
                 ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.inventory_2_outlined,
-                          size: 64,
-                          color: Colors.grey[300],
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'No products available',
-                          style: GoogleFonts.inter(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xFF9E9E9E),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
-                    itemCount: _filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = _filteredProducts[index];
-                      final isSelected = _isSelected(product.id!);
-                      final selectedItem = _getSelectedItem(product.id!);
-                      final stock = _getStock(product);
-
-                      return _buildProductCard(
-                        product: product,
-                        isSelected: isSelected,
-                        selectedItem: selectedItem,
-                        stock: stock,
-                      );
-                    },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.inventory_2_outlined,
+                    size: 64,
+                    color: Colors.grey[300],
                   ),
+                  const SizedBox(height: 16),
+                  Text(
+                    strings.noProductsAvailable,
+                    style: GoogleFonts.inter(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFF9E9E9E),
+                    ),
+                  ),
+                ],
+              ),
+            )
+                : ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+              itemCount: _filteredProducts.length,
+              itemBuilder: (context, index) {
+                final product = _filteredProducts[index];
+                final isSelected = _isSelected(product.id!);
+                final selectedItem = _getSelectedItem(product.id!);
+                final stock = _getStock(product);
+
+                return _buildProductCard(
+                  product: product,
+                  isSelected: isSelected,
+                  selectedItem: selectedItem,
+                  stock: stock,
+                );
+              },
+            ),
           ),
         ],
       ),
       bottomNavigationBar: _selectedItems.isNotEmpty
           ? Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context, _selectedItems);
-                    },
-                    child: Text(
-                      'Add ${_selectedItems.length} item${_selectedItems.length > 1 ? 's' : ''}',
-                    ),
-                  ),
-                ),
-              ),
-            )
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, _selectedItems);
+              },
+              child: Text(strings.addItems(_selectedItems.length)),
+            ),
+          ),
+        ),
+      )
           : null,
     );
   }
@@ -325,6 +326,8 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
     required SaleItem? selectedItem,
     required double stock,
   }) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
@@ -355,10 +358,10 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                 ),
                 child: isSelected
                     ? const Icon(
-                        Icons.check,
-                        size: 16,
-                        color: Colors.white,
-                      )
+                  Icons.check,
+                  size: 16,
+                  color: Colors.white,
+                )
                     : null,
               ),
               const SizedBox(width: 14),
@@ -412,7 +415,7 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
-                            'Stock: ${stock.toStringAsFixed(0)}',
+                            '${strings.stock}: ${stock.toStringAsFixed(0)}',
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

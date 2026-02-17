@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_dues_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_purchase_dues_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerDueCard extends StatelessWidget {
   final CustomerDueData customerDue;
@@ -15,6 +17,8 @@ class CustomerDueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -42,7 +46,7 @@ class CustomerDueCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      customerDue.name ?? 'N/A',
+                      customerDue.name ?? strings.notAvailable,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: _getDueStatusColor(),
                       ),
@@ -60,7 +64,7 @@ class CustomerDueCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      '৳${customerDue.due ?? 0}',
+                      '৳${CurrencyFormatter.format(customerDue.due ?? 0, context: context)}',
                       style: GoogleFonts.poppins(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -79,7 +83,10 @@ class CustomerDueCard extends StatelessWidget {
                   context,
                   CustomerPurchaseDuesPage.route(
                     customerId: customerDue.id ?? 0,
-                    customerName: customerDue.name ?? 'Customer',
+                    customerName:
+                    AppLocalizations.of(context)!.localeName == 'bn'
+                        ? customerDue.nameBn ?? 'গ্রাহক'
+                        : customerDue.name ??'Customer',
                   ),
                 );
               },
@@ -111,7 +118,7 @@ class CustomerDueCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedCall,
-                        label: 'Phone',
+                        label: strings.phone,
                         value: customerDue.phone!,
                       ),
 
@@ -120,7 +127,7 @@ class CustomerDueCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedMail01,
-                        label: 'Email',
+                        label: strings.email,
                         value: customerDue.email!,
                       ),
 
@@ -129,7 +136,7 @@ class CustomerDueCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedLocation01,
-                        label: 'Address',
+                        label: strings.address,
                         value: customerDue.address!,
                         maxLines: 2,
                       ),
@@ -144,20 +151,20 @@ class CustomerDueCard extends StatelessWidget {
                       children: [
                         _buildFinancialTag(
                           context,
-                          label: 'Total Sales',
-                          value: '৳${customerDue.totalSales ?? 0}',
+                          label: strings.totalSales,
+                          value: '৳${CurrencyFormatter.format(customerDue.totalSales ?? 0, context: context)}',
                           icon: HugeIcons.strokeRoundedShoppingCart01,
                         ),
                         _buildFinancialTag(
                           context,
-                          label: 'Paid',
-                          value: '৳${customerDue.totalPaid ?? 0}',
+                          label: strings.paid,
+                          value: '৳${CurrencyFormatter.format(customerDue.totalPaid ?? 0, context: context)}',
                           icon: HugeIcons.strokeRoundedWallet01,
                         ),
                         _buildFinancialTag(
                           context,
-                          label: 'Due Sales',
-                          value: '${customerDue.dueSaleCount ?? 0}',
+                          label: strings.dueSales,
+                          value: CurrencyFormatter.format(customerDue.dueSaleCount ?? 0, context: context),
                           icon: HugeIcons.strokeRoundedReceiptDollar,
                         ),
                       ],
@@ -185,7 +192,7 @@ class CustomerDueCard extends StatelessWidget {
                             size: 18,
                           ),
                           label: Text(
-                            'View Details',
+                            strings.viewDetails,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
                               fontSize: 13,

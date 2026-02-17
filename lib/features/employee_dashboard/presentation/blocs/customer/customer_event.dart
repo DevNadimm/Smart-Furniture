@@ -2,7 +2,11 @@ part of 'customer_bloc.dart';
 
 abstract class CustomerEvent {}
 
-class LoadCustomersEvent extends CustomerEvent {}
+class LoadCustomersEvent extends CustomerEvent {
+  final int? branchId;
+
+  LoadCustomersEvent({this.branchId});
+}
 
 class CreateCustomerEvent extends CustomerEvent {
   final Map<String, dynamic> customerData;

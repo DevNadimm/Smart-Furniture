@@ -12,7 +12,7 @@ class PurchaseBloc extends Bloc<PurchaseEvent, PurchaseState> {
     on<LoadPurchasesEvent>((event, emit) async {
       emit(PurchaseLoading());
       try {
-        final data = await PurchaseRepository.fetchPurchase();
+        final data = await PurchaseRepository.fetchPurchase(fromDate: event.fromDate, toDate: event.toDate, categoryId: event.categoryId);
         emit(PurchaseLoaded(data));
       } catch (e) {
         emit(PurchaseError(HelperFunctions.cleanErrorMessage(e.toString())));

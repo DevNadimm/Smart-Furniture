@@ -9,10 +9,15 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/customer
 class CustomerRepository {
 
   /// Fetch all customers
-  static Future<CustomerModel?> fetchCustomers() async {
+  static Future<CustomerModel?> fetchCustomers({int? branchId}) async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.customers;
-    final uri = Uri.parse(endpoint);
+
+    final queryParams = {
+      if (branchId != null) 'branch_id': branchId.toString(),
+    };
+
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
 
     debugPrint('📡 [FETCH CUSTOMERS] URL => $uri');
 

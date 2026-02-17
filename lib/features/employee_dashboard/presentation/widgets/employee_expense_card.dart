@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_expense_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense/employee_expense_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EmployeeExpenseCard extends StatelessWidget {
   final bool isAdmin;
@@ -21,6 +23,8 @@ class EmployeeExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -46,11 +50,11 @@ class EmployeeExpenseCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: isAdmin ? const EdgeInsets.symmetric(vertical: 8.0) : const EdgeInsets.all(0),
-                    child: Expanded(
+                  Expanded(
+                    child: Padding(
+                      padding: isAdmin ? const EdgeInsets.symmetric(vertical: 8.0) : const EdgeInsets.all(0),
                       child: Text(
-                        expense?.expense?.head ?? 'N/A',
+                        expense?.expense?.head ?? strings.notAvailable,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -122,11 +126,11 @@ class EmployeeExpenseCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Amount',
+                        strings.amount,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       _infoTag(
-                        '\$${expense?.amount ?? '0.00'}',
+                        '৳${CurrencyFormatter.format(num.tryParse(expense?.amount ?? '0'), context: context)}',
                         AppColors.primaryColor,
                       ),
                     ],
@@ -137,7 +141,7 @@ class EmployeeExpenseCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Date',
+                        strings.date,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       Text(
@@ -174,28 +178,38 @@ class EmployeeExpenseCard extends StatelessWidget {
   }
 
   void _showDeleteConfirmation(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text('Delete Expense', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18)),
-          content: const Text('Are you sure you want to delete this expense?'),
+          title: Text(
+            strings.deleteExpenseTitle,
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+          ),
+          content: Text(strings.deleteExpenseMessage),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Cancel', style: TextStyle(color: AppColors.grey)),
+              child: Text(
+                strings.cancel,
+                style: const TextStyle(color: AppColors.grey),
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
                 if (expense?.id != null) {
-                  context.read<EmployeeExpenseBloc>().add(DeleteEmployeeExpenseEvent(expense!.id!),);
+                  context.read<EmployeeExpenseBloc>().add(
+                    DeleteEmployeeExpenseEvent(expense!.id!),
+                  );
                 }
               },
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.error,
               ),
-              child: const Text('Delete'),
+              child: Text(strings.delete),
             ),
           ],
         );

@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/empty_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer_purchase_dues/customer_purchase_dues_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/widgets/customer_sale_due_card.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerPurchaseDuesPage extends StatefulWidget {
   final int customerId;
@@ -51,6 +53,8 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.customerName),
@@ -58,7 +62,7 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _fetchCustomerPurchaseDues,
-            tooltip: 'Refresh',
+            tooltip: strings.refresh,
           ),
         ],
       ),
@@ -77,8 +81,8 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
           }
 
           if (state is CustomerPurchaseDuesError) {
-            return const ErrorStateWidget(
-              title: 'Failed to Load Purchase Dues',
+            return ErrorStateWidget(
+              title: strings.failedToLoadPurchaseDues,
               message: ErrorMessages.networkError,
             );
           }
@@ -88,16 +92,16 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
             final sales = state.customerPurchaseDueModel.sales;
 
             if (sales?.isEmpty ?? true) {
-              return const EmptyStateWidget(
-                title: 'No Due Sales Found',
-                message: 'This customer has no pending due payments.',
+              return EmptyStateWidget(
+                title: strings.noDueSalesFound,
+                message: strings.noDueSalesMessage,
               );
             }
 
             return Column(
               children: [
                 // Customer Info Card
-                if (customer != null) _buildCustomerInfoCard(customer),
+                if (customer != null) _buildCustomerInfoCard(customer, strings),
 
                 // Sales List
                 Expanded(
@@ -122,7 +126,7 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
     );
   }
 
-  Widget _buildCustomerInfoCard(customer) {
+  Widget _buildCustomerInfoCard(customer, AppLocalizations strings) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(16),
@@ -167,7 +171,7 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      customer.name ?? 'N/A',
+                      customer.name ?? strings.notAvailable,
                       style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 18,
@@ -195,16 +199,16 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
             children: [
               Column(
                 children: [
-                  const Text(
-                    'Total Due',
-                    style: TextStyle(
+                  Text(
+                    strings.totalDue,
+                    style: const TextStyle(
                       color: AppColors.white,
                       fontSize: 14,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '৳${customer.totalDue ?? 0}',
+                    '৳${CurrencyFormatter.format(customer.totalDue ?? 0, context: context)}',
                     style: const TextStyle(
                       color: AppColors.white,
                       fontSize: 24,

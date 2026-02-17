@@ -14,7 +14,9 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/employee
 import 'package:smart_furniture/features/employee_dashboard/data/models/sale_item_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/employee_sales_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/create_customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/product_selection_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CreateSalesPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const CreateSalesPage());
@@ -29,7 +31,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
   final _formKey = GlobalKey<FormState>();
   final _saleDateController = TextEditingController();
   final _customerController = TextEditingController();
-  final _discountController = TextEditingController(text: '0');
+  final _discountController = TextEditingController();
   final _paymentTypeController = TextEditingController();
   final _paidAmountController = TextEditingController();
   final _paymentInfoController = TextEditingController();
@@ -73,8 +75,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
   }
 
   double get _discountAmount {
-    final discountPercent = double.tryParse(_discountController.text) ?? 0;
-    return _subTotal * (discountPercent / 100);
+    return double.tryParse(_discountController.text) ?? 0;
   }
 
   double get _grandTotal {
@@ -103,15 +104,16 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
   }
 
   void _selectCustomerPicker(List<String> items) {
+    final strings = AppLocalizations.of(context)!;
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Customer',
-          subtitle: 'Please choose a customer from the list',
-          searchHint: 'Search customer...',
+          title: strings.selectCustomerTitle,
+          subtitle: strings.selectCustomerSubtitle,
+          searchHint: strings.searchCustomer,
           selectedItem: _customerController.text,
           onItemSelected: (String selectedName) {
             _customerController.text = selectedName;
@@ -122,15 +124,16 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
   }
 
   void _selectPaymentTypePicker(List<String> items) {
+    final strings = AppLocalizations.of(context)!;
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Payment Type',
-          subtitle: 'Please choose a payment type from the list',
-          searchHint: 'Search payment type...',
+          title: strings.selectPaymentTypeTitle,
+          subtitle: strings.selectPaymentTypeSubtitle,
+          searchHint: strings.searchPaymentType,
           selectedItem: _paymentTypeController.text,
           onItemSelected: (String selectedName) {
             _paymentTypeController.text = selectedName;
@@ -166,17 +169,19 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
   }
 
   void _createSale() {
+    final strings = AppLocalizations.of(context)!;
+
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
     if (_customerNameToId[_customerController.text] == null) {
-      AppNotifier.showToast('Please select a customer', type: MessageType.error);
+      AppNotifier.showToast(strings.pleaseSelectCustomer, type: MessageType.error);
       return;
     }
 
     if (_selectedItems.isEmpty) {
-      AppNotifier.showToast('Please add at least one product', type: MessageType.error);
+      AppNotifier.showToast(strings.pleaseAddProduct, type: MessageType.error);
       return;
     }
 
@@ -185,7 +190,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
       'customer_id': _customerNameToId[_customerController.text] ?? '',
       'items': _selectedItems.map((item) => item.toJson()).toList(),
       'sub_total': _subTotal,
-      'discount': double.tryParse(_discountController.text) ?? 0,
+      'discount': _discountAmount,
       'grand_total': _grandTotal,
       'paid_amount': double.tryParse(_paidAmountController.text) ?? 0,
       'due_amount': _dueAmount,
@@ -201,12 +206,15 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).languageCode;
+
     return BlocConsumer<EmployeeSalesBloc, EmployeeSalesState>(
       listener: (context, createSalesState) {
         if (createSalesState is EmployeeSalesError) {
           AppNotifier.showToast(createSalesState.message, type: MessageType.error);
         } else if (createSalesState is EmployeeSalesOperationSuccess) {
-          AppNotifier.showToast('Sale created successfully', type: MessageType.success);
+          AppNotifier.showToast(strings.saleCreatedSuccess, type: MessageType.success);
           Navigator.pop(context);
         }
       },
@@ -218,7 +226,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
             } else if (salesDetailsState is SalesDetailsLoaded) {
               _customerNameToId = {
                 for (var c in salesDetailsState.salesDetailsModel.data!.customers!)
-                  c.customer ?? '': (c.id?.toString() ?? '')
+                  locale == 'bn' ? c.nameBn ?? '' : c.customer ?? '': (c.id?.toString() ?? '')
               };
               final data = salesDetailsState.salesDetailsModel.data;
               if (data != null) {
@@ -233,7 +241,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
           builder: (context, salesDetailsState) {
             return Stack(
               children: [
-                _content(),
+                _content(strings),
                 if (salesDetailsState is SalesDetailsLoading || createSalesState is EmployeeSalesOperationLoading)
                   Container(
                     height: double.infinity,
@@ -253,10 +261,10 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
     );
   }
 
-  Widget _content() {
+  Widget _content(AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Sales'),
+        title: Text(strings.createSales),
       ),
       body: Form(
         key: _formKey,
@@ -266,8 +274,8 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextField(
-                label: 'Sale Date',
-                hintText: 'Select sale date',
+                label: strings.saleDate,
+                hintText: strings.selectSaleDate,
                 controller: _saleDateController,
                 validationLabel: 'sale date',
                 isRequired: true,
@@ -276,13 +284,27 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Customer',
-                hintText: 'Select customer',
+                label: strings.customer,
+                addCustomer:  OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.push(context, CreateCustomerPage.route());
+                  },
+                  icon: const Icon(Icons.add, size: 18),
+                  label: Text(
+                    strings.addCustomer,
+                    style: const TextStyle(letterSpacing: 0, fontSize: 12),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: AppColors.primaryColor,
+                      side: const BorderSide(width: 1, color: AppColors.primaryColor)
+                  ),
+                ),
+                hintText: strings.selectCustomer,
                 controller: _customerController,
                 validationLabel: 'customer',
                 isRequired: true,
                 readOnly: true,
-                onTap: () => _selectCustomerPicker(_customers.map((e) => e.customer ?? '').toList()),
+                onTap: () => _selectCustomerPicker(_customerNameToId.keys.toList()),
                 suffixIcon: const Icon(Icons.arrow_drop_down),
               ),
               const SizedBox(height: 16),
@@ -290,7 +312,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Products',
+                    strings.products,
                     style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                         fontSize: 16,
@@ -302,11 +324,14 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                   OutlinedButton.icon(
                     onPressed: _selectProducts,
                     icon: const Icon(Icons.add, size: 18),
-                    label: const Text(
-                      'Add Products',
-                      style: TextStyle(letterSpacing: 0, fontSize: 12),
+                    label: Text(
+                      strings.addProducts,
+                      style: const TextStyle(letterSpacing: 0, fontSize: 12),
                     ),
-                    style: OutlinedButton.styleFrom(foregroundColor: AppColors.primaryColor, side: const BorderSide(width: 1, color: AppColors.primaryColor)),
+                    style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primaryColor,
+                        side: const BorderSide(width: 1, color: AppColors.primaryColor)
+                    ),
                   ),
                 ],
               ),
@@ -320,7 +345,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                   ),
                   child: Center(
                     child: Text(
-                      'No products added!\n\nTap on the "Add Products" button to select products.',
+                      strings.noProductsAdded,
                       style: GoogleFonts.poppins(
                         color: AppColors.secondaryFontColor,
                         fontSize: 14,
@@ -331,7 +356,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                 )
               else
                 ..._selectedItems.map(
-                  (item) => Container(
+                      (item) => Container(
                     margin: const EdgeInsets.symmetric(vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -402,40 +427,52 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                 ),
                 child: Column(
                   children: [
-                    _buildPriceRow('Sub Total', '৳${_subTotal.toStringAsFixed(2)}'),
+                    _buildPriceRow(strings.subTotal, '৳${_subTotal.toStringAsFixed(2)}'),
                     const SizedBox(height: 6),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Discount',
+                          strings.discount,
                           style: GoogleFonts.poppins(fontSize: 14),
                         ),
                         SizedBox(
-                          width: 80,
+                          width: 120,
                           child: TextFormField(
                             controller: _discountController,
-                            keyboardType: TextInputType.number,
+                            keyboardType: const TextInputType.numberWithOptions(decimal: true),
                             inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              LengthLimitingTextInputFormatter(3),
+                              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
                             ],
                             decoration: const InputDecoration(
                               isDense: true,
                               contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                               border: OutlineInputBorder(),
-                              suffixText: '%',
+                              prefixText: '৳',
+                              hintText: '0.00',
                             ),
                             onChanged: (_) => setState(() {}),
+                            validator: (value) {
+                              if (value != null && value.isNotEmpty) {
+                                final discount = double.tryParse(value);
+                                if (discount == null) {
+                                  return strings.invalidAmount;
+                                }
+                                if (discount > _subTotal) {
+                                  return strings.cannotExceedSubtotal;
+                                }
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 6),
-                    _buildPriceRow('Discount Amount', '-৳${_discountAmount.toStringAsFixed(2)}'),
+                    _buildPriceRow(strings.discountAmount, '-৳${_discountAmount.toStringAsFixed(2)}'),
                     const Divider(height: 18, thickness: 1, color: AppColors.borderColor),
                     _buildPriceRow(
-                      'Grand Total',
+                      strings.grandTotal,
                       '৳${_grandTotal.toStringAsFixed(2)}',
                       isBold: true,
                     ),
@@ -444,8 +481,8 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Payment Type',
-                hintText: 'Select payment type',
+                label: strings.paymentType,
+                hintText: strings.selectPaymentType,
                 controller: _paymentTypeController,
                 validationLabel: 'payment type',
                 isRequired: true,
@@ -455,7 +492,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Paid Amount',
+                label: strings.paidAmount,
                 controller: _paidAmountController,
                 validationLabel: 'paid amount',
                 isRequired: true,
@@ -463,14 +500,14 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                 onChanged: (_) => setState(() {}),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Paid amount is required';
+                    return strings.paidAmountRequired;
                   }
                   final amount = double.tryParse(value);
                   if (amount == null) {
-                    return 'Enter a valid amount';
+                    return strings.enterValidAmount;
                   }
                   if (amount > _grandTotal) {
-                    return 'Paid amount cannot exceed grand total';
+                    return strings.paidAmountExceedsTotal;
                   }
                   return null;
                 },
@@ -489,7 +526,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Due Amount',
+                      strings.dueAmount,
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -509,10 +546,10 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Payment Info',
+                label: strings.paymentInfo,
                 controller: _paymentInfoController,
                 validationLabel: 'payment info',
-                hintText: 'Transaction ID, Reference, etc. (Optional)',
+                hintText: strings.paymentInfoHint,
                 maxLines: 3,
               ),
               const SizedBox(height: 24),
@@ -520,9 +557,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: _createSale,
-                  child: const Text(
-                    'Create Sale'
-                  ),
+                  child: Text(strings.createSale),
                 ),
               ),
               const SizedBox(height: 16),

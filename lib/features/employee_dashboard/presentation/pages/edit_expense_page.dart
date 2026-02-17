@@ -10,6 +10,7 @@ import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart'
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_expense_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense/employee_expense_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense_head/expense_head_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EditExpensePage extends StatefulWidget {
   static Route route({required EmployeeExpenseData expense}) => MaterialPageRoute(builder: (_) => EditExpensePage(expense: expense));
@@ -60,15 +61,16 @@ class _EditExpensePageState extends State<EditExpensePage> {
   }
 
   void _selectExpenseHeadPicker(List<String> items) {
+    final strings = AppLocalizations.of(context)!;
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Expense Head',
-          subtitle: 'Please choose an expense head',
-          searchHint: 'Search expense head...',
+          title: strings.selectExpenseHeadTitle,
+          subtitle: strings.selectExpenseHeadSubtitle,
+          searchHint: strings.searchExpenseHead,
           selectedItem: _expenseHeadController.text,
           onItemSelected: (String selectedName) {
             _expenseHeadController.text = selectedName;
@@ -96,12 +98,14 @@ class _EditExpensePageState extends State<EditExpensePage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return BlocConsumer<EmployeeExpenseBloc, EmployeeExpenseState>(
       listener: (context, expenseState) {
         if (expenseState is EmployeeExpenseError) {
           AppNotifier.showToast(expenseState.message, type: MessageType.error);
         } else if (expenseState is EmployeeExpenseOperationSuccess) {
-          AppNotifier.showToast('Expense edited successfully', type: MessageType.success);
+          AppNotifier.showToast(strings.expenseEditedSuccess, type: MessageType.success);
           Navigator.pop(context);
         }
       },
@@ -123,7 +127,7 @@ class _EditExpensePageState extends State<EditExpensePage> {
           builder: (context, expenseHeadState) {
             return Stack(
               children: [
-                _content(expenseHeadState),
+                _content(expenseHeadState, strings),
                 if (expenseHeadState is ExpenseHeadLoading || expenseState is EmployeeExpenseOperationLoading)
                   Container(
                     height: double.infinity,
@@ -143,10 +147,10 @@ class _EditExpensePageState extends State<EditExpensePage> {
     );
   }
 
-  Widget _content(ExpenseHeadState state) {
+  Widget _content(ExpenseHeadState state, AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Expense'),
+        title: Text(strings.editExpense),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -156,8 +160,8 @@ class _EditExpensePageState extends State<EditExpensePage> {
             child: Column(
               children: [
                 CustomTextField(
-                  label: 'Expense Head',
-                  hintText: 'Select expense head',
+                  label: strings.expenseHead,
+                  hintText: strings.selectExpenseHead,
                   controller: _expenseHeadController,
                   validationLabel: 'Expense Head',
                   readOnly: true,
@@ -170,8 +174,8 @@ class _EditExpensePageState extends State<EditExpensePage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Expense Date',
-                  hintText: 'Select expense date',
+                  label: strings.expenseDate,
+                  hintText: strings.selectExpenseDate,
                   controller: _expenseDateController,
                   validationLabel: 'expense date',
                   isRequired: true,
@@ -180,8 +184,8 @@ class _EditExpensePageState extends State<EditExpensePage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Amount',
-                  hintText: 'Enter amount',
+                  label: strings.amount,
+                  hintText: strings.enterAmount,
                   controller: _amountController,
                   validationLabel: 'Amount',
                   isRequired: true,
@@ -189,8 +193,8 @@ class _EditExpensePageState extends State<EditExpensePage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Remarks',
-                  hintText: 'Enter remarks (Optional)',
+                  label: strings.remarks,
+                  hintText: strings.enterRemarks,
                   controller: _remarksController,
                   validationLabel: 'Remarks',
                   isRequired: false,
@@ -200,7 +204,10 @@ class _EditExpensePageState extends State<EditExpensePage> {
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: _editExpense, child: const Text('Edit Expense')),
+                  child: ElevatedButton(
+                      onPressed: _editExpense,
+                      child: Text(strings.editExpense)
+                  ),
                 ),
                 const SizedBox(height: 16),
               ],

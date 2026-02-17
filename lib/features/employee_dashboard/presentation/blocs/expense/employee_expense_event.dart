@@ -4,8 +4,11 @@ abstract class EmployeeExpenseEvent {}
 
 class LoadEmployeeExpensesEvent extends EmployeeExpenseEvent {
   final int? branchId;
+  final String? fromDate;
+  final String? toDate;
+  final String? headId;
 
-  LoadEmployeeExpensesEvent({this.branchId});
+  LoadEmployeeExpensesEvent({this.branchId, this.fromDate, this.toDate, this.headId});
 }
 
 class CreateEmployeeExpenseEvent extends EmployeeExpenseEvent {

@@ -9,6 +9,7 @@ import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense/employee_expense_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/expense_head/expense_head_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CreateExpensePage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const CreateExpensePage());
@@ -55,15 +56,16 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
   }
 
   void _selectExpenseHeadPicker(List<String> items) {
+    final strings = AppLocalizations.of(context)!;
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Expense Head',
-          subtitle: 'Please choose an expense head',
-          searchHint: 'Search expense head...',
+          title: strings.selectExpenseHeadTitle,
+          subtitle: strings.selectExpenseHeadSubtitle,
+          searchHint: strings.searchExpenseHead,
           selectedItem: _expenseHeadController.text,
           onItemSelected: (String selectedName) {
             _expenseHeadController.text = selectedName;
@@ -74,6 +76,8 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
   }
 
   void _createExpense() {
+    final strings = AppLocalizations.of(context)!;
+
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -91,12 +95,14 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return BlocConsumer<EmployeeExpenseBloc, EmployeeExpenseState>(
       listener: (context, expenseState) {
         if (expenseState is EmployeeExpenseError) {
           AppNotifier.showToast(expenseState.message, type: MessageType.error);
         } else if (expenseState is EmployeeExpenseOperationSuccess) {
-          AppNotifier.showToast('Expense created successfully', type: MessageType.success);
+          AppNotifier.showToast(strings.expenseCreatedSuccess, type: MessageType.success);
           Navigator.pop(context);
         }
       },
@@ -118,7 +124,7 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
           builder: (context, expenseHeadState) {
             return Stack(
               children: [
-                _content(expenseHeadState),
+                _content(expenseHeadState, strings),
                 if (expenseHeadState is ExpenseHeadLoading || expenseState is EmployeeExpenseOperationLoading)
                   Container(
                     height: double.infinity,
@@ -138,10 +144,10 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
     );
   }
 
-  Widget _content(ExpenseHeadState state) {
+  Widget _content(ExpenseHeadState state, AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Expense'),
+        title: Text(strings.createExpense),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -151,22 +157,22 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
             child: Column(
               children: [
                 CustomTextField(
-                  label: 'Expense Head',
-                  hintText: 'Select expense head',
+                  label: strings.expenseHead,
+                  hintText: strings.selectExpenseHead,
                   controller: _expenseHeadController,
                   validationLabel: 'Expense Head',
                   readOnly: true,
                   isRequired: true,
                   onTap: state is ExpenseHeadLoaded
                       ? () => _selectExpenseHeadPicker(
-                          _expenseHeadNameToId.keys.toList())
+                      _expenseHeadNameToId.keys.toList())
                       : null,
                   suffixIcon: const Icon(Icons.arrow_drop_down),
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Expense Date',
-                  hintText: 'Select expense date',
+                  label: strings.expenseDate,
+                  hintText: strings.selectExpenseDate,
                   controller: _expenseDateController,
                   validationLabel: 'expense date',
                   isRequired: true,
@@ -175,8 +181,8 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Amount',
-                  hintText: 'Enter amount',
+                  label: strings.amount,
+                  hintText: strings.enterAmount,
                   controller: _amountController,
                   validationLabel: 'Amount',
                   isRequired: true,
@@ -184,8 +190,8 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Remarks',
-                  hintText: 'Enter remarks (Optional)',
+                  label: strings.remarks,
+                  hintText: strings.enterRemarks,
                   controller: _remarksController,
                   validationLabel: 'Remarks',
                   isRequired: false,
@@ -195,7 +201,10 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
                 const SizedBox(height: 24),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(onPressed: _createExpense, child: const Text('Create Expense')),
+                  child: ElevatedButton(
+                      onPressed: _createExpense,
+                      child: Text(strings.createExpense)
+                  ),
                 ),
                 const SizedBox(height: 16),
               ],

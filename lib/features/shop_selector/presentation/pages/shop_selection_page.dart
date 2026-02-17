@@ -42,6 +42,7 @@ class _ShopSelectionPageState extends State<ShopSelectionPage> {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(context, strings),
               const SizedBox(height: 24),
@@ -105,6 +106,7 @@ class _ShopSelectionPageState extends State<ShopSelectionPage> {
   Widget _buildHeader(BuildContext context, AppLocalizations strings) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         const SizedBox(height: 8),
         Text(
@@ -165,6 +167,8 @@ class _ShopSelectionPageState extends State<ShopSelectionPage> {
   // ----------------------------------------------------------
 
   Widget _companyCard(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -211,7 +215,7 @@ class _ShopSelectionPageState extends State<ShopSelectionPage> {
 
                 Expanded(
                   child: Text(
-                    'Company',
+                    strings.company,
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge

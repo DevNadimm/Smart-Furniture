@@ -68,5 +68,5 @@ class ErrorMessages {
   static const String fetchSupplierFailed = 'Failed to fetch suppliers. Please try again later.';
   static const String fetchSupplierDuesFailed = 'Failed to fetch supplier dues. Please try again later.';
   static const String fetchSupplierPurchaseDueFailed = 'Failed to fetch supplier purchase dues. Please try again later.';
-
+  static const String fetchFinishedProductCategoryFailed = 'Failed to fetch finished product categories. Please try again later.';
 }

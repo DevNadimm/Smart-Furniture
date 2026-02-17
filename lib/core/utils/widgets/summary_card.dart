@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 
 class SummaryCard extends StatelessWidget {
   final double amount;
@@ -48,7 +49,7 @@ class SummaryCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "$quantity",
+                  CurrencyFormatter.format(quantity.toDouble(), context: context),
                   style: GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -80,7 +81,7 @@ class SummaryCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "৳${amount.toStringAsFixed(0)}",
+                  "৳${CurrencyFormatter.format(num.tryParse(amount.toStringAsFixed(0)), context: context)}",
                   style: GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

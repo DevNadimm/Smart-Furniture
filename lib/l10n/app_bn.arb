@@ -10,12 +10,114 @@
   "shopNoorjahanFurniture": "নূরজাহান ফার্নিচার",
   "shopNaimFurniture": "নাইম ফার্নিচার",
   "shopNoorjahanSteel": "নূরজাহান স্টিল",
+  "adminLoginTitle": "আপনার অ্যাকাউন্টে লগইন করুন",
+  "adminLoginWelcome": "স্বাগতম! আপনার অ্যাডমিন ড্যাশবোর্ড থেকে শাখা, বিক্রয় এবং পরিচালনা নির্বিঘ্নে পরিচালনা করুন।",
+  "adminLoginEmail": "ইমেইল",
+  "adminLoginEmailHint": "ইমেইল লিখুন",
+  "adminLoginPassword": "পাসওয়ার্ড",
+  "adminLoginPasswordHint": "পাসওয়ার্ড লিখুন",
+  "adminLoginForgotPassword": "পাসওয়ার্ড ভুলে গেছেন?",
+  "adminLoginButton": "লগইন",
+  "companyOverview": "কোম্পানি সংক্ষিপ্ত বিবরণ",
+  "searchCategory": "ক্যাটাগরি সার্চ করুন...",
+  "notAvailable": "পাওয়া যায়নি",
+  "grandTotal": "সর্বমোট",
+  "paid": "পরিশোধিত",
+  "due": "বকেয়া",
+  "items": "আইটেম",
+  "date": "তারিখ",
+  "statusCompleted": "সম্পন্ন",
+  "statusPending": "অপেক্ষমাণ",
+  "statusCancelled": "বাতিল",
+  "expenses": "খরচ",
+  "amount": "পরিমাণ",
+  "deleteExpenseTitle": "খরচ মুছুন",
+  "deleteExpenseMessage": "আপনি কি নিশ্চিত যে এই খরচটি মুছতে চান?",
+  "cancel": "বাতিল",
+  "purchaseDetails": "ক্রয়ের বিবরণ",
+  "refresh": "রিফ্রেশ",
+  "purchaseDetailsLoadError": "ক্রয়ের বিবরণ লোড করতে ব্যর্থ",
+  "supplierInformation": "সরবরাহকারীর তথ্য",
+  "name": "নাম",
+  "phone": "ফোন",
+  "email": "ইমেইল",
+  "address": "ঠিকানা",
+  "receivedBy": "গৃহীত",
+  "purchaseItems": "ক্রয় আইটেম",
+  "quantity": "পরিমাণ",
+  "suppliers": "সরবরাহকারী",
+  "supplierLoadError": "সরবরাহকারী লোড করতে ব্যর্থ",
+  "noSuppliersFound": "কোনো সরবরাহকারী পাওয়া যায়নি",
+  "noSuppliersMessage": "আপনার অনুসন্ধানের সাথে কোনো সরবরাহকারী মিলছে না।",
+  "searchSupplier": "সরবরাহকারী খুঁজুন (English / বাংলা)",
+  "supplierDuesLoadError": "সরবরাহকারী বকেয়া লোড করতে ব্যর্থ",
+  "noSupplierDuesFound": "কোনো সরবরাহকারী বকেয়া পাওয়া যায়নি",
+  "noSupplierDuesMessage": "বর্তমানে কোনো সরবরাহকারীর কোনো বকেয়া নেই।",
+  "totalDues": "মোট বকেয়া",
+  "totalSuppliers": "মোট সরবরাহকারী",
+  "totalPurchasesLabel": "মোট ক্রয়",
+  "duePurchases": "বকেয়া ক্রয়",
+  "supplierDueDetails": "সরবরাহকারী বকেয়া বিবরণ",
+  "supplierDueDetailsLoadError": "সরবরাহকারী বকেয়া বিবরণ লোড করতে ব্যর্থ",
+  "noPurchaseDues": "কোনো ক্রয় বকেয়া নেই",
+  "noPurchaseDuesMessage": "এই সরবরাহকারীর কোনো বকেয়া ক্রয় নেই।",
+  "totalDueAmount": "মোট বকেয়া পরিমাণ",
+  "purchaseDuesTitle": "ক্রয় বকেয়া",
+  "statusPaid": "পরিশোধিত",
+  "finishedProductsLoadError": "সমাপ্ত পণ্য লোড করতে ব্যর্থ",
+  "noFinishedProductsFound": "কোনো সমাপ্ত পণ্য পাওয়া যায়নি",
+  "noFinishedProductsMessage": "বর্তমানে কোনো সমাপ্ত পণ্যের তথ্য উপলব্ধ নেই।",
+  "unit": "একক",
+  "employeeLoginWelcome": "স্বাগতম! যেকোনো সময় আপনার বিক্রয় আপডেট, সময়সূচি এবং ব্যবসায়িক কার্যক্রম দেখুন।",
+  "unitPrice": "একক মূল্য",
+  "total": "মোট",
+  "paymentSummary": "পেমেন্ট সারসংক্ষেপ",
+  "subTotal": "উপমোট",
+  "discount": "ছাড়",
+  "paidAmount": "পরিশোধিত পরিমাণ",
+  "dueAmount": "বকেয়া পরিমাণ",
+  "delete": "মুছুন",
+  "purchases": "ক্রয়",
+  "purchaseDate": "ক্রয়ের তারিখ",
+  "viewDetails": "বিস্তারিত দেখুন",
+  "statusPartial": "আংশিক",
+  "statusDue": "বকেয়া",
+  "category": "বিভাগ",
+  "selectCategory": "বিভাগ নির্বাচন করুন",
+  "selectCategorySubtitle": "ক্রয় বিভাগ নির্বাচন করুন",
+  "searchCategory": "বিভাগ খুঁজুন...",
+  "purchaseLoadError": "ক্রয় লোড করতে ব্যর্থ",
+  "noPurchasesFound": "কোনো ক্রয় পাওয়া যায়নি",
+  "noPurchasesMessage": "ফিল্টার সমন্বয় করুন বা অন্য সময়কাল নির্বাচন করুন।",
+  "totalAmount": "মোট পরিমাণ",
+  "totalPurchases": "মোট ক্রয়",
+  "head": "হেড",
+  "selectHead": "হেড নির্বাচন করুন",
+  "selectHeadSubtitle": "তালিকা থেকে একটি হেড নির্বাচন করুন",
+  "searchHead": "হেড খুঁজুন...",
+  "expenseLoadError": "খরচ লোড করতে ব্যর্থ",
+  "noExpensesFound": "কোনো খরচ পাওয়া যায়নি",
+  "noExpensesMessage": "বর্তমানে কোনো খরচের তথ্য উপলব্ধ নেই।",
+  "switchShop": "দোকান পরিবর্তন করুন",
+  "companySalesSubtitle": "কোম্পানি-ব্যাপী বিক্রয় দেখুন",
+  "companyExpenseSubtitle": "কোম্পানির খরচ পরিচালনা করুন",
+  "purchase": "ক্রয়",
+  "purchaseSubtitle": "ক্রয়ের বিবরণ দেখুন",
+  "supplier": "সরবরাহকারী",
+  "supplierSubtitle": "সরবরাহকারীর বিবরণ দেখুন",
+  "supplierDues": "সরবরাহকারী বকেয়া",
+  "supplierDuesSubtitle": "সরবরাহকারীর বকেয়া দেখুন",
+  "finishedProducts": "সমাপ্ত পণ্য",
+  "finishedProductsSubtitle": "সমস্ত শাখায় বিক্রয়যোগ্য পণ্য দেখুন এবং পরিচালনা করুন",
+  "companyRawMaterials": "কোম্পানির কাঁচামাল",
+  "companyRawMaterialsSubtitle": "কাঁচামাল এবং গুদাম তালিকা পর্যবেক্ষণ করুন",
 
   "@@chooseUserRole": "===== ব্যবহারকারীর ভূমিকা নির্বাচন =====",
   "chooseUserRoleHeader": "আপনার রোল নির্বাচন করুন",
   "chooseUserRoleSubtitle": "অ্যাপ্লিকেশনটি কীভাবে ব্যবহার করবেন তা প্রকাশ করে একটি ভূমিকা নির্বাচন করুন, যাতে অভিজ্ঞতাটি ব্যক্তিগতভাবে সাজানো যায়।",
   "adminRole": "অ্যাডমিন",
-  "employeeRole": "কর্মচারী",
+  "employeeRole": "ম্যানেজার",
+  "switchShop": "দোকান পরিবর্তন",
 
   "dashboard": "ড্যাশবোর্ড",
   "furnitureManagementSystem": "ফার্নিচার ম্যানেজমেন্ট সিস্টেম",
@@ -227,5 +329,511 @@
   "totalSalesQuantity": "মোট বিক্রয় পরিমাণ",
   "totalCurrentQuantity": "মোট বর্তমান পরিমাণ",
   "totalPurchasesAmount": "মোট ক্রয় মূল্য",
-  "totalSalesAmount": "মোট বিক্রয় মূল্য"
+  "totalSalesAmount": "মোট বিক্রয় মূল্য",
+
+  "notAvailable": "প্রযোজ্য নয়",
+  "@notAvailable": {
+    "description": "Text shown when data is not available"
+  },
+  "category": "বিভাগ",
+  "@category": {
+    "description": "Label for product category"
+  },
+  "quantity": "পরিমাণ",
+  "@quantity": {
+    "description": "Label for product quantity"
+  },
+  "unit": "একক",
+  "@unit": {
+    "description": "Label for unit of measurement"
+  },
+  "purchaseDate": "ক্রয়ের তারিখ",
+  "@purchaseDate": {
+    "description": "Label for purchase date"
+  },
+  "grandTotal": "সর্বমোট",
+  "@grandTotal": {
+    "description": "Label for grand total amount"
+  },
+  "paid": "পরিশোধিত",
+  "@paid": {
+    "description": "Label for paid amount"
+  },
+  "due": "বকেয়া",
+  "@due": {
+    "description": "Label for due amount"
+  },
+  "viewDetails": "বিস্তারিত দেখুন",
+  "@viewDetails": {
+    "description": "Button text to view details"
+  },
+  "statusCompleted": "সম্পন্ন",
+  "@statusCompleted": {
+    "description": "Status label for completed purchases"
+  },
+  "statusPartial": "আংশিক",
+  "@statusPartial": {
+    "description": "Status label for partially paid purchases"
+  },
+  "statusPending": "অপেক্ষমাণ",
+  "@statusPending": {
+    "description": "Status label for pending purchases"
+  },
+  "statusDue": "বকেয়া",
+  "@statusDue": {
+    "description": "Status label for due purchases"
+  },
+  "createSales": "বিক্রয় তৈরি করুন",
+  "@createSales": {
+    "description": "Title for create sales page"
+  },
+  "saleDate": "বিক্রয়ের তারিখ",
+  "@saleDate": {
+    "description": "Label for sale date field"
+  },
+  "selectSaleDate": "বিক্রয়ের তারিখ নির্বাচন করুন",
+  "@selectSaleDate": {
+    "description": "Hint text for sale date field"
+  },
+  "customer": "ক্রেতা",
+  "@customer": {
+    "description": "Label for customer field"
+  },
+  "selectCustomer": "ক্রেতা নির্বাচন করুন",
+  "@selectCustomer": {
+    "description": "Hint text for customer field"
+  },
+  "selectCustomerTitle": "ক্রেতা নির্বাচন করুন",
+  "@selectCustomerTitle": {
+    "description": "Title for customer selection bottom sheet"
+  },
+  "selectCustomerSubtitle": "অনুগ্রহ করে তালিকা থেকে একজন ক্রেতা নির্বাচন করুন",
+  "@selectCustomerSubtitle": {
+    "description": "Subtitle for customer selection bottom sheet"
+  },
+  "searchCustomer": "ক্রেতা খুঁজুন...",
+  "@searchCustomer": {
+    "description": "Hint text for customer search field"
+  },
+  "products": "পণ্য",
+  "@products": {
+    "description": "Label for products section"
+  },
+  "addProducts": "পণ্য যোগ করুন",
+  "@addProducts": {
+    "description": "Button text to add products"
+  },
+  "noProductsAdded": "কোন পণ্য যোগ করা হয়নি!\n\nপণ্য নির্বাচন করতে \"পণ্য যোগ করুন\" বাটনে ট্যাপ করুন।",
+  "@noProductsAdded": {
+    "description": "Message when no products are added"
+  },
+  "subTotal": "উপমোট",
+  "@subTotal": {
+    "description": "Label for subtotal amount"
+  },
+  "discount": "ছাড়",
+  "@discount": {
+    "description": "Label for discount field"
+  },
+  "discountAmount": "ছাড়ের পরিমাণ",
+  "@discountAmount": {
+    "description": "Label for discount amount"
+  },
+  "paymentType": "পেমেন্টের ধরন",
+  "@paymentType": {
+    "description": "Label for payment type field"
+  },
+  "selectPaymentType": "পেমেন্টের ধরন নির্বাচন করুন",
+  "@selectPaymentType": {
+    "description": "Hint text for payment type field"
+  },
+  "selectPaymentTypeTitle": "পেমেন্টের ধরন নির্বাচন করুন",
+  "@selectPaymentTypeTitle": {
+    "description": "Title for payment type selection bottom sheet"
+  },
+  "selectPaymentTypeSubtitle": "অনুগ্রহ করে তালিকা থেকে একটি পেমেন্টের ধরন নির্বাচন করুন",
+  "@selectPaymentTypeSubtitle": {
+    "description": "Subtitle for payment type selection bottom sheet"
+  },
+  "searchPaymentType": "পেমেন্টের ধরন খুঁজুন...",
+  "@searchPaymentType": {
+    "description": "Hint text for payment type search field"
+  },
+  "paidAmount": "পরিশোধিত পরিমাণ",
+  "@paidAmount": {
+    "description": "Label for paid amount field"
+  },
+  "dueAmount": "বকেয়া পরিমাণ",
+  "@dueAmount": {
+    "description": "Label for due amount"
+  },
+  "paymentInfo": "পেমেন্ট তথ্য",
+  "@paymentInfo": {
+    "description": "Label for payment info field"
+  },
+  "paymentInfoHint": "লেনদেন আইডি, রেফারেন্স, ইত্যাদি (ঐচ্ছিক)",
+  "@paymentInfoHint": {
+    "description": "Hint text for payment info field"
+  },
+  "createSale": "বিক্রয় তৈরি করুন",
+  "@createSale": {
+    "description": "Button text to create sale"
+  },
+  "pleaseSelectCustomer": "অনুগ্রহ করে একজন ক্রেতা নির্বাচন করুন",
+  "@pleaseSelectCustomer": {
+    "description": "Error message when customer is not selected"
+  },
+  "pleaseAddProduct": "অনুগ্রহ করে অন্তত একটি পণ্য যোগ করুন",
+  "@pleaseAddProduct": {
+    "description": "Error message when no products are added"
+  },
+  "saleCreatedSuccess": "বিক্রয় সফলভাবে তৈরি হয়েছে",
+  "@saleCreatedSuccess": {
+    "description": "Success message when sale is created"
+  },
+  "invalidAmount": "অবৈধ",
+  "@invalidAmount": {
+    "description": "Error message for invalid amount"
+  },
+  "cannotExceedSubtotal": "উপমোট অতিক্রম করতে পারবে না",
+  "@cannotExceedSubtotal": {
+    "description": "Error message when discount exceeds subtotal"
+  },
+  "paidAmountRequired": "পরিশোধিত পরিমাণ প্রয়োজন",
+  "@paidAmountRequired": {
+    "description": "Error message when paid amount is not entered"
+  },
+  "enterValidAmount": "একটি বৈধ পরিমাণ লিখুন",
+  "@enterValidAmount": {
+    "description": "Error message for invalid amount format"
+  },
+  "paidAmountExceedsTotal": "পরিশোধিত পরিমাণ সর্বমোট অতিক্রম করতে পারবে না",
+  "@paidAmountExceedsTotal": {
+    "description": "Error message when paid amount exceeds grand total"
+  },
+  "cash": "নগদ",
+  "@cash": {
+    "description": "Payment type: Cash"
+  },
+  "qrCode": "কিউআর কোড",
+  "@qrCode": {
+    "description": "Payment type: QR Code"
+  },
+  "debitCreditCards": "ডেবিট/ক্রেডিট কার্ড",
+  "@debitCreditCards": {
+    "description": "Payment type: Debit/Credit Cards"
+  },
+  "digitalWallet": "ডিজিটাল ওয়ালেট",
+  "@digitalWallet": {
+    "description": "Payment type: Digital Wallet"
+  },
+
+  "notAvailable": "প্রযোজ্য নয়",
+  "@notAvailable": {
+    "description": "Text shown when data is not available"
+  },
+  "category": "বিভাগ",
+  "@category": {
+    "description": "Label for product category"
+  },
+  "quantity": "পরিমাণ",
+  "@quantity": {
+    "description": "Label for product quantity"
+  },
+  "unit": "একক",
+  "@unit": {
+    "description": "Label for unit of measurement"
+  },
+  "purchaseDate": "ক্রয়ের তারিখ",
+  "@purchaseDate": {
+    "description": "Label for purchase date"
+  },
+  "grandTotal": "সর্বমোট",
+  "@grandTotal": {
+    "description": "Label for grand total amount"
+  },
+  "paid": "পরিশোধিত",
+  "@paid": {
+    "description": "Label for paid amount"
+  },
+  "due": "বকেয়া",
+  "@due": {
+    "description": "Label for due amount"
+  },
+  "viewDetails": "বিস্তারিত দেখুন",
+  "@viewDetails": {
+    "description": "Button text to view details"
+  },
+  "statusCompleted": "সম্পন্ন",
+  "@statusCompleted": {
+    "description": "Status label for completed purchases"
+  },
+  "statusPartial": "আংশিক",
+  "@statusPartial": {
+    "description": "Status label for partially paid purchases"
+  },
+  "statusPending": "অপেক্ষমাণ",
+  "@statusPending": {
+    "description": "Status label for pending purchases"
+  },
+  "statusDue": "বকেয়া",
+  "@statusDue": {
+    "description": "Status label for due purchases"
+  },
+  "createSales": "বিক্রয় তৈরি করুন",
+  "@createSales": {
+    "description": "Title for create sales page"
+  },
+  "saleDate": "বিক্রয়ের তারিখ",
+  "@saleDate": {
+    "description": "Label for sale date field"
+  },
+  "selectSaleDate": "বিক্রয়ের তারিখ নির্বাচন করুন",
+  "@selectSaleDate": {
+    "description": "Hint text for sale date field"
+  },
+  "customer": "ক্রেতা",
+  "@customer": {
+    "description": "Label for customer field"
+  },
+  "selectCustomer": "ক্রেতা নির্বাচন করুন",
+  "@selectCustomer": {
+    "description": "Hint text for customer field"
+  },
+  "selectCustomerTitle": "ক্রেতা নির্বাচন করুন",
+  "@selectCustomerTitle": {
+    "description": "Title for customer selection bottom sheet"
+  },
+  "selectCustomerSubtitle": "অনুগ্রহ করে তালিকা থেকে একজন ক্রেতা নির্বাচন করুন",
+  "@selectCustomerSubtitle": {
+    "description": "Subtitle for customer selection bottom sheet"
+  },
+  "searchCustomer": "ক্রেতা খুঁজুন...",
+  "@searchCustomer": {
+    "description": "Hint text for customer search field"
+  },
+  "products": "পণ্য",
+  "@products": {
+    "description": "Label for products section"
+  },
+  "addProducts": "পণ্য যোগ করুন",
+  "@addProducts": {
+    "description": "Button text to add products"
+  },
+  "noProductsAdded": "কোন পণ্য যোগ করা হয়নি!\n\nপণ্য নির্বাচন করতে \"পণ্য যোগ করুন\" বাটনে ট্যাপ করুন।",
+  "@noProductsAdded": {
+    "description": "Message when no products are added"
+  },
+  "subTotal": "উপমোট",
+  "@subTotal": {
+    "description": "Label for subtotal amount"
+  },
+  "discount": "ছাড়",
+  "@discount": {
+    "description": "Label for discount field"
+  },
+  "discountAmount": "ছাড়ের পরিমাণ",
+  "@discountAmount": {
+    "description": "Label for discount amount"
+  },
+  "paymentType": "পেমেন্টের ধরন",
+  "@paymentType": {
+    "description": "Label for payment type field"
+  },
+  "selectPaymentType": "পেমেন্টের ধরন নির্বাচন করুন",
+  "@selectPaymentType": {
+    "description": "Hint text for payment type field"
+  },
+  "selectPaymentTypeTitle": "পেমেন্টের ধরন নির্বাচন করুন",
+  "@selectPaymentTypeTitle": {
+    "description": "Title for payment type selection bottom sheet"
+  },
+  "selectPaymentTypeSubtitle": "অনুগ্রহ করে তালিকা থেকে একটি পেমেন্টের ধরন নির্বাচন করুন",
+  "@selectPaymentTypeSubtitle": {
+    "description": "Subtitle for payment type selection bottom sheet"
+  },
+  "searchPaymentType": "পেমেন্টের ধরন খুঁজুন...",
+  "@searchPaymentType": {
+    "description": "Hint text for payment type search field"
+  },
+  "paidAmount": "পরিশোধিত পরিমাণ",
+  "@paidAmount": {
+    "description": "Label for paid amount field"
+  },
+  "dueAmount": "বকেয়া পরিমাণ",
+  "@dueAmount": {
+    "description": "Label for due amount"
+  },
+  "paymentInfo": "পেমেন্ট তথ্য",
+  "@paymentInfo": {
+    "description": "Label for payment info field"
+  },
+  "paymentInfoHint": "লেনদেন আইডি, রেফারেন্স, ইত্যাদি (ঐচ্ছিক)",
+  "@paymentInfoHint": {
+    "description": "Hint text for payment info field"
+  },
+  "createSale": "বিক্রয় তৈরি করুন",
+  "@createSale": {
+    "description": "Button text to create sale"
+  },
+  "pleaseSelectCustomer": "অনুগ্রহ করে একজন ক্রেতা নির্বাচন করুন",
+  "@pleaseSelectCustomer": {
+    "description": "Error message when customer is not selected"
+  },
+  "pleaseAddProduct": "অনুগ্রহ করে অন্তত একটি পণ্য যোগ করুন",
+  "@pleaseAddProduct": {
+    "description": "Error message when no products are added"
+  },
+  "saleCreatedSuccess": "বিক্রয় সফলভাবে তৈরি হয়েছে",
+  "@saleCreatedSuccess": {
+    "description": "Success message when sale is created"
+  },
+  "invalidAmount": "অবৈধ",
+  "@invalidAmount": {
+    "description": "Error message for invalid amount"
+  },
+  "cannotExceedSubtotal": "উপমোট অতিক্রম করতে পারবে না",
+  "@cannotExceedSubtotal": {
+    "description": "Error message when discount exceeds subtotal"
+  },
+  "paidAmountRequired": "পরিশোধিত পরিমাণ প্রয়োজন",
+  "@paidAmountRequired": {
+    "description": "Error message when paid amount is not entered"
+  },
+  "enterValidAmount": "একটি বৈধ পরিমাণ লিখুন",
+  "@enterValidAmount": {
+    "description": "Error message for invalid amount format"
+  },
+  "paidAmountExceedsTotal": "পরিশোধিত পরিমাণ সর্বমোট অতিক্রম করতে পারবে না",
+  "@paidAmountExceedsTotal": {
+    "description": "Error message when paid amount exceeds grand total"
+  },
+  "cash": "নগদ",
+  "@cash": {
+    "description": "Payment type: Cash"
+  },
+  "qrCode": "কিউআর কোড",
+  "@qrCode": {
+    "description": "Payment type: QR Code"
+  },
+  "debitCreditCards": "ডেবিট/ক্রেডিট কার্ড",
+  "@debitCreditCards": {
+    "description": "Payment type: Debit/Credit Cards"
+  },
+  "digitalWallet": "ডিজিটাল ওয়ালেট",
+  "@digitalWallet": {
+    "description": "Payment type: Digital Wallet"
+  },
+  "selectProducts": "পণ্য নির্বাচন করুন",
+  "@selectProducts": {
+    "description": "Title for product selection page"
+  },
+  "selected": "নির্বাচিত",
+  "@selected": {
+    "description": "Text showing number of selected items"
+  },
+  "searchProducts": "পণ্য খুঁজুন...",
+  "@searchProducts": {
+    "description": "Hint text for product search field"
+  },
+  "all": "সব",
+  "@all": {
+    "description": "Label for all categories filter"
+  },
+  "noProductsAvailable": "কোন পণ্য উপলব্ধ নেই",
+  "@noProductsAvailable": {
+    "description": "Message when no products are available"
+  },
+  "stock": "স্টক",
+  "@stock": {
+    "description": "Label for stock quantity"
+  },
+  "addItems": "{count}টি পণ্য যোগ করুন",
+  "@addItems": {
+    "description": "Button text to add selected items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "addItemsPlural": "{count}টি পণ্য যোগ করুন",
+  "@addItemsPlural": {
+    "description": "Button text to add multiple selected items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "createExpense": "খরচ তৈরি করুন",
+  "expenseHead": "খরচের খাত",
+  "selectExpenseHead": "খরচের খাত নির্বাচন করুন",
+  "selectExpenseHeadTitle": "খরচের খাত নির্বাচন করুন",
+  "selectExpenseHeadSubtitle": "অনুগ্রহ করে একটি খরচের খাত নির্বাচন করুন",
+  "searchExpenseHead": "খরচের খাত খুঁজুন...",
+  "expenseDate": "খরচের তারিখ",
+  "selectExpenseDate": "খরচের তারিখ নির্বাচন করুন",
+  "amount": "পরিমাণ",
+  "enterAmount": "পরিমাণ লিখুন",
+  "remarks": "মন্তব্য",
+  "enterRemarks": "মন্তব্য লিখুন (ঐচ্ছিক)",
+  "expenseCreatedSuccess": "খরচ সফলভাবে তৈরি হয়েছে",
+  "editExpense": "খরচ সম্পাদনা করুন",
+  "expenseEditedSuccess": "খরচ সফলভাবে সম্পাদিত হয়েছে",
+  "customers": "ক্রেতাগণ",
+  "failedToLoadCustomers": "ক্রেতা লোড করতে ব্যর্থ",
+  "noCustomersFound": "কোন ক্রেতা পাওয়া যায়নি",
+  "noCustomerMatches": "আপনার অনুসন্ধানের সাথে কোন ক্রেতা মিলেনি।",
+  "searchCustomerPlaceholder": "ক্রেতা খুঁজুন (English / বাংলা / ফোন)",
+  "email": "ইমেইল",
+  "phone": "ফোন",
+  "address": "ঠিকানা",
+  "branch": "শাখা",
+  "deleteCustomer": "ক্রেতা মুছুন",
+  "deleteCustomerConfirm": "আপনি কি নিশ্চিত যে এই ক্রেতাকে মুছে ফেলতে চান?",
+  "cancel": "বাতিল",
+  "delete": "মুছুন",
+  "createCustomer": "ক্রেতা তৈরি করুন",
+  "addCustomer": "ক্রেতা যোগ করুন",
+  "editCustomer": "ক্রেতা সম্পাদনা করুন",
+  "name": "নাম",
+  "enterCustomerName": "ক্রেতার নাম লিখুন",
+  "nameBangla": "নাম (বাংলা)",
+  "enterCustomerNameBangla": "ক্রেতার নাম বাংলায় লিখুন",
+  "enterPhoneNumber": "ফোন নম্বর লিখুন",
+  "enterEmailAddress": "ইমেইল ঠিকানা লিখুন",
+  "enterAddress": "ঠিকানা লিখুন",
+  "customerCreatedSuccess": "ক্রেতা সফলভাবে তৈরি হয়েছে",
+  "customerEditedSuccess": "ক্রেতা সফলভাবে সম্পাদিত হয়েছে",
+  "customerDues": "ক্রেতার বকেয়া",
+  "refresh": "রিফ্রেশ",
+  "failedToLoadCustomerDues": "ক্রেতার বকেয়া লোড করতে ব্যর্থ",
+  "noCustomerDuesFound": "কোন ক্রেতার বকেয়া পাওয়া যায়নি",
+  "noCustomerDuesMessage": "বর্তমানে কোন ক্রেতার কোন বকেয়া নেই।",
+  "totalDues": "মোট বকেয়া",
+  "totalCustomers": "মোট ক্রেতা",
+  "totalSales": "মোট বিক্রয়",
+  "dueSales": "বকেয়া বিক্রয়",
+  "failedToLoadPurchaseDues": "ক্রয় বকেয়া লোড করতে ব্যর্থ",
+  "noDueSalesFound": "কোন বকেয়া বিক্রয় পাওয়া যায়নি",
+  "noDueSalesMessage": "এই ক্রেতার কোন বকেয়া পেমেন্ট নেই।",
+  "totalDue": "মোট বকেয়া",
+  "payDue": "বকেয়া পরিশোধ করুন",
+  "duePayment": "বকেয়া পেমেন্ট",
+  "paymentDate": "পেমেন্টের তারিখ",
+  "selectPaymentDate": "পেমেন্টের তারিখ নির্বাচন করুন",
+  "paymentAmount": "পেমেন্টের পরিমাণ",
+  "paymentAmountRequired": "পেমেন্টের পরিমাণ প্রয়োজন",
+  "amountGreaterThanZero": "পরিমাণ ০ এর চেয়ে বেশি হতে হবে",
+  "amountCannotExceedDue": "পরিমাণ বকেয়া পরিমাণ অতিক্রম করতে পারবে না",
+  "transactionId": "লেনদেন আইডি",
+  "transactionIdHint": "লেনদেন আইডি, রেফারেন্স, ইত্যাদি (ঐচ্ছিক)",
+  "payingAmount": "পরিশোধের পরিমাণ",
+  "remainingDue": "অবশিষ্ট বকেয়া",
+  "submitPayment": "পেমেন্ট জমা দিন",
+  "saleInformation": "বিক্রয় তথ্য",
+  "dueAmount": "বকেয়া পরিমাণ",
+  "manageCustomerDues": "ক্রেতার বকেয়া পরিচালনা করুন",
+  "company": "কোম্পানি"
 }

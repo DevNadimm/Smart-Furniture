@@ -10,12 +10,114 @@
   "shopNoorjahanFurniture": "Noorjahan Furniture",
   "shopNaimFurniture": "Naim Furniture",
   "shopNoorjahanSteel": "Noorjahan Steel",
+  "adminLoginTitle": "Login to Your Account",
+  "companyOverview": "Company Overview",
+  "searchCategory": "Search category...",
+  "notAvailable": "N/A",
+  "grandTotal": "Grand Total",
+  "paid": "Paid",
+  "due": "Due",
+  "items": "Items",
+  "date": "Date",
+  "statusCompleted": "Completed",
+  "statusPending": "Pending",
+  "statusCancelled": "Cancelled",
+  "expenses": "Expenses",
+  "amount": "Amount",
+  "deleteExpenseTitle": "Delete Expense",
+  "purchases": "Purchases",
+  "category": "Category",
+  "selectCategory": "Select Category",
+  "selectCategorySubtitle": "Choose purchase category",
+  "searchCategory": "Search category...",
+  "purchaseLoadError": "Failed to Load Purchases",
+  "noPurchasesFound": "No Purchases Found",
+  "noPurchasesMessage": "Try adjusting filters or selecting another period.",
+  "totalAmount": "Total Amount",
+  "totalPurchases": "Total Purchases",
+  "purchaseDate": "Purchase Date",
+  "viewDetails": "View Details",
+  "statusPartial": "Partial",
+  "statusDue": "Due",
+  "purchaseDetails": "Purchase Details",
+  "refresh": "Refresh",
+  "purchaseDetailsLoadError": "Failed to Load Purchase Details",
+  "supplierInformation": "Supplier Information",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "address": "Address",
+  "receivedBy": "Received By",
+  "purchaseItems": "Purchase Items",
+  "quantity": "Quantity",
+  "unitPrice": "Unit Price",
+  "total": "Total",
+  "paymentSummary": "Payment Summary",
+  "subTotal": "Sub Total",
+  "discount": "Discount",
+  "paidAmount": "Paid Amount",
+  "dueAmount": "Due Amount",
+  "suppliers": "Suppliers",
+  "supplierLoadError": "Failed to Load Suppliers",
+  "noSuppliersFound": "No Suppliers Found",
+  "noSuppliersMessage": "No supplier matches your search.",
+  "searchSupplier": "Search supplier (English / বাংলা)",
+  "supplierDuesLoadError": "Failed to Load Supplier Dues",
+  "noSupplierDuesFound": "No Supplier Dues Found",
+  "noSupplierDuesMessage": "Currently no supplier has any pending dues.",
+  "totalDues": "Total Dues",
+  "totalSuppliers": "Total Suppliers",
+  "totalPurchasesLabel": "Total Purchases",
+  "duePurchases": "Due Purchases",
+  "supplierDueDetails": "Supplier Due Details",
+  "supplierDueDetailsLoadError": "Failed to Load Supplier Due Details",
+  "noPurchaseDues": "No Purchase Dues",
+  "noPurchaseDuesMessage": "This supplier has no outstanding purchase dues.",
+  "totalDueAmount": "Total Due Amount",
+  "purchaseDuesTitle": "Purchase Dues",
+  "statusPaid": "Paid",
+  "finishedProductsLoadError": "Failed to Load Finished Products",
+  "noFinishedProductsFound": "No Finished Products Found",
+  "noFinishedProductsMessage": "Currently no finished product information is available.",
+  "unit": "Unit",
+  "employeeLoginWelcome": "Welcome back! Access your sales updates, schedules, and business activities anytime.",
+  "deleteExpenseMessage": "Are you sure you want to delete this expense?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "head": "Head",
+  "selectHead": "Select Head",
+  "selectHeadSubtitle": "Please choose a head from the list",
+  "searchHead": "Search head...",
+  "expenseLoadError": "Failed to Load Expenses",
+  "noExpensesFound": "No Expenses Found",
+  "noExpensesMessage": "Currently no expense information is available.",
+  "switchShop": "Switch Shop",
+  "companySalesSubtitle": "View company-wide sales",
+  "companyExpenseSubtitle": "Manage company expenses",
+  "purchase": "Purchase",
+  "purchaseSubtitle": "Check purchase details",
+  "supplier": "Supplier",
+  "supplierSubtitle": "Check supplier details",
+  "supplierDues": "Supplier Dues",
+  "supplierDuesSubtitle": "Check supplier dues",
+  "finishedProducts": "Finished Products",
+  "finishedProductsSubtitle": "View and manage sellable products across branches",
+  "companyRawMaterials": "Company Raw Materials",
+  "companyRawMaterialsSubtitle": "Monitor raw materials and warehouse inventory",
+  "adminLoginWelcome": "Welcome back! Manage branches, sales, and operations seamlessly from your admin dashboard.",
+  "adminLoginEmail": "Email",
+  "adminLoginEmailHint": "Enter email",
+  "adminLoginPassword": "Password",
+  "adminLoginPasswordHint": "Enter password",
+  "adminLoginForgotPassword": "Forgot password?",
+  "adminLoginButton": "Login",
 
   "@@chooseUserRole": "===== Choose User Role =====",
   "chooseUserRoleHeader": "Choose Your Role",
   "chooseUserRoleSubtitle": "Please select the role that best represents how you will use this application.",
   "adminRole": "Admin",
-  "employeeRole": "Employee",
+  "employeeRole": "Manager",
+  "switchShop": "Switch Shop",
 
   "dashboard": "Dashboard",
   "furnitureManagementSystem": "Furniture Management System",
@@ -227,5 +329,511 @@
   "totalSalesQuantity": "Total Sales Quantity",
   "totalCurrentQuantity": "Total Current Quantity",
   "totalPurchasesAmount": "Total Purchases Amount",
-  "totalSalesAmount": "Total Sales Amount"
+  "totalSalesAmount": "Total Sales Amount",
+
+  "notAvailable": "N/A",
+  "@notAvailable": {
+    "description": "Text shown when data is not available"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Label for product category"
+  },
+  "quantity": "Quantity",
+  "@quantity": {
+    "description": "Label for product quantity"
+  },
+  "unit": "Unit",
+  "@unit": {
+    "description": "Label for unit of measurement"
+  },
+  "purchaseDate": "Purchase Date",
+  "@purchaseDate": {
+    "description": "Label for purchase date"
+  },
+  "grandTotal": "Grand Total",
+  "@grandTotal": {
+    "description": "Label for grand total amount"
+  },
+  "paid": "Paid",
+  "@paid": {
+    "description": "Label for paid amount"
+  },
+  "due": "Due",
+  "@due": {
+    "description": "Label for due amount"
+  },
+  "viewDetails": "View Details",
+  "@viewDetails": {
+    "description": "Button text to view details"
+  },
+  "statusCompleted": "Completed",
+  "@statusCompleted": {
+    "description": "Status label for completed purchases"
+  },
+  "statusPartial": "Partial",
+  "@statusPartial": {
+    "description": "Status label for partially paid purchases"
+  },
+  "statusPending": "Pending",
+  "@statusPending": {
+    "description": "Status label for pending purchases"
+  },
+  "statusDue": "Due",
+  "@statusDue": {
+    "description": "Status label for due purchases"
+  },
+  "createSales": "Create Sales",
+  "@createSales": {
+    "description": "Title for create sales page"
+  },
+  "saleDate": "Sale Date",
+  "@saleDate": {
+    "description": "Label for sale date field"
+  },
+  "selectSaleDate": "Select sale date",
+  "@selectSaleDate": {
+    "description": "Hint text for sale date field"
+  },
+  "customer": "Customer",
+  "@customer": {
+    "description": "Label for customer field"
+  },
+  "selectCustomer": "Select customer",
+  "@selectCustomer": {
+    "description": "Hint text for customer field"
+  },
+  "selectCustomerTitle": "Select Customer",
+  "@selectCustomerTitle": {
+    "description": "Title for customer selection bottom sheet"
+  },
+  "selectCustomerSubtitle": "Please choose a customer from the list",
+  "@selectCustomerSubtitle": {
+    "description": "Subtitle for customer selection bottom sheet"
+  },
+  "searchCustomer": "Search customer...",
+  "@searchCustomer": {
+    "description": "Hint text for customer search field"
+  },
+  "products": "Products",
+  "@products": {
+    "description": "Label for products section"
+  },
+  "addProducts": "Add Products",
+  "@addProducts": {
+    "description": "Button text to add products"
+  },
+  "noProductsAdded": "No products added!\n\nTap on the \"Add Products\" button to select products.",
+  "@noProductsAdded": {
+    "description": "Message when no products are added"
+  },
+  "subTotal": "Sub Total",
+  "@subTotal": {
+    "description": "Label for subtotal amount"
+  },
+  "discount": "Discount",
+  "@discount": {
+    "description": "Label for discount field"
+  },
+  "discountAmount": "Discount Amount",
+  "@discountAmount": {
+    "description": "Label for discount amount"
+  },
+  "paymentType": "Payment Type",
+  "@paymentType": {
+    "description": "Label for payment type field"
+  },
+  "selectPaymentType": "Select payment type",
+  "@selectPaymentType": {
+    "description": "Hint text for payment type field"
+  },
+  "selectPaymentTypeTitle": "Select Payment Type",
+  "@selectPaymentTypeTitle": {
+    "description": "Title for payment type selection bottom sheet"
+  },
+  "selectPaymentTypeSubtitle": "Please choose a payment type from the list",
+  "@selectPaymentTypeSubtitle": {
+    "description": "Subtitle for payment type selection bottom sheet"
+  },
+  "searchPaymentType": "Search payment type...",
+  "@searchPaymentType": {
+    "description": "Hint text for payment type search field"
+  },
+  "paidAmount": "Paid Amount",
+  "@paidAmount": {
+    "description": "Label for paid amount field"
+  },
+  "dueAmount": "Due Amount",
+  "@dueAmount": {
+    "description": "Label for due amount"
+  },
+  "paymentInfo": "Payment Info",
+  "@paymentInfo": {
+    "description": "Label for payment info field"
+  },
+  "paymentInfoHint": "Transaction ID, Reference, etc. (Optional)",
+  "@paymentInfoHint": {
+    "description": "Hint text for payment info field"
+  },
+  "createSale": "Create Sale",
+  "@createSale": {
+    "description": "Button text to create sale"
+  },
+  "pleaseSelectCustomer": "Please select a customer",
+  "@pleaseSelectCustomer": {
+    "description": "Error message when customer is not selected"
+  },
+  "pleaseAddProduct": "Please add at least one product",
+  "@pleaseAddProduct": {
+    "description": "Error message when no products are added"
+  },
+  "saleCreatedSuccess": "Sale created successfully",
+  "@saleCreatedSuccess": {
+    "description": "Success message when sale is created"
+  },
+  "invalidAmount": "Invalid",
+  "@invalidAmount": {
+    "description": "Error message for invalid amount"
+  },
+  "cannotExceedSubtotal": "Cannot exceed subtotal",
+  "@cannotExceedSubtotal": {
+    "description": "Error message when discount exceeds subtotal"
+  },
+  "paidAmountRequired": "Paid amount is required",
+  "@paidAmountRequired": {
+    "description": "Error message when paid amount is not entered"
+  },
+  "enterValidAmount": "Enter a valid amount",
+  "@enterValidAmount": {
+    "description": "Error message for invalid amount format"
+  },
+  "paidAmountExceedsTotal": "Paid amount cannot exceed grand total",
+  "@paidAmountExceedsTotal": {
+    "description": "Error message when paid amount exceeds grand total"
+  },
+  "cash": "Cash",
+  "@cash": {
+    "description": "Payment type: Cash"
+  },
+  "qrCode": "QR Code",
+  "@qrCode": {
+    "description": "Payment type: QR Code"
+  },
+  "debitCreditCards": "Debit/Credit Cards",
+  "@debitCreditCards": {
+    "description": "Payment type: Debit/Credit Cards"
+  },
+  "digitalWallet": "Digital Wallet",
+  "@digitalWallet": {
+    "description": "Payment type: Digital Wallet"
+  },
+
+  "notAvailable": "N/A",
+  "@notAvailable": {
+    "description": "Text shown when data is not available"
+  },
+  "category": "Category",
+  "@category": {
+    "description": "Label for product category"
+  },
+  "quantity": "Quantity",
+  "@quantity": {
+    "description": "Label for product quantity"
+  },
+  "unit": "Unit",
+  "@unit": {
+    "description": "Label for unit of measurement"
+  },
+  "purchaseDate": "Purchase Date",
+  "@purchaseDate": {
+    "description": "Label for purchase date"
+  },
+  "grandTotal": "Grand Total",
+  "@grandTotal": {
+    "description": "Label for grand total amount"
+  },
+  "paid": "Paid",
+  "@paid": {
+    "description": "Label for paid amount"
+  },
+  "due": "Due",
+  "@due": {
+    "description": "Label for due amount"
+  },
+  "viewDetails": "View Details",
+  "@viewDetails": {
+    "description": "Button text to view details"
+  },
+  "statusCompleted": "Completed",
+  "@statusCompleted": {
+    "description": "Status label for completed purchases"
+  },
+  "statusPartial": "Partial",
+  "@statusPartial": {
+    "description": "Status label for partially paid purchases"
+  },
+  "statusPending": "Pending",
+  "@statusPending": {
+    "description": "Status label for pending purchases"
+  },
+  "statusDue": "Due",
+  "@statusDue": {
+    "description": "Status label for due purchases"
+  },
+  "createSales": "Create Sales",
+  "@createSales": {
+    "description": "Title for create sales page"
+  },
+  "saleDate": "Sale Date",
+  "@saleDate": {
+    "description": "Label for sale date field"
+  },
+  "selectSaleDate": "Select sale date",
+  "@selectSaleDate": {
+    "description": "Hint text for sale date field"
+  },
+  "customer": "Customer",
+  "@customer": {
+    "description": "Label for customer field"
+  },
+  "selectCustomer": "Select customer",
+  "@selectCustomer": {
+    "description": "Hint text for customer field"
+  },
+  "selectCustomerTitle": "Select Customer",
+  "@selectCustomerTitle": {
+    "description": "Title for customer selection bottom sheet"
+  },
+  "selectCustomerSubtitle": "Please choose a customer from the list",
+  "@selectCustomerSubtitle": {
+    "description": "Subtitle for customer selection bottom sheet"
+  },
+  "searchCustomer": "Search customer...",
+  "@searchCustomer": {
+    "description": "Hint text for customer search field"
+  },
+  "products": "Products",
+  "@products": {
+    "description": "Label for products section"
+  },
+  "addProducts": "Add Products",
+  "@addProducts": {
+    "description": "Button text to add products"
+  },
+  "noProductsAdded": "No products added!\n\nTap on the \"Add Products\" button to select products.",
+  "@noProductsAdded": {
+    "description": "Message when no products are added"
+  },
+  "subTotal": "Sub Total",
+  "@subTotal": {
+    "description": "Label for subtotal amount"
+  },
+  "discount": "Discount",
+  "@discount": {
+    "description": "Label for discount field"
+  },
+  "discountAmount": "Discount Amount",
+  "@discountAmount": {
+    "description": "Label for discount amount"
+  },
+  "paymentType": "Payment Type",
+  "@paymentType": {
+    "description": "Label for payment type field"
+  },
+  "selectPaymentType": "Select payment type",
+  "@selectPaymentType": {
+    "description": "Hint text for payment type field"
+  },
+  "selectPaymentTypeTitle": "Select Payment Type",
+  "@selectPaymentTypeTitle": {
+    "description": "Title for payment type selection bottom sheet"
+  },
+  "selectPaymentTypeSubtitle": "Please choose a payment type from the list",
+  "@selectPaymentTypeSubtitle": {
+    "description": "Subtitle for payment type selection bottom sheet"
+  },
+  "searchPaymentType": "Search payment type...",
+  "@searchPaymentType": {
+    "description": "Hint text for payment type search field"
+  },
+  "paidAmount": "Paid Amount",
+  "@paidAmount": {
+    "description": "Label for paid amount field"
+  },
+  "dueAmount": "Due Amount",
+  "@dueAmount": {
+    "description": "Label for due amount"
+  },
+  "paymentInfo": "Payment Info",
+  "@paymentInfo": {
+    "description": "Label for payment info field"
+  },
+  "paymentInfoHint": "Transaction ID, Reference, etc. (Optional)",
+  "@paymentInfoHint": {
+    "description": "Hint text for payment info field"
+  },
+  "createSale": "Create Sale",
+  "@createSale": {
+    "description": "Button text to create sale"
+  },
+  "pleaseSelectCustomer": "Please select a customer",
+  "@pleaseSelectCustomer": {
+    "description": "Error message when customer is not selected"
+  },
+  "pleaseAddProduct": "Please add at least one product",
+  "@pleaseAddProduct": {
+    "description": "Error message when no products are added"
+  },
+  "saleCreatedSuccess": "Sale created successfully",
+  "@saleCreatedSuccess": {
+    "description": "Success message when sale is created"
+  },
+  "invalidAmount": "Invalid",
+  "@invalidAmount": {
+    "description": "Error message for invalid amount"
+  },
+  "cannotExceedSubtotal": "Cannot exceed subtotal",
+  "@cannotExceedSubtotal": {
+    "description": "Error message when discount exceeds subtotal"
+  },
+  "paidAmountRequired": "Paid amount is required",
+  "@paidAmountRequired": {
+    "description": "Error message when paid amount is not entered"
+  },
+  "enterValidAmount": "Enter a valid amount",
+  "@enterValidAmount": {
+    "description": "Error message for invalid amount format"
+  },
+  "paidAmountExceedsTotal": "Paid amount cannot exceed grand total",
+  "@paidAmountExceedsTotal": {
+    "description": "Error message when paid amount exceeds grand total"
+  },
+  "cash": "Cash",
+  "@cash": {
+    "description": "Payment type: Cash"
+  },
+  "qrCode": "QR Code",
+  "@qrCode": {
+    "description": "Payment type: QR Code"
+  },
+  "debitCreditCards": "Debit/Credit Cards",
+  "@debitCreditCards": {
+    "description": "Payment type: Debit/Credit Cards"
+  },
+  "digitalWallet": "Digital Wallet",
+  "@digitalWallet": {
+    "description": "Payment type: Digital Wallet"
+  },
+  "selectProducts": "Select Products",
+  "@selectProducts": {
+    "description": "Title for product selection page"
+  },
+  "selected": "selected",
+  "@selected": {
+    "description": "Text showing number of selected items"
+  },
+  "searchProducts": "Search products...",
+  "@searchProducts": {
+    "description": "Hint text for product search field"
+  },
+  "all": "All",
+  "@all": {
+    "description": "Label for all categories filter"
+  },
+  "noProductsAvailable": "No products available",
+  "@noProductsAvailable": {
+    "description": "Message when no products are available"
+  },
+  "stock": "Stock",
+  "@stock": {
+    "description": "Label for stock quantity"
+  },
+  "addItems": "Add {count} item",
+  "@addItems": {
+    "description": "Button text to add selected items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "addItemsPlural": "Add {count} items",
+  "@addItemsPlural": {
+    "description": "Button text to add multiple selected items",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "createExpense": "Create Expense",
+  "expenseHead": "Expense Head",
+  "selectExpenseHead": "Select expense head",
+  "selectExpenseHeadTitle": "Select Expense Head",
+  "selectExpenseHeadSubtitle": "Please choose an expense head",
+  "searchExpenseHead": "Search expense head...",
+  "expenseDate": "Expense Date",
+  "selectExpenseDate": "Select expense date",
+  "amount": "Amount",
+  "enterAmount": "Enter amount",
+  "remarks": "Remarks",
+  "enterRemarks": "Enter remarks (Optional)",
+  "expenseCreatedSuccess": "Expense created successfully",
+  "editExpense": "Edit Expense",
+  "expenseEditedSuccess": "Expense edited successfully",
+  "customers": "Customers",
+  "failedToLoadCustomers": "Failed to Load Customers",
+  "noCustomersFound": "No Customers Found",
+  "noCustomerMatches": "No customer matches your search.",
+  "searchCustomerPlaceholder": "Search customer (English / বাংলা / Phone)",
+  "email": "Email",
+  "phone": "Phone",
+  "address": "Address",
+  "branch": "Branch",
+  "deleteCustomer": "Delete Customer",
+  "deleteCustomerConfirm": "Are you sure you want to delete this customer?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "createCustomer": "Create Customer",
+  "addCustomer": "Add Customer",
+  "editCustomer": "Edit Customer",
+  "name": "Name",
+  "enterCustomerName": "Enter customer name",
+  "nameBangla": "Name (Bangla)",
+  "enterCustomerNameBangla": "Enter customer name in Bangla",
+  "enterPhoneNumber": "Enter phone number",
+  "enterEmailAddress": "Enter email address",
+  "enterAddress": "Enter address",
+  "customerCreatedSuccess": "Customer created successfully",
+  "customerEditedSuccess": "Customer edited successfully",
+  "customerDues": "Customer Dues",
+  "refresh": "Refresh",
+  "failedToLoadCustomerDues": "Failed to Load Customer Dues",
+  "noCustomerDuesFound": "No Customer Dues Found",
+  "noCustomerDuesMessage": "Currently no customer has any pending dues.",
+  "totalDues": "Total Dues",
+  "totalCustomers": "Total Customers",
+  "totalSales": "Total Sales",
+  "dueSales": "Due Sales",
+  "failedToLoadPurchaseDues": "Failed to Load Purchase Dues",
+  "noDueSalesFound": "No Due Sales Found",
+  "noDueSalesMessage": "This customer has no pending due payments.",
+  "totalDue": "Total Due",
+  "payDue": "Pay Due",
+  "duePayment": "Due Payment",
+  "paymentDate": "Payment Date",
+  "selectPaymentDate": "Select payment date",
+  "paymentAmount": "Payment Amount",
+  "paymentAmountRequired": "Payment amount is required",
+  "amountGreaterThanZero": "Amount must be greater than 0",
+  "amountCannotExceedDue": "Amount cannot exceed due amount",
+  "transactionId": "Transaction ID",
+  "transactionIdHint": "Transaction ID, Reference, etc. (Optional)",
+  "payingAmount": "Paying Amount",
+  "remainingDue": "Remaining Due",
+  "submitPayment": "Submit Payment",
+  "saleInformation": "Sale Information",
+  "dueAmount": "Due Amount",
+  "manageCustomerDues": "Manage customer dues",
+  "company": "Company"
 }

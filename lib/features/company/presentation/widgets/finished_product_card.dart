@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/company/data/models/finished_product_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class FinishedProductCard extends StatelessWidget {
   final FinishedProductData? finishedProduct;
@@ -13,6 +14,8 @@ class FinishedProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -42,7 +45,7 @@ class FinishedProductCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        finishedProduct?.productName ?? 'N/A',
+                        finishedProduct?.productName ?? strings.notAvailable,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -63,7 +66,7 @@ class FinishedProductCard extends StatelessWidget {
                     _buildInfoRow(
                       context,
                       icon: HugeIcons.strokeRoundedTag01,
-                      label: 'Category',
+                      label: strings.category,
                       value: finishedProduct!.category!,
                     ),
                   const Divider(color: AppColors.borderColor, thickness: 1),
@@ -75,8 +78,8 @@ class FinishedProductCard extends StatelessWidget {
                         child: _buildInfoRow(
                           context,
                           icon: HugeIcons.strokeRoundedPackage,
-                          label: 'Quantity',
-                          value: finishedProduct?.quantity ?? 'N/A',
+                          label: strings.quantity,
+                          value: finishedProduct?.quantity ?? strings.notAvailable,
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -84,8 +87,8 @@ class FinishedProductCard extends StatelessWidget {
                         child: _buildInfoRow(
                           context,
                           icon: HugeIcons.strokeRoundedCells,
-                          label: 'Unit',
-                          value: finishedProduct?.unit ?? 'N/A',
+                          label: strings.unit,
+                          value: finishedProduct?.unit ?? strings.notAvailable,
                         ),
                       ),
                     ],

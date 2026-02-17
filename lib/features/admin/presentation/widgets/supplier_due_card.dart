@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/admin/data/models/supplier_dues_model.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_due_details_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class SupplierDueCard extends StatelessWidget {
   final SupplierDueData supplierDue;
@@ -15,6 +17,8 @@ class SupplierDueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -42,7 +46,7 @@ class SupplierDueCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      supplierDue.name ?? 'N/A',
+                      supplierDue.name ?? strings.notAvailable,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: _getDueStatusColor(),
                       ),
@@ -60,7 +64,7 @@ class SupplierDueCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      '৳${supplierDue.due ?? 0}',
+                      '৳${CurrencyFormatter.format(supplierDue.due ?? 0, context: context)}',
                       style: GoogleFonts.poppins(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
@@ -110,7 +114,7 @@ class SupplierDueCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedCall,
-                        label: 'Phone',
+                        label: strings.phone,
                         value: supplierDue.phone!,
                       ),
 
@@ -119,7 +123,7 @@ class SupplierDueCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedMail01,
-                        label: 'Email',
+                        label: strings.email,
                         value: supplierDue.email!,
                       ),
 
@@ -128,7 +132,7 @@ class SupplierDueCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedLocation01,
-                        label: 'Address',
+                        label: strings.address,
                         value: supplierDue.address!,
                         maxLines: 2,
                       ),
@@ -143,20 +147,20 @@ class SupplierDueCard extends StatelessWidget {
                       children: [
                         _buildFinancialTag(
                           context,
-                          label: 'Total Purchases',
-                          value: '৳${supplierDue.totalPurchases ?? 0}',
+                          label: strings.totalPurchasesLabel,
+                          value: '৳${CurrencyFormatter.format(supplierDue.totalPurchases ?? 0, context: context)}',
                           icon: HugeIcons.strokeRoundedShoppingCart01,
                         ),
                         _buildFinancialTag(
                           context,
-                          label: 'Paid',
-                          value: '৳${supplierDue.totalPaid ?? 0}',
+                          label: strings.paid,
+                          value: '৳${CurrencyFormatter.format(supplierDue.totalPaid ?? 0, context: context)}',
                           icon: HugeIcons.strokeRoundedWallet01,
                         ),
                         _buildFinancialTag(
                           context,
-                          label: 'Due Purchases',
-                          value: '${supplierDue.duePurchaseCount ?? 0}',
+                          label: strings.duePurchases,
+                          value: CurrencyFormatter.format(supplierDue.duePurchaseCount ?? 0, context: context),
                           icon: HugeIcons.strokeRoundedReceiptDollar,
                         ),
                       ],
@@ -183,7 +187,7 @@ class SupplierDueCard extends StatelessWidget {
                             size: 18,
                           ),
                           label: Text(
-                            'View Details',
+                            strings.viewDetails,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
                               fontSize: 13,
@@ -275,6 +279,7 @@ class SupplierDueCard extends StatelessWidget {
             color: AppColors.grey,
             fontWeight: FontWeight.w500,
           ),
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 2),
         Text(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
-import 'package:smart_furniture/features/company/presentation/pages/company_raw_material_page.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/purchase_page.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/supplier_dues_page.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/supplier_page.dart';
 import 'package:smart_furniture/features/company/presentation/pages/finished_product_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_sales_page.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
@@ -47,9 +51,9 @@ class CompanyDashboardPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      const Text(
-                        "Company Overview",
-                        style: TextStyle(
+                      Text(
+                        strings.companyOverview,
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Color(0xFF64748B),
                           fontWeight: FontWeight.w600,
@@ -113,9 +117,9 @@ class CompanyDashboardPage extends StatelessWidget {
                               ShopSelectionPage.route(),
                             );
                           },
-                          child: const Text(
-                            'Switch Shop',
-                            style: TextStyle(
+                          child: Text(
+                            strings.switchShop,
+                            style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Color(0xFF475569),
                             ),
@@ -133,7 +137,7 @@ class CompanyDashboardPage extends StatelessWidget {
                           /// SALES (ALL BRANCHES)
                           _ModuleCard(
                             title: strings.sales,
-                            subtitle: "View company-wide sales",
+                            subtitle: strings.companySalesSubtitle,
                             icon: HugeIcons.strokeRoundedDiscountTag02,
                             iconColor: const Color(0xFF8B5CF6),
                             backgroundColor: const Color(0xFFF5F3FF),
@@ -153,7 +157,7 @@ class CompanyDashboardPage extends StatelessWidget {
                           /// EXPENSE
                           _ModuleCard(
                             title: strings.expense,
-                            subtitle: "Manage company expenses",
+                            subtitle: strings.companyExpenseSubtitle,
                             icon: HugeIcons.strokeRoundedInvoice01,
                             iconColor: const Color(0xFFEC4899),
                             backgroundColor: const Color(0xFFFDF2F8),
@@ -169,11 +173,55 @@ class CompanyDashboardPage extends StatelessWidget {
                           ),
 
                           const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.purchase,
+                            subtitle: strings.purchaseSubtitle,
+                            icon: HugeIcons.strokeRoundedShoppingBag01,
+                            iconColor: const Color(0xFFF59E0B),
+                            backgroundColor: const Color(0xFFFFFBEB),
+                            onTap: () {
+                              Navigator.push(context, PurchasePage.route());
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.customer,
+                            subtitle: strings.customerSubtitle,
+                            icon: HugeIcons.strokeRoundedUser03,
+                            iconColor: const Color(0xFF2563EB),
+                            backgroundColor: const Color(0xFFEFF6FF),
+                            onTap: () {
+                              Navigator.push(context, CustomerPage.route(isAdmin: true, branchId: null));
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.supplier,
+                            subtitle: strings.supplierSubtitle,
+                            icon: HugeIcons.strokeRoundedUser03,
+                            iconColor: AppColors.success,
+                            backgroundColor: AppColors.success.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, SupplierPage.route());
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.supplierDues,
+                            subtitle: strings.supplierDuesSubtitle,
+                            icon: HugeIcons.strokeRoundedDollar02,
+                            iconColor: const Color(0xFF06B6D4),
+                            backgroundColor: const Color(0xFFECFEFF),
+                            onTap: () {
+                              Navigator.push(context, SupplierDuesPage.route());
+                            },
+                          ),
+                          const SizedBox(height: 16),
 
                           /// FINISHED PRODUCTS (Branch Distributed Items)
                           _ModuleCard(
-                            title: 'Finished Products',
-                            subtitle: "View and manage sellable products across branches",
+                            title: strings.finishedProducts,
+                            subtitle: strings.finishedProductsSubtitle,
                             icon: HugeIcons.strokeRoundedDeliveryBox01,
                             iconColor: const Color(0xFF06B6D4),
                             backgroundColor: const Color(0xFFECFEFF),
@@ -187,20 +235,21 @@ class CompanyDashboardPage extends StatelessWidget {
 
                           const SizedBox(height: 16),
 
+
                           /// RAW MATERIALS (Company Warehouse)
-                          _ModuleCard(
-                            title: 'Company Raw Materials',
-                            subtitle: "Monitor raw materials and warehouse inventory",
-                            icon: HugeIcons.strokeRoundedNanoTechnology,
-                            iconColor: const Color(0xFFF59E0B),
-                            backgroundColor: const Color(0xFFFFFBEB),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                CompanyRawMaterialPage.route(),
-                              );
-                            },
-                          ),
+                          // _ModuleCard(
+                          //   title: strings.companyRawMaterials,
+                          //   subtitle: strings.companyRawMaterialsSubtitle,
+                          //   icon: HugeIcons.strokeRoundedNanoTechnology,
+                          //   iconColor: const Color(0xFFF59E0B),
+                          //   backgroundColor: const Color(0xFFFFFBEB),
+                          //   onTap: () {
+                          //     Navigator.push(
+                          //       context,
+                          //       CompanyRawMaterialPage.route(),
+                          //     );
+                          //   },
+                          // ),
                         ],
                       ),
                     ),

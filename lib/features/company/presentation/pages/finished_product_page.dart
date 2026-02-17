@@ -8,6 +8,7 @@ import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/features/company/presentation/blocs/finished_product/finished_product_bloc.dart';
 import 'package:smart_furniture/features/company/presentation/widgets/finished_product_card.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class FinishedProductPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const FinishedProductPage());
@@ -31,9 +32,11 @@ class _FinishedProductPageState extends State<FinishedProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Finished Products'),
+        title: Text(strings.finishedProducts),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -49,17 +52,17 @@ class _FinishedProductPageState extends State<FinishedProductPage> {
             }
 
             if (state is FinishedProductError) {
-              return const ErrorStateWidget(
-                title: 'Failed to Load Finished Products',
+              return ErrorStateWidget(
+                title: strings.finishedProductsLoadError,
                 message: ErrorMessages.networkError,
               );
             }
 
             if (state is FinishedProductLoaded) {
               if (state.finishedProducts.isEmpty) {
-                return const EmptyStateWidget(
-                  title: 'No Finished Products Found',
-                  message: 'Currently no finished product information is available.',
+                return EmptyStateWidget(
+                  title: strings.noFinishedProductsFound,
+                  message: strings.noFinishedProductsMessage,
                 );
               }
 

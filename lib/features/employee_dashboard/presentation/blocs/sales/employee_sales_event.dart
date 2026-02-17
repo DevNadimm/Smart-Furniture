@@ -4,8 +4,16 @@ abstract class EmployeeSalesEvent {}
 
 class LoadEmployeeSalesEvent extends EmployeeSalesEvent {
   final int? branchId;
+  final String? fromDate;
+  final String? toDate;
+  final String? categoryId;
 
-  LoadEmployeeSalesEvent({this.branchId});
+  LoadEmployeeSalesEvent({
+    required this.branchId,
+    required this.fromDate,
+    required this.toDate,
+    required this.categoryId,
+  });
 }
 
 class CreateEmployeeSaleEvent extends EmployeeSalesEvent {

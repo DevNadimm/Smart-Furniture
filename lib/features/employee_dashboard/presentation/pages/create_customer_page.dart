@@ -5,6 +5,8 @@ import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer/customer_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CreateCustomerPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const CreateCustomerPage());
@@ -42,19 +44,22 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return BlocConsumer<CustomerBloc, CustomerState>(
       listener: (context, state) {
         if (state is CustomerError) {
           AppNotifier.showToast(state.message, type: MessageType.error);
         } else if (state is CustomerOperationSuccess) {
-          AppNotifier.showToast('Customer created successfully', type: MessageType.success);
+          AppNotifier.showToast(strings.customerCreatedSuccess, type: MessageType.success);
+          context.read<EmployeeSalesDetailsBloc>().add(LoadSalesDetailsEvent());
           Navigator.pop(context);
         }
       },
       builder: (context, state) {
         return Stack(
           children: [
-            _content(),
+            _content(strings),
             if (state is CustomerOperationLoading)
               Container(
                 height: double.infinity,
@@ -72,10 +77,10 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
     );
   }
 
-  Widget _content() {
+  Widget _content(AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Customer'),
+        title: Text(strings.createCustomer),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -85,8 +90,8 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
             child: Column(
               children: [
                 CustomTextField(
-                  label: 'Name',
-                  hintText: 'Enter customer name',
+                  label: strings.name,
+                  hintText: strings.enterCustomerName,
                   controller: _nameController,
                   validationLabel: 'Name',
                   isRequired: true,
@@ -94,8 +99,8 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Name (Bangla)',
-                  hintText: 'Enter customer name in Bangla',
+                  label: strings.nameBangla,
+                  hintText: strings.enterCustomerNameBangla,
                   controller: _nameBnController,
                   validationLabel: 'Name (Bangla)',
                   isRequired: false,
@@ -103,8 +108,8 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Phone',
-                  hintText: 'Enter phone number',
+                  label: strings.phone,
+                  hintText: strings.enterPhoneNumber,
                   controller: _phoneController,
                   validationLabel: 'Phone',
                   isRequired: true,
@@ -112,8 +117,8 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Email',
-                  hintText: 'Enter email address',
+                  label: strings.email,
+                  hintText: strings.enterEmailAddress,
                   controller: _emailController,
                   validationLabel: 'Email',
                   isRequired: true,
@@ -121,8 +126,8 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Address',
-                  hintText: 'Enter address',
+                  label: strings.address,
+                  hintText: strings.enterAddress,
                   controller: _addressController,
                   validationLabel: 'Address',
                   isRequired: true,
@@ -134,7 +139,7 @@ class _CreateCustomerPageState extends State<CreateCustomerPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _createCustomer,
-                    child: const Text('Create Customer'),
+                    child: Text(strings.createCustomer),
                   ),
                 ),
                 const SizedBox(height: 16),

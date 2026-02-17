@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
-import 'package:smart_furniture/features/admin/presentation/pages/purchase_page.dart';
-import 'package:smart_furniture/features/admin/presentation/pages/supplier_dues_page.dart';
-import 'package:smart_furniture/features/admin/presentation/pages/supplier_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_sales_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_stock_page.dart';
 import 'package:smart_furniture/features/shop_selector/domain/entities/shop.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/pages/shop_selection_page.dart';
 import 'package:smart_furniture/features/splash/splash_page.dart';
@@ -58,7 +56,7 @@ class DashboardPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              shop.name,
+                              _localeShopName(context, shop.name),
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: Color(0xFF64748B),
@@ -144,9 +142,9 @@ class DashboardPage extends StatelessWidget {
                           onTap: () {
                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const ShopSelectionPage()));
                           },
-                          child: const Text(
-                            'Switch Shop',
-                            style: TextStyle(
+                          child: Text(
+                            strings.switchShop,
+                            style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               color: Color(0xFF475569),
                             ),
@@ -178,37 +176,27 @@ class DashboardPage extends StatelessWidget {
                             Navigator.push(context, EmployeeExpensePage.route(isAdmin: true, branchId: shop.id));
                           },
                         ),
+
                         const SizedBox(height: 16),
                         _ModuleCard(
-                          title: 'Purchase',
-                          subtitle: 'Check purchase details',
-                          icon: HugeIcons.strokeRoundedShoppingBag01,
-                          iconColor: const Color(0xFFF59E0B),
-                          backgroundColor: const Color(0xFFFFFBEB),
-                          onTap: () {
-                            Navigator.push(context, PurchasePage.route());
-                          },
-                        ),
-                        const SizedBox(height: 16),
-                        _ModuleCard(
-                          title: 'Supplier',
-                          subtitle: 'Check supplier details',
+                          title: strings.customer,
+                          subtitle: strings.customerSubtitle,
                           icon: HugeIcons.strokeRoundedUser03,
-                          iconColor: AppColors.success,
-                          backgroundColor: AppColors.success.withValues(alpha: 0.1),
+                          iconColor: const Color(0xFF2563EB),
+                          backgroundColor: const Color(0xFFEFF6FF),
                           onTap: () {
-                            Navigator.push(context, SupplierPage.route());
+                            Navigator.push(context, CustomerPage.route(isAdmin: true, branchId: shop.id));
                           },
                         ),
                         const SizedBox(height: 16),
                         _ModuleCard(
-                          title: 'Supplier Dues',
-                          subtitle: 'Check supplier dues',
-                          icon: HugeIcons.strokeRoundedDollar02,
+                          title: strings.stock,
+                          subtitle: strings.stockSubtitle,
+                          icon: HugeIcons.strokeRoundedDeliveryBox01,
                           iconColor: const Color(0xFF06B6D4),
                           backgroundColor: const Color(0xFFECFEFF),
                           onTap: () {
-                            Navigator.push(context, SupplierDuesPage.route());
+                            Navigator.push(context, EmployeeStockPage.route(isAdmin: true, branchId: shop.id));
                           },
                         ),
                       ]),
@@ -324,4 +312,21 @@ class _ModuleCard extends StatelessWidget {
       ),
     );
   }
+}
+
+String _localeShopName(BuildContext context, String branchName) {
+  final locale = Localizations.localeOf(context);
+
+  if (locale.languageCode != 'bn') {
+    return branchName;
+  }
+
+  const Map<String, String> bnNames = {
+    "SMART FURNITURE": "স্মার্ট ফার্নিচার",
+    "NAIM FURNITURE": "নাঈম ফার্নিচার",
+    "NOORJAHAN FURNITURE": "নূরজাহান ফার্নিচার",
+    "NOORJAHAN STEEL": "নূরজাহান স্টিল",
+  };
+
+  return bnNames[branchName] ?? branchName;
 }

@@ -7,11 +7,13 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/due_payment/due_payment_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer_purchase_dues/customer_purchase_dues_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class DuePaymentPage extends StatefulWidget {
   final int customerId;
@@ -95,15 +97,16 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
   }
 
   void _selectPaymentTypePicker(List<String> items) {
+    final strings = AppLocalizations.of(context)!;
     showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (_) {
         return SearchableBottomSheet(
           items: items,
-          title: 'Select Payment Type',
-          subtitle: 'Please choose a payment type from the list',
-          searchHint: 'Search payment type...',
+          title: strings.selectPaymentTypeTitle,
+          subtitle: strings.selectPaymentTypeSubtitle,
+          searchHint: strings.searchPaymentType,
           selectedItem: _paymentTypeController.text,
           onItemSelected: (String selectedName) {
             _paymentTypeController.text = selectedName;
@@ -134,6 +137,8 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return BlocConsumer<DuePaymentBloc, DuePaymentState>(
       listener: (context, state) {
         if (state is DuePaymentError) {
@@ -152,7 +157,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
       builder: (context, state) {
         return Stack(
           children: [
-            _content(),
+            _content(strings),
             if (state is DuePaymentLoading)
               Container(
                 height: double.infinity,
@@ -170,10 +175,10 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
     );
   }
 
-  Widget _content() {
+  Widget _content(AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Due Payment'),
+        title: Text(strings.duePayment),
       ),
       body: Form(
         key: _formKey,
@@ -183,13 +188,13 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Sale Information Card
-              _buildSaleInfoCard(),
+              _buildSaleInfoCard(strings),
               const SizedBox(height: 24),
 
               /// Payment Date
               CustomTextField(
-                label: 'Payment Date',
-                hintText: 'Select payment date',
+                label: strings.paymentDate,
+                hintText: strings.selectPaymentDate,
                 controller: _paymentDateController,
                 validationLabel: 'payment date',
                 isRequired: true,
@@ -200,7 +205,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
 
               /// Payment Amount
               CustomTextField(
-                label: 'Payment Amount',
+                label: strings.paymentAmount,
                 controller: _amountController,
                 validationLabel: 'payment amount',
                 isRequired: true,
@@ -208,17 +213,17 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                 onChanged: (_) => setState(() {}),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Payment amount is required';
+                    return strings.paymentAmountRequired;
                   }
                   final amount = double.tryParse(value);
                   if (amount == null) {
-                    return 'Enter a valid amount';
+                    return strings.enterValidAmount;
                   }
                   if (amount <= 0) {
-                    return 'Amount must be greater than 0';
+                    return strings.amountGreaterThanZero;
                   }
                   if (amount > widget.dueAmount) {
-                    return 'Amount cannot exceed due amount';
+                    return strings.amountCannotExceedDue;
                   }
                   return null;
                 },
@@ -227,8 +232,8 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
 
               /// Payment Type
               CustomTextField(
-                label: 'Payment Type',
-                hintText: 'Select payment type',
+                label: strings.paymentType,
+                hintText: strings.selectPaymentType,
                 controller: _paymentTypeController,
                 validationLabel: 'payment type',
                 isRequired: true,
@@ -240,10 +245,10 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
 
               /// Transaction ID
               CustomTextField(
-                label: 'Transaction ID',
+                label: strings.transactionId,
                 controller: _transactionIdController,
                 validationLabel: 'transaction ID',
-                hintText: 'Transaction ID, Reference, etc. (Optional)',
+                hintText: strings.transactionIdHint,
                 maxLines: 2,
               ),
               const SizedBox(height: 24),
@@ -275,14 +280,14 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total Due',
+                          strings.totalDue,
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: AppColors.white,
                           ),
                         ),
                         Text(
-                          '৳${widget.dueAmount}',
+                          '৳${CurrencyFormatter.format(widget.dueAmount, context: context)}',
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -296,14 +301,14 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Paying Amount',
+                          strings.payingAmount,
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: AppColors.white,
                           ),
                         ),
                         Text(
-                          '৳${_amountController.text.isEmpty ? '0' : _amountController.text}',
+                          '৳${CurrencyFormatter.format(num.tryParse(_amountController.text), context: context)}',
                           style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
@@ -321,7 +326,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Remaining Due',
+                          strings.remainingDue,
                           style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -329,7 +334,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                           ),
                         ),
                         Text(
-                          '৳${_calculateRemainingDue()}',
+                          '৳${CurrencyFormatter.format(num.tryParse(_calculateRemainingDue()), context: context)}',
                           style: GoogleFonts.poppins(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -354,7 +359,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                     size: 22,
                   ),
                   label: Text(
-                    'Submit Payment',
+                    strings.submitPayment,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
@@ -379,7 +384,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
     );
   }
 
-  Widget _buildSaleInfoCard() {
+  Widget _buildSaleInfoCard(AppLocalizations strings) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -413,7 +418,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sale Information',
+                      strings.saleInformation,
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         color: AppColors.grey,
@@ -441,7 +446,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Due Amount',
+                strings.dueAmount,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
                   color: AppColors.grey,
@@ -454,7 +459,7 @@ class _DuePaymentPageState extends State<DuePaymentPage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  '৳${widget.dueAmount}',
+                  '৳${CurrencyFormatter.format(widget.dueAmount, context: context)}',
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

@@ -6,6 +6,7 @@ import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer/customer_bloc.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EditCustomerPage extends StatefulWidget {
   static Route route({required CustomerData customer}) => MaterialPageRoute(builder: (_) => EditCustomerPage(customer: customer));
@@ -54,19 +55,21 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return BlocConsumer<CustomerBloc, CustomerState>(
       listener: (context, state) {
         if (state is CustomerError) {
           AppNotifier.showToast(state.message, type: MessageType.error);
         } else if (state is CustomerOperationSuccess) {
-          AppNotifier.showToast('Customer edited successfully', type: MessageType.success);
+          AppNotifier.showToast(strings.customerEditedSuccess, type: MessageType.success);
           Navigator.pop(context);
         }
       },
       builder: (context, state) {
         return Stack(
           children: [
-            _content(),
+            _content(strings),
             if (state is CustomerOperationLoading)
               Container(
                 height: double.infinity,
@@ -84,10 +87,10 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
     );
   }
 
-  Widget _content() {
+  Widget _content(AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Customer'),
+        title: Text(strings.editCustomer),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -97,8 +100,8 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
             child: Column(
               children: [
                 CustomTextField(
-                  label: 'Name',
-                  hintText: 'Enter customer name',
+                  label: strings.name,
+                  hintText: strings.enterCustomerName,
                   controller: _nameController,
                   validationLabel: 'Name',
                   isRequired: true,
@@ -106,8 +109,8 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Name (Bangla)',
-                  hintText: 'Enter customer name in Bangla',
+                  label: strings.nameBangla,
+                  hintText: strings.enterCustomerNameBangla,
                   controller: _nameBnController,
                   validationLabel: 'Name (Bangla)',
                   isRequired: false,
@@ -115,8 +118,8 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Phone',
-                  hintText: 'Enter phone number',
+                  label: strings.phone,
+                  hintText: strings.enterPhoneNumber,
                   controller: _phoneController,
                   validationLabel: 'Phone',
                   isRequired: true,
@@ -124,8 +127,8 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Email',
-                  hintText: 'Enter email address',
+                  label: strings.email,
+                  hintText: strings.enterEmailAddress,
                   controller: _emailController,
                   validationLabel: 'Email',
                   isRequired: true,
@@ -133,8 +136,8 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Address',
-                  hintText: 'Enter address',
+                  label: strings.address,
+                  hintText: strings.enterAddress,
                   controller: _addressController,
                   validationLabel: 'Address',
                   isRequired: true,
@@ -146,7 +149,7 @@ class _EditCustomerPageState extends State<EditCustomerPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _editCustomer,
-                    child: const Text('Edit Customer'),
+                    child: Text(strings.editCustomer),
                   ),
                 ),
                 const SizedBox(height: 16),

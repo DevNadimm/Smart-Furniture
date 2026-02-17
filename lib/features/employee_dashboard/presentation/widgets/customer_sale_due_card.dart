@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_purchase_due_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/due_payment_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerSaleDueCard extends StatelessWidget {
   final CustomerSaleData sale;
@@ -17,6 +19,8 @@ class CustomerSaleDueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -51,7 +55,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        sale.saleNo ?? 'N/A',
+                        sale.saleNo ?? strings.notAvailable,
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: AppColors.primaryColor,
                         ),
@@ -67,7 +71,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        sale.saleDateFormatted ?? 'N/A',
+                        sale.saleDateFormatted ?? strings.notAvailable,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.primaryColor,
                           fontWeight: FontWeight.w500,
@@ -91,7 +95,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                     children: [
                       _buildAmountItem(
                         context,
-                        label: 'Grand Total',
+                        label: strings.grandTotal,
                         amount: sale.grandTotal ?? 0,
                         icon: HugeIcons.strokeRoundedShoppingCart01,
                         color: AppColors.grey,
@@ -103,7 +107,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                       ),
                       _buildAmountItem(
                         context,
-                        label: 'Paid',
+                        label: strings.paid,
                         amount: sale.paidAmount ?? 0,
                         icon: HugeIcons.strokeRoundedCheckmarkCircle02,
                         color: Colors.green,
@@ -115,7 +119,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                       ),
                       _buildAmountItem(
                         context,
-                        label: 'Due',
+                        label: strings.due,
                         amount: sale.dueAmount ?? 0,
                         icon: HugeIcons.strokeRoundedAlertCircle,
                         color: Colors.red,
@@ -137,7 +141,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                             DuePaymentPage.route(
                               customerId: customerId,
                               saleId: sale.id ?? 0,
-                              saleNo: sale.saleNo ?? 'N/A',
+                              saleNo: sale.saleNo ?? strings.notAvailable,
                               dueAmount: sale.dueAmount ?? 0,
                             ),
                           );
@@ -148,7 +152,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                           size: 20,
                         ),
                         label: Text(
-                          'Pay Due',
+                          strings.payDue,
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
@@ -201,7 +205,7 @@ class CustomerSaleDueCard extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '৳$amount',
+          '৳${CurrencyFormatter.format(amount, context: context)}',
           style: GoogleFonts.poppins(
             fontSize: 15,
             fontWeight: FontWeight.bold,

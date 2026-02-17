@@ -12,7 +12,7 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
     on<LoadCustomersEvent>((event, emit) async {
       emit(CustomerLoading());
       try {
-        final data = await CustomerRepository.fetchCustomers();
+        final data = await CustomerRepository.fetchCustomers(branchId: event.branchId);
         emit(CustomerLoaded(data!));
       } catch (e) {
         emit(CustomerError(HelperFunctions.cleanErrorMessage(e.toString())));

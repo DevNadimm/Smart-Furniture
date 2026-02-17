@@ -7,6 +7,7 @@ import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/features/auth/presentation/blocs/employee_login/login_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_dashboard_page.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EmployeeLoginPage extends StatefulWidget {
   static Route route() => MaterialPageRoute(builder: (_) => const EmployeeLoginPage());
@@ -24,6 +25,8 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginFailure) {
@@ -40,7 +43,7 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
       builder: (context, state) {
         return Stack(
           children: [
-            content(),
+            content(strings),
             if (state is LoginLoading)
               Container(
                 height: double.infinity,
@@ -54,10 +57,10 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
     );
   }
 
-  Widget content() {
+  Widget content(AppLocalizations strings) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login to Your Account'),
+        title: Text(strings.adminLoginTitle),
         // leading: const AppBarBackBtn(),
       ),
       body: SingleChildScrollView(
@@ -69,7 +72,7 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome back! Access your sales updates, schedules, and business activities anytime.",
+                  strings.employeeLoginWelcome,
                   style: GoogleFonts.poppins(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
@@ -78,21 +81,21 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
                 ),
                 const SizedBox(height: 32),
                 CustomTextField(
-                  label: 'Email',
+                  label: strings.adminLoginEmail,
                   controller: _emailController,
                   isRequired: true,
                   keyboardType: TextInputType.emailAddress,
-                  hintText: 'Enter email',
-                  validationLabel: 'Email',
+                  hintText: strings.adminLoginEmailHint,
+                  validationLabel: strings.adminLoginEmail,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
-                  label: 'Password',
+                  label: strings.adminLoginPassword,
                   controller: _passwordController,
                   isRequired: true,
                   keyboardType: TextInputType.visiblePassword,
-                  hintText: 'Enter password',
-                  validationLabel: 'Confirm Password',
+                  hintText: strings.adminLoginPasswordHint,
+                  validationLabel: strings.adminLoginPassword,
                 ),
                 const SizedBox(height: 4),
                 Align(
@@ -101,11 +104,11 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
                     onTap: () {
                       // Navigator.push(context, ForgotPasswordPage.route());
                     },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Text(
-                        'Forgot password?',
-                        style: TextStyle(
+                        strings.adminLoginForgotPassword,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           color: AppColors.primaryColor,
                         ),
@@ -118,7 +121,7 @@ class _SignUpScreenState extends State<EmployeeLoginPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () => onTapLogin(),
-                    child: const Text('Login'),
+                    child: Text(strings.adminLoginButton),
                   ),
                 ),
                 const SizedBox(height: 24),

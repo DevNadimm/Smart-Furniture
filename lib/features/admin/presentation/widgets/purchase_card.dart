@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/features/admin/data/models/purchase_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class PurchaseCard extends StatelessWidget {
   final PurchaseData purchase;
@@ -16,6 +17,8 @@ class PurchaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -43,7 +46,7 @@ class PurchaseCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      purchase.purchaseNo ?? 'N/A',
+                      purchase.purchaseNo ?? strings.notAvailable,
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: _getStatusColor(),
                       ),
@@ -61,7 +64,7 @@ class PurchaseCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      purchase.status ?? 'N/A',
+                      _getLocalizedStatus(context, purchase.status ?? strings.notAvailable),
                       style: GoogleFonts.poppins(
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -104,7 +107,7 @@ class PurchaseCard extends StatelessWidget {
                       _buildInfoRow(
                         context,
                         icon: HugeIcons.strokeRoundedCalendar03,
-                        label: 'Purchase Date',
+                        label: strings.purchaseDate,
                         value: purchase.purchaseDate!,
                       ),
 
@@ -118,19 +121,19 @@ class PurchaseCard extends StatelessWidget {
                       children: [
                         _buildFinancialTag(
                           context,
-                          label: 'Grand Total',
+                          label: strings.grandTotal,
                           value: '৳${purchase.grandTotal?.toStringAsFixed(2) ?? '0.00'}',
                           icon: HugeIcons.strokeRoundedShoppingCart01,
                         ),
                         _buildFinancialTag(
                           context,
-                          label: 'Paid',
+                          label: strings.paid,
                           value: '৳${purchase.paidAmount?.toStringAsFixed(2) ?? '0.00'}',
                           icon: HugeIcons.strokeRoundedWallet01,
                         ),
                         _buildFinancialTag(
                           context,
-                          label: 'Due',
+                          label: strings.due,
                           value: '৳${purchase.dueAmount?.toStringAsFixed(2) ?? '0.00'}',
                           icon: HugeIcons.strokeRoundedReceiptDollar,
                           isDue: true,
@@ -152,7 +155,7 @@ class PurchaseCard extends StatelessWidget {
                             size: 18,
                           ),
                           label: Text(
-                            'View Details',
+                            strings.viewDetails,
                             style: GoogleFonts.poppins(
                               fontWeight: FontWeight.w600,
                               fontSize: 13,
@@ -257,6 +260,23 @@ class PurchaseCard extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _getLocalizedStatus(BuildContext context, String status) {
+    final strings = AppLocalizations.of(context)!;
+    final lowerStatus = status.toLowerCase();
+
+    if (lowerStatus.contains('paid') || lowerStatus.contains('complete')) {
+      return strings.statusCompleted;
+    } else if (lowerStatus.contains('partial')) {
+      return strings.statusPartial;
+    } else if (lowerStatus.contains('pending')) {
+      return strings.statusPending;
+    } else if (lowerStatus.contains('due')) {
+      return strings.statusDue;
+    } else {
+      return status;
+    }
   }
 
   Color _getStatusColor() {

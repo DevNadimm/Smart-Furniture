@@ -10,11 +10,11 @@ class EmployeeStockRepository {
     final api = ApiEndpoints(shop: '');
     String endpoint = api.branchStock;
 
-    // if(branchId != null) {
-    //   endpoint += '?branch_id=$branchId';
-    // }
+    final queryParams = {
+      if (branchId != null) 'branch_id': branchId.toString(),
+    };
 
-    final uri = Uri.parse(endpoint);
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print('URL: $uri');
 
     try {

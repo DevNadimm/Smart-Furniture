@@ -1,10 +1,12 @@
 class EmployeeSalesModel {
   final bool? success;
   final List<EmployeeSaleData>? data;
+  final EmployeeSalesSummary? summary;
 
   EmployeeSalesModel({
     this.success,
     this.data,
+    this.summary,
   });
 
   factory EmployeeSalesModel.fromJson(Map<String, dynamic> json) {
@@ -12,8 +14,11 @@ class EmployeeSalesModel {
       success: json['success'],
       data: json['sales'] != null
           ? (json['sales'] as List)
-              .map((e) => EmployeeSaleData.fromJson(e))
-              .toList()
+          .map((e) => EmployeeSaleData.fromJson(e))
+          .toList()
+          : null,
+      summary: json['summary'] != null
+          ? EmployeeSalesSummary.fromJson(json['summary'])
           : null,
     );
   }
@@ -22,6 +27,7 @@ class EmployeeSalesModel {
     return {
       'success': success,
       'sales': data?.map((e) => e.toJson()).toList(),
+      'summary': summary?.toJson(),
     };
   }
 }
@@ -33,9 +39,9 @@ class EmployeeSaleData {
   final String? customerName;
   final String? branchName;
   final int? itemCount;
-  final num? grandTotal;
-  final num? paidAmount;
-  final num? dueAmount;
+  final double? grandTotal;
+  final double? paidAmount;
+  final double? dueAmount;
   final String? status;
 
   EmployeeSaleData({
@@ -59,9 +65,9 @@ class EmployeeSaleData {
       customerName: json['customer_name'],
       branchName: json['branch_name'],
       itemCount: json['item_count'],
-      grandTotal: json['grand_total'],
-      paidAmount: json['paid_amount'],
-      dueAmount: json['due_amount'],
+      grandTotal: (json['grand_total'] as num?)?.toDouble(),
+      paidAmount: (json['paid_amount'] as num?)?.toDouble(),
+      dueAmount: (json['due_amount'] as num?)?.toDouble(),
       status: json['status'],
     );
   }
@@ -78,6 +84,34 @@ class EmployeeSaleData {
       'paid_amount': paidAmount,
       'due_amount': dueAmount,
       'status': status,
+    };
+  }
+}
+
+class EmployeeSalesSummary {
+  final int? totalQuantity;
+  final double? totalAmount;
+  final int? totalSales;
+
+  EmployeeSalesSummary({
+    this.totalQuantity,
+    this.totalAmount,
+    this.totalSales,
+  });
+
+  factory EmployeeSalesSummary.fromJson(Map<String, dynamic> json) {
+    return EmployeeSalesSummary(
+      totalQuantity: json['total_quantity'],
+      totalAmount: (json['total_amount'] as num?)?.toDouble(),
+      totalSales: json['total_sales'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'total_quantity': totalQuantity,
+      'total_amount': totalAmount,
+      'total_sales': totalSales,
     };
   }
 }
