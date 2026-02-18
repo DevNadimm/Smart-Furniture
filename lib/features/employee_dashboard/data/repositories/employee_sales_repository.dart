@@ -8,11 +8,10 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/employee
 
 class EmployeeSalesRepository {
   /// Fetch employee sales
-  static Future<EmployeeSalesModel?> fetchSales(
-      {int? branchId,
-      String? fromDate,
-      String? toDate,
-      String? categoryId}) async {
+  static Future<EmployeeSalesModel?> fetchSales({int? branchId,
+    String? fromDate,
+    String? toDate,
+    String? categoryId,}) async {
     final api = ApiEndpoints(shop: '');
     String endpoint = api.employeeSales;
 
@@ -40,7 +39,7 @@ class EmployeeSalesRepository {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonMap =
-            jsonDecode(response.body) as Map<String, dynamic>;
+        jsonDecode(response.body) as Map<String, dynamic>;
 
         return EmployeeSalesModel.fromJson(jsonMap);
       } else {

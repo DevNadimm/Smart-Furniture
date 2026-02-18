@@ -82,10 +82,9 @@ class EmployeeDashboardPage extends StatelessWidget {
               ),
             ),
 
-            // Module Cards Section
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

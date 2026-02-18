@@ -8,10 +8,15 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/customer
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_purchase_due_model.dart';
 
 class CustomerDuesRepository {
-  static Future<CustomerDuesModel?> fetchCustomerDues() async {
+  static Future<CustomerDuesModel?> fetchCustomerDues({int? branchId}) async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.customerDues;
-    final uri = Uri.parse(endpoint);
+
+    final queryParams = {
+      if (branchId != null) 'branch_id': branchId.toString(),
+    };
+
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
 
     debugPrint('📡 [FETCH CUSTOMER DUES] URL => $uri');
 

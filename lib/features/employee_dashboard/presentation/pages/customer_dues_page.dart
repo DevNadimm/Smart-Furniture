@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
@@ -13,10 +12,11 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/widgets
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerDuesPage extends StatefulWidget {
-  static Route route() =>
-      MaterialPageRoute(builder: (_) => const CustomerDuesPage());
+  static Route route({int? branchId}) => MaterialPageRoute(builder: (_) => CustomerDuesPage(branchId: branchId));
 
-  const CustomerDuesPage({super.key});
+  final int? branchId;
+
+  const CustomerDuesPage({super.key, this.branchId});
 
   @override
   State<CustomerDuesPage> createState() => _CustomerDuesPageState();
@@ -30,7 +30,7 @@ class _CustomerDuesPageState extends State<CustomerDuesPage> {
   }
 
   void _fetchCustomerDues() {
-    context.read<CustomerDuesBloc>().add(LoadCustomerDuesEvent());
+    context.read<CustomerDuesBloc>().add(LoadCustomerDuesEvent(branchId: widget.branchId));
   }
 
   @override

@@ -34,8 +34,7 @@ class CustomerPurchaseDuesPage extends StatefulWidget {
   });
 
   @override
-  State<CustomerPurchaseDuesPage> createState() =>
-      _CustomerPurchaseDuesPageState();
+  State<CustomerPurchaseDuesPage> createState() => _CustomerPurchaseDuesPageState();
 }
 
 class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {

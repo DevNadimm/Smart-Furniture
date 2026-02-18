@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_sales_page.dart';
@@ -13,8 +15,7 @@ import 'package:smart_furniture/l10n/app_localizations.dart';
 class DashboardPage extends StatelessWidget {
   final ShopModel shop;
 
-  static route({required ShopModel shop}) =>
-      MaterialPageRoute(builder: (_) => DashboardPage(shop: shop));
+  static route({required ShopModel shop}) => MaterialPageRoute(builder: (_) => DashboardPage(shop: shop));
 
   const DashboardPage({super.key, required this.shop});
 
@@ -26,7 +27,6 @@ class DashboardPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header Section
             Container(
               padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
               decoration: const BoxDecoration(
@@ -76,8 +76,7 @@ class DashboardPage extends StatelessWidget {
                             AppPreferences.clearAll();
                             Navigator.pushAndRemoveUntil(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SplashPage()),
+                              MaterialPageRoute(builder: (context) => const SplashPage()),
                               (route) => false,
                             );
                           },
@@ -118,11 +117,9 @@ class DashboardPage extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Module Cards Section
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -176,7 +173,6 @@ class DashboardPage extends StatelessWidget {
                             Navigator.push(context, EmployeeExpensePage.route(isAdmin: true, branchId: shop.id));
                           },
                         ),
-
                         const SizedBox(height: 16),
                         _ModuleCard(
                           title: strings.customer,
@@ -186,6 +182,17 @@ class DashboardPage extends StatelessWidget {
                           backgroundColor: const Color(0xFFEFF6FF),
                           onTap: () {
                             Navigator.push(context, CustomerPage.route(isAdmin: true, branchId: shop.id));
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        _ModuleCard(
+                          title: strings.customerDues,
+                          subtitle: strings.manageCustomerDues,
+                          icon: HugeIcons.strokeRoundedDollar02,
+                          iconColor: AppColors.error,
+                          backgroundColor: AppColors.error.withValues(alpha: 0.1),
+                          onTap: () {
+                            Navigator.push(context, CustomerDuesPage.route(branchId: shop.id));
                           },
                         ),
                         const SizedBox(height: 16),
@@ -249,7 +256,6 @@ class _ModuleCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // Icon Container
               Container(
                 width: 64,
                 height: 64,
@@ -264,7 +270,6 @@ class _ModuleCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 20),
-              // Text Content
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -292,7 +297,6 @@ class _ModuleCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Arrow Icon
               Container(
                 width: 40,
                 height: 40,

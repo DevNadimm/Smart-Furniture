@@ -6,6 +6,7 @@ import 'package:smart_furniture/features/admin/presentation/pages/purchase_page.
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_dues_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_page.dart';
 import 'package:smart_furniture/features/company/presentation/pages/finished_product_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_sales_page.dart';
@@ -26,8 +27,6 @@ class CompanyDashboardPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-
-            /// HEADER
             Container(
               padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
               decoration: const BoxDecoration(
@@ -61,8 +60,6 @@ class CompanyDashboardPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                  /// Logout
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xFFF1F5F9),
@@ -88,11 +85,9 @@ class CompanyDashboardPage extends StatelessWidget {
                 ],
               ),
             ),
-
-            /// MODULE SECTION
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -127,14 +122,10 @@ class CompanyDashboardPage extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 20),
-
                     Expanded(
                       child: ListView(
                         children: [
-
-                          /// SALES (ALL BRANCHES)
                           _ModuleCard(
                             title: strings.sales,
                             subtitle: strings.companySalesSubtitle,
@@ -151,10 +142,7 @@ class CompanyDashboardPage extends StatelessWidget {
                               );
                             },
                           ),
-
                           const SizedBox(height: 16),
-
-                          /// EXPENSE
                           _ModuleCard(
                             title: strings.expense,
                             subtitle: strings.companyExpenseSubtitle,
@@ -162,16 +150,9 @@ class CompanyDashboardPage extends StatelessWidget {
                             iconColor: const Color(0xFFEC4899),
                             backgroundColor: const Color(0xFFFDF2F8),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                EmployeeExpensePage.route(
-                                  isAdmin: true,
-                                  branchId: null,
-                                ),
-                              );
+                              Navigator.push(context, EmployeeExpensePage.route(isAdmin: true, branchId: null));
                             },
                           ),
-
                           const SizedBox(height: 16),
                           _ModuleCard(
                             title: strings.purchase,
@@ -192,6 +173,17 @@ class CompanyDashboardPage extends StatelessWidget {
                             backgroundColor: const Color(0xFFEFF6FF),
                             onTap: () {
                               Navigator.push(context, CustomerPage.route(isAdmin: true, branchId: null));
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.customerDues,
+                            subtitle: strings.manageCustomerDues,
+                            icon: HugeIcons.strokeRoundedDollar02,
+                            iconColor: AppColors.error,
+                            backgroundColor: AppColors.error.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, CustomerDuesPage.route());
                             },
                           ),
                           const SizedBox(height: 16),
@@ -217,8 +209,6 @@ class CompanyDashboardPage extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 16),
-
-                          /// FINISHED PRODUCTS (Branch Distributed Items)
                           _ModuleCard(
                             title: strings.finishedProducts,
                             subtitle: strings.finishedProductsSubtitle,
@@ -232,9 +222,7 @@ class CompanyDashboardPage extends StatelessWidget {
                               );
                             },
                           ),
-
                           const SizedBox(height: 16),
-
 
                           /// RAW MATERIALS (Company Warehouse)
                           // _ModuleCard(

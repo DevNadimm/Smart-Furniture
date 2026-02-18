@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_dues_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_purchase_dues_page.dart';
@@ -46,7 +47,7 @@ class CustomerDueCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      customerDue.name ?? strings.notAvailable,
+                      LocalizationService.getText(context, en: customerDue.name ?? strings.notAvailable, bn: customerDue.nameBn),
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: _getDueStatusColor(),
                       ),
@@ -79,14 +80,12 @@ class CustomerDueCard extends StatelessWidget {
             /// Body
             InkWell(
               onTap: () {
+                final customerName = LocalizationService.getText(context, en: customerDue.name ?? strings.notAvailable, bn: customerDue.nameBn);
                 Navigator.push(
                   context,
                   CustomerPurchaseDuesPage.route(
                     customerId: customerDue.id ?? 0,
-                    customerName:
-                    AppLocalizations.of(context)!.localeName == 'bn'
-                        ? customerDue.nameBn ?? 'গ্রাহক'
-                        : customerDue.name ??'Customer',
+                    customerName: customerName,
                   ),
                 );
               },
@@ -95,24 +94,7 @@ class CustomerDueCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    /// Bangla Name
-                    if (customerDue.nameBn != null && customerDue.nameBn!.isNotEmpty)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            customerDue.nameBn!,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.grey.withValues(alpha: 0.8),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                        ],
-                      ),
-                    const Divider(color: AppColors.borderColor, thickness: 1),
-                    const SizedBox(height: 6),
-
+                    const SizedBox(height: 4),
                     /// Phone
                     if (customerDue.phone != null && customerDue.phone!.isNotEmpty)
                       _buildInfoRow(

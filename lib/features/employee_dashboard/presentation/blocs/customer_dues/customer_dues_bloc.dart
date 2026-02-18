@@ -13,7 +13,7 @@ class CustomerDuesBloc extends Bloc<CustomerDuesEvent, CustomerDuesState> {
     on<LoadCustomerDuesEvent>((event, emit) async {
       emit(CustomerDuesLoading());
       try {
-        final data = await CustomerDuesRepository.fetchCustomerDues();
+        final data = await CustomerDuesRepository.fetchCustomerDues(branchId: event.branchId);
         if (data != null) {
           emit(CustomerDuesLoaded(data));
         } else {
