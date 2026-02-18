@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 class LocalizationService {
-  /// Returns localized string based on current locale
+  /// Returns localized text based on app locale
   static String getText(
     BuildContext context, {
     required String en,
-    required String bn,
+    String? bn,
   }) {
-    final locale = Localizations.localeOf(context).languageCode;
+    final languageCode = Localizations.localeOf(context).languageCode;
 
-    if (locale == 'bn') {
-      return bn;
+    if (languageCode == 'bn' && (bn?.isNotEmpty ?? false)) {
+      return bn!;
     }
+
     return en;
   }
 }

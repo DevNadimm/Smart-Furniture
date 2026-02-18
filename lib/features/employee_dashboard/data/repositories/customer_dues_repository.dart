@@ -8,10 +8,6 @@ import 'package:smart_furniture/features/employee_dashboard/data/models/customer
 import 'package:smart_furniture/features/employee_dashboard/data/models/customer_purchase_due_model.dart';
 
 class CustomerDuesRepository {
-
-  /// ===============================
-  /// Fetch All Customer Dues
-  /// ===============================
   static Future<CustomerDuesModel?> fetchCustomerDues() async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.customerDues;

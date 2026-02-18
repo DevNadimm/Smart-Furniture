@@ -29,25 +29,31 @@ class FinishedProductModel {
 class FinishedProductData {
   final int? productId;
   final String? productName;
+  final String? productNameBn;     // ✅ NEW
   final String? category;
+  final String? categoryNameBn;    // ✅ NEW
   final String? quantity;
   final String? unit;
 
   FinishedProductData({
     this.productId,
     this.productName,
+    this.productNameBn,
     this.category,
+    this.categoryNameBn,
     this.quantity,
     this.unit,
   });
 
   factory FinishedProductData.fromJson(Map<String, dynamic> json) {
     return FinishedProductData(
-      productId: json['product_id'],
-      productName: json['product_name'],
-      category: json['category'],
-      quantity: json['quantity'],
-      unit: json['unit'],
+      productId: json['product_id'] as int?,
+      productName: json['product_name'] as String?,
+      productNameBn: json['product_name_bn'] as String?,
+      category: json['category'] as String?,
+      categoryNameBn: json['category_name_bn'] as String?,
+      quantity: json['quantity'] as String?,
+      unit: json['unit'] as String?,
     );
   }
 
@@ -55,7 +61,9 @@ class FinishedProductData {
     return {
       'product_id': productId,
       'product_name': productName,
+      'product_name_bn': productNameBn,
       'category': category,
+      'category_name_bn': categoryNameBn,
       'quantity': quantity,
       'unit': unit,
     };

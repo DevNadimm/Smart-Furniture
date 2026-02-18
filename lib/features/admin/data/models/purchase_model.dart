@@ -11,14 +11,12 @@ class PurchaseModel {
 
   factory PurchaseModel.fromJson(Map<String, dynamic> json) {
     return PurchaseModel(
-      success: json['success'],
-      purchases: json['purchases'] != null
-          ? List<PurchaseData>.from(
-              json['purchases'].map((x) => PurchaseData.fromJson(x)),
-            )
-          : null,
+      success: json['success'] as bool?,
+      purchases: (json['purchases'] as List?)
+          ?.map((x) => PurchaseData.fromJson(x as Map<String, dynamic>))
+          .toList(),
       summary: json['summary'] != null
-          ? PurchaseSummary.fromJson(json['summary'])
+          ? PurchaseSummary.fromJson(json['summary'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -37,6 +35,7 @@ class PurchaseData {
   final String? purchaseDate;
   final String? purchaseNo;
   final String? supplierName;
+  final String? supplierNameBn; // added
   final double? grandTotal;
   final double? paidAmount;
   final double? dueAmount;
@@ -47,6 +46,7 @@ class PurchaseData {
     this.purchaseDate,
     this.purchaseNo,
     this.supplierName,
+    this.supplierNameBn, // added
     this.grandTotal,
     this.paidAmount,
     this.dueAmount,
@@ -55,14 +55,15 @@ class PurchaseData {
 
   factory PurchaseData.fromJson(Map<String, dynamic> json) {
     return PurchaseData(
-      id: json['id'],
-      purchaseDate: json['purchase_date'],
-      purchaseNo: json['purchase_no'],
-      supplierName: json['supplier_name'],
+      id: json['id'] as int?,
+      purchaseDate: json['purchase_date'] as String?,
+      purchaseNo: json['purchase_no'] as String?,
+      supplierName: json['supplier_name'] as String?,
+      supplierNameBn: json['supplier_name_bn'] as String?, // nullable
       grandTotal: (json['grand_total'] as num?)?.toDouble(),
       paidAmount: (json['paid_amount'] as num?)?.toDouble(),
       dueAmount: (json['due_amount'] as num?)?.toDouble(),
-      status: json['status'],
+      status: json['status'] as String?,
     );
   }
 
@@ -72,6 +73,7 @@ class PurchaseData {
       'purchase_date': purchaseDate,
       'purchase_no': purchaseNo,
       'supplier_name': supplierName,
+      'supplier_name_bn': supplierNameBn, // added
       'grand_total': grandTotal,
       'paid_amount': paidAmount,
       'due_amount': dueAmount,
@@ -95,7 +97,7 @@ class PurchaseSummary {
     return PurchaseSummary(
       totalQuantity: (json['total_quantity'] as num?)?.toDouble(),
       totalAmount: (json['total_amount'] as num?)?.toDouble(),
-      totalPurchases: json['total_purchases'],
+      totalPurchases: json['total_purchases'] as int?,
     );
   }
 

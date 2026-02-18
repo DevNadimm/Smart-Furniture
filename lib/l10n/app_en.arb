@@ -835,5 +835,17 @@
   "saleInformation": "Sale Information",
   "dueAmount": "Due Amount",
   "manageCustomerDues": "Manage customer dues",
-  "company": "Company"
+  "company": "Company",
+  "salesDetails": "Sales Details",
+  "salesDetailsLoadError": "Failed to Load Sales Details",
+  "customerInformation": "Customer Information",
+  "createdBy": "Created By",
+  "saleItems": "Sale Items",
+  "paymentSummary": "Payment Summary",
+  "unitPrice": "Unit Price",
+  "total": "Total",
+  "failedToLoadStock": "Failed to Load Stock",
+  "noStockFound": "No Stock Found",
+  "noStockAvailable": "Currently no stock information is available.",
+  "searchStock": "Search by product name or category..."
 }

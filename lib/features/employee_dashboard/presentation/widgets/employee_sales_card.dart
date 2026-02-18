@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_sales_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class EmployeeSalesCard extends StatelessWidget {
   final EmployeeSaleData? sale;
+  final VoidCallback onTap;
 
   const EmployeeSalesCard({
     super.key,
-    required this.sale,
+    required this.sale, required this.onTap,
   });
 
   @override
@@ -67,8 +70,7 @@ class EmployeeSalesCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Customer Name
-                  if (sale?.customerName != null &&
-                      sale!.customerName!.isNotEmpty)
+                  if (sale?.customerName != null && sale!.customerName!.isNotEmpty)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -82,7 +84,7 @@ class EmployeeSalesCard extends StatelessWidget {
                             const SizedBox(width: 6),
                             Expanded(
                               child: Text(
-                                sale!.customerName!,
+                                LocalizationService.getText(context, en: sale?.customerName ?? 'No Name', bn: sale?.customerNameBn),
                                 style: Theme.of(context).textTheme.titleMedium,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -109,7 +111,7 @@ class EmployeeSalesCard extends StatelessWidget {
                             const SizedBox(width: 6),
                             Expanded(
                               child: Text(
-                                sale!.branchName!,
+                                HelperFunctions.localeShopName(context, sale!.branchName!),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium
@@ -230,6 +232,37 @@ class EmployeeSalesCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 12),
+
+                  /// View Details Button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton.icon(
+                        onPressed: onTap,
+                        icon: const HugeIcon(
+                          icon: HugeIcons.strokeRoundedArrowRight01,
+                          color: AppColors.primaryColor,
+                          size: 18,
+                        ),
+                        label: Text(
+                          strings.viewDetails,
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          backgroundColor: AppColors.primaryColor.withValues(alpha: 0.1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -269,7 +302,7 @@ class EmployeeSalesCard extends StatelessWidget {
         statusColor = AppColors.success;
         localizedStatus = strings.statusCompleted;
         break;
-      case 'pending':
+      case 'due':
         statusColor = AppColors.warning;
         localizedStatus = strings.statusPending;
         break;

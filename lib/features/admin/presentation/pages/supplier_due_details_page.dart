@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
@@ -149,7 +150,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      supplier.name ?? strings.notAvailable,
+                      LocalizationService.getText(context, en: supplier.name ?? strings.notAvailable, bn: supplier.nameBn),
                       style: GoogleFonts.poppins(
                         color: AppColors.white,
                         fontSize: 18,
@@ -169,7 +170,7 @@ class _SupplierDueDetailsPageState extends State<SupplierDueDetailsPage> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 12),
           const Divider(color: AppColors.white, thickness: 0.5),
           const SizedBox(height: 12),
           Row(

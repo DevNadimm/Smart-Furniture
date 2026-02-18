@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_stock_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -37,11 +38,11 @@ class EmployeeStockCard extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
               child: Text(
-                stock?.productName ?? 'N/A',
+                LocalizationService.getText(context, en: stock?.productName ?? strings.notAvailable, bn: stock?.productNameBn),
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   color: AppColors.primaryColor,
                 ),
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -54,7 +55,7 @@ class EmployeeStockCard extends StatelessWidget {
                 children: [
                   /// Category
                   Text(
-                    "${strings.category}: ${stock?.category ?? 'N/A'}",
+                    "${strings.category}: ${LocalizationService.getText(context, en: stock?.category ?? strings.notAvailable, bn: stock?.categoryNameBn)}",
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
 

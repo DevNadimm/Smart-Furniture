@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/admin/data/models/supplier_dues_model.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_due_details_page.dart';
@@ -46,7 +47,7 @@ class SupplierDueCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      supplierDue.name ?? strings.notAvailable,
+                      LocalizationService.getText(context, en: supplierDue.name ?? strings.notAvailable, bn: supplierDue.nameBn),
                       style: Theme.of(context).textTheme.labelLarge!.copyWith(
                         color: _getDueStatusColor(),
                       ),
@@ -91,23 +92,7 @@ class SupplierDueCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    /// Bangla Name
-                    if (supplierDue.nameBn != null && supplierDue.nameBn!.isNotEmpty)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            supplierDue.nameBn!,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.grey.withValues(alpha: 0.8),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                        ],
-                      ),
-                    const Divider(color: AppColors.borderColor, thickness: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
 
                     /// Phone
                     if (supplierDue.phone != null && supplierDue.phone!.isNotEmpty)
@@ -137,7 +122,7 @@ class SupplierDueCard extends StatelessWidget {
                         maxLines: 2,
                       ),
 
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
                     const Divider(color: AppColors.borderColor, thickness: 1),
                     const SizedBox(height: 8),
 

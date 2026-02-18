@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/company/data/models/finished_product_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
@@ -45,9 +47,9 @@ class FinishedProductCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        finishedProduct?.productName ?? strings.notAvailable,
+                        LocalizationService.getText(context, en: finishedProduct?.productName ?? strings.notAvailable, bn: finishedProduct?.productNameBn),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -67,7 +69,7 @@ class FinishedProductCard extends StatelessWidget {
                       context,
                       icon: HugeIcons.strokeRoundedTag01,
                       label: strings.category,
-                      value: finishedProduct!.category!,
+                      value: LocalizationService.getText(context, en: finishedProduct!.category!, bn: finishedProduct?.categoryNameBn),
                     ),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
@@ -79,7 +81,7 @@ class FinishedProductCard extends StatelessWidget {
                           context,
                           icon: HugeIcons.strokeRoundedPackage,
                           label: strings.quantity,
-                          value: finishedProduct?.quantity ?? strings.notAvailable,
+                          value: CurrencyFormatter.format(num.tryParse(finishedProduct?.quantity.toString() ?? '0'), context: context),
                         ),
                       ),
                       const SizedBox(width: 16),

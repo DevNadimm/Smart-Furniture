@@ -37,6 +37,7 @@ class EmployeeSaleData {
   final String? saleDate;
   final String? saleNo;
   final String? customerName;
+  final String? customerNameBn;
   final String? branchName;
   final int? itemCount;
   final double? grandTotal;
@@ -49,6 +50,7 @@ class EmployeeSaleData {
     this.saleDate,
     this.saleNo,
     this.customerName,
+    this.customerNameBn,
     this.branchName,
     this.itemCount,
     this.grandTotal,
@@ -63,6 +65,7 @@ class EmployeeSaleData {
       saleDate: json['sale_date'],
       saleNo: json['sale_no'],
       customerName: json['customer_name'],
+      customerNameBn: json['customer_name_bn'],
       branchName: json['branch_name'],
       itemCount: json['item_count'],
       grandTotal: (json['grand_total'] as num?)?.toDouble(),
@@ -78,6 +81,7 @@ class EmployeeSaleData {
       'sale_date': saleDate,
       'sale_no': saleNo,
       'customer_name': customerName,
+      'customer_name_bn': customerNameBn,
       'branch_name': branchName,
       'item_count': itemCount,
       'grand_total': grandTotal,

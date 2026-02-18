@@ -7,41 +7,39 @@ import 'package:smart_furniture/core/constants/error_messages.dart';
 import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
-import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
-import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
-import 'package:smart_furniture/features/admin/data/models/purchase_details_model.dart';
-import 'package:smart_furniture/features/admin/presentation/blocs/purchase_details/purchase_details_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/sales_details_bloc.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
-class PurchaseDetailsPage extends StatefulWidget {
-  final int purchaseId;
+class SalesDetailsPage extends StatefulWidget {
+  final int saleId;
 
-  static Route route({required int purchaseId}) => MaterialPageRoute(
-    builder: (_) => PurchaseDetailsPage(purchaseId: purchaseId),
+  static Route route({required int saleId}) => MaterialPageRoute(
+    builder: (_) => SalesDetailsPage(saleId: saleId),
   );
 
-  const PurchaseDetailsPage({
+  const SalesDetailsPage({
     super.key,
-    required this.purchaseId,
+    required this.saleId,
   });
 
   @override
-  State<PurchaseDetailsPage> createState() => _PurchaseDetailsPageState();
+  State<SalesDetailsPage> createState() => _SalesDetailsPageState();
 }
 
-class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
+class _SalesDetailsPageState extends State<SalesDetailsPage> {
   @override
   void initState() {
     super.initState();
-    _fetchPurchaseDetails();
+    _fetchSalesDetails();
   }
 
-  void _fetchPurchaseDetails() {
-    context.read<PurchaseDetailsBloc>().add(LoadPurchaseDetailsEvent(widget.purchaseId));
+  void _fetchSalesDetails() {
+    context.read<SalesDetailsBloc>().add(LoadSalesDetailsEvent(widget.saleId));
   }
 
   @override
@@ -50,38 +48,45 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.purchaseDetails),
+        title: Text(strings.salesDetails),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: _fetchPurchaseDetails,
+            onPressed: _fetchSalesDetails,
             tooltip: strings.refresh,
           ),
         ],
       ),
-      body: BlocConsumer<PurchaseDetailsBloc, PurchaseDetailsState>(
+      body: BlocConsumer<SalesDetailsBloc, SalesDetailsState>(
         listener: (context, state) {
-          if (state is PurchaseDetailsError) {
+          if (state is SalesDetailsError) {
             AppNotifier.showToast(state.message, type: MessageType.error);
           }
         },
         builder: (context, state) {
-          if (state is PurchaseDetailsLoading) {
+          if (state is SalesDetailsLoading) {
             return const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Loader(),
             );
           }
 
-          if (state is PurchaseDetailsError) {
+          if (state is SalesDetailsError) {
             return ErrorStateWidget(
-              title: strings.purchaseDetailsLoadError,
+              title: strings.salesDetailsLoadError,
               message: ErrorMessages.networkError,
             );
           }
 
-          if (state is PurchaseDetailsLoaded) {
-            final details = state.purchaseDetails;
+          if (state is SalesDetailsLoaded) {
+            final details = state.salesDetailsModel.data;
+
+            if (details == null) {
+              return ErrorStateWidget(
+                title: strings.salesDetailsLoadError,
+                message: ErrorMessages.networkError,
+              );
+            }
 
             return SingleChildScrollView(
               child: Padding(
@@ -89,32 +94,34 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Purchase Info Card
-                    _buildPurchaseInfoCard(details, strings),
+                    /// Sale Info Card
+                    _buildSaleInfoCard(details, strings),
                     const SizedBox(height: 16),
 
-                    // Supplier Info Card
-                    if (details.supplier != null)
-                      _buildSupplierInfoCard(details.supplier!, strings),
+                    /// Customer Info Card
+                    if (details.customer != null)
+                      _buildCustomerInfoCard(details.customer!, strings),
                     const SizedBox(height: 16),
 
-                    // Received By
-                    if (details.receivedBy != null && details.receivedBy!.isNotEmpty)
+                    /// Created By
+                    if (details.createdBy != null && details.createdBy!.isNotEmpty)
                       _buildInfoCard(
-                        title: strings.receivedBy,
-                        content: details.receivedBy!,
+                        title: strings.createdBy,
+                        content: HelperFunctions.localeShopName(context, details.createdBy!),
                         icon: HugeIcons.strokeRoundedUser,
                       ),
                     const SizedBox(height: 16),
 
-                    // Purchase Items
-                    if (details.purchaseDetails != null && details.purchaseDetails!.isNotEmpty)
-                      _buildPurchaseItemsSection(details.purchaseDetails!, strings),
+                    /// Sale Items
+                    if (details.saleDetails != null && details.saleDetails!.isNotEmpty)
+                      _buildSaleItemsSection(details.saleDetails!, strings),
                     const SizedBox(height: 16),
 
-                    // Summary Card
-                    if (details.summary != null)
-                      _buildSummaryCard(details.summary!, strings),
+                    /// Summary Card
+                    if (details.financialSummary != null)
+                      _buildSummaryCard(details.financialSummary!, strings),
+
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -127,7 +134,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseInfoCard(details, AppLocalizations strings) {
+  Widget _buildSaleInfoCard(details, AppLocalizations strings) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -164,16 +171,16 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      details.purchaseNo ?? strings.notAvailable,
+                      details.saleNo ?? strings.notAvailable,
                       style: GoogleFonts.poppins(
                         color: AppColors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    if (details.purchaseDate != null && details.purchaseDate!.isNotEmpty)
+                    if (details.saleDate != null && details.saleDate!.isNotEmpty)
                       Text(
-                        DateFormatters.readableDate(context, details.purchaseDate),
+                        DateFormatters.readableDate(context, details.saleDate),
                         style: const TextStyle(
                           color: AppColors.white,
                           fontSize: 14,
@@ -189,7 +196,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildSupplierInfoCard(SupplierInfo supplier, AppLocalizations strings) {
+  Widget _buildCustomerInfoCard(customer, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -223,7 +230,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  strings.supplierInformation,
+                  strings.customerInformation,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -237,29 +244,35 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                if (supplier.name != null && supplier.name!.isNotEmpty)
+                if (customer.name != null && customer.name!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedUser,
                     label: strings.name,
-                    value: LocalizationService.getText(context, en: supplier.name!, bn: supplier.nameBn),
+                    value: customer.name!,
                   ),
-                if (supplier.phone != null && supplier.phone!.isNotEmpty)
+                if (customer.nameBn != null && customer.nameBn!.isNotEmpty)
+                  _buildDetailRow(
+                    icon: HugeIcons.strokeRoundedUser,
+                    label: strings.nameBangla,
+                    value: customer.nameBn!,
+                  ),
+                if (customer.phone != null && customer.phone!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedCall,
                     label: strings.phone,
-                    value: supplier.phone!,
+                    value: customer.phone!,
                   ),
-                if (supplier.email != null && supplier.email!.isNotEmpty)
+                if (customer.email != null && customer.email!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedMail01,
                     label: strings.email,
-                    value: supplier.email!,
+                    value: customer.email!,
                   ),
-                if (supplier.address != null && supplier.address!.isNotEmpty)
+                if (customer.address != null && customer.address!.isNotEmpty)
                   _buildDetailRow(
                     icon: HugeIcons.strokeRoundedLocation01,
                     label: strings.address,
-                    value: supplier.address!,
+                    value: customer.address!,
                     maxLines: 2,
                   ),
               ],
@@ -322,7 +335,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseItemsSection(List<dynamic> items, AppLocalizations strings) {
+  Widget _buildSaleItemsSection(List<dynamic> items, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -356,7 +369,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  strings.purchaseItems,
+                  strings.saleItems,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -378,7 +391,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             ),
             itemBuilder: (context, index) {
               final item = items[index];
-              return _buildPurchaseItemCard(item, strings);
+              return _buildSaleItemCard(item, strings);
             },
           ),
         ],
@@ -386,12 +399,12 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseItemCard(dynamic item, AppLocalizations strings) {
+  Widget _buildSaleItemCard(dynamic item, AppLocalizations strings) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          item.productName ?? strings.notAvailable,
+          LocalizationService.getText(context, en: item.productName ?? strings.notAvailable, bn: item.productNameBn),
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             fontSize: 15,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/image_paths.dart';
+import 'package:smart_furniture/core/utils/helper_functions/helper_functions.dart';
 import 'package:smart_furniture/features/shop_selector/data/models/branch_model.dart';
 import 'package:smart_furniture/features/shop_selector/presentation/cubit/shop_selection_cubit.dart';
 
@@ -77,7 +78,7 @@ class ShopCard extends StatelessWidget {
                     const SizedBox(height: 16),
                     const Spacer(),
                     Text(
-                      _localeShopName(context, branch.name ?? 'Unknown Branch'),
+                      HelperFunctions.localeShopName(context, branch.name ?? 'Unknown Branch'),
                       style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -114,21 +115,4 @@ class ShopCard extends StatelessWidget {
       },
     );
   }
-}
-
-String _localeShopName(BuildContext context, String branchName) {
-  final locale = Localizations.localeOf(context);
-
-  if (locale.languageCode != 'bn') {
-    return branchName;
-  }
-
-  const Map<String, String> bnNames = {
-    "SMART FURNITURE": "স্মার্ট ফার্নিচার",
-    "NAIM FURNITURE": "নাঈম ফার্নিচার",
-    "NOORJAHAN FURNITURE": "নূরজাহান ফার্নিচার",
-    "NOORJAHAN STEEL": "নূরজাহান স্টিল",
-  };
-
-  return bnNames[branchName] ?? branchName;
 }

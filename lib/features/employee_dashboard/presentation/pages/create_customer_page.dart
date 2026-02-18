@@ -5,7 +5,7 @@ import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer/customer_bloc.dart';
-import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales_details/employee_sales_details_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/employee_sales_details/employee_sales_details_bloc.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CreateCustomerPage extends StatefulWidget {

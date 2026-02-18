@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/admin/data/models/purchase_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
@@ -90,7 +94,7 @@ class PurchaseCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            purchase.supplierName!,
+                            LocalizationService.getText(context, en: purchase.supplierName!, bn: purchase.supplierNameBn),
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.grey.withValues(alpha: 0.8),
@@ -122,19 +126,19 @@ class PurchaseCard extends StatelessWidget {
                         _buildFinancialTag(
                           context,
                           label: strings.grandTotal,
-                          value: '৳${purchase.grandTotal?.toStringAsFixed(2) ?? '0.00'}',
+                          value: '৳${CurrencyFormatter.format(num.tryParse(purchase.grandTotal?.toStringAsFixed(2) ?? '0.00'), context: context)}',
                           icon: HugeIcons.strokeRoundedShoppingCart01,
                         ),
                         _buildFinancialTag(
                           context,
                           label: strings.paid,
-                          value: '৳${purchase.paidAmount?.toStringAsFixed(2) ?? '0.00'}',
+                          value: '৳${CurrencyFormatter.format(num.tryParse(purchase.paidAmount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
                           icon: HugeIcons.strokeRoundedWallet01,
                         ),
                         _buildFinancialTag(
                           context,
                           label: strings.due,
-                          value: '৳${purchase.dueAmount?.toStringAsFixed(2) ?? '0.00'}',
+                          value: '৳${CurrencyFormatter.format(num.tryParse(purchase.dueAmount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
                           icon: HugeIcons.strokeRoundedReceiptDollar,
                           isDue: true,
                         ),

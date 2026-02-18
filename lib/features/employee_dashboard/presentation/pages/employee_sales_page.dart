@@ -16,6 +16,7 @@ import 'package:smart_furniture/core/utils/widgets/summary_card.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/finished_product_category/finished_product_category_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/sales/employee_sales_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/create_sales_page.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/sales_details_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/widgets/employee_sales_card.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
@@ -238,6 +239,9 @@ class _EmployeeSalesPageState extends State<EmployeeSalesPage> {
                             itemBuilder: (context, index) {
                               return EmployeeSalesCard(
                                 sale: state.salesModel.data![index],
+                                onTap: () {
+                                  Navigator.push(context, SalesDetailsPage.route(saleId: state.salesModel.data![index].id!));
+                                },
                               );
                             },
                           ),

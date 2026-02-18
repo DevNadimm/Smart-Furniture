@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/features/admin/data/models/supplier_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
@@ -47,7 +48,7 @@ class SupplierCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        supplier.name ?? strings.notAvailable,
+                        LocalizationService.getText(context, en: supplier.name ?? strings.notAvailable, bn: supplier.nameBn),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
                           color: AppColors.primaryColor,
                         ),
@@ -68,22 +69,7 @@ class SupplierCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (supplier.nameBn != null && supplier.nameBn!.isNotEmpty)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            supplier.nameBn!,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.grey.withValues(alpha: 0.8),
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                        ],
-                      ),
-                    const Divider(color: AppColors.borderColor, thickness: 1),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
 
                     /// Phone
                     if (supplier.phone != null && supplier.phone!.isNotEmpty)
