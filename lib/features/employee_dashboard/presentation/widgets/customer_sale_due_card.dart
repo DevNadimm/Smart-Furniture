@@ -10,11 +10,13 @@ import 'package:smart_furniture/l10n/app_localizations.dart';
 class CustomerSaleDueCard extends StatelessWidget {
   final CustomerSaleData sale;
   final int customerId;
+  final bool? isAdmin;
 
   const CustomerSaleDueCard({
     super.key,
     required this.sale,
     required this.customerId,
+    this.isAdmin = false,
   });
 
   @override
@@ -128,7 +130,7 @@ class CustomerSaleDueCard extends StatelessWidget {
                   ),
 
                   /// Pay Due Button
-                  if ((sale.dueAmount ?? 0) > 0) ...[
+                  if ((sale.dueAmount ?? 0) > 0 && isAdmin == false) ...[
                     const SizedBox(height: 12),
                     const Divider(color: AppColors.borderColor, thickness: 1),
                     const SizedBox(height: 12),

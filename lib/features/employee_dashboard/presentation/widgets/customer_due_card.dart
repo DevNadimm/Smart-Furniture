@@ -10,10 +10,12 @@ import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerDueCard extends StatelessWidget {
   final CustomerDueData customerDue;
+  final bool? isAdmin;
 
   const CustomerDueCard({
     super.key,
     required this.customerDue,
+    this.isAdmin = false,
   });
 
   @override
@@ -165,6 +167,7 @@ class CustomerDueCard extends StatelessWidget {
                               CustomerPurchaseDuesPage.route(
                                 customerId: customerDue.id ?? 0,
                                 customerName: customerDue.name ?? 'Customer',
+                                isAdmin: isAdmin
                               ),
                             );
                           },

@@ -15,15 +15,17 @@ import 'package:smart_furniture/l10n/app_localizations.dart';
 class CustomerPurchaseDuesPage extends StatefulWidget {
   final int customerId;
   final String customerName;
+  final bool? isAdmin;
 
   static Route route({
     required int customerId,
     required String customerName,
-  }) =>
-      MaterialPageRoute(
+    bool? isAdmin,
+  }) => MaterialPageRoute(
         builder: (_) => CustomerPurchaseDuesPage(
           customerId: customerId,
           customerName: customerName,
+          isAdmin: isAdmin,
         ),
       );
 
@@ -31,6 +33,7 @@ class CustomerPurchaseDuesPage extends StatefulWidget {
     super.key,
     required this.customerId,
     required this.customerName,
+    this.isAdmin = false,
   });
 
   @override
@@ -111,6 +114,7 @@ class _CustomerPurchaseDuesPageState extends State<CustomerPurchaseDuesPage> {
                       return CustomerSaleDueCard(
                         sale: sales[index],
                         customerId: widget.customerId,
+                        isAdmin: widget.isAdmin,
                       );
                     },
                   ),

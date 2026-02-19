@@ -12,11 +12,12 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/widgets
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CustomerDuesPage extends StatefulWidget {
-  static Route route({int? branchId}) => MaterialPageRoute(builder: (_) => CustomerDuesPage(branchId: branchId));
+  static Route route({int? branchId, bool? isAdmin}) => MaterialPageRoute(builder: (_) => CustomerDuesPage(branchId: branchId, isAdmin: isAdmin,));
 
   final int? branchId;
+  final bool? isAdmin;
 
-  const CustomerDuesPage({super.key, this.branchId});
+  const CustomerDuesPage({super.key, this.branchId, this.isAdmin = false});
 
   @override
   State<CustomerDuesPage> createState() => _CustomerDuesPageState();
@@ -97,6 +98,7 @@ class _CustomerDuesPageState extends State<CustomerDuesPage> {
                     itemBuilder: (context, index) {
                       return CustomerDueCard(
                         customerDue: state.customerDuesModel.data![index],
+                        isAdmin: widget.isAdmin,
                       );
                     },
                   ),

@@ -192,7 +192,7 @@ class DashboardPage extends StatelessWidget {
                           iconColor: AppColors.error,
                           backgroundColor: AppColors.error.withValues(alpha: 0.1),
                           onTap: () {
-                            Navigator.push(context, CustomerDuesPage.route(branchId: shop.id));
+                            Navigator.push(context, CustomerDuesPage.route(isAdmin: true, branchId: shop.id));
                           },
                         ),
                         const SizedBox(height: 16),

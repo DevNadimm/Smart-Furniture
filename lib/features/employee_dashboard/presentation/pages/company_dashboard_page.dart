@@ -183,7 +183,7 @@ class CompanyDashboardPage extends StatelessWidget {
                             iconColor: AppColors.error,
                             backgroundColor: AppColors.error.withValues(alpha: 0.1),
                             onTap: () {
-                              Navigator.push(context, CustomerDuesPage.route());
+                              Navigator.push(context, CustomerDuesPage.route(isAdmin: true));
                             },
                           ),
                           const SizedBox(height: 16),
@@ -208,6 +208,17 @@ class CompanyDashboardPage extends StatelessWidget {
                               Navigator.push(context, SupplierDuesPage.route());
                             },
                           ),
+                          // const SizedBox(height: 16),
+                          // _ModuleCard(
+                          //   title: strings.stock,
+                          //   subtitle: strings.stockSubtitle,
+                          //   icon: HugeIcons.strokeRoundedDeliveryBox01,
+                          //   iconColor: const Color(0xFFEC4899),
+                          //   backgroundColor: const Color(0xFFFDF2F8),
+                          //   onTap: () {
+                          //     Navigator.push(context, EmployeeStockPage.route(isAdmin: true));
+                          //   },
+                          // ),
                           const SizedBox(height: 16),
                           _ModuleCard(
                             title: strings.finishedProducts,
