@@ -35,6 +35,9 @@ class ApiEndpoints {
   String get supplierDues => '$employeeBaseUrl/api/payments/supplier-dues';
   String supplierWisePurchaseDues(int id) => '$employeeBaseUrl/api/payments/supplier/$id/purchases';
   String get finishedProductCategories => '$employeeBaseUrl/api/categories/finished-product';
+  String get customOrders => '$employeeBaseUrl/api/custom-orders';
+  String get storeCustomOrder => '$employeeBaseUrl/api/custom-orders';
+  String get customOrderDuePayment => '$employeeBaseUrl/api/custom-orders/payment';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

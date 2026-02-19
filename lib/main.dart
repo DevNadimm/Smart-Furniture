@@ -21,6 +21,9 @@ import 'package:smart_furniture/features/auth/presentation/blocs/employee_login/
 import 'package:smart_furniture/features/common/presentation/blocs/category_list/category_list_bloc.dart';
 import 'package:smart_furniture/features/company/presentation/blocs/company_raw_material/company_raw_material_bloc.dart';
 import 'package:smart_furniture/features/company/presentation/blocs/finished_product/finished_product_bloc.dart';
+import 'package:smart_furniture/features/custom_order/presentation/blocs/custom_order/custom_order_bloc.dart';
+import 'package:smart_furniture/features/custom_order/presentation/blocs/store_custom_order/store_custom_order_bloc.dart';
+import 'package:smart_furniture/features/custom_order/presentation/blocs/store_due_payment/store_due_payment_bloc.dart';
 import 'package:smart_furniture/features/daily_reports/presentation/blocs/daily_reports_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer/customer_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/customer_dues/customer_dues_bloc.dart';
@@ -101,6 +104,9 @@ Future<void> main() async {
         BlocProvider(create: (_) => SupplierDuesBloc()),
         BlocProvider(create: (_) => SupplierDueDetailsBloc()),
         BlocProvider(create: (_) => FinishedProductCategoryBloc()),
+        BlocProvider(create: (_) => CustomOrderBloc()),
+        BlocProvider(create: (_) => StoreCustomOrderBloc()),
+        BlocProvider(create: (_) => StoreDuePaymentBloc()),
       ],
       child: const MyApp(),
     ),

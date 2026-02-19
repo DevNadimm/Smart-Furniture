@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:hugeicons/hugeicons.dart';
+import 'package:smart_furniture/core/constants/colors.dart';
 
 class CustomCachedImage extends StatelessWidget {
   final String imageUrl;
@@ -26,18 +28,8 @@ class CustomCachedImage extends StatelessWidget {
       fit: fit,
       width: width,
       height: height,
-      placeholder: (context, url) => Image.asset(
-        loadingAsset,
-        fit: fit,
-        width: width,
-        height: height,
-      ),
-      errorWidget: (context, url, error) => Image.asset(
-        errorAsset,
-        fit: fit,
-        width: width,
-        height: height,
-      ),
+      placeholder: (context, url) => Container(color: AppColors.backgroundColor, child: const Center(child: CircularProgressIndicator())),
+      errorWidget: (context, url, error) => Container(color: AppColors.backgroundColor, child: const Center(child: HugeIcon(icon: HugeIcons.strokeRoundedImageNotFound01, color: Colors.red, size: 30))),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:smart_furniture/features/admin/presentation/pages/purchase_page.
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_dues_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_page.dart';
 import 'package:smart_furniture/features/company/presentation/pages/finished_product_page.dart';
+import 'package:smart_furniture/features/custom_order/presentation/pages/custom_order_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/employee_expense_page.dart';
@@ -234,6 +235,16 @@ class CompanyDashboardPage extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.customOrderTitle,
+                            subtitle: strings.customOrderSubtitle,
+                            icon: HugeIcons.strokeRoundedDeliveryBox01,
+                            iconColor: AppColors.warning,
+                            backgroundColor: AppColors.warning.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, CustomOrderPage.route(isAdmin: true));
+                            },
+                          ),
 
                           /// RAW MATERIALS (Company Warehouse)
                           // _ModuleCard(
