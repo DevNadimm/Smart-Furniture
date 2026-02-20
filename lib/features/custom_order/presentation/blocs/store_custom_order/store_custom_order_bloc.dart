@@ -5,22 +5,28 @@ import 'package:smart_furniture/features/custom_order/data/repositories/custom_o
 part 'store_custom_order_event.dart';
 part 'store_custom_order_state.dart';
 
-class StoreCustomOrderBloc
-    extends Bloc<StoreCustomOrderEvent, StoreCustomOrderState> {
+class StoreCustomOrderBloc extends Bloc<StoreCustomOrderEvent, StoreCustomOrderState> {
   StoreCustomOrderBloc() : super(StoreCustomOrderInitial()) {
+
     on<StoreCustomOrderSubmitEvent>((event, emit) async {
       emit(StoreCustomOrderLoading());
       try {
-        final result = await CustomOrderRepository.storeOrder(event.body);
+        final result = await CustomOrderRepository.storeOrder(
+          fields: event.fields,
+          items: event.items,
+        );
         if (result) {
           emit(StoreCustomOrderSuccess('Custom order created successfully'));
         } else {
           emit(StoreCustomOrderError('Failed to create custom order'));
         }
       } catch (e) {
-        emit(StoreCustomOrderError(
-            HelperFunctions.cleanErrorMessage(e.toString())));
+        emit(StoreCustomOrderError(HelperFunctions.cleanErrorMessage(e.toString())));
       }
+    });
+
+    on<ResetStoreCustomOrderEvent>((event, emit) {
+      emit(StoreCustomOrderInitial());
     });
   }
 }

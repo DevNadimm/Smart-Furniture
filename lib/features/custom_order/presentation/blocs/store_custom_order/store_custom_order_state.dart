@@ -8,12 +8,10 @@ class StoreCustomOrderLoading extends StoreCustomOrderState {}
 
 class StoreCustomOrderSuccess extends StoreCustomOrderState {
   final String message;
-
   StoreCustomOrderSuccess(this.message);
 }
 
 class StoreCustomOrderError extends StoreCustomOrderState {
   final String message;
-
   StoreCustomOrderError(this.message);
 }

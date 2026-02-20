@@ -6,6 +6,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
@@ -226,7 +227,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
             } else if (salesDetailsState is SalesDetailsLoaded) {
               _customerNameToId = {
                 for (var c in salesDetailsState.salesDetailsModel.data!.customers!)
-                  locale == 'bn' ? c.nameBn ?? '' : c.customer ?? '': (c.id?.toString() ?? '')
+                  LocalizationService.getText(context, en: c.customer ?? strings.notAvailable, bn: c.nameBn): (c.id?.toString() ?? '')
               };
               final data = salesDetailsState.salesDetailsModel.data;
               if (data != null) {
@@ -295,8 +296,8 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                     style: const TextStyle(letterSpacing: 0, fontSize: 12),
                   ),
                   style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.primaryColor,
-                      side: const BorderSide(width: 1, color: AppColors.primaryColor)
+                    foregroundColor: AppColors.primaryColor,
+                    side: const BorderSide(width: 1, color: AppColors.primaryColor),
                   ),
                 ),
                 hintText: strings.selectCustomer,
@@ -329,8 +330,11 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                       style: const TextStyle(letterSpacing: 0, fontSize: 12),
                     ),
                     style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primaryColor,
-                        side: const BorderSide(width: 1, color: AppColors.primaryColor)
+                      foregroundColor: AppColors.primaryColor,
+                      side: const BorderSide(
+                        width: 1,
+                        color: AppColors.primaryColor,
+                      ),
                     ),
                   ),
                 ],
@@ -355,8 +359,7 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                   ),
                 )
               else
-                ..._selectedItems.map(
-                      (item) => Container(
+                ..._selectedItems.map((item) => Container(
                     margin: const EdgeInsets.symmetric(vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.white,

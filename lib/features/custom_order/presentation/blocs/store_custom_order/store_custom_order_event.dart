@@ -3,7 +3,16 @@ part of 'store_custom_order_bloc.dart';
 abstract class StoreCustomOrderEvent {}
 
 class StoreCustomOrderSubmitEvent extends StoreCustomOrderEvent {
-  final Map<String, dynamic> body;
+  /// Flat string fields (order_date, customer_id, sub_total, etc.)
+  final Map<String, String> fields;
 
-  StoreCustomOrderSubmitEvent(this.body);
+  /// Item list with optional image files
+  final List<CustomOrderItemPayload> items;
+
+  StoreCustomOrderSubmitEvent({
+    required this.fields,
+    required this.items,
+  });
 }
+
+class ResetStoreCustomOrderEvent extends StoreCustomOrderEvent {}

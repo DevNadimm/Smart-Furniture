@@ -13,6 +13,7 @@ import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
 import 'package:smart_furniture/features/custom_order/presentation/blocs/custom_order/custom_order_bloc.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/custom_order_details_page.dart';
+import 'package:smart_furniture/features/custom_order/presentation/pages/create_custom_order_page.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/store_due_payment_page.dart';
 import 'package:smart_furniture/features/custom_order/presentation/widgets/custom_order_card.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -118,10 +119,10 @@ class _CustomOrderPageState extends State<CustomOrderPage> {
       floatingActionButton: !widget.isAdmin
           ? FloatingActionButton(
               onPressed: () async {
-                // await Navigator.push(
-                //   context,
-                //   CreateCustomOrderPage.route(),
-                // );
+                await Navigator.push(
+                  context,
+                  CreateCustomOrderPage.route(branchId: widget.branchId),
+                );
                 _fetchOrders();
               },
               backgroundColor: AppColors.primaryColor,
