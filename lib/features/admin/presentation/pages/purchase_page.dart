@@ -19,8 +19,7 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/f
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class PurchasePage extends StatefulWidget {
-  static Route route() =>
-      MaterialPageRoute(builder: (_) => const PurchasePage());
+  static Route route() => MaterialPageRoute(builder: (_) => const PurchasePage());
 
   const PurchasePage({super.key});
 
@@ -77,9 +76,7 @@ class _PurchasePageState extends State<PurchasePage> {
   }
 
   void _fetchCategories() {
-    context
-        .read<FinishedProductCategoryBloc>()
-        .add(LoadFinishedProductCategoriesEvent());
+    context.read<FinishedProductCategoryBloc>().add(LoadFinishedProductCategoriesEvent());
   }
 
   /// ================= DATE PICKER =================

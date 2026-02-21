@@ -108,8 +108,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                     const SizedBox(height: 16),
 
                     // Purchase Items
-                    if (details.purchaseDetails != null && details.purchaseDetails!.isNotEmpty)
-                      _buildPurchaseItemsSection(details.purchaseDetails!, strings),
+                    if (details.purchaseDetails != null && details.purchaseDetails!.isNotEmpty)_buildPurchaseItemsSection(details.purchaseDetails!, strings),
                     const SizedBox(height: 16),
 
                     // Summary Card
@@ -391,7 +390,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          item.productName ?? strings.notAvailable,
+          LocalizationService.getText(context, en: item.productName ?? strings.notAvailable, bn: item.productNameBn),
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             fontSize: 15,
