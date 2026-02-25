@@ -240,7 +240,7 @@ class _PurchasePageState extends State<PurchasePage> {
                           child: SummaryCard(
                             amount: state.purchases.summary?.totalAmount?.toDouble() ?? 0,
                             amountLabel: strings.totalAmount,
-                            quantity: state.purchases.summary?.totalPurchases ?? 0,
+                            quantity: state.purchases.summary?.totalQuantity?.toInt() ?? 0,
                             quantityLabel: strings.totalPurchases,
                           ),
                         ),

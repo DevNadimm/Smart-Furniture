@@ -7,11 +7,16 @@ import 'package:smart_furniture/features/company/data/models/finished_product_mo
 
 class FinishedProductRepository {
   /// Fetch all finished products
-  static Future<List<FinishedProductData>> fetchFinishedProducts() async {
+  static Future<FinishedProductModel> fetchFinishedProducts({int? categoryId, String? search}) async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.finishedProducts;
 
-    final uri = Uri.parse(endpoint);
+    final queryParams = {
+      if (categoryId != null) 'category_id': categoryId.toString(),
+      if (search != null) 'search': search,
+    };
+
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print('URL => $uri');
 
     try {
@@ -30,12 +35,9 @@ class FinishedProductRepository {
       print('📥 Response Body => ${response.body}');
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> jsonMap =
-        jsonDecode(response.body) as Map<String, dynamic>;
-        final List<dynamic> data = jsonMap['data'] ?? [];
-
+        final Map<String, dynamic> jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
         print('✅ Finished products fetched successfully');
-        return data.map((e) => FinishedProductData.fromJson(e)).toList();
+        return FinishedProductModel.fromJson(jsonMap); // ✅
       } else {
         print('❌ Fetch finished products failed');
         throw Exception(ErrorMessages.fetchFinishedProductFailed);

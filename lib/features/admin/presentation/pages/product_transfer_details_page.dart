@@ -4,42 +4,45 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/constants/error_messages.dart';
-import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
-import 'package:smart_furniture/features/admin/data/models/purchase_details_model.dart';
-import 'package:smart_furniture/features/admin/presentation/blocs/purchase_details/purchase_details_bloc.dart';
+import 'package:smart_furniture/features/admin/data/models/product_transfer_details_model.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/product_transfer_details/product_transfer_details_bloc.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
-class PurchaseDetailsPage extends StatefulWidget {
-  final int purchaseId;
+class ProductTransferDetailsPage extends StatefulWidget {
+  final int transferId;
 
-  static Route route({required int purchaseId}) => MaterialPageRoute(
-    builder: (_) => PurchaseDetailsPage(purchaseId: purchaseId),
+  static Route route({required int transferId}) => MaterialPageRoute(
+    builder: (_) => ProductTransferDetailsPage(transferId: transferId),
   );
 
-  const PurchaseDetailsPage({
+  const ProductTransferDetailsPage({
     super.key,
-    required this.purchaseId,
+    required this.transferId,
   });
 
   @override
-  State<PurchaseDetailsPage> createState() => _PurchaseDetailsPageState();
+  State<ProductTransferDetailsPage> createState() =>
+      _ProductTransferDetailsPageState();
 }
 
-class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
+class _ProductTransferDetailsPageState
+    extends State<ProductTransferDetailsPage> {
   @override
   void initState() {
     super.initState();
-    _fetchPurchaseDetails();
+    _fetchDetails();
   }
 
-  void _fetchPurchaseDetails() {
-    context.read<PurchaseDetailsBloc>().add(LoadPurchaseDetailsEvent(widget.purchaseId));
+  void _fetchDetails() {
+    context
+        .read<ProductTransferDetailsBloc>()
+        .add(LoadTransferDetailsEvent(widget.transferId));
   }
 
   @override
@@ -48,69 +51,92 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(strings.purchaseDetails),
+        title: Text(strings.transferDetails),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: _fetchPurchaseDetails,
+            onPressed: _fetchDetails,
             tooltip: strings.refresh,
           ),
         ],
       ),
-      body: BlocConsumer<PurchaseDetailsBloc, PurchaseDetailsState>(
+      body: BlocConsumer<ProductTransferDetailsBloc,
+          ProductTransferDetailsState>(
         listener: (context, state) {
-          if (state is PurchaseDetailsError) {
+          if (state is ProductTransferDetailsError) {
             AppNotifier.showToast(state.message, type: MessageType.error);
           }
         },
         builder: (context, state) {
-          if (state is PurchaseDetailsLoading) {
+          if (state is ProductTransferDetailsLoading) {
             return const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Loader(),
             );
           }
 
-          if (state is PurchaseDetailsError) {
+          if (state is ProductTransferDetailsError) {
             return ErrorStateWidget(
-              title: strings.purchaseDetailsLoadError,
+              title: strings.transferDetailsLoadError,
               message: ErrorMessages.networkError,
             );
           }
 
-          if (state is PurchaseDetailsLoaded) {
-            final details = state.purchaseDetails;
-
+          if (state is ProductTransferDetailsLoaded) {
+            final details = state.transferDetails;
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Purchase Info Card
-                    _buildPurchaseInfoCard(details, strings),
+                    /// Transfer Info Header Card
+                    _buildTransferInfoCard(details, strings),
                     const SizedBox(height: 16),
 
-                    // Supplier Info Card
-                    if (details.supplier != null)
-                      _buildSupplierInfoCard(details.supplier!, strings),
+                    /// Route Info Card (From → To)
+                    _buildRouteCard(details, strings),
                     const SizedBox(height: 16),
 
-                    // Received By
-                    if (details.receivedBy != null && details.receivedBy!.isNotEmpty)
+                    /// Company Info
+                    if (details.company?.name != null &&
+                        details.company!.name!.isNotEmpty)
                       _buildInfoCard(
-                        title: strings.receivedBy,
-                        content: details.receivedBy!,
+                        title: strings.company,
+                        content: details.company!.name!,
+                        icon: HugeIcons.strokeRoundedBuilding04,
+                      ),
+                    const SizedBox(height: 16),
+
+                    /// Created By
+                    if (details.createdBy != null &&
+                        details.createdBy!.isNotEmpty)
+                      _buildInfoCard(
+                        title: strings.createdBy,
+                        content: details.createdBy!,
                         icon: HugeIcons.strokeRoundedUser,
                       ),
                     const SizedBox(height: 16),
 
-                    // Purchase Items
-                    if (details.purchaseDetails != null && details.purchaseDetails!.isNotEmpty)_buildPurchaseItemsSection(details.purchaseDetails!, strings),
+                    /// Remarks
+                    if (details.remarks != null && details.remarks!.isNotEmpty)
+                      _buildInfoCard(
+                        title: strings.remarks,
+                        content: details.remarks!,
+                        icon: HugeIcons.strokeRoundedNote,
+                      ),
                     const SizedBox(height: 16),
 
-                    // Summary Card
-                    if (details.summary != null) _buildSummaryCard(details.summary!, strings),
+                    /// Transfer Items
+                    if (details.items != null && details.items!.isNotEmpty)
+                      _buildItemsSection(details.items!, strings),
+                    const SizedBox(height: 16),
+
+                    /// Summary
+                    if (details.summary != null)
+                      _buildSummaryCard(details.summary!, strings),
+
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
@@ -123,7 +149,8 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseInfoCard(details, AppLocalizations strings) {
+  Widget _buildTransferInfoCard(
+      ProductTransferData details, AppLocalizations strings) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -144,49 +171,47 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.receipt_long,
-                color: AppColors.white,
-                size: 28,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      details.purchaseNo ?? strings.notAvailable,
-                      style: GoogleFonts.poppins(
-                        color: AppColors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (details.purchaseDate != null && details.purchaseDate!.isNotEmpty)
-                      Text(
-                        DateFormatters.readableDate(context, details.purchaseDate),
-                        style: const TextStyle(
-                          color: AppColors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                  ],
+          const Icon(
+            Icons.swap_horiz_rounded,
+            color: AppColors.white,
+            size: 28,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  details.transferNumber ?? strings.notAvailable,
+                  style: GoogleFonts.poppins(
+                    color: AppColors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+                if (details.transferDate != null &&
+                    details.transferDate!.isNotEmpty)
+                  Text(
+                    DateFormatters.readableDate(context, details.transferDate),
+                    style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSupplierInfoCard(SupplierInfo supplier, AppLocalizations strings) {
+  Widget _buildRouteCard(
+      ProductTransferData details, AppLocalizations strings) {
     return Container(
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: AppColors.cardColor,
@@ -195,69 +220,67 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             color: AppColors.grey.withValues(alpha: 0.15),
             blurRadius: 8,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
-      child: Column(
+      child: Row(
         children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor.withValues(alpha: 0.1),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
-            ),
-            child: Row(
+          /// From Location
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const HugeIcon(
-                  icon: HugeIcons.strokeRoundedUserMultiple,
-                  color: AppColors.primaryColor,
-                  size: 20,
-                ),
-                const SizedBox(width: 8),
                 Text(
-                  strings.supplierInformation,
-                  style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: AppColors.primaryColor,
+                  strings.fromLocation,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w500,
                   ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  details.fromLocation ?? strings.notAvailable,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
           ),
+
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: HugeIcon(
+              icon: HugeIcons.strokeRoundedArrowRight01,
+              color: AppColors.primaryColor,
+              size: 24,
+            ),
+          ),
+
+          /// To Branch
+          Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (supplier.name != null && supplier.name!.isNotEmpty)
-                  _buildDetailRow(
-                    icon: HugeIcons.strokeRoundedUser,
-                    label: strings.name,
-                    value: LocalizationService.getText(context, en: supplier.name!, bn: supplier.nameBn),
+                Text(
+                  strings.toBranch,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w500,
                   ),
-                if (supplier.phone != null && supplier.phone!.isNotEmpty)
-                  _buildDetailRow(
-                    icon: HugeIcons.strokeRoundedCall,
-                    label: strings.phone,
-                    value: supplier.phone!,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  details.toBranch?.name ?? strings.notAvailable,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primaryColor,
                   ),
-                if (supplier.email != null && supplier.email!.isNotEmpty)
-                  _buildDetailRow(
-                    icon: HugeIcons.strokeRoundedMail01,
-                    label: strings.email,
-                    value: supplier.email!,
-                  ),
-                if (supplier.address != null && supplier.address!.isNotEmpty)
-                  _buildDetailRow(
-                    icon: HugeIcons.strokeRoundedLocation01,
-                    label: strings.address,
-                    value: supplier.address!,
-                    maxLines: 2,
-                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
@@ -281,10 +304,11 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             color: AppColors.grey.withValues(alpha: 0.15),
             blurRadius: 8,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HugeIcon(
             icon: icon,
@@ -318,7 +342,8 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseItemsSection(List<dynamic> items, AppLocalizations strings) {
+  Widget _buildItemsSection(
+      List<TransferItem> items, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -328,11 +353,12 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             color: AppColors.grey.withValues(alpha: 0.15),
             blurRadius: 8,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Column(
         children: [
+          /// Section Header
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(12),
@@ -352,7 +378,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  strings.purchaseItems,
+                  strings.transferItems,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -362,6 +388,8 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
               ],
             ),
           ),
+
+          /// Items List
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -373,8 +401,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
               height: 24,
             ),
             itemBuilder: (context, index) {
-              final item = items[index];
-              return _buildPurchaseItemCard(item, strings);
+              return _buildItemRow(items[index], strings);
             },
           ),
         ],
@@ -382,33 +409,49 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildPurchaseItemCard(dynamic item, AppLocalizations strings) {
+  Widget _buildItemRow(TransferItem item, AppLocalizations strings) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        /// Product Name & Category
         Text(
-          LocalizationService.getText(context, en: item.productName ?? strings.notAvailable, bn: item.productNameBn),
+          item.productName ?? strings.notAvailable,
           style: GoogleFonts.poppins(
             fontWeight: FontWeight.w600,
             fontSize: 15,
             color: AppColors.grey,
           ),
         ),
-        const SizedBox(height: 12),
+        if (item.category != null && item.category!.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 2, bottom: 8),
+            child: Text(
+              item.category!,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: AppColors.grey,
+              ),
+            ),
+          )
+        else
+          const SizedBox(height: 10),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildItemDetail(
               label: strings.quantity,
-              value: '${CurrencyFormatter.format(item.quantity ?? 0, context: context)} ${item.unit ?? ''}',
+              value:
+              '${CurrencyFormatter.format(item.quantity, context: context)} ${item.unit ?? ''}',
             ),
             _buildItemDetail(
               label: strings.unitPrice,
-              value: '৳${CurrencyFormatter.format(num.tryParse(item.unitPrice?.toStringAsFixed(2) ?? '0.00'), context: context)}',
+              value:
+              '৳${CurrencyFormatter.format(item.unitPrice, context: context)}',
             ),
             _buildItemDetail(
               label: strings.total,
-              value: '৳${CurrencyFormatter.format(num.tryParse(item.totalPrice?.toStringAsFixed(2) ?? '0.00'), context: context)}',
+              value:
+              '৳${CurrencyFormatter.format(item.total, context: context)}',
               isHighlighted: true,
             ),
           ],
@@ -445,7 +488,8 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
     );
   }
 
-  Widget _buildSummaryCard(summary, AppLocalizations strings) {
+  Widget _buildSummaryCard(
+      TransferDetailsSummary summary, AppLocalizations strings) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
@@ -455,7 +499,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             color: AppColors.grey.withValues(alpha: 0.15),
             blurRadius: 8,
             offset: const Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: Column(
@@ -479,7 +523,7 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  strings.paymentSummary,
+                  strings.transferSummary,
                   style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -494,34 +538,17 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
             child: Column(
               children: [
                 _buildSummaryRow(
-                  label: strings.subTotal,
-                  value: '৳${CurrencyFormatter.format(num.tryParse(summary.subTotal?.toStringAsFixed(2) ?? '0.00'), context: context)}',
-                ),
-                const SizedBox(height: 8),
-                _buildSummaryRow(
-                  label: strings.discount,
-                  value: '৳${CurrencyFormatter.format(num.tryParse(summary.discount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
-                  valueColor: Colors.green,
+                  label: strings.totalQuantity,
+                  value: CurrencyFormatter.format(summary.totalQuantity,
+                      context: context),
                 ),
                 const SizedBox(height: 8),
                 const Divider(color: AppColors.borderColor, thickness: 1),
                 const SizedBox(height: 8),
                 _buildSummaryRow(
-                  label: strings.grandTotal,
-                  value: '৳${CurrencyFormatter.format(num.tryParse(summary.grandTotal?.toStringAsFixed(2) ?? '0.00'), context: context)}',
-                  isBold: true,
-                ),
-                const SizedBox(height: 8),
-                _buildSummaryRow(
-                  label: strings.paidAmount,
-                  value: '৳${CurrencyFormatter.format(num.tryParse(summary.paidAmount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
-                  valueColor: Colors.green,
-                ),
-                const SizedBox(height: 8),
-                _buildSummaryRow(
-                  label: strings.dueAmount,
-                  value: '৳${CurrencyFormatter.format(num.tryParse(summary.dueAmount?.toStringAsFixed(2) ?? '0.00'), context: context)}',
-                  valueColor: Colors.red,
+                  label: strings.totalAmount,
+                  value:
+                  '৳${CurrencyFormatter.format(summary.totalAmount, context: context)}',
                   isBold: true,
                 ),
               ],
@@ -535,7 +562,6 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
   Widget _buildSummaryRow({
     required String label,
     required String value,
-    Color? valueColor,
     bool isBold = false,
   }) {
     return Row(
@@ -554,55 +580,10 @@ class _PurchaseDetailsPageState extends State<PurchaseDetailsPage> {
           style: GoogleFonts.poppins(
             fontSize: isBold ? 16 : 14,
             fontWeight: isBold ? FontWeight.bold : FontWeight.w600,
-            color: valueColor ?? AppColors.grey,
+            color: isBold ? AppColors.primaryColor : AppColors.grey,
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildDetailRow({
-    required IconData icon,
-    required String label,
-    required String value,
-    int maxLines = 1,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HugeIcon(
-            icon: icon,
-            color: AppColors.primaryColor,
-            size: 18,
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  value,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                  maxLines: maxLines,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

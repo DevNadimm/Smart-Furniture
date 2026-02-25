@@ -38,6 +38,8 @@ class ApiEndpoints {
   String get customOrders => '$employeeBaseUrl/api/custom-orders';
   String get storeCustomOrder => '$employeeBaseUrl/api/custom-orders';
   String get customOrderDuePayment => '$employeeBaseUrl/api/custom-orders/payment';
+  String get transfers => '$employeeBaseUrl/api/transfers';
+  String transferDetails(int id) => '$employeeBaseUrl/api/transfers/$id';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';

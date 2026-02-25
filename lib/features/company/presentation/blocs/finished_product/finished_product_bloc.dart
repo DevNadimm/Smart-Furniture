@@ -12,7 +12,7 @@ class FinishedProductBloc extends Bloc<FinishedProductEvent, FinishedProductStat
     on<LoadFinishedProductsEvent>((event, emit) async {
       emit(FinishedProductLoading());
       try {
-        final data = await FinishedProductRepository.fetchFinishedProducts();
+        final data = await FinishedProductRepository.fetchFinishedProducts(categoryId: event.categoryId, search: event.search);
         emit(FinishedProductLoaded(data));
       } catch (e) {
         emit(FinishedProductError(HelperFunctions.cleanErrorMessage(e.toString())));

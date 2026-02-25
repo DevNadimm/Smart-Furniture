@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/enums/message_type.dart';
 import 'package:smart_furniture/core/utils/widgets/app_notifier.dart';
 import 'package:smart_furniture/core/utils/widgets/custom_text_field.dart';
@@ -117,7 +118,7 @@ class _CreateExpensePageState extends State<CreateExpensePage> {
             } else if (expenseHeadState is ExpenseHeadLoaded) {
               _expenseHeadNameToId = {
                 for (final e in expenseHeadState.expenseHeads)
-                  if (e.head != null && e.id != null) e.head!: e.id!.toString(),
+                  if (e.head != null && e.id != null) LocalizationService.getText(context, en: e.head ?? strings.notAvailable, bn: e.nameBn): e.id!.toString(),
               };
             }
           },

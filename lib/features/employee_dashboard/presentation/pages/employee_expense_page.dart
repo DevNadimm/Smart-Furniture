@@ -147,8 +147,8 @@ class _EmployeeExpensePageState extends State<EmployeeExpensePage> {
                 final items = state.expenseHeads.map((e) {
                   final localizedName = LocalizationService.getText(
                     context,
-                    en: e.head ?? '',
-                    bn: e.head ?? '',
+                    en: e.head ?? strings.notAvailable,
+                    bn: e.nameBn,
                   );
                   return {
                     'id': e.id?.toString() ?? '',

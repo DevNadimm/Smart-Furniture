@@ -70,5 +70,7 @@ class ErrorMessages {
   static const String fetchSupplierPurchaseDueFailed = 'Failed to fetch supplier purchase dues. Please try again later.';
   static const String fetchFinishedProductCategoryFailed = 'Failed to fetch finished product categories. Please try again later.';
   static const String createOrderFailed = 'Failed to create order. Please try again later.';
-  static const String fetchOrderFailed = 'Failed to fetch finished product categories. Please try again later.';
+  static const String fetchOrderFailed = 'Failed to fetch orders. Please try again later.';
+  static const String fetchTransferFailed = 'Failed to fetch product transfers. Please try again later.';
+  static const String fetchTransferDetailsFailed = 'Failed to fetch product transfer details. Please try again later.';
 }

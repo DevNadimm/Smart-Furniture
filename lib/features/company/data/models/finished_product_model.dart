@@ -1,19 +1,22 @@
 class FinishedProductModel {
   final bool? success;
   final List<FinishedProductData>? data;
+  final FinishedProductSummary? summary;
 
   FinishedProductModel({
     this.success,
     this.data,
+    this.summary,
   });
 
   factory FinishedProductModel.fromJson(Map<String, dynamic> json) {
     return FinishedProductModel(
-      success: json['success'],
-      data: json['data'] != null
-          ? List<FinishedProductData>.from(
-        json['data'].map((x) => FinishedProductData.fromJson(x)),
-      )
+      success: json['success'] as bool?,
+      data: (json['data'] as List?)
+          ?.map((e) => FinishedProductData.fromJson(e))
+          .toList(),
+      summary: json['summary'] != null
+          ? FinishedProductSummary.fromJson(json['summary'])
           : null,
     );
   }
@@ -22,6 +25,7 @@ class FinishedProductModel {
     return {
       'success': success,
       'data': data?.map((x) => x.toJson()).toList(),
+      'summary': summary?.toJson(),
     };
   }
 }
@@ -29,11 +33,12 @@ class FinishedProductModel {
 class FinishedProductData {
   final int? productId;
   final String? productName;
-  final String? productNameBn;     // ✅ NEW
+  final String? productNameBn;
   final String? category;
-  final String? categoryNameBn;    // ✅ NEW
+  final String? categoryNameBn;
   final String? quantity;
   final String? unit;
+  final String? rate; // ✅ NEW
 
   FinishedProductData({
     this.productId,
@@ -43,6 +48,7 @@ class FinishedProductData {
     this.categoryNameBn,
     this.quantity,
     this.unit,
+    this.rate,
   });
 
   factory FinishedProductData.fromJson(Map<String, dynamic> json) {
@@ -54,6 +60,7 @@ class FinishedProductData {
       categoryNameBn: json['category_name_bn'] as String?,
       quantity: json['quantity'] as String?,
       unit: json['unit'] as String?,
+      rate: json['rate'] as String?,
     );
   }
 
@@ -66,6 +73,35 @@ class FinishedProductData {
       'category_name_bn': categoryNameBn,
       'quantity': quantity,
       'unit': unit,
+      'rate': rate,
+    };
+  }
+}
+
+class FinishedProductSummary {
+  final int? totalQuantity;
+  final int? totalAmount;
+  final int? totalProducts;
+
+  FinishedProductSummary({
+    this.totalQuantity,
+    this.totalAmount,
+    this.totalProducts,
+  });
+
+  factory FinishedProductSummary.fromJson(Map<String, dynamic> json) {
+    return FinishedProductSummary(
+      totalQuantity: json['total_quantity'] as int?,
+      totalAmount: json['total_amount'] as int?,
+      totalProducts: json['total_products'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'total_quantity': totalQuantity,
+      'total_amount': totalAmount,
+      'total_products': totalProducts,
     };
   }
 }

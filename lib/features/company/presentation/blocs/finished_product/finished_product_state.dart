@@ -8,9 +8,9 @@ final class FinishedProductInitial extends FinishedProductState {}
 final class FinishedProductLoading extends FinishedProductState {}
 
 final class FinishedProductLoaded extends FinishedProductState {
-  final List<FinishedProductData> finishedProducts;
+  final FinishedProductModel finishedProductModel;
 
-  FinishedProductLoaded(this.finishedProducts);
+  FinishedProductLoaded(this.finishedProductModel);
 }
 
 final class FinishedProductError extends FinishedProductState {

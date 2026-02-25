@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
 import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/core/utils/formatters/date_formatters.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_expense_model.dart';
@@ -54,7 +55,7 @@ class EmployeeExpenseCard extends StatelessWidget {
                     child: Padding(
                       padding: isAdmin ? const EdgeInsets.symmetric(vertical: 8.0) : const EdgeInsets.all(0),
                       child: Text(
-                        expense?.expense?.head ?? strings.notAvailable,
+                        LocalizationService.getText(context, en: expense?.expense?.head ?? strings.notAvailable, bn: expense?.expense?.nameBn),
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,

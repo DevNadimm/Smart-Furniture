@@ -8,6 +8,8 @@ import 'package:smart_furniture/features/accounts/presentation/blocs/bank_transa
 import 'package:smart_furniture/features/accounts/presentation/blocs/cash_transaction/cash_transaction_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/pending_cheque_list/pending_cheque_list_bloc.dart';
 import 'package:smart_furniture/features/accounts/presentation/blocs/reminder_cheque_list/reminder_cheque_list_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/product_transfer/product_transfer_bloc.dart';
+import 'package:smart_furniture/features/admin/presentation/blocs/product_transfer_details/product_transfer_details_bloc.dart';
 import 'package:smart_furniture/features/admin/presentation/blocs/purchase/purchase_bloc.dart';
 import 'package:smart_furniture/features/admin/presentation/blocs/purchase_details/purchase_details_bloc.dart';
 import 'package:smart_furniture/features/admin/presentation/blocs/supplier/supplier_bloc.dart';
@@ -107,6 +109,8 @@ Future<void> main() async {
         BlocProvider(create: (_) => CustomOrderBloc()),
         BlocProvider(create: (_) => StoreCustomOrderBloc()),
         BlocProvider(create: (_) => StoreDuePaymentBloc()),
+        BlocProvider(create: (_) => ProductTransferBloc()),
+        BlocProvider(create: (_) => ProductTransferDetailsBloc()),
       ],
       child: const MyApp(),
     ),

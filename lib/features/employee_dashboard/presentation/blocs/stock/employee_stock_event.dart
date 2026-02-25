@@ -4,6 +4,8 @@ abstract class EmployeeStockEvent {}
 
 class LoadStocksEvent extends EmployeeStockEvent {
   final int? branchId;
+  final int? categoryId;
+  final String? search;
 
-  LoadStocksEvent({this.branchId});
+  LoadStocksEvent({this.branchId, this.categoryId, this.search});
 }
