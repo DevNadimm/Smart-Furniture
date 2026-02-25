@@ -41,7 +41,6 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
   String _searchQuery = '';
   int? _selectedCategoryId;
 
-  // Map to hold TextEditingController per product for price input
   final Map<int, TextEditingController> _priceControllers = {};
 
   @override
@@ -49,7 +48,6 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
     super.initState();
     _selectedItems = List.from(widget.selectedItems);
 
-    // Initialize controllers for already-selected items
     for (final item in _selectedItems) {
       _priceControllers[item.productId] = TextEditingController(
         text: item.unitPrice.toStringAsFixed(2),
@@ -448,7 +446,6 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                         const SizedBox(height: 6),
                         Row(
                           children: [
-                            // Price display (when not selected) or editable field (when selected)
                             if (!isSelected) ...[
                               Text(
                                 '৳${product.salesRate}',
@@ -572,7 +569,7 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                   onTap: () {},
                   child: Row(
                     children: [
-                      const SizedBox(width: 36), // align with product name
+                      const SizedBox(width: 36),
                       Text(
                         '${strings.price}:',
                         style: GoogleFonts.inter(
@@ -586,34 +583,24 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                         child: Container(
                           height: 38,
                           constraints: const BoxConstraints(maxWidth: 140),
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryColor.withValues(alpha: 0.06),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: AppColors.primaryColor.withValues(alpha: 0.4),
-                              width: 1,
-                            ),
-                          ),
-                          child: Expanded(
-                            child: Center(
-                              child: TextField(
-                                controller: priceController,
-                                keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
-                                ],
-                                style: GoogleFonts.inter(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF1A1A1A),
-                                ),
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(left: 4),
-                                ),
-                                onChanged: (val) => _updatePrice(product.id!, val),
-                                onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                          child: Center(
+                            child: TextField(
+                              controller: priceController,
+                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+                              ],
+                              style: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: const Color(0xFF1A1A1A),
                               ),
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(left: 4),
+                              ),
+                              onChanged: (val) => _updatePrice(product.id!, val),
+                              onTapOutside: (_) => FocusScope.of(context).unfocus(),
                             ),
                           ),
                         ),
