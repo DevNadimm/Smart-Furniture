@@ -11,6 +11,7 @@ import 'package:smart_furniture/core/utils/widgets/error_state_widget.dart';
 import 'package:smart_furniture/core/utils/widgets/filter_bar.dart';
 import 'package:smart_furniture/core/utils/widgets/loader.dart';
 import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart';
+import 'package:smart_furniture/core/utils/widgets/summary_card.dart';
 import 'package:smart_furniture/features/custom_order/presentation/blocs/custom_order/custom_order_bloc.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/custom_order_details_page.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/create_custom_order_page.dart';
@@ -170,42 +171,72 @@ class _CustomOrderPageState extends State<CustomOrderPage> {
                     }
 
                     if (state is CustomOrderLoaded) {
-                      if (state.orders.isEmpty) {
+                      final orders = state.orders.data ?? [];
+
+                      if (orders.isEmpty) {
                         return EmptyStateWidget(
                           title: strings.noCustomOrdersFound,
                           message: strings.noCustomOrdersMessage,
                         );
                       }
 
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.orders.length,
-                        itemBuilder: (context, index) {
-                          final order = state.orders[index];
-                          return CustomOrderCard(
-                            order: order,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                CustomOrderDetailsPage.route(order: order),
+                      final summary = state.orders.summary;
+
+                      return Column(
+                        children: [
+                          /// Summary Card — pending row
+                          if (summary?.pending != null && _statusController.text != 'Delivered')
+                            SummaryCard(
+                              amount: summary!.pending!.totalValue?.toDouble() ?? 0.0,
+                              amountLabel: strings.pendingAmount,       // add to l10n
+                              quantity: summary.pending!.count ?? 0,
+                              quantityLabel: strings.pendingOrders,     // add to l10n
+                            ),
+
+                          /// Summary Card — delivered row
+                          if (summary?.delivered != null && _statusController.text != 'Pending') ...[
+                            const SizedBox(height: 8),
+                            SummaryCard(
+                              amount: summary!.delivered!.totalValue?.toDouble() ?? 0.0,
+                              amountLabel: strings.deliveredAmount,     // add to l10n
+                              quantity: summary.delivered!.count ?? 0,
+                              quantityLabel: strings.deliveredOrders,   // add to l10n
+                            ),
+                          ],
+
+                          const SizedBox(height: 8),
+
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: orders.length,
+                            itemBuilder: (context, index) {
+                              final order = orders[index];
+                              return CustomOrderCard(
+                                order: order,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    CustomOrderDetailsPage.route(order: order),
+                                  );
+                                },
+                                onPayDue: (order.dueAmount ?? 0) > 0 && widget.isAdmin == false
+                                    ? () async {
+                                  final result = await Navigator.push(
+                                    context,
+                                    CustomOrderDuePaymentPage.route(
+                                      orderId: order.id!,
+                                      orderNo: order.orderNo!,
+                                      dueAmount: order.dueAmount!,
+                                    ),
+                                  );
+                                  if (result == true) _fetchOrders();
+                                }
+                                    : null,
                               );
                             },
-                            onPayDue: (order.dueAmount ?? 0) > 0 && widget.isAdmin == false
-                                ? () async {
-                                    final result = await Navigator.push(
-                                      context,
-                                      CustomOrderDuePaymentPage.route(
-                                        orderId: order.id!,
-                                        orderNo: order.orderNo!,
-                                        dueAmount: order.dueAmount!,
-                                      ),
-                                    );
-                                    if (result == true) _fetchOrders();
-                                  }
-                                : null,
-                          );
-                        },
+                          ),
+                        ],
                       );
                     }
 

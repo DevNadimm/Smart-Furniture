@@ -12,7 +12,7 @@ class CompanyRawMaterialBloc extends Bloc<CompanyRawMaterialEvent, CompanyRawMat
     on<LoadCompanyRawMaterialsEvent>((event, emit) async {
       emit(CompanyRawMaterialLoading());
       try {
-        final data = await CompanyRawMaterialRepository.fetchCompanyRawMaterials();
+        final data = await CompanyRawMaterialRepository.fetchCompanyRawMaterials(categoryId: event.categoryId, search: event.search);
         emit(CompanyRawMaterialLoaded(data));
       } catch (e) {
         emit(CompanyRawMaterialError(HelperFunctions.cleanErrorMessage(e.toString())));

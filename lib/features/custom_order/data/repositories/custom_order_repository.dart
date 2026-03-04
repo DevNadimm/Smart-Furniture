@@ -8,8 +8,7 @@ import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/custom_order/data/models/custom_order_model.dart';
 
 class CustomOrderRepository {
-
-  static Future<List<CustomOrderData>> fetchOrders({
+  static Future<CustomOrderModel> fetchOrders({
     int? branchId,
     String? fromDate,
     String? toDate,
@@ -43,11 +42,9 @@ class CustomOrderRepository {
       debugPrint('📥 Response => ${response.body}');
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> jsonMap =
-        jsonDecode(response.body) as Map<String, dynamic>;
-        final List<dynamic> data = jsonMap['data'] ?? [];
+        final Map<String, dynamic> jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
         debugPrint('✅ Custom orders fetched successfully');
-        return data.map((e) => CustomOrderData.fromJson(e)).toList();
+        return CustomOrderModel.fromJson(jsonMap);
       } else {
         throw Exception(ErrorMessages.fetchOrderFailed);
       }

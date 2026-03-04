@@ -14,6 +14,7 @@ import 'package:smart_furniture/core/utils/widgets/searchable_bottom_sheet.dart'
 import 'package:smart_furniture/core/utils/widgets/summary_card.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/finished_product_category/finished_product_category_bloc.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/stock/employee_stock_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/stock_register_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/widgets/employee_stock_card.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
@@ -203,7 +204,7 @@ class _EmployeeStockPageState extends State<EmployeeStockPage> {
                             physics: const BouncingScrollPhysics(),
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             itemCount: stocks.length,
-                            itemBuilder: (context, index) => EmployeeStockCard(stock: stocks[index]),
+                            itemBuilder: (context, index) => EmployeeStockCard(stock: stocks[index], onTap: () => Navigator.push(context, StockRegisterPage.route(productId: stocks[index].productId, branchId: widget.branchId.toString())),),
                           ),
                         ],
                       ),

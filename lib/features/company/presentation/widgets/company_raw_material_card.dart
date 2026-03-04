@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/services/localization_service.dart';
+import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/company/data/models/company_raw_material_model.dart';
+import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class CompanyRawMaterialCard extends StatelessWidget {
   final RawMaterialData? rawMaterial;
@@ -14,6 +16,8 @@ class CompanyRawMaterialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
@@ -34,25 +38,27 @@ class CompanyRawMaterialCard extends StatelessWidget {
             /// Header
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        rawMaterial?.productName ?? 'N/A',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  LocalizationService.getText(
+                    context,
+                    en: rawMaterial?.productName ?? strings.notAvailable,
+                    bn: rawMaterial?.productNameBn,
                   ),
-                ],
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelLarge!
+                      .copyWith(color: AppColors.primaryColor),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
+
             /// Body
             Padding(
               padding: const EdgeInsets.all(12),
@@ -60,15 +66,21 @@ class CompanyRawMaterialCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Category
-                  if (rawMaterial?.category != null && rawMaterial!.category!.isNotEmpty)
+                  if (rawMaterial?.category != null &&
+                      rawMaterial!.category!.isNotEmpty)
                     _buildInfoRow(
                       context,
                       icon: HugeIcons.strokeRoundedTag01,
-                      label: 'Category',
-                      value: rawMaterial!.category!,
+                      label: strings.category,
+                      value: LocalizationService.getText(
+                        context,
+                        en: rawMaterial!.category!,
+                        bn: rawMaterial?.categoryNameBn,
+                      ),
                     ),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
+
                   /// Quantity and Unit
                   Row(
                     children: [
@@ -76,8 +88,8 @@ class CompanyRawMaterialCard extends StatelessWidget {
                         child: _buildInfoRow(
                           context,
                           icon: HugeIcons.strokeRoundedPackage,
-                          label: 'Quantity',
-                          value: rawMaterial?.quantity ?? 'N/A',
+                          label: strings.quantity,
+                          value: CurrencyFormatter.format(num.tryParse(rawMaterial?.quantity ?? '0'), context: context),
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -85,8 +97,9 @@ class CompanyRawMaterialCard extends StatelessWidget {
                         child: _buildInfoRow(
                           context,
                           icon: HugeIcons.strokeRoundedCells,
-                          label: 'Unit',
-                          value: rawMaterial?.unit ?? 'N/A',
+                          label: strings.unit,
+                          value:
+                          rawMaterial?.unit ?? strings.notAvailable,
                         ),
                       ),
                     ],
@@ -112,11 +125,7 @@ class CompanyRawMaterialCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HugeIcon(
-            icon: icon,
-            color: AppColors.primaryColor,
-            size: 18,
-          ),
+          HugeIcon(icon: icon, color: AppColors.primaryColor, size: 18),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -124,11 +133,7 @@ class CompanyRawMaterialCard extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppColors.grey,
                     fontWeight: FontWeight.w500,
                   ),
@@ -136,10 +141,7 @@ class CompanyRawMaterialCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   value,
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   maxLines: maxLines,
                   overflow: TextOverflow.ellipsis,
                 ),

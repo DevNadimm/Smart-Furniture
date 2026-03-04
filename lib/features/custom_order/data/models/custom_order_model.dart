@@ -1,10 +1,12 @@
 class CustomOrderModel {
   final bool? success;
   final List<CustomOrderData>? data;
+  final OrderSummary? summary;
 
   CustomOrderModel({
     this.success,
     this.data,
+    this.summary,
   });
 
   factory CustomOrderModel.fromJson(Map<String, dynamic> json) {
@@ -12,8 +14,11 @@ class CustomOrderModel {
       success: json['success'],
       data: json['data'] != null
           ? (json['data'] as List)
-              .map((e) => CustomOrderData.fromJson(e))
-              .toList()
+          .map((e) => CustomOrderData.fromJson(e))
+          .toList()
+          : null,
+      summary: json['summary'] != null
+          ? OrderSummary.fromJson(json['summary'])
           : null,
     );
   }
@@ -80,8 +85,8 @@ class CustomOrderData {
       itemsCount: json['items_count'],
       items: json['items'] != null
           ? (json['items'] as List)
-              .map((e) => CustomOrderItem.fromJson(e))
-              .toList()
+          .map((e) => CustomOrderItem.fromJson(e))
+          .toList()
           : null,
     );
   }
@@ -157,5 +162,46 @@ class CustomOrderItem {
       'unit_price': unitPrice,
       'total_price': totalPrice,
     };
+  }
+}
+
+class OrderSummary {
+  final SummaryStatus? pending;
+  final SummaryStatus? delivered;
+
+  OrderSummary({
+    this.pending,
+    this.delivered,
+  });
+
+  factory OrderSummary.fromJson(Map<String, dynamic> json) {
+    return OrderSummary(
+      pending: json['pending'] != null
+          ? SummaryStatus.fromJson(json['pending'])
+          : null,
+      delivered: json['delivered'] != null
+          ? SummaryStatus.fromJson(json['delivered'])
+          : null,
+    );
+  }
+}
+
+class SummaryStatus {
+  final int? count;
+  final int? totalQuantity;
+  final num? totalValue;
+
+  SummaryStatus({
+    this.count,
+    this.totalQuantity,
+    this.totalValue,
+  });
+
+  factory SummaryStatus.fromJson(Map<String, dynamic> json) {
+    return SummaryStatus(
+      count: json['count'],
+      totalQuantity: json['total_quantity'],
+      totalValue: json['total_value'],
+    );
   }
 }

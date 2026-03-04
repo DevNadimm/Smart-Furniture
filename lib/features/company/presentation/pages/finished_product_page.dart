@@ -15,11 +15,11 @@ import 'package:smart_furniture/core/utils/widgets/summary_card.dart';
 import 'package:smart_furniture/features/company/presentation/blocs/finished_product/finished_product_bloc.dart';
 import 'package:smart_furniture/features/company/presentation/widgets/finished_product_card.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/finished_product_category/finished_product_category_bloc.dart';
+import 'package:smart_furniture/features/employee_dashboard/presentation/pages/stock_register_page.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class FinishedProductPage extends StatefulWidget {
-  static Route route() =>
-      MaterialPageRoute(builder: (_) => const FinishedProductPage());
+  static Route route() => MaterialPageRoute(builder: (_) => const FinishedProductPage());
 
   const FinishedProductPage({super.key});
 
@@ -211,7 +211,7 @@ class _FinishedProductPageState extends State<FinishedProductPage> {
                             itemCount: products.length,
                             itemBuilder: (context, index) =>
                                 FinishedProductCard(
-                              finishedProduct: products[index],
+                              finishedProduct: products[index], onTap: () => Navigator.push(context, StockRegisterPage.route(productId: products[index].productId, branchId: '')),
                             ),
                           ),
                         ],

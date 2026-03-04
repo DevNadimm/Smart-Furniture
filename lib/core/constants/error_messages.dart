@@ -73,4 +73,10 @@ class ErrorMessages {
   static const String fetchOrderFailed = 'Failed to fetch orders. Please try again later.';
   static const String fetchTransferFailed = 'Failed to fetch product transfers. Please try again later.';
   static const String fetchTransferDetailsFailed = 'Failed to fetch product transfer details. Please try again later.';
+  static const String fetchProductFailed = 'Failed to fetch products. Please try again later.';
+  static const String fetchProfitLossFailed = 'Failed to fetch profit & loss report. Please try again later.';
+  static const String fetchRawMaterialCategoryFailed = 'Failed to fetch raw material categories. Please try again later.';
+  static const String fetchCustomProductionFailed = 'Failed to fetch custom production data. Please try again later.';
+  static const String fetchFixedProductionFailed = 'Failed to fetch fixed production data. Please try again later.';
+  static const String fetchStockRegisterFailed = 'Failed to fetch stock register data. Please try again later.';
 }

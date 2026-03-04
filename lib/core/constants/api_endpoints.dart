@@ -40,6 +40,12 @@ class ApiEndpoints {
   String get customOrderDuePayment => '$employeeBaseUrl/api/custom-orders/payment';
   String get transfers => '$employeeBaseUrl/api/transfers';
   String transferDetails(int id) => '$employeeBaseUrl/api/transfers/$id';
+  String get products => '$employeeBaseUrl/api/products';
+  String get profitLoss => '$employeeBaseUrl/api/profitLossReport';
+  String get rawMaterialCategories => '$employeeBaseUrl/api/categories/raw-material';
+  String get customProductions => '$employeeBaseUrl/api/custom-boms';
+  String get fixedProductions => '$employeeBaseUrl/api/fixed-boms';
+  String stockRegister(int id) => '$employeeBaseUrl/api/stock/movement/$id';
 
   // 📦 Administration
   String get customerList => '$baseUrl/customers';
@@ -73,7 +79,7 @@ class ApiEndpoints {
   String get dailyReport => '$baseUrl/daily-report';
   String get supplierPaymentReports => '$baseUrl/report-module/supplier-payment-report';
   String get customerPaymentReports => '$baseUrl/report-module/customer-payment-report';
-  String get profitLoss => '$baseUrl/report-module/profit-loss';
+  // String get profitLoss => '$baseUrl/profitLossReport';
 
   // 📦 Misc
   String get bankAccounts => '$baseUrl/bank-accounts';

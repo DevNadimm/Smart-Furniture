@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/localization_service.dart';
@@ -8,10 +9,11 @@ import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class FinishedProductCard extends StatelessWidget {
   final FinishedProductData? finishedProduct;
+  final VoidCallback onTap;
 
   const FinishedProductCard({
     super.key,
-    required this.finishedProduct,
+    required this.finishedProduct, required this.onTap,
   });
 
   @override
@@ -91,6 +93,38 @@ class FinishedProductCard extends StatelessWidget {
                           icon: HugeIcons.strokeRoundedCells,
                           label: strings.unit,
                           value: finishedProduct?.unit ?? strings.notAvailable,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  /// View Details Button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton.icon(
+                        onPressed: onTap,
+                        icon: const HugeIcon(
+                          icon: HugeIcons.strokeRoundedArrowRight01,
+                          color: AppColors.primaryColor,
+                          size: 18,
+                        ),
+                        label: Text(
+                          strings.stockRegister,
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          backgroundColor: AppColors.primaryColor.withValues(alpha: 0.1),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                       ),
                     ],

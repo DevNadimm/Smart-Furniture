@@ -7,11 +7,16 @@ import 'package:smart_furniture/features/company/data/models/company_raw_materia
 
 class CompanyRawMaterialRepository {
   /// Fetch all company raw materials
-  static Future<List<RawMaterialData>> fetchCompanyRawMaterials() async {
+  static Future<CompanyRawMaterialModel> fetchCompanyRawMaterials({String? categoryId, String? search}) async {
     final api = ApiEndpoints(shop: '');
     final endpoint = api.companyRawMaterials;
 
-    final uri = Uri.parse(endpoint);
+    final queryParams = {
+      if (search != null && search.isNotEmpty) 'search': search,
+      if (categoryId != null && categoryId.isNotEmpty) 'category_id': categoryId,
+    };
+
+    final uri = Uri.parse(endpoint).replace(queryParameters: queryParams);
     print('URL => $uri');
 
     try {
@@ -31,11 +36,10 @@ class CompanyRawMaterialRepository {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonMap =
-        jsonDecode(response.body) as Map<String, dynamic>;
-        final List<dynamic> data = jsonMap['data'] ?? [];
+            jsonDecode(response.body) as Map<String, dynamic>;
 
         print('✅ Company raw materials fetched successfully');
-        return data.map((e) => RawMaterialData.fromJson(e)).toList();
+        return CompanyRawMaterialModel.fromJson(jsonMap);
       } else {
         print('❌ Fetch company raw materials failed');
         throw Exception(ErrorMessages.fetchCompanyRawMaterialFailed);

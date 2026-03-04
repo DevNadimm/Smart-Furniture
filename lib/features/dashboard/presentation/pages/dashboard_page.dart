@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/product_transfer_page.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/profit_loss_page.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/custom_order_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
@@ -206,6 +207,17 @@ class DashboardPage extends StatelessWidget {
                           backgroundColor: const Color(0xFFECFEFF),
                           onTap: () {
                             Navigator.push(context, EmployeeStockPage.route(isAdmin: true, branchId: shop.id));
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        _ModuleCard(
+                          title: strings.profitLoss,
+                          subtitle: strings.profitLossReportSubtitle,
+                          icon: HugeIcons.strokeRoundedDollar02,
+                          iconColor: AppColors.error,
+                          backgroundColor: AppColors.error.withValues(alpha: 0.1),
+                          onTap: () {
+                            Navigator.push(context, ProfitLossPage.route(branchId: shop.id));
                           },
                         ),
                         const SizedBox(height: 16),

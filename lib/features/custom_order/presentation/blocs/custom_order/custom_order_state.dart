@@ -7,7 +7,7 @@ class CustomOrderInitial extends CustomOrderState {}
 class CustomOrderLoading extends CustomOrderState {}
 
 class CustomOrderLoaded extends CustomOrderState {
-  final List<CustomOrderData> orders;
+  final CustomOrderModel orders;
 
   CustomOrderLoaded(this.orders);
 }

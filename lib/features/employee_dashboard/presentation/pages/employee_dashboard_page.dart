@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/product_list_page.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/custom_order_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
@@ -130,6 +131,17 @@ class EmployeeDashboardPage extends StatelessWidget {
                             backgroundColor: const Color(0xFFECFEFF),
                             onTap: () {
                               Navigator.push(context, EmployeeStockPage.route());
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.productListTitle,
+                            subtitle: strings.productListSubtitle,
+                            icon: HugeIcons.strokeRoundedDeliveryBox01,
+                            iconColor: AppColors.success,
+                            backgroundColor: AppColors.success.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, ProductListPage.route());
                             },
                           ),
                           const SizedBox(height: 16),

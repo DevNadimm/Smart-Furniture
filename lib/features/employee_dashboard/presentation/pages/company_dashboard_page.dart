@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/product_list_page.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/profit_loss_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/purchase_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_dues_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_page.dart';
+import 'package:smart_furniture/features/company/presentation/pages/company_raw_material_page.dart';
+import 'package:smart_furniture/features/company/presentation/pages/custom_production_page.dart';
 import 'package:smart_furniture/features/company/presentation/pages/finished_product_page.dart';
+import 'package:smart_furniture/features/company/presentation/pages/fixed_production_page.dart';
 import 'package:smart_furniture/features/custom_order/presentation/pages/custom_order_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_dues_page.dart';
 import 'package:smart_furniture/features/employee_dashboard/presentation/pages/customer_page.dart';
@@ -209,6 +214,28 @@ class CompanyDashboardPage extends StatelessWidget {
                               Navigator.push(context, SupplierDuesPage.route());
                             },
                           ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.profitLoss,
+                            subtitle: strings.profitLossReportSubtitle,
+                            icon: HugeIcons.strokeRoundedDollar02,
+                            iconColor: AppColors.error,
+                            backgroundColor: AppColors.error.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, ProfitLossPage.route(branchId: null));
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.productListTitle,
+                            subtitle: strings.productListSubtitle,
+                            icon: HugeIcons.strokeRoundedDeliveryBox01,
+                            iconColor: AppColors.success,
+                            backgroundColor: AppColors.success.withValues(alpha: 0.1),
+                            onTap: () {
+                              Navigator.push(context, ProductListPage.route());
+                            },
+                          ),
                           // const SizedBox(height: 16),
                           // _ModuleCard(
                           //   title: strings.stock,
@@ -236,6 +263,48 @@ class CompanyDashboardPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           _ModuleCard(
+                            title: strings.companyRawMaterials,
+                            subtitle: strings.companyRawMaterialsSubtitle,
+                            icon: HugeIcons.strokeRoundedNanoTechnology,
+                            iconColor: const Color(0xFFF59E0B),
+                            backgroundColor: const Color(0xFFFFFBEB),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                CompanyRawMaterialPage.route(),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.customProductions,
+                            subtitle: strings.customProductionsSubtitle,
+                            icon: HugeIcons.strokeRoundedNanoTechnology,
+                            iconColor: const Color(0xFF8B5CF6),
+                            backgroundColor: const Color(0xFFF5F3FF),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                CustomProductionPage.route(),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.fixedProductions,
+                            subtitle: strings.fixedProductionsSubtitle,
+                            icon: HugeIcons.strokeRoundedNanoTechnology,
+                            iconColor: const Color(0xFFEC4899),
+                            backgroundColor: const Color(0xFFFDF2F8),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                FixedProductionPage.route(),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
                             title: strings.customOrderTitle,
                             subtitle: strings.customOrderSubtitle,
                             icon: HugeIcons.strokeRoundedDeliveryBox01,
@@ -245,21 +314,6 @@ class CompanyDashboardPage extends StatelessWidget {
                               Navigator.push(context, CustomOrderPage.route(isAdmin: true));
                             },
                           ),
-
-                          /// RAW MATERIALS (Company Warehouse)
-                          // _ModuleCard(
-                          //   title: strings.companyRawMaterials,
-                          //   subtitle: strings.companyRawMaterialsSubtitle,
-                          //   icon: HugeIcons.strokeRoundedNanoTechnology,
-                          //   iconColor: const Color(0xFFF59E0B),
-                          //   backgroundColor: const Color(0xFFFFFBEB),
-                          //   onTap: () {
-                          //     Navigator.push(
-                          //       context,
-                          //       CompanyRawMaterialPage.route(),
-                          //     );
-                          //   },
-                          // ),
                         ],
                       ),
                     ),

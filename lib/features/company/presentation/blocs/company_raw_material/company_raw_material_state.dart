@@ -8,7 +8,7 @@ final class CompanyRawMaterialInitial extends CompanyRawMaterialState {}
 final class CompanyRawMaterialLoading extends CompanyRawMaterialState {}
 
 final class CompanyRawMaterialLoaded extends CompanyRawMaterialState {
-  final List<RawMaterialData> rawMaterials;
+  final CompanyRawMaterialModel rawMaterials;
 
   CompanyRawMaterialLoaded(this.rawMaterials);
 }
