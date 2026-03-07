@@ -8,8 +8,9 @@ import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ProductListCard extends StatelessWidget {
   final ProductData? product;
+  final bool isCompany;
 
-  const ProductListCard({super.key, required this.product});
+  const ProductListCard({super.key, required this.product, required this.isCompany});
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +67,6 @@ class ProductListCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   const Divider(color: AppColors.borderColor, thickness: 1),
                   const SizedBox(height: 6),
-
-                  /// Sales Rate (instead of quantity + unit)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -80,13 +79,37 @@ class ProductListCard extends StatelessWidget {
                       ),
                       _infoTag(
                         CurrencyFormatter.format(
-                          product?.rate,
+                          isCompany ? product?.rate : product?.transferRate,
                           context: context,
                         ),
                         AppColors.success,
                       ),
                     ],
                   ),
+                  if(isCompany)
+                    ...[
+                      const SizedBox(height: 2),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            strings.transferRate,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          _infoTag(
+                            CurrencyFormatter.format(
+                              product?.transferRate,
+                              context: context,
+                            ),
+                            AppColors.success,
+                          ),
+                        ],
+                      ),
+                    ],
+                  const SizedBox(height: 2),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

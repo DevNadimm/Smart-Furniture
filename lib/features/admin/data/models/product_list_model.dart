@@ -16,13 +16,6 @@ class ProductListModel {
           : null,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data?.map((x) => x.toJson()).toList(),
-    };
-  }
 }
 
 class ProductData {
@@ -34,6 +27,7 @@ class ProductData {
   final Unit? unit;
   final num? rate;
   final num? salesRate;
+  final num? transferRate;
 
   ProductData({
     this.id,
@@ -44,6 +38,7 @@ class ProductData {
     this.unit,
     this.rate,
     this.salesRate,
+    this.transferRate,
   });
 
   factory ProductData.fromJson(Map<String, dynamic> json) {
@@ -59,23 +54,9 @@ class ProductData {
           ? Unit.fromJson(json['unit'])
           : null,
       rate: json['rate'] != null ? num.tryParse(json['rate'].toString()) : null,
-      salesRate: json['sales_rate'] != null
-          ? num.tryParse(json['sales_rate'].toString())
-          : null,
+      salesRate: json['sales_rate'] != null ? num.tryParse(json['sales_rate'].toString()) : null,
+      transferRate: json['transfer_rate'] != null ? num.tryParse(json['transfer_rate'].toString()) : null,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'item_description': itemDescription,
-      'name_bn': nameBn,
-      'product_slug': productSlug,
-      'category': category?.toJson(),
-      'unit': unit?.toJson(),
-      'rate': rate,
-      'sales_rate': salesRate,
-    };
   }
 }
 

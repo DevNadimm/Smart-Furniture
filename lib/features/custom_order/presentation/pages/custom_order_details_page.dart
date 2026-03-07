@@ -260,8 +260,8 @@ class CustomOrderDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildOrderItemRow(
-      BuildContext context, CustomOrderItem item, AppLocalizations strings) {
+  Widget _buildOrderItemRow(BuildContext context, CustomOrderItem item, AppLocalizations strings) {
+    debugPrint('Image URL: ${item.image ?? ''}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

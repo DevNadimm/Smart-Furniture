@@ -3,6 +3,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
 import 'package:smart_furniture/core/services/app_preferences.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/product_list_page.dart';
+import 'package:smart_furniture/features/admin/presentation/pages/product_transfer_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/profit_loss_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/purchase_page.dart';
 import 'package:smart_furniture/features/admin/presentation/pages/supplier_dues_page.dart';
@@ -222,7 +223,18 @@ class CompanyDashboardPage extends StatelessWidget {
                             iconColor: AppColors.error,
                             backgroundColor: AppColors.error.withValues(alpha: 0.1),
                             onTap: () {
-                              Navigator.push(context, ProfitLossPage.route(branchId: null));
+                              Navigator.push(context, ProfitLossPage.route(branchId: null, isCompany: true));
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _ModuleCard(
+                            title: strings.productTransfer,
+                            subtitle: strings.productTransferSubtitle,
+                            icon: HugeIcons.strokeRoundedDeliveryBox01,
+                            iconColor: const Color(0xFF8B5CF6),
+                            backgroundColor: const Color(0xFFF5F3FF),
+                            onTap: () {
+                              Navigator.push(context, ProductTransferPage.route(branchId: null));
                             },
                           ),
                           const SizedBox(height: 16),
@@ -233,7 +245,7 @@ class CompanyDashboardPage extends StatelessWidget {
                             iconColor: AppColors.success,
                             backgroundColor: AppColors.success.withValues(alpha: 0.1),
                             onTap: () {
-                              Navigator.push(context, ProductListPage.route());
+                              Navigator.push(context, ProductListPage.route(isCompany: true));
                             },
                           ),
                           // const SizedBox(height: 16),

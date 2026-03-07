@@ -17,14 +17,16 @@ import 'package:smart_furniture/features/employee_dashboard/presentation/blocs/f
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ProductListPage extends StatefulWidget {
-  static Route route() => MaterialPageRoute(
+  static Route route({bool? isCompany}) => MaterialPageRoute(
     builder: (context) => BlocProvider(
       create: (_) => ProductListBloc(),
-      child: const ProductListPage(),
+      child: ProductListPage(isCompany: isCompany ?? false),
     ),
   );
 
-  const ProductListPage({super.key});
+  final bool isCompany;
+
+  const ProductListPage({super.key, required this.isCompany});
 
   @override
   State<ProductListPage> createState() => _ProductListPageState();
@@ -216,7 +218,7 @@ class _ProductListPageState extends State<ProductListPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       itemCount: displayedProducts.length,
                       itemBuilder: (context, index) =>
-                          ProductListCard(product: displayedProducts[index]),
+                          ProductListCard(product: displayedProducts[index], isCompany: widget.isCompany),
                     );
                   }
 

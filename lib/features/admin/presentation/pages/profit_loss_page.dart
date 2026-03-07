@@ -15,12 +15,12 @@ import 'package:smart_furniture/features/admin/presentation/blocs/profit_loss/pr
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
 class ProfitLossPage extends StatefulWidget {
-  static Route route({required int? branchId}) =>
-      MaterialPageRoute(builder: (_) => ProfitLossPage(branchId: branchId));
+  static Route route({required int? branchId, bool? isCompany}) => MaterialPageRoute(builder: (_) => ProfitLossPage(branchId: branchId, isCompany: isCompany ?? false));
 
   final int? branchId;
+  final bool isCompany;
 
-  const ProfitLossPage({super.key, this.branchId});
+  const ProfitLossPage({super.key, this.branchId, required this.isCompany});
 
   @override
   State<ProfitLossPage> createState() => _ProfitLossPageState();
@@ -119,7 +119,7 @@ class _ProfitLossPageState extends State<ProfitLossPage> {
                         );
                       }
 
-                      return _ProfitLossContent(data: data);
+                      return _ProfitLossContent(data: data, isCompany: widget.isCompany);
                     }
 
                     return const SizedBox.shrink();
@@ -136,12 +136,31 @@ class _ProfitLossPageState extends State<ProfitLossPage> {
 
 class _ProfitLossContent extends StatelessWidget {
   final ProfitLossData data;
+  final bool isCompany;
 
-  const _ProfitLossContent({required this.data});
+  const _ProfitLossContent({required this.data, required this.isCompany});
 
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
+    num netSales() {
+      final num netSales;
+      debugPrint('==================== DEBUG ====================');
+      debugPrint('Is Company: $isCompany');
+      debugPrint('Total Sales: ${data.totalSales}');
+      debugPrint('Transfer Sales: ${data.transferIncome}');
+      debugPrint('Sales Return: ${data.totalSalesReturn}');
+      debugPrint('Actual Net Sales (FROM API): ${data.netSales}');
+
+      if (isCompany) {
+        netSales = (data.totalSales + data.transferIncome) - data.totalSalesReturn;
+      } else {
+        netSales = data.netSales;
+      }
+      debugPrint('Calculated Net Sales: $netSales');
+
+      return netSales;
+    }
 
     return Column(
       children: [
@@ -149,8 +168,9 @@ class _ProfitLossContent extends StatelessWidget {
           title: strings.sales, // 'Sales'
           rows: [
             _RowData(strings.totalSales, data.totalSales, AppColors.primaryColor),
+            if(isCompany) _RowData(strings.transferSales, data.transferIncome, AppColors.primaryColor),
             _RowData(strings.salesReturn, data.totalSalesReturn, AppColors.error),
-            _RowData(strings.netSales, data.netSales, AppColors.primaryColor, isBold: true),
+            _RowData(strings.netSales, netSales(), AppColors.primaryColor, isBold: true),
           ],
         ),
         const SizedBox(height: 12),
@@ -166,9 +186,7 @@ class _ProfitLossContent extends StatelessWidget {
           rows: [
             _RowData(strings.grossProfit, data.grossProfit, AppColors.success, isBold: true),
             _RowData(strings.totalExpenses, data.totalExpenses, AppColors.error),
-            _RowData(strings.netProfit, data.netProfit,
-                (data.netProfit ?? 0) >= 0 ? AppColors.success : AppColors.error,
-                isBold: true),
+            _RowData(strings.netProfit, data.netProfit, (data.netProfit) >= 0 ? AppColors.success : AppColors.error, isBold: true),
           ],
         ),
       ],
