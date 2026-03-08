@@ -993,5 +993,8 @@
   "createdBy": "Created By",
   "totalIn": "Total In",
   "totalOut": "Total Out",
-  "stockMovementType": "Type"
+  "stockMovementType": "Type",
+  "selectBranch": "Select Branch",
+  "selectBranchSubtitle": "Choose a branch from the list",
+  "searchBranch": "Search Branch"
 }

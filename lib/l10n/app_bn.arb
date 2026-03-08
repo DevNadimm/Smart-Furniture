@@ -993,5 +993,8 @@
   "createdBy": "তৈরি করেছেন",
   "totalIn": "মোট প্রবেশ",
   "totalOut": "মোট আউট",
-  "stockMovementType": "ধরন"
+  "stockMovementType": "ধরন",
+  "selectBranch": "শাখা নির্বাচন করুন",
+  "selectBranchSubtitle": "তালিকা থেকে একটি শাখা নির্বাচন করুন",
+  "searchBranch": "শাখা খুঁজুন"
 }
