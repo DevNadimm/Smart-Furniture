@@ -147,6 +147,7 @@ class _CustomOrderPageState extends State<CustomOrderPage> {
       appBar: AppBar(
         title: Text(strings.customOrders),
         actions: [
+          widget.branchId == null ?
           SizedBox(
             height: 40,
             width: 120,
@@ -179,7 +180,7 @@ class _CustomOrderPageState extends State<CustomOrderPage> {
                 );
               },
             ),
-          ),
+          ) : const SizedBox.shrink(),
           const SizedBox(width: 16)
         ],
       ),
