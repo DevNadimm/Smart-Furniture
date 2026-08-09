@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class CompanyRawMaterialModel {
   final bool? success;
   final List<RawMaterialData>? data;
@@ -41,6 +43,12 @@ class RawMaterialData {
   final String? quantity;
   final String? unit;
   final String? rate;
+  final String? image;
+  final String? fullImageUrl;
+  final List<String>? imageUrls;
+
+  String? get primaryImage =>
+      imageUrls?.isNotEmpty == true ? imageUrls!.first : (fullImageUrl ?? image);
 
   RawMaterialData({
     this.productId,
@@ -51,18 +59,24 @@ class RawMaterialData {
     this.quantity,
     this.unit,
     this.rate,
+    this.image,
+    this.fullImageUrl,
+    this.imageUrls,
   });
 
   factory RawMaterialData.fromJson(Map<String, dynamic> json) {
     return RawMaterialData(
-      productId: json['product_id'],
-      productName: json['product_name'],
-      productNameBn: json['product_name_bn'],
-      category: json['category'],
-      categoryNameBn: json['category_name_bn'],
-      quantity: json['quantity'],
-      unit: json['unit'],
-      rate: json['rate'],
+      productId: SafeParse.toInt(json['product_id']),
+      productName: SafeParse.toStringValue(json['product_name']),
+      productNameBn: SafeParse.toStringValue(json['product_name_bn']),
+      category: SafeParse.toStringValue(json['category']),
+      categoryNameBn: SafeParse.toStringValue(json['category_name_bn']),
+      quantity: SafeParse.toStringValue(json['quantity']),
+      unit: SafeParse.toStringValue(json['unit']),
+      rate: SafeParse.toStringValue(json['rate']),
+      image: SafeParse.toStringValue(json['image']),
+      fullImageUrl: SafeParse.toStringValue(json['full_image_url']),
+      imageUrls: SafeParse.asStringList(json['image_urls']),
     );
   }
 
@@ -76,6 +90,9 @@ class RawMaterialData {
       'quantity': quantity,
       'unit': unit,
       'rate': rate,
+      'image': image,
+      'full_image_url': fullImageUrl,
+      'image_urls': imageUrls,
     };
   }
 }

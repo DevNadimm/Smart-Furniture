@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class CustomerDuesModel {
   final bool? success;
   final List<CustomerDueData>? data;
@@ -13,14 +15,14 @@ class CustomerDuesModel {
 
   factory CustomerDuesModel.fromJson(Map<String, dynamic> json) {
     return CustomerDuesModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? List<CustomerDueData>.from(
         json['data'].map((x) => CustomerDueData.fromJson(x)),
       )
           : null,
-      totalDues: json['total_dues'],
-      totalCustomers: json['total_customers'],
+      totalDues: SafeParse.toInt(json['total_dues']),
+      totalCustomers: SafeParse.toInt(json['total_customers']),
     );
   }
 
@@ -61,16 +63,16 @@ class CustomerDueData {
 
   factory CustomerDueData.fromJson(Map<String, dynamic> json) {
     return CustomerDueData(
-      id: json['id'],
-      name: json['name'],
-      nameBn: json['name_bn'],
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
-      totalSales: json['total_sales'],
-      totalPaid: json['total_paid'],
-      due: json['due'],
-      dueSaleCount: json['due_sale_count'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      phone: SafeParse.toStringValue(json['phone']),
+      email: SafeParse.toStringValue(json['email']),
+      address: SafeParse.toStringValue(json['address']),
+      totalSales: SafeParse.toInt(json['total_sales']),
+      totalPaid: SafeParse.toInt(json['total_paid']),
+      due: SafeParse.toInt(json['due']),
+      dueSaleCount: SafeParse.toInt(json['due_sale_count']),
     );
   }
 

@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class StockRegisterModel {
   final bool? success;
   final StockRegisterData? data;
@@ -9,7 +11,7 @@ class StockRegisterModel {
 
   factory StockRegisterModel.fromJson(Map<String, dynamic> json) {
     return StockRegisterModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? StockRegisterData.fromJson(json['data'])
           : null,
@@ -83,13 +85,13 @@ class StockRegisterProduct {
 
   factory StockRegisterProduct.fromJson(Map<String, dynamic> json) {
     return StockRegisterProduct(
-      id: json['id'],
-      name: json['name'],
-      nameBn: json['name_bn'],
-      category: json['category'],
-      categoryNameBn: json['category_name_bn'],
-      currentStock: json['current_stock'],
-      unit: json['unit'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      category: SafeParse.toStringValue(json['category']),
+      categoryNameBn: SafeParse.toStringValue(json['category_name_bn']),
+      currentStock: SafeParse.toStringValue(json['current_stock']),
+      unit: SafeParse.toStringValue(json['unit']),
     );
   }
 
@@ -129,14 +131,14 @@ class StockMovement {
 
   factory StockMovement.fromJson(Map<String, dynamic> json) {
     return StockMovement(
-      date: json['date'],
-      type: json['type'],
-      reference: json['reference'],
-      inQuantity: json['in_quantity'],
-      outQuantity: json['out_quantity'],
-      balanceAfter: json['balance_after'],
-      notes: json['notes'],
-      createdBy: json['created_by'],
+      date: SafeParse.toStringValue(json['date']),
+      type: SafeParse.toStringValue(json['type']),
+      reference: SafeParse.toStringValue(json['reference']),
+      inQuantity: SafeParse.toStringValue(json['in_quantity']),
+      outQuantity: SafeParse.toStringValue(json['out_quantity']),
+      balanceAfter: SafeParse.toStringValue(json['balance_after']),
+      notes: SafeParse.toStringValue(json['notes']),
+      createdBy: SafeParse.toStringValue(json['created_by']),
     );
   }
 
@@ -165,8 +167,8 @@ class StockRegisterSummary {
 
   factory StockRegisterSummary.fromJson(Map<String, dynamic> json) {
     return StockRegisterSummary(
-      totalIn: json['total_in'],
-      totalOut: json['total_out'],
+      totalIn: SafeParse.toDouble(json['total_in']),
+      totalOut: SafeParse.toDouble(json['total_out']),
     );
   }
 

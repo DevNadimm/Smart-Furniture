@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class ProductTransferModel {
   final bool? success;
   final List<Transfer>? transfers;
@@ -11,7 +13,7 @@ class ProductTransferModel {
 
   factory ProductTransferModel.fromJson(Map<String, dynamic> json) {
     return ProductTransferModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       transfers: (json['transfers'] as List?)
           ?.map((e) => Transfer.fromJson(e))
           .toList(),
@@ -51,14 +53,14 @@ class Transfer {
 
   factory Transfer.fromJson(Map<String, dynamic> json) {
     return Transfer(
-      id: json['id'],
-      transferNumber: json['transfer_number'],
-      transferDate: json['transfer_date'],
+      id: SafeParse.toInt(json['id']),
+      transferNumber: SafeParse.toStringValue(json['transfer_number']),
+      transferDate: SafeParse.toStringValue(json['transfer_date']),
       toBranch:
           json['to_branch'] != null ? Branch.fromJson(json['to_branch']) : null,
-      itemsCount: json['items_count'],
-      totalQuantity: json['total_quantity'],
-      totalAmount: json['total_amount'],
+      itemsCount: SafeParse.toInt(json['items_count']),
+      totalQuantity: SafeParse.toInt(json['total_quantity']),
+      totalAmount: SafeParse.toDouble(json['total_amount']),
     );
   }
 
@@ -86,8 +88,8 @@ class Branch {
 
   factory Branch.fromJson(Map<String, dynamic> json) {
     return Branch(
-      id: json['id'],
-      name: json['name'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
     );
   }
 
@@ -112,9 +114,9 @@ class TransferSummary {
 
   factory TransferSummary.fromJson(Map<String, dynamic> json) {
     return TransferSummary(
-      totalQuantity: json['total_quantity'],
-      totalAmount: json['total_amount'],
-      totalTransfers: json['total_transfers'],
+      totalQuantity: SafeParse.toInt(json['total_quantity']),
+      totalAmount: SafeParse.toDouble(json['total_amount']),
+      totalTransfers: SafeParse.toInt(json['total_transfers']),
     );
   }
 

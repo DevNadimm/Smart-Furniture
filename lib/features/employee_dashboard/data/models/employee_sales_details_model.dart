@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class EmployeeSalesDetailsModel {
   final bool? success;
   final EmployeeSalesDetailsData? data;
@@ -77,8 +79,12 @@ class EmployeeProduct {
   final String? image;
   final dynamic branchStock;
   final String? fullImageUrl;
+  final List<String>? imageUrls;
   final EmployeeUnit? unit;
   final EmployeeCategory? category;
+
+  String? get primaryImage =>
+      imageUrls?.isNotEmpty == true ? imageUrls!.first : (fullImageUrl ?? image);
 
   EmployeeProduct({
     this.id,
@@ -93,24 +99,26 @@ class EmployeeProduct {
     this.image,
     this.branchStock,
     this.fullImageUrl,
+    this.imageUrls,
     this.unit,
     this.category,
   });
 
   factory EmployeeProduct.fromJson(Map<String, dynamic> json) {
     return EmployeeProduct(
-      id: json['id'] as int?,
-      productName: json['product_name'] as String?,
-      nameBn: json['name_bn'] as String?,
-      companyStock: json['company_stock'] as String?,
-      purchaseRate: json['purchase_rate']?.toString(),
-      wholesaleRate: json['wholesale_rate']?.toString(),
-      salesRate: json['sales_rate']?.toString(),
-      unitId: json['unit_id']?.toString(),
-      productCategory: json['product_category']?.toString(),
-      image: json['image'] as String?,
+      id: SafeParse.toInt(json['id']),
+      productName: SafeParse.toStringValue(json['product_name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      companyStock: SafeParse.toStringValue(json['company_stock']),
+      purchaseRate: SafeParse.toStringValue(json['purchase_rate']),
+      wholesaleRate: SafeParse.toStringValue(json['wholesale_rate']),
+      salesRate: SafeParse.toStringValue(json['sales_rate']),
+      unitId: SafeParse.toStringValue(json['unit_id']),
+      productCategory: SafeParse.toStringValue(json['product_category']),
+      image: SafeParse.toStringValue(json['image']),
       branchStock: json['branch_stock'],
-      fullImageUrl: json['full_image_url'] as String?,
+      fullImageUrl: SafeParse.toStringValue(json['full_image_url']),
+      imageUrls: SafeParse.asStringList(json['image_urls']),
       unit: json['unit'] != null
           ? EmployeeUnit.fromJson(json['unit'] as Map<String, dynamic>)
           : null,
@@ -136,6 +144,7 @@ class EmployeeProduct {
       'image': image,
       'branch_stock': branchStock,
       'full_image_url': fullImageUrl,
+      'image_urls': imageUrls,
       'unit': unit?.toJson(),
       'category': category?.toJson(),
     };

@@ -6,6 +6,8 @@ import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/admin/data/models/product_list_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
+import 'package:smart_furniture/core/utils/widgets/custom_cached_image.dart';
+
 class ProductListCard extends StatelessWidget {
   final ProductData? product;
   final bool isCompany;
@@ -38,17 +40,33 @@ class ProductListCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
-              child: Text(
-                LocalizationService.getText(
-                  context,
-                  en: product?.itemDescription ?? strings.notAvailable,
-                  bn: product?.nameBn,
-                ),
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: AppColors.primaryColor,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomCachedImage(
+                      imageUrl: product?.primaryImage ?? '',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      LocalizationService.getText(
+                        context,
+                        en: product?.itemDescription ?? strings.notAvailable,
+                        bn: product?.nameBn,
+                      ),
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
 

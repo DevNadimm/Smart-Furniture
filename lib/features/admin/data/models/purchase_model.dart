@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class PurchaseModel {
   final bool? success;
   final List<PurchaseData>? purchases;
@@ -11,7 +13,7 @@ class PurchaseModel {
 
   factory PurchaseModel.fromJson(Map<String, dynamic> json) {
     return PurchaseModel(
-      success: json['success'] as bool?,
+      success: SafeParse.toBool(json['success']),
       purchases: (json['purchases'] as List?)
           ?.map((x) => PurchaseData.fromJson(x as Map<String, dynamic>))
           .toList(),
@@ -55,15 +57,15 @@ class PurchaseData {
 
   factory PurchaseData.fromJson(Map<String, dynamic> json) {
     return PurchaseData(
-      id: json['id'] as int?,
-      purchaseDate: json['purchase_date'] as String?,
-      purchaseNo: json['purchase_no'] as String?,
-      supplierName: json['supplier_name'] as String?,
-      supplierNameBn: json['supplier_name_bn'] as String?, // nullable
-      grandTotal: (json['grand_total'] as num?)?.toDouble(),
-      paidAmount: (json['paid_amount'] as num?)?.toDouble(),
-      dueAmount: (json['due_amount'] as num?)?.toDouble(),
-      status: json['status'] as String?,
+      id: SafeParse.toInt(json['id']),
+      purchaseDate: SafeParse.toStringValue(json['purchase_date']),
+      purchaseNo: SafeParse.toStringValue(json['purchase_no']),
+      supplierName: SafeParse.toStringValue(json['supplier_name']),
+      supplierNameBn: SafeParse.toStringValue(json['supplier_name_bn']), // nullable
+      grandTotal: SafeParse.toDouble(json['grand_total']),
+      paidAmount: SafeParse.toDouble(json['paid_amount']),
+      dueAmount: SafeParse.toDouble(json['due_amount']),
+      status: SafeParse.toStringValue(json['status']),
     );
   }
 
@@ -95,9 +97,9 @@ class PurchaseSummary {
 
   factory PurchaseSummary.fromJson(Map<String, dynamic> json) {
     return PurchaseSummary(
-      totalQuantity: (json['total_quantity'] as num?)?.toDouble(),
-      totalAmount: (json['total_amount'] as num?)?.toDouble(),
-      totalPurchases: json['total_purchases'] as int?,
+      totalQuantity: SafeParse.toDouble(json['total_quantity']),
+      totalAmount: SafeParse.toDouble(json['total_amount']),
+      totalPurchases: SafeParse.toInt(json['total_purchases']),
     );
   }
 

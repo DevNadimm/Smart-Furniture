@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class ProductTransferDetailsModel {
   final bool? success;
   final ProductTransferData? data;
@@ -9,7 +11,7 @@ class ProductTransferDetailsModel {
 
   factory ProductTransferDetailsModel.fromJson(Map<String, dynamic> json) {
     return ProductTransferDetailsModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? ProductTransferData.fromJson(json['data'])
           : null,
@@ -51,16 +53,16 @@ class ProductTransferData {
 
   factory ProductTransferData.fromJson(Map<String, dynamic> json) {
     return ProductTransferData(
-      id: json['id'],
-      transferNumber: json['transfer_number'],
-      transferDate: json['transfer_date'],
+      id: SafeParse.toInt(json['id']),
+      transferNumber: SafeParse.toStringValue(json['transfer_number']),
+      transferDate: SafeParse.toStringValue(json['transfer_date']),
       company:
           json['company'] != null ? Company.fromJson(json['company']) : null,
-      fromLocation: json['from_location'],
+      fromLocation: SafeParse.toStringValue(json['from_location']),
       toBranch:
           json['to_branch'] != null ? Branch.fromJson(json['to_branch']) : null,
-      createdBy: json['created_by'],
-      remarks: json['remarks'],
+      createdBy: SafeParse.toStringValue(json['created_by']),
+      remarks: SafeParse.toStringValue(json['remarks']),
       items: (json['items'] as List?)
           ?.map((e) => TransferItem.fromJson(e))
           .toList(),
@@ -93,7 +95,7 @@ class Company {
 
   factory Company.fromJson(Map<String, dynamic> json) {
     return Company(
-      name: json['name'],
+      name: SafeParse.toStringValue(json['name']),
     );
   }
 
@@ -111,7 +113,7 @@ class Branch {
 
   factory Branch.fromJson(Map<String, dynamic> json) {
     return Branch(
-      name: json['name'],
+      name: SafeParse.toStringValue(json['name']),
     );
   }
 
@@ -141,12 +143,12 @@ class TransferItem {
 
   factory TransferItem.fromJson(Map<String, dynamic> json) {
     return TransferItem(
-      productName: json['product_name'],
-      category: json['category'],
-      unit: json['unit'],
-      quantity: json['quantity'],
-      unitPrice: json['unit_price'],
-      total: json['total'],
+      productName: SafeParse.toStringValue(json['product_name']),
+      category: SafeParse.toStringValue(json['category']),
+      unit: SafeParse.toStringValue(json['unit']),
+      quantity: SafeParse.toDouble(json['quantity']),
+      unitPrice: SafeParse.toDouble(json['unit_price']),
+      total: SafeParse.toDouble(json['total']),
     );
   }
 
@@ -173,8 +175,8 @@ class TransferDetailsSummary {
 
   factory TransferDetailsSummary.fromJson(Map<String, dynamic> json) {
     return TransferDetailsSummary(
-      totalQuantity: json['total_quantity'],
-      totalAmount: json['total_amount'],
+      totalQuantity: SafeParse.toDouble(json['total_quantity']),
+      totalAmount: SafeParse.toDouble(json['total_amount']),
     );
   }
 

@@ -41,7 +41,6 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
   DateTime _selectedDate = DateTime.now();
 
   List<EmployeeProduct> _products = [];
-  List<EmployeeCustomer> _customers = [];
   bool _isBranchUser = false;
 
   Map<String, String> _customerNameToId = {};
@@ -202,13 +201,11 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
     };
 
     context.read<EmployeeSalesBloc>().add(CreateEmployeeSaleEvent(saleData));
-    print('Sale Data: $saleData');
   }
 
   @override
   Widget build(BuildContext context) {
     final strings = AppLocalizations.of(context)!;
-    final locale = Localizations.localeOf(context).languageCode;
 
     return BlocConsumer<EmployeeSalesBloc, EmployeeSalesState>(
       listener: (context, createSalesState) {
@@ -233,7 +230,6 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
               if (data != null) {
                 setState(() {
                   _products = data.products ?? [];
-                  _customers = data.customers ?? [];
                   _isBranchUser = data.isBranchUser ?? false;
                 });
               }
@@ -373,17 +369,30 @@ class _CreateSalesPageState extends State<CreateSalesPage> {
                       padding: const EdgeInsets.all(12.0),
                       child: Row(
                         children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              width: 50,
+                              height: 50,
                               color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const HugeIcon(
-                              icon: HugeIcons.strokeRoundedDeliveryBox01,
-                              size: 24,
-                              color: AppColors.primaryFontColor,
+                              child: item.image != null && item.image!.isNotEmpty
+                                  ? Image.network(
+                                      item.image!,
+                                      width: 50,
+                                      height: 50,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) =>
+                                          const HugeIcon(
+                                        icon: HugeIcons.strokeRoundedDeliveryBox01,
+                                        size: 24,
+                                        color: AppColors.primaryFontColor,
+                                      ),
+                                    )
+                                  : const HugeIcon(
+                                      icon: HugeIcons.strokeRoundedDeliveryBox01,
+                                      size: 24,
+                                      color: AppColors.primaryFontColor,
+                                    ),
                             ),
                           ),
                           const SizedBox(width: 12),

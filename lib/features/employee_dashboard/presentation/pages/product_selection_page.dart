@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_furniture/core/constants/colors.dart';
+import 'package:smart_furniture/core/utils/widgets/custom_cached_image.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_sales_details_model.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/sale_item_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
@@ -426,7 +427,18 @@ class _ProductSelectionPageState extends State<ProductSelectionPage> {
                     )
                         : null,
                   ),
-                  const SizedBox(width: 14),
+                  const SizedBox(width: 12),
+
+                  // Product Image Thumbnail
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomCachedImage(
+                      imageUrl: product.primaryImage ?? '',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
 
                   // Product Info
                   Expanded(

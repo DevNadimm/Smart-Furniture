@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class CustomerPurchaseDueModel {
   final bool? success;
   final CustomerInfo? customer;
@@ -11,7 +13,7 @@ class CustomerPurchaseDueModel {
 
   factory CustomerPurchaseDueModel.fromJson(Map<String, dynamic> json) {
     return CustomerPurchaseDueModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       customer: json['customer'] != null
           ? CustomerInfo.fromJson(json['customer'])
           : null,
@@ -53,13 +55,13 @@ class CustomerInfo {
 
   factory CustomerInfo.fromJson(Map<String, dynamic> json) {
     return CustomerInfo(
-      id: json['id'],
-      name: json['name'],
-      nameBn: json['name_bn'],
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
-      totalDue: json['total_due'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      phone: SafeParse.toStringValue(json['phone']),
+      email: SafeParse.toStringValue(json['email']),
+      address: SafeParse.toStringValue(json['address']),
+      totalDue: SafeParse.toInt(json['total_due']),
     );
   }
 
@@ -97,13 +99,13 @@ class CustomerSaleData {
 
   factory CustomerSaleData.fromJson(Map<String, dynamic> json) {
     return CustomerSaleData(
-      id: json['id'],
-      saleNo: json['sale_no'],
-      saleDate: json['sale_date'],
-      saleDateFormatted: json['sale_date_formatted'],
-      grandTotal: json['grand_total'],
-      paidAmount: json['paid_amount'],
-      dueAmount: json['due_amount'],
+      id: SafeParse.toInt(json['id']),
+      saleNo: SafeParse.toStringValue(json['sale_no']),
+      saleDate: SafeParse.toStringValue(json['sale_date']),
+      saleDateFormatted: SafeParse.toStringValue(json['sale_date_formatted']),
+      grandTotal: SafeParse.toInt(json['grand_total']),
+      paidAmount: SafeParse.toInt(json['paid_amount']),
+      dueAmount: SafeParse.toInt(json['due_amount']),
     );
   }
 

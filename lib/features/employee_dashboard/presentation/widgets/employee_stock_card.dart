@@ -7,6 +7,8 @@ import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/employee_dashboard/data/models/employee_stock_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
+import 'package:smart_furniture/core/utils/widgets/custom_cached_image.dart';
+
 class EmployeeStockCard extends StatelessWidget {
   final StockItem? stock;
   final VoidCallback onTap;
@@ -39,13 +41,29 @@ class EmployeeStockCard extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
-              child: Text(
-                LocalizationService.getText(context, en: stock?.productName ?? strings.notAvailable, bn: stock?.productNameBn),
-                style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  color: AppColors.primaryColor,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomCachedImage(
+                      imageUrl: stock?.primaryImage ?? '',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      LocalizationService.getText(context, en: stock?.productName ?? strings.notAvailable, bn: stock?.productNameBn),
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
 

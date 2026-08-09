@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class ProfitLossModel {
   final bool? success;
   final ProfitLossData? data;
@@ -9,7 +11,7 @@ class ProfitLossModel {
 
   factory ProfitLossModel.fromJson(Map<String, dynamic> json) {
     return ProfitLossModel(
-      success: json['success'] as bool?,
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? ProfitLossData.fromJson(json['data'])
           : null,
@@ -20,7 +22,7 @@ class ProfitLossModel {
 class ProfitLossData {
   final num totalSales;
   final num totalSalesReturn;
-  final num transferIncome;   // ✅ NEW FIELD
+  final num transferIncome;
   final num netSales;
   final num totalPurchaseCost;
   final num grossProfit;
@@ -40,14 +42,14 @@ class ProfitLossData {
 
   factory ProfitLossData.fromJson(Map<String, dynamic> json) {
     return ProfitLossData(
-      totalSales: json['total_sales'] ?? 0,
-      totalSalesReturn: json['total_sales_return'] ?? 0,
-      transferIncome: json['transfer_income'] ?? 0, // ✅ mapped
-      netSales: json['net_sales'] ?? 0,
-      totalPurchaseCost: json['total_purchase_cost'] ?? 0,
-      grossProfit: json['gross_profit'] ?? 0,
-      totalExpenses: json['total_expenses'] ?? 0,
-      netProfit: json['net_profit'] ?? 0,
+      totalSales: SafeParse.toDouble(json['total_sales']) ?? 0,
+      totalSalesReturn: SafeParse.toDouble(json['total_sales_return']) ?? 0,
+      transferIncome: SafeParse.toDouble(json['transfer_income']) ?? 0,
+      netSales: SafeParse.toDouble(json['net_sales']) ?? 0,
+      totalPurchaseCost: SafeParse.toDouble(json['total_purchase_cost']) ?? 0,
+      grossProfit: SafeParse.toDouble(json['gross_profit']) ?? 0,
+      totalExpenses: SafeParse.toDouble(json['total_expenses']) ?? 0,
+      netProfit: SafeParse.toDouble(json['net_profit']) ?? 0,
     );
   }
 }

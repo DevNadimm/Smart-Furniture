@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class ProductListModel {
   final bool? success;
   final List<ProductData>? data;
@@ -28,6 +30,12 @@ class ProductData {
   final num? rate;
   final num? salesRate;
   final num? transferRate;
+  final String? image;
+  final String? fullImageUrl;
+  final List<String>? imageUrls;
+
+  String? get primaryImage =>
+      imageUrls?.isNotEmpty == true ? imageUrls!.first : (fullImageUrl ?? image);
 
   ProductData({
     this.id,
@@ -39,14 +47,17 @@ class ProductData {
     this.rate,
     this.salesRate,
     this.transferRate,
+    this.image,
+    this.fullImageUrl,
+    this.imageUrls,
   });
 
   factory ProductData.fromJson(Map<String, dynamic> json) {
     return ProductData(
-      id: json['id'],
-      itemDescription: json['item_description'],
-      nameBn: json['name_bn'],
-      productSlug: json['product_slug'],
+      id: SafeParse.toInt(json['id']),
+      itemDescription: SafeParse.toStringValue(json['item_description']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      productSlug: SafeParse.toStringValue(json['product_slug']),
       category: json['category'] != null
           ? Category.fromJson(json['category'])
           : null,
@@ -56,6 +67,9 @@ class ProductData {
       rate: json['rate'] != null ? num.tryParse(json['rate'].toString()) : null,
       salesRate: json['sales_rate'] != null ? num.tryParse(json['sales_rate'].toString()) : null,
       transferRate: json['transfer_rate'] != null ? num.tryParse(json['transfer_rate'].toString()) : null,
+      image: SafeParse.toStringValue(json['image']),
+      fullImageUrl: SafeParse.toStringValue(json['full_image_url']),
+      imageUrls: SafeParse.asStringList(json['image_urls']),
     );
   }
 }

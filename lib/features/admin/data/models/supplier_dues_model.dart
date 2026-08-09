@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class SupplierDuesModel {
   final bool? success;
   final List<SupplierDueData>? data;
@@ -13,14 +15,14 @@ class SupplierDuesModel {
 
   factory SupplierDuesModel.fromJson(Map<String, dynamic> json) {
     return SupplierDuesModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? List<SupplierDueData>.from(
         json['data'].map((x) => SupplierDueData.fromJson(x)),
       )
           : null,
-      totalDues: (json['total_dues'] as num?)?.toDouble(),
-      totalSuppliers: json['total_suppliers'],
+      totalDues: SafeParse.toDouble(json['total_dues']),
+      totalSuppliers: SafeParse.toInt(json['total_suppliers']),
     );
   }
 
@@ -61,16 +63,16 @@ class SupplierDueData {
 
   factory SupplierDueData.fromJson(Map<String, dynamic> json) {
     return SupplierDueData(
-      id: json['id'],
-      name: json['name'],
-      nameBn: json['name_bn'],
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
-      totalPurchases: (json['total_purchases'] as num?)?.toDouble(),
-      totalPaid: (json['total_paid'] as num?)?.toDouble(),
-      due: (json['due'] as num?)?.toDouble(),
-      duePurchaseCount: json['due_purchase_count'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      phone: SafeParse.toStringValue(json['phone']),
+      email: SafeParse.toStringValue(json['email']),
+      address: SafeParse.toStringValue(json['address']),
+      totalPurchases: SafeParse.toDouble(json['total_purchases']),
+      totalPaid: SafeParse.toDouble(json['total_paid']),
+      due: SafeParse.toDouble(json['due']),
+      duePurchaseCount: SafeParse.toInt(json['due_purchase_count']),
     );
   }
 

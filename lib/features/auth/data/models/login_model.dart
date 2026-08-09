@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class LoginModel {
   final bool? success;
   final String? message;
@@ -15,11 +17,11 @@ class LoginModel {
 
   factory LoginModel.fromJson(Map<String, dynamic> json) {
     return LoginModel(
-      success: json['success'],
-      message: json['message'],
+      success: SafeParse.toBool(json['success']),
+      message: SafeParse.toStringValue(json['message']),
       data: json['data'] != null ? Data.fromJson(json['data']) : null,
-      accessToken: json['access_token'],
-      tokenType: json['token_type'],
+      accessToken: SafeParse.toStringValue(json['access_token']),
+      tokenType: SafeParse.toStringValue(json['token_type']),
     );
   }
 
@@ -59,15 +61,15 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      isSuperadmin: json['is_superadmin'],
-      companyId: json['company_id'],
-      branchId: json['branch_id'],
-      emailVerifiedAt: json['email_verified_at'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      email: SafeParse.toStringValue(json['email']),
+      isSuperadmin: SafeParse.toStringValue(json['is_superadmin']),
+      companyId: SafeParse.toStringValue(json['company_id']),
+      branchId: SafeParse.toStringValue(json['branch_id']),
+      emailVerifiedAt: SafeParse.toStringValue(json['email_verified_at']),
+      createdAt: SafeParse.toStringValue(json['created_at']),
+      updatedAt: SafeParse.toStringValue(json['updated_at']),
     );
   }
 
@@ -85,3 +87,4 @@ class Data {
     };
   }
 }
+

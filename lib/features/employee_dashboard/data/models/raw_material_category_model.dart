@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class RawMaterialCategoryModel {
   final bool? success;
   final List<RawMaterialCategoryData>? data;
@@ -9,7 +11,7 @@ class RawMaterialCategoryModel {
 
   factory RawMaterialCategoryModel.fromJson(Map<String, dynamic> json) {
     return RawMaterialCategoryModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? List<RawMaterialCategoryData>.from(
         json['data'].map(
@@ -53,15 +55,15 @@ class RawMaterialCategoryData {
 
   factory RawMaterialCategoryData.fromJson(Map<String, dynamic> json) {
     return RawMaterialCategoryData(
-      id: json['id'],
-      categoryName: json['category_name'],
-      nameBn: json['name_bn'],
-      type: json['type'],
-      companyId: json['company_id'],
-      branchId: json['branch_id'],
-      createdByType: json['created_by_type'],
-      createdAt: json['created_at'],
-      updatedAt: json['updated_at'],
+      id: SafeParse.toInt(json['id']),
+      categoryName: SafeParse.toStringValue(json['category_name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      type: SafeParse.toStringValue(json['type']),
+      companyId: SafeParse.toStringValue(json['company_id']),
+      branchId: SafeParse.toStringValue(json['branch_id']),
+      createdByType: SafeParse.toStringValue(json['created_by_type']),
+      createdAt: SafeParse.toStringValue(json['created_at']),
+      updatedAt: SafeParse.toStringValue(json['updated_at']),
     );
   }
 

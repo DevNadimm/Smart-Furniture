@@ -21,15 +21,60 @@ class CustomCachedImage extends StatelessWidget {
     this.errorAsset = 'assets/images/error.png',
   });
 
+  String get _formattedUrl {
+    final trimmed = imageUrl.trim();
+    if (trimmed.isEmpty) return '';
+    if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+      return trimmed;
+    }
+    if (trimmed.startsWith('/')) {
+      return 'https://sff.jabedinternational.com$trimmed';
+    }
+    return 'https://sff.jabedinternational.com/$trimmed';
+  }
+
   @override
   Widget build(BuildContext context) {
+    final finalUrl = _formattedUrl;
+    if (finalUrl.isEmpty) {
+      return Container(
+        width: width,
+        height: height,
+        color: AppColors.backgroundColor,
+        child: const Center(
+          child: HugeIcon(
+            icon: HugeIcons.strokeRoundedImageNotFound01,
+            color: Colors.grey,
+            size: 24,
+          ),
+        ),
+      );
+    }
     return CachedNetworkImage(
-      imageUrl: imageUrl,
+      imageUrl: finalUrl,
       fit: fit,
       width: width,
       height: height,
-      placeholder: (context, url) => Container(color: AppColors.backgroundColor, child: const Center(child: CircularProgressIndicator())),
-      errorWidget: (context, url, error) => Container(color: AppColors.backgroundColor, child: const Center(child: HugeIcon(icon: HugeIcons.strokeRoundedImageNotFound01, color: Colors.red, size: 30))),
+      placeholder: (context, url) => Container(
+        color: AppColors.backgroundColor,
+        child: const Center(
+          child: SizedBox(
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+        ),
+      ),
+      errorWidget: (context, url, error) => Container(
+        color: AppColors.backgroundColor,
+        child: const Center(
+          child: HugeIcon(
+            icon: HugeIcons.strokeRoundedImageNotFound01,
+            color: Colors.grey,
+            size: 24,
+          ),
+        ),
+      ),
     );
   }
 }

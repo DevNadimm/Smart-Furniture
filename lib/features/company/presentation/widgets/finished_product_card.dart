@@ -7,6 +7,8 @@ import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/company/data/models/finished_product_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
+import 'package:smart_furniture/core/utils/widgets/custom_cached_image.dart';
+
 class FinishedProductCard extends StatelessWidget {
   final FinishedProductData? finishedProduct;
   final VoidCallback onTap;
@@ -40,20 +42,28 @@ class FinishedProductCard extends StatelessWidget {
             /// Header
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomCachedImage(
+                      imageUrl: finishedProduct?.primaryImage ?? '',
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        LocalizationService.getText(context, en: finishedProduct?.productName ?? strings.notAvailable, bn: finishedProduct?.productNameBn),
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: AppColors.primaryColor),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                    child: Text(
+                      LocalizationService.getText(context, en: finishedProduct?.productName ?? strings.notAvailable, bn: finishedProduct?.productNameBn),
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.w600,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

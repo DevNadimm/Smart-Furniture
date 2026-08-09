@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class SupplierModel {
   final bool? success;
   final List<SupplierData>? data;
@@ -9,7 +11,7 @@ class SupplierModel {
 
   factory SupplierModel.fromJson(Map<String, dynamic> json) {
     return SupplierModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? List<SupplierData>.from(
         json['data'].map((x) => SupplierData.fromJson(x)),
@@ -45,12 +47,12 @@ class SupplierData {
 
   factory SupplierData.fromJson(Map<String, dynamic> json) {
     return SupplierData(
-      id: json['id'],
-      name: json['name'],
-      nameBn: json['name_bn'],
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      phone: SafeParse.toStringValue(json['phone']),
+      email: SafeParse.toStringValue(json['email']),
+      address: SafeParse.toStringValue(json['address']),
     );
   }
 

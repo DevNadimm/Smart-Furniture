@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class SalesDetailsModel {
   final bool? success;
   final SalesDetailsData? data;
@@ -9,7 +11,7 @@ class SalesDetailsModel {
 
   factory SalesDetailsModel.fromJson(Map<String, dynamic> json) {
     return SalesDetailsModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? SalesDetailsData.fromJson(json['data'])
           : null,
@@ -40,13 +42,13 @@ class SalesDetailsData {
 
   factory SalesDetailsData.fromJson(Map<String, dynamic> json) {
     return SalesDetailsData(
-      id: json['id'],
-      saleDate: json['sale_date'],
-      saleNo: json['sale_no'],
+      id: SafeParse.toInt(json['id']),
+      saleDate: SafeParse.toStringValue(json['sale_date']),
+      saleNo: SafeParse.toStringValue(json['sale_no']),
       customer:
           json['customer'] != null ? Customer.fromJson(json['customer']) : null,
-      branch: json['branch'],
-      createdBy: json['created_by'],
+      branch: SafeParse.toStringValue(json['branch']),
+      createdBy: SafeParse.toStringValue(json['created_by']),
       saleDetails: (json['sale_details'] as List?)
           ?.map((e) => SaleDetail.fromJson(e))
           .toList(),
@@ -74,11 +76,11 @@ class Customer {
 
   factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(
-      name: json['name'],
-      nameBn: json['name_bn'],
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      phone: SafeParse.toStringValue(json['phone']),
+      email: SafeParse.toStringValue(json['email']),
+      address: SafeParse.toStringValue(json['address']),
     );
   }
 }
@@ -104,13 +106,13 @@ class SaleDetail {
 
   factory SaleDetail.fromJson(Map<String, dynamic> json) {
     return SaleDetail(
-      serial: json['serial'],
-      productName: json['product_name'],
-      productNameBn: json['product_name_bn'],
-      quantity: json['quantity'],
-      unit: json['unit'],
-      unitPrice: (json['unit_price'] as num?)?.toDouble(),
-      totalPrice: (json['total_price'] as num?)?.toDouble(),
+      serial: SafeParse.toInt(json['serial']),
+      productName: SafeParse.toStringValue(json['product_name']),
+      productNameBn: SafeParse.toStringValue(json['product_name_bn']),
+      quantity: SafeParse.toInt(json['quantity']),
+      unit: SafeParse.toStringValue(json['unit']),
+      unitPrice: SafeParse.toDouble(json['unit_price']),
+      totalPrice: SafeParse.toDouble(json['total_price']),
     );
   }
 }
@@ -132,11 +134,11 @@ class FinancialSummary {
 
   factory FinancialSummary.fromJson(Map<String, dynamic> json) {
     return FinancialSummary(
-      subTotal: (json['sub_total'] as num?)?.toDouble(),
-      discount: (json['discount'] as num?)?.toDouble(),
-      grandTotal: (json['grand_total'] as num?)?.toDouble(),
-      paidAmount: (json['paid_amount'] as num?)?.toDouble(),
-      dueAmount: (json['due_amount'] as num?)?.toDouble(),
+      subTotal: SafeParse.toDouble(json['sub_total']),
+      discount: SafeParse.toDouble(json['discount']),
+      grandTotal: SafeParse.toDouble(json['grand_total']),
+      paidAmount: SafeParse.toDouble(json['paid_amount']),
+      dueAmount: SafeParse.toDouble(json['due_amount']),
     );
   }
 }

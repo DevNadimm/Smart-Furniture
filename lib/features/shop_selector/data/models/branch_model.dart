@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class BranchModel {
   final bool? success;
   final List<BranchData>? branches;
@@ -9,7 +11,7 @@ class BranchModel {
 
   factory BranchModel.fromJson(Map<String, dynamic> json) {
     return BranchModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       branches: json['branches'] != null
           ? List<BranchData>.from(
               json['branches'].map((x) => BranchData.fromJson(x)),
@@ -49,14 +51,14 @@ class BranchData {
 
   factory BranchData.fromJson(Map<String, dynamic> json) {
     return BranchData(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      contactNumber: json['contact_number'],
-      contactPersonName: json['contact_person_name'],
-      contactPersonNumber: json['contact_person_number'],
-      area: json['area'],
-      address: json['address'],
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      email: SafeParse.toStringValue(json['email']),
+      contactNumber: SafeParse.toStringValue(json['contact_number']),
+      contactPersonName: SafeParse.toStringValue(json['contact_person_name']),
+      contactPersonNumber: SafeParse.toStringValue(json['contact_person_number']),
+      area: SafeParse.toStringValue(json['area']),
+      address: SafeParse.toStringValue(json['address']),
     );
   }
 

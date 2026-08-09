@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class EmployeeExpenseModel {
   final bool? success;
   final List<EmployeeExpenseData>? data;
@@ -9,7 +11,7 @@ class EmployeeExpenseModel {
 
   factory EmployeeExpenseModel.fromJson(Map<String, dynamic> json) {
     return EmployeeExpenseModel(
-      success: json['success'] as bool?,
+      success: SafeParse.toBool(json['success']),
       data: (json['data'] as List?)
           ?.map((e) => EmployeeExpenseData.fromJson(e))
           .toList(),
@@ -47,12 +49,12 @@ class EmployeeExpenseData {
 
   factory EmployeeExpenseData.fromJson(Map<String, dynamic> json) {
     return EmployeeExpenseData(
-      id: json['id'] as int?,
-      transactionDate: json['transaction_date'] as String?,
-      amount: json['amount'] as String?,
-      remarks: json['remarks'] as String?,
-      expenseId: json['expense_id'] as String?,
-      branchId: json['branch_id'] as String?,
+      id: SafeParse.toInt(json['id']),
+      transactionDate: SafeParse.toStringValue(json['transaction_date']),
+      amount: SafeParse.toStringValue(json['amount']),
+      remarks: SafeParse.toStringValue(json['remarks']),
+      expenseId: SafeParse.toStringValue(json['expense_id']),
+      branchId: SafeParse.toStringValue(json['branch_id']),
       expense: json['expense'] != null
           ? ExpenseHead.fromJson(json['expense'])
           : null,
@@ -90,10 +92,10 @@ class ExpenseHead {
 
   factory ExpenseHead.fromJson(Map<String, dynamic> json) {
     return ExpenseHead(
-      id: json['id'] as int?,
-      head: json['head'] as String?,
-      nameBn: json['name_bn'] as String?,
-      description: json['description'] as String?,
+      id: SafeParse.toInt(json['id']),
+      head: SafeParse.toStringValue(json['head']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      description: SafeParse.toStringValue(json['description']),
     );
   }
 
@@ -118,8 +120,8 @@ class BranchInfo {
 
   factory BranchInfo.fromJson(Map<String, dynamic> json) {
     return BranchInfo(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
     );
   }
 

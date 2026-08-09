@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class FinishedProductCategoryModel {
   final bool? success;
   final List<FinishedProductCategoryData>? data;
@@ -9,7 +11,7 @@ class FinishedProductCategoryModel {
 
   factory FinishedProductCategoryModel.fromJson(Map<String, dynamic> json) {
     return FinishedProductCategoryModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? (json['data'] as List)
               .map((e) => FinishedProductCategoryData.fromJson(e))
@@ -51,13 +53,13 @@ class FinishedProductCategoryData {
 
   factory FinishedProductCategoryData.fromJson(Map<String, dynamic> json) {
     return FinishedProductCategoryData(
-      id: json['id'],
-      categoryName: json['category_name'],
-      nameBn: json['name_bn'],
-      type: json['type'],
-      companyId: int.tryParse(json['company_id'].toString()),
-      branchId: int.tryParse(json['branch_id'].toString()),
-      createdByType: json['created_by_type'],
+      id: SafeParse.toInt(json['id']),
+      categoryName: SafeParse.toStringValue(json['category_name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      type: SafeParse.toStringValue(json['type']),
+      companyId: SafeParse.toInt(json['company_id']),
+      branchId: SafeParse.toInt(json['branch_id']),
+      createdByType: SafeParse.toStringValue(json['created_by_type']),
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'])
           : null,

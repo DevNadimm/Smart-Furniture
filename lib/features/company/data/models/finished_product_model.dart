@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class FinishedProductModel {
   final bool? success;
   final List<FinishedProductData>? data;
@@ -38,7 +40,13 @@ class FinishedProductData {
   final String? categoryNameBn;
   final String? quantity;
   final String? unit;
-  final String? rate; // ✅ NEW
+  final String? rate;
+  final String? image;
+  final String? fullImageUrl;
+  final List<String>? imageUrls;
+
+  String? get primaryImage =>
+      imageUrls?.isNotEmpty == true ? imageUrls!.first : (fullImageUrl ?? image);
 
   FinishedProductData({
     this.productId,
@@ -49,18 +57,24 @@ class FinishedProductData {
     this.quantity,
     this.unit,
     this.rate,
+    this.image,
+    this.fullImageUrl,
+    this.imageUrls,
   });
 
   factory FinishedProductData.fromJson(Map<String, dynamic> json) {
     return FinishedProductData(
-      productId: json['product_id'] as int?,
-      productName: json['product_name'] as String?,
-      productNameBn: json['product_name_bn'] as String?,
-      category: json['category'] as String?,
-      categoryNameBn: json['category_name_bn'] as String?,
-      quantity: json['quantity'] as String?,
-      unit: json['unit'] as String?,
-      rate: json['rate'] as String?,
+      productId: SafeParse.toInt(json['product_id']),
+      productName: SafeParse.toStringValue(json['product_name']),
+      productNameBn: SafeParse.toStringValue(json['product_name_bn']),
+      category: SafeParse.toStringValue(json['category']),
+      categoryNameBn: SafeParse.toStringValue(json['category_name_bn']),
+      quantity: SafeParse.toStringValue(json['quantity']),
+      unit: SafeParse.toStringValue(json['unit']),
+      rate: SafeParse.toStringValue(json['rate']),
+      image: SafeParse.toStringValue(json['image']),
+      fullImageUrl: SafeParse.toStringValue(json['full_image_url']),
+      imageUrls: SafeParse.asStringList(json['image_urls']),
     );
   }
 
@@ -74,6 +88,9 @@ class FinishedProductData {
       'quantity': quantity,
       'unit': unit,
       'rate': rate,
+      'image': image,
+      'full_image_url': fullImageUrl,
+      'image_urls': imageUrls,
     };
   }
 }

@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class CustomProductionModel {
   final bool? success;
   final List<CustomProductionData>? data;
@@ -11,7 +13,7 @@ class CustomProductionModel {
 
   factory CustomProductionModel.fromJson(Map<String, dynamic> json) {
     return CustomProductionModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       data: json['data'] != null
           ? List<CustomProductionData>.from(
         json['data'].map(
@@ -59,15 +61,15 @@ class CustomProductionData {
 
   factory CustomProductionData.fromJson(Map<String, dynamic> json) {
     return CustomProductionData(
-      id: json['id'],
-      bomNumber: json['bom_number'],
-      productName: json['product_name'],
-      productNameBn: json['product_name_bn'],
-      productUnit: json['product_unit'],
-      quantity: json['quantity'],
-      materialsCount: json['materials_count'],
-      totalMaterialCost: json['total_material_cost'],
-      createdAt: json['created_at'],
+      id: SafeParse.toInt(json['id']),
+      bomNumber: SafeParse.toStringValue(json['bom_number']),
+      productName: SafeParse.toStringValue(json['product_name']),
+      productNameBn: SafeParse.toStringValue(json['product_name_bn']),
+      productUnit: SafeParse.toStringValue(json['product_unit']),
+      quantity: SafeParse.toNum(json['quantity']),
+      materialsCount: SafeParse.toNum(json['materials_count']),
+      totalMaterialCost: SafeParse.toNum(json['total_material_cost']),
+      createdAt: SafeParse.toStringValue(json['created_at']),
     );
   }
 
@@ -101,10 +103,10 @@ class CustomProductionSummary {
 
   factory CustomProductionSummary.fromJson(Map<String, dynamic> json) {
     return CustomProductionSummary(
-      totalBoms: json['total_boms'],
-      totalQuantity: json['total_quantity'],
-      totalMaterialCost: json['total_material_cost'],
-      totalMaterialsUsed: json['total_materials_used'],
+      totalBoms: SafeParse.toNum(json['total_boms']),
+      totalQuantity: SafeParse.toNum(json['total_quantity']),
+      totalMaterialCost: SafeParse.toNum(json['total_material_cost']),
+      totalMaterialsUsed: SafeParse.toNum(json['total_materials_used']),
     );
   }
 

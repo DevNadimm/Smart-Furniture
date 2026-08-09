@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class ExpenseHeadModel {
   final bool? success;
   final List<ExpenseHeadData>? data;
@@ -6,7 +8,7 @@ class ExpenseHeadModel {
 
   factory ExpenseHeadModel.fromJson(Map<String, dynamic> json) {
     return ExpenseHeadModel(
-      success: json['success'] as bool?,
+      success: SafeParse.toBool(json['success']),
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => ExpenseHeadData.fromJson(e))
           .toList(),
@@ -29,10 +31,10 @@ class ExpenseHeadData {
 
   factory ExpenseHeadData.fromJson(Map<String, dynamic> json) {
     return ExpenseHeadData(
-      id: json['id'] as int?,
-      head: json['head'] as String?,
-      nameBn: json['name_bn'] as String?,
-      description: json['description'] as String?,
+      id: SafeParse.toInt(json['id']),
+      head: SafeParse.toStringValue(json['head']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      description: SafeParse.toStringValue(json['description']),
     );
   }
 

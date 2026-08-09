@@ -1,3 +1,5 @@
+import 'package:smart_furniture/core/utils/helper_functions/safe_parse.dart';
+
 class SupplierPurchaseDueModel {
   final bool? success;
   final SupplierDueInfo? supplier;
@@ -11,7 +13,7 @@ class SupplierPurchaseDueModel {
 
   factory SupplierPurchaseDueModel.fromJson(Map<String, dynamic> json) {
     return SupplierPurchaseDueModel(
-      success: json['success'],
+      success: SafeParse.toBool(json['success']),
       supplier: json['supplier'] != null
           ? SupplierDueInfo.fromJson(json['supplier'])
           : null,
@@ -52,12 +54,12 @@ class SupplierDueInfo {
 
   factory SupplierDueInfo.fromJson(Map<String, dynamic> json) {
     return SupplierDueInfo(
-      id: json['id'],
-      name: json['name'],
-      nameBn: json['name_bn'],
-      phone: json['phone'],
-      email: json['email'],
-      totalDue: (json['total_due'] as num?)?.toDouble(),
+      id: SafeParse.toInt(json['id']),
+      name: SafeParse.toStringValue(json['name']),
+      nameBn: SafeParse.toStringValue(json['name_bn']),
+      phone: SafeParse.toStringValue(json['phone']),
+      email: SafeParse.toStringValue(json['email']),
+      totalDue: SafeParse.toDouble(json['total_due']),
     );
   }
 
@@ -94,13 +96,13 @@ class SupplierPurchaseDue {
 
   factory SupplierPurchaseDue.fromJson(Map<String, dynamic> json) {
     return SupplierPurchaseDue(
-      id: json['id'],
-      purchaseNo: json['purchase_no'],
-      purchaseDate: json['purchase_date'],
-      purchaseDateFormatted: json['purchase_date_formatted'],
-      grandTotal: (json['grand_total'] as num?)?.toDouble(),
-      paidAmount: (json['paid_amount'] as num?)?.toDouble(),
-      dueAmount: (json['due_amount'] as num?)?.toDouble(),
+      id: SafeParse.toInt(json['id']),
+      purchaseNo: SafeParse.toStringValue(json['purchase_no']),
+      purchaseDate: SafeParse.toStringValue(json['purchase_date']),
+      purchaseDateFormatted: SafeParse.toStringValue(json['purchase_date_formatted']),
+      grandTotal: SafeParse.toDouble(json['grand_total']),
+      paidAmount: SafeParse.toDouble(json['paid_amount']),
+      dueAmount: SafeParse.toDouble(json['due_amount']),
     );
   }
 

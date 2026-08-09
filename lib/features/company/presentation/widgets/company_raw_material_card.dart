@@ -6,6 +6,8 @@ import 'package:smart_furniture/core/utils/formatters/currency_formatter.dart';
 import 'package:smart_furniture/features/company/data/models/company_raw_material_model.dart';
 import 'package:smart_furniture/l10n/app_localizations.dart';
 
+import 'package:smart_furniture/core/utils/widgets/custom_cached_image.dart';
+
 class CompanyRawMaterialCard extends StatelessWidget {
   final RawMaterialData? rawMaterial;
 
@@ -38,24 +40,38 @@ class CompanyRawMaterialCard extends StatelessWidget {
             /// Header
             Container(
               width: double.infinity,
-              padding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.all(12),
               color: AppColors.primaryColor.withValues(alpha: 0.1),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  LocalizationService.getText(
-                    context,
-                    en: rawMaterial?.productName ?? strings.notAvailable,
-                    bn: rawMaterial?.productNameBn,
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: CustomCachedImage(
+                      imageUrl: rawMaterial?.primaryImage ?? '',
+                      width: 50,
+                      height: 50,
+                    ),
                   ),
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelLarge!
-                      .copyWith(color: AppColors.primaryColor),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      LocalizationService.getText(
+                        context,
+                        en: rawMaterial?.productName ?? strings.notAvailable,
+                        bn: rawMaterial?.productNameBn,
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
             ),
 
